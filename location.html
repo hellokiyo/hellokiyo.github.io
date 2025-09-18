@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Location Based AR</title>
+    <title>Dynamic Location AR</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
   </head>
 
   <body style="margin: 0; overflow: hidden;">
@@ -15,12 +15,45 @@
       arjs="sourceType: webcam; debugUIEnabled: false;"
     >
       <a-box
+        id="my-box"
         material="color: dodgerblue"
-        gps-entity-place="latitude: 37.494351; longitude: 126.887641;"
-        scale="3 3 3"
+        scale="5 5 5"
       ></a-box>
 
       <a-camera gps-camera rotation-reader> </a-camera>
     </a-scene>
+
+    <script>
+      // 페이지 로딩이 완료되면 함수를 실행합니다.
+      window.onload = () => {
+        const box = document.querySelector('#my-box');
+
+        // 1. Geolocation API가 사용 가능한지 확인합니다.
+        if (!navigator.geolocation) {
+          alert('Geolocation을 지원하지 않는 브라우저입니다.');
+          return;
+        }
+
+        // 2. 사용자의 현재 위치를 가져옵니다.
+        navigator.geolocation.getCurrentPosition(
+          // 성공 콜백 함수
+          (position) => {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            
+            console.log(`현재 위치: ${latitude}, ${longitude}`);
+            alert(`현재 위치에 상자를 배치합니다!\n위도: ${latitude.toFixed(6)}\n경도: ${longitude.toFixed(6)}`);
+
+            // 3. 가져온 좌표를 a-box의 gps-entity-place 속성으로 설정합니다.
+            box.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
+          },
+          // 에러 콜백 함수
+          (err) => {
+            alert('위치 정보를 가져오는 데 실패했습니다. 권한을 허용했는지 확인해주세요.');
+            console.error(err);
+          }
+        );
+      };
+    </script>
   </body>
 </html>
