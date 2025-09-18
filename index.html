@@ -1,33 +1,26 @@
+
 <!DOCTYPE html>
 <html>
-  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+</html>
+
+
 
   <body style="margin : 0px; overflow: hidden;">
-    <a-scene embedded arjs>
-      
-      <a-marker preset="hiro">
-        
-        <a-torus 
-          position="0 0.5 0" 
-          rotation="-90 0 0" 
-          color="#FF0000"
-          radius="0.4"
-          radius-tubular="0.05">
-          
-          <a-animation 
-            attribute="rotation" 
-            to="0 360 0" 
-            loop="true" 
-            dur="5000"
-            easing="linear">
-          </a-animation>
+    
+    
+    <a src="hiro.html">마커 예제 1</a>
 
-        </a-torus>
-      </a-marker>
+    <a src="ar-experience.html">마커 예제 2</a>
+    
 
-      <a-entity camera></a-entity>
+    <a src="location.html">땅 바닥에 마커찍기</a>
+    
+    <a src="booth-street.html">부스 구경</a>
+    
+    <a src="virtual-floor.html">vr부스</a>
 
-    </a-scene>
-  </body>
+ 
+ 
+
+  </body>  
 </html>
