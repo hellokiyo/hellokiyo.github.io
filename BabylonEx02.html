@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Babylon.js Basic Scene</title>
+    <style>
+        html, body {
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #renderCanvas {
+            width: 100%;
+            height: 100%;
+            touch-action: none; /* 터치 이벤트 처리를 위함 */
+        }
+    </style>
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+</head>
+<body>
+
+</body>
+<canvas id="renderCanvas"></canvas>
+<script>
+
+    // 여기에 Babylon.js 코드가 들어갑니다.
+    const canvas = document.getElementById("renderCanvas");
+    const engine = new BABYLON.Engine(canvas, true);
+
+    const createScene = function () {
+        const scene = new BABYLON.Scene(engine);
+
+        const camera = new BABYLON.ArcRotateCamera("camera", -Math.PI / 2, Math.PI / 2.5, 20, BABYLON.Vector3.Zero(), scene);
+        camera.attachControl(canvas, true);
+        const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
+
+        // 1. 바닥 생성
+        const ground = BABYLON.MeshBuilder.CreateGround("ground", {width: 15, height: 15}, scene);
+
+        // 2. 상자 생성 및 위치 이동
+        const box = BABYLON.MeshBuilder.CreateBox("box", {size: 2}, scene);
+        box.position.x = -5;
+        box.position.y = 1;
+
+        // 3. 원기둥 생성 및 위치 이동
+        const cylinder = BABYLON.MeshBuilder.CreateCylinder("cylinder", {height: 3, diameter: 2}, scene);
+        cylinder.position.x = 0;
+        cylinder.position.y = 1.5;
+
+        // 4. 토러스(도넛) 생성 및 위치 이동
+        const torus = BABYLON.MeshBuilder.CreateTorus("torus", {diameter: 3, thickness: 1}, scene);
+        torus.position.x = 5;
+        torus.position.y = 1.5;
+
+        return scene;
+    };
+
+    const scene = createScene();
+
+    // 렌더링 루프: 매 프레임마다 장면을 그림
+    engine.runRenderLoop(function () {
+        scene.render();
+    });
+
+    // 창 크기 변경 시 렌더링 엔진도 크기 조절
+    window.addEventListener("resize", function () {
+        engine.resize();
+    });
+</script>
+</html>
