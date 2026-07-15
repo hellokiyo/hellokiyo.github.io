@@ -1,1 +1,137 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Linux Master Lab</title><meta name="description" content="리눅스마스터 2급 학습 허브"><link rel="stylesheet" href="styles.css"></head><body><header class="topbar"><div class="topinner"><a class="brand" href="index.html">🐧 Linux Master Lab</a><nav class="nav"><a href="summary.html">핵심요약</a><a href="practice.html">80문항</a><a href="supplement.html">보강 40문항</a></nav></div></header><section class="hero"><div class="hero-inner"><div class="eyebrow">2026 Study Hub</div><h1>리눅스마스터 2급<br>합격 학습 허브</h1><p>핵심요약을 회독하고, 80문항을 실전처럼 푼 다음, 13강 연계 보강 40문항으로 빈틈을 채우세요.</p><div class="statrow"><span class="stat">총 120문항</span><span class="stat">진도 자동 저장</span><span class="stat">모바일 지원</span></div></div></section><main class="container"><h2>학습 순서</h2><div class="cards"><a class="card card-link" href="summary.html"><span class="tag">STEP 1</span><h2>핵심요약집</h2><p>명령어·파일경로·권한·포트·서비스를 검색하고 섹션별로 체크합니다.</p><div class="progress"><i data-progress="linux-summary-progress:count"></i></div><p class="meta" data-label="linux-summary-progress:count">진도 기록 없음</p></a><a class="card card-link" href="practice.html"><span class="tag">STEP 2</span><h2>실전 모의고사</h2><p>실제 배분에 맞춘 80문항. 답안 선택, 자동 채점, 오답 필터를 제공합니다.</p><div class="progress"><i data-progress="linux-practice-80:count"></i></div><p class="meta" data-label="linux-practice-80:count">진도 기록 없음</p></a><a class="card card-link" href="supplement.html"><span class="tag">STEP 3</span><h2>영상 연계 보강</h2><p>13개 강의와 대조해 보강한 부팅·셸·장치·가상화 중심 40문항입니다.</p><div class="progress"><i data-progress="linux-supplement-40:count"></i></div><p class="meta" data-label="linux-supplement-40:count">진도 기록 없음</p></a></div><section class="card" style="margin-top:22px"><h2>추천 루틴</h2><ol><li>핵심요약집을 40~60분 안에 읽고 완료 체크</li><li>80문항을 100분 제한으로 풀이</li><li>채점 후 오답만 다시 풀기</li><li>보강 40문항으로 영상 강의 범위 점검</li></ol></section></main><script>document.querySelectorAll('[data-label]').forEach(e=>{const v=localStorage.getItem(e.dataset.label);if(v)e.textContent='진도 '+v});document.querySelectorAll('[data-progress]').forEach(e=>{const v=localStorage.getItem(e.dataset.progress);if(v){const [a,b]=v.split('/').map(Number);e.style.width=(a/b*100)+'%'}})</script><footer class="footer">개인 학습용 · 답안 선택과 진도는 이 브라우저에 자동 저장됩니다.</footer></body></html>
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Linux Master Lab</title>
+  <meta name="description" content="리눅스마스터 2급 학습 허브">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topinner">
+      <a class="brand" href="index.html">Linux Master Lab</a>
+      <nav class="nav">
+        <a href="summary.html">핵심요약</a>
+        <a href="commands.html">명령어 활용</a>
+        <a href="practice.html">80문항</a>
+        <a href="supplement.html">보강 40문항</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero compact-hero">
+    <div class="hero-inner">
+      <div class="eyebrow">2026 Study Hub</div>
+      <h1>리눅스마스터 2급 학습 허브</h1>
+      <p>요약을 읽고, 명령어가 실제로 어디에 쓰이는지 확인한 뒤, 문제로 점검하세요.</p>
+    </div>
+  </section>
+
+  <main class="container">
+    <h2>바로 시작</h2>
+    <div class="cards">
+      <a class="card card-link" href="summary.html">
+        <span class="tag">STEP 1</span>
+        <h2>핵심요약</h2>
+        <p>시험에 자주 나오는 개념, 경로, 포트, 함정을 빠르게 회독합니다.</p>
+        <div class="progress"><i data-progress="linux-summary-progress:count"></i></div>
+        <p class="meta" data-label="linux-summary-progress:count">진도 기록 없음</p>
+      </a>
+      <a class="card card-link" href="commands.html">
+        <span class="tag">STEP 2</span>
+        <h2>명령어 활용</h2>
+        <p>명령어의 진짜 사용처, 기본 예시, 시험 함정을 카드로 확인합니다.</p>
+      </a>
+      <a class="card card-link" href="practice.html">
+        <span class="tag">STEP 3</span>
+        <h2>80문항</h2>
+        <p>답안 선택, 자동 채점, 오답 필터로 실전 감각을 만듭니다.</p>
+        <div class="progress"><i data-progress="linux-practice-80:count"></i></div>
+        <p class="meta" data-label="linux-practice-80:count">진도 기록 없음</p>
+      </a>
+    </div>
+
+    <section class="study-tabs card">
+      <div class="tab-buttons" role="tablist" aria-label="학습 카드">
+        <button class="tab-button active" type="button" data-tab="daily">오늘의 상식</button>
+        <button class="tab-button" type="button" data-tab="command">명령어 감각</button>
+        <button class="tab-button" type="button" data-tab="exam">시험 팁</button>
+      </div>
+
+      <div class="tab-panel active" id="tab-daily">
+        <div class="fact-card">
+          <span class="tag">오늘의 상식</span>
+          <h2>Linux에서 everything is a file 이라고 말하는 이유</h2>
+          <p>일반 파일뿐 아니라 장치, 파이프, 소켓도 파일처럼 다루는 인터페이스를 갖습니다. 그래서 <code>/dev/sda</code> 같은 장치 파일, <code>/proc</code> 같은 가상 파일시스템이 시험에 자주 나옵니다.</p>
+        </div>
+        <div class="fact-card">
+          <span class="tag">헷갈림 방지</span>
+          <h2><code>/etc/passwd</code>에는 실제 비밀번호가 없습니다</h2>
+          <p>현대 Linux는 암호 해시를 보통 <code>/etc/shadow</code>에 둡니다. <code>/etc/passwd</code>는 계정, UID, GID, 홈, 셸 정보를 보는 파일로 기억하세요.</p>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-command">
+        <div class="fact-card">
+          <span class="tag">실사용</span>
+          <h2><code>grep</code>은 파일 찾기가 아니라 내용 검색입니다</h2>
+          <p>로그에서 에러 줄을 찾거나 설정 파일 안의 특정 옵션을 찾을 때 씁니다. 파일 이름을 찾을 때는 <code>find</code>, 실행 파일 위치는 <code>which</code>가 더 맞습니다.</p>
+        </div>
+        <div class="fact-card">
+          <span class="tag">예시</span>
+          <h2><code>tail -f /var/log/syslog</code></h2>
+          <p>로그 파일의 마지막 줄을 계속 따라가며 봅니다. 서버에서 서비스가 죽거나 접속이 실패할 때 실시간 확인용으로 자주 씁니다.</p>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-exam">
+        <div class="fact-card">
+          <span class="tag">출제 포인트</span>
+          <h2><code>systemctl start</code>와 <code>enable</code>은 다릅니다</h2>
+          <p><code>start</code>는 지금 바로 실행, <code>enable</code>은 부팅 시 자동 실행 등록입니다. 문제에서 “현재”인지 “부팅 시”인지 먼저 보세요.</p>
+        </div>
+        <div class="fact-card">
+          <span class="tag">함정</span>
+          <h2><code>usermod -aG</code>에서 <code>-a</code>를 빼면 위험합니다</h2>
+          <p>기존 보조 그룹을 유지하며 새 그룹을 추가하려면 <code>-aG</code>를 같이 씁니다. <code>-G</code>만 쓰면 기존 보조 그룹 구성이 바뀔 수 있습니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card routine-card">
+      <h2>추천 루틴</h2>
+      <ol>
+        <li>핵심요약을 한 번 읽고 모르는 단어만 표시</li>
+        <li>명령어 활용 카드에서 실제 쓰임 확인</li>
+        <li>80문항 풀이 후 오답을 명령어·권한·네트워크로 분류</li>
+        <li>보강 40문항으로 약한 범위만 다시 점검</li>
+      </ol>
+    </section>
+  </main>
+
+  <script>
+    document.querySelectorAll('[data-label]').forEach((element) => {
+      const value = localStorage.getItem(element.dataset.label);
+      if (value) element.textContent = '진도 ' + value;
+    });
+
+    document.querySelectorAll('[data-progress]').forEach((element) => {
+      const value = localStorage.getItem(element.dataset.progress);
+      if (!value) return;
+      const [done, total] = value.split('/').map(Number);
+      if (total) element.style.width = (done / total * 100) + '%';
+    });
+
+    document.querySelectorAll('.tab-button').forEach((button) => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.tab-button').forEach((item) => item.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach((panel) => panel.classList.remove('active'));
+        button.classList.add('active');
+        document.getElementById('tab-' + button.dataset.tab).classList.add('active');
+      });
+    });
+  </script>
+  <footer class="footer">개인 학습용 · 답안 선택과 진도는 이 브라우저에 자동 저장됩니다.</footer>
+</body>
+</html>

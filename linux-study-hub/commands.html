@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>리눅스 명령어 활용</title>
+  <meta name="description" content="상황 카드와 미니 퀴즈로 익히는 리눅스 명령어">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topinner">
+      <a class="brand" href="index.html">Linux Master Lab</a>
+      <nav class="nav">
+        <a href="summary.html">핵심요약</a>
+        <a href="commands.html">명령어 활용</a>
+        <a href="practice.html">80문항</a>
+        <a href="supplement.html">보강 40문항</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero compact-hero">
+    <div class="hero-inner">
+      <div class="eyebrow">Interactive Command Study</div>
+      <h1>상황으로 익히는 명령어</h1>
+      <p>명령어를 외우기보다 “어떤 상황에서 왜 쓰는지”를 먼저 맞혀보세요.</p>
+    </div>
+  </section>
+
+  <main class="container command-app">
+    <section class="learn-board">
+      <div class="card today-card">
+        <span class="tag">오늘의 루틴</span>
+        <h2>10분 명령어 감각 만들기</h2>
+        <div class="routine-steps">
+          <label><input type="checkbox" data-daily="read"> 상황 카드 5개 보기</label>
+          <label><input type="checkbox" data-daily="quiz"> 미니 퀴즈 3개 맞히기</label>
+          <label><input type="checkbox" data-daily="trap"> 시험 함정 1개 기억하기</label>
+        </div>
+        <div class="progress"><i id="dailyProgress"></i></div>
+        <p class="meta" id="dailyText">오늘 진도 0/3</p>
+      </div>
+
+      <div class="card mission-card">
+        <span class="tag">상황 선택</span>
+        <h2 id="missionTitle">서버에서 에러 원인을 찾고 싶다</h2>
+        <p id="missionBody">로그에서 error가 들어간 줄만 빠르게 찾고 싶을 때 어떤 명령을 쓸까요?</p>
+        <div class="choice-grid" id="missionChoices"></div>
+        <div class="answer" id="missionAnswer"></div>
+      </div>
+    </section>
+
+    <section class="mode-tabs card">
+      <div class="tab-buttons" role="tablist" aria-label="명령어 학습 모드">
+        <button class="tab-button active" type="button" data-view="cards">명령어 카드</button>
+        <button class="tab-button" type="button" data-view="quiz">빠른 퀴즈</button>
+        <button class="tab-button" type="button" data-view="traps">시험 함정</button>
+      </div>
+
+      <div class="command-controls">
+        <input class="search" id="commandSearch" placeholder="예: 로그, 권한, 포트, grep">
+        <div class="filter-row" id="categoryFilters"></div>
+      </div>
+
+      <div class="view-panel active" id="view-cards">
+        <div class="command-grid" id="commandGrid"></div>
+      </div>
+
+      <div class="view-panel" id="view-quiz">
+        <div class="quiz-card">
+          <p class="meta" id="quizCount">문제 1/5</p>
+          <h2 id="quizQuestion"></h2>
+          <div class="choice-grid" id="quizChoices"></div>
+          <div class="answer" id="quizAnswer"></div>
+        </div>
+      </div>
+
+      <div class="view-panel" id="view-traps">
+        <div class="trap-list" id="trapList"></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const commands = [
+      {cat:'파일', cmd:'ls -al', use:'파일 목록, 숨김 파일, 권한, 소유자, 시간을 한 번에 확인', sample:'ls -al /etc', output:'drwxr-xr-x root root ...\n-rw-r--r-- root root passwd', why:'권한 문제를 풀 때 가장 먼저 보는 기본 화면입니다.', trap:'ls는 내용 검색이 아니라 목록 확인입니다.'},
+      {cat:'파일', cmd:'cp -a', use:'디렉터리를 권한과 시간 정보까지 보존해 백업', sample:'cp -a /etc/nginx /backup/nginx', output:'원본 구조와 권한을 유지한 복사본 생성', why:'설정 백업처럼 원본 상태 보존이 중요할 때 씁니다.', trap:'그냥 cp보다 백업 느낌이면 -a를 떠올리세요.'},
+      {cat:'파일', cmd:'mkdir -p', use:'중간 폴더가 없어도 한 번에 디렉터리 생성', sample:'mkdir -p project/logs/2026', output:'project, logs, 2026 폴더가 필요한 만큼 생성', why:'설치 스크립트나 프로젝트 초기 구조 만들 때 편합니다.', trap:'이미 폴더가 있어도 크게 문제 삼지 않습니다.'},
+      {cat:'텍스트', cmd:'grep', use:'파일 내용에서 특정 단어가 들어간 줄 검색', sample:'grep -i "error" app.log', output:'ERROR failed to connect\nerror: timeout', why:'로그 분석과 설정값 확인에 가장 자주 씁니다.', trap:'파일 이름 찾기는 find, 내용 찾기는 grep입니다.'},
+      {cat:'텍스트', cmd:'tail -f', use:'로그가 새로 쌓이는 모습을 실시간 추적', sample:'tail -f /var/log/auth.log', output:'새 로그인 기록이 생길 때마다 화면에 추가 출력', why:'SSH 접속 실패, 서비스 오류를 바로 확인할 때 씁니다.', trap:'마지막 몇 줄만 보는 건 tail, 계속 따라가는 건 tail -f입니다.'},
+      {cat:'텍스트', cmd:'sort | uniq -c', use:'중복 줄을 모아 개수 집계', sample:'sort access.log | uniq -c', output:'  12 GET /index.html\n   4 POST /login', why:'반복되는 로그, IP, 단어를 세는 데 씁니다.', trap:'uniq는 붙어 있는 중복만 처리하므로 보통 sort와 조합합니다.'},
+      {cat:'권한', cmd:'chmod', use:'읽기, 쓰기, 실행 권한 변경', sample:'chmod 755 script.sh', output:'소유자 rwx, 그룹 r-x, 기타 r-x', why:'스크립트 실행 권한이나 웹 파일 권한 조정에 씁니다.', trap:'r=4, w=2, x=1을 더해 숫자를 만듭니다.'},
+      {cat:'권한', cmd:'chown', use:'파일 소유자와 소유 그룹 변경', sample:'sudo chown www-data:www-data site', output:'site의 소유자가 www-data로 변경', why:'웹 서버나 서비스 계정이 파일을 읽고 써야 할 때 씁니다.', trap:'권한 모드는 chmod, 소유자는 chown입니다.'},
+      {cat:'권한', cmd:'usermod -aG', use:'기존 보조 그룹을 유지하며 새 그룹 추가', sample:'sudo usermod -aG docker student', output:'student가 docker 그룹에도 속함', why:'Docker, sudo 같은 그룹 권한을 추가할 때 씁니다.', trap:'-a 없이 -G만 쓰면 기존 보조 그룹이 바뀔 수 있습니다.'},
+      {cat:'서비스', cmd:'systemctl', use:'서비스 시작, 중지, 상태 확인, 자동 실행 등록', sample:'systemctl status ssh\nsudo systemctl enable ssh', output:'ssh 서비스 상태와 자동 실행 설정 확인', why:'systemd 기반 배포판에서 서비스 관리의 중심입니다.', trap:'start는 지금 실행, enable은 부팅 시 자동 실행입니다.'},
+      {cat:'서비스', cmd:'journalctl', use:'systemd 로그 조회', sample:'journalctl -u ssh -n 50', output:'ssh 서비스의 최근 로그 50줄 출력', why:'서비스가 왜 실패했는지 확인할 때 씁니다.', trap:'특정 서비스 로그는 -u 서비스명으로 좁힙니다.'},
+      {cat:'디스크', cmd:'df -h', use:'파일시스템 단위의 남은 용량 확인', sample:'df -h', output:'/dev/sda1  80G  61G  19G  77% /', why:'디스크가 꽉 찼는지 전체 상황을 볼 때 씁니다.', trap:'df는 파일시스템, du는 폴더가 차지한 용량입니다.'},
+      {cat:'디스크', cmd:'du -sh', use:'특정 디렉터리의 실제 사용량 확인', sample:'du -sh /var/log', output:'2.3G /var/log', why:'어느 폴더가 용량을 많이 먹는지 찾을 때 씁니다.', trap:'전체 디스크 여유 공간은 df가 더 맞습니다.'},
+      {cat:'네트워크', cmd:'ip addr', use:'네트워크 인터페이스와 IP 주소 확인', sample:'ip addr', output:'eth0: inet 192.168.0.10/24', why:'서버에 IP가 제대로 잡혔는지 볼 때 씁니다.', trap:'현대 Linux는 ifconfig보다 ip 명령이 중심입니다.'},
+      {cat:'네트워크', cmd:'ss -tulpn', use:'열린 포트와 사용 중인 프로세스 확인', sample:'sudo ss -tulpn', output:'LISTEN 0 128 0.0.0.0:22 users:(("sshd"))', why:'서비스가 실제로 포트를 열었는지 확인합니다.', trap:'구형 명령 netstat와 현대 명령 ss를 구분하세요.'},
+      {cat:'네트워크', cmd:'dig', use:'DNS 레코드 응답 확인', sample:'dig example.com A\ndig -x 8.8.8.8', output:'example.com. A 93.184.216.34', why:'도메인이 어떤 IP로 해석되는지 확인합니다.', trap:'정방향은 A/AAAA, 역방향은 PTR입니다.'}
+    ];
+
+    const missions = [
+      {title:'서버에서 에러 원인을 찾고 싶다', body:'로그에서 error가 들어간 줄만 빠르게 찾고 싶을 때?', choices:['grep','chmod','df -h'], answer:'grep', explain:'grep은 파일 내용에서 특정 문자열이 들어간 줄을 찾습니다.'},
+      {title:'웹 서버가 포트를 열었는지 보고 싶다', body:'22, 80, 443 같은 포트가 실제로 LISTEN 중인지 확인할 때?', choices:['ss -tulpn','du -sh','mkdir -p'], answer:'ss -tulpn', explain:'ss -tulpn은 TCP/UDP 리스닝 소켓과 프로세스를 확인합니다.'},
+      {title:'부팅할 때 서비스가 자동 실행되게 하고 싶다', body:'지금 실행이 아니라 다음 부팅부터 자동 실행 등록은?', choices:['systemctl enable','systemctl start','tail -f'], answer:'systemctl enable', explain:'enable은 부팅 시 자동 실행 등록, start는 지금 실행입니다.'}
+    ];
+
+    let activeCategory = '전체';
+    let quizIndex = 0;
+
+    const grid = document.getElementById('commandGrid');
+    const search = document.getElementById('commandSearch');
+    const categories = ['전체', ...new Set(commands.map((item) => item.cat))];
+
+    function renderFilters() {
+      document.getElementById('categoryFilters').innerHTML = categories.map((cat) =>
+        `<button type="button" class="chip ${cat === activeCategory ? 'active' : ''}" data-cat="${cat}">${cat}</button>`
+      ).join('');
+      document.querySelectorAll('.chip').forEach((button) => {
+        button.addEventListener('click', () => {
+          activeCategory = button.dataset.cat;
+          renderFilters();
+          renderCards();
+        });
+      });
+    }
+
+    function renderCards() {
+      const keyword = search.value.trim().toLowerCase();
+      const filtered = commands.filter((item) => {
+        const inCategory = activeCategory === '전체' || item.cat === activeCategory;
+        const text = Object.values(item).join(' ').toLowerCase();
+        return inCategory && (!keyword || text.includes(keyword));
+      });
+
+      grid.innerHTML = filtered.map((item, index) => `
+        <article class="command-card">
+          <div class="card-top">
+            <span class="tag">${item.cat}</span>
+            <button class="mini-button" type="button" data-save="${item.cmd}">암기 체크</button>
+          </div>
+          <h3><code>${item.cmd}</code></h3>
+          <p><strong>언제 쓰나</strong><br>${item.use}</p>
+          <div class="terminal-demo">
+            <div class="terminal-line">$ ${item.sample.replace(/\n/g, '<br>$ ')}</div>
+            <div class="terminal-output">${item.output.replace(/\n/g, '<br>')}</div>
+          </div>
+          <details>
+            <summary>왜 이 명령인지 보기</summary>
+            <p>${item.why}</p>
+          </details>
+          <details>
+            <summary>시험 함정 보기</summary>
+            <p>${item.trap}</p>
+          </details>
+        </article>
+      `).join('') || '<p class="meta">검색 결과가 없습니다.</p>';
+
+      document.querySelectorAll('[data-save]').forEach((button) => {
+        const key = 'command-known:' + button.dataset.save;
+        if (localStorage.getItem(key)) button.classList.add('done');
+        button.addEventListener('click', () => {
+          if (localStorage.getItem(key)) {
+            localStorage.removeItem(key);
+            button.classList.remove('done');
+          } else {
+            localStorage.setItem(key, '1');
+            button.classList.add('done');
+          }
+        });
+      });
+    }
+
+    function renderMission() {
+      const mission = missions[new Date().getDate() % missions.length];
+      document.getElementById('missionTitle').textContent = mission.title;
+      document.getElementById('missionBody').textContent = mission.body;
+      document.getElementById('missionChoices').innerHTML = mission.choices.map((choice) =>
+        `<button type="button" class="choice-button" data-choice="${choice}">${choice}</button>`
+      ).join('');
+      const answerBox = document.getElementById('missionAnswer');
+      answerBox.style.display = 'none';
+      document.querySelectorAll('[data-choice]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const correct = button.dataset.choice === mission.answer;
+          answerBox.style.display = 'block';
+          answerBox.innerHTML = correct
+            ? `<strong class="good">정답</strong><br>${mission.explain}`
+            : `<strong class="bad">다시 보기</strong><br>이 상황에서는 <code>${mission.answer}</code>가 더 맞습니다. ${mission.explain}`;
+        });
+      });
+    }
+
+    const quizItems = [
+      {q:'파일 내용에서 error가 들어간 줄만 찾는 명령은?', choices:['grep','find','ls'], a:'grep'},
+      {q:'폴더별 사용량을 확인하는 명령은?', choices:['du -sh','df -h','ip addr'], a:'du -sh'},
+      {q:'서비스를 부팅 시 자동 실행 등록하는 명령은?', choices:['systemctl enable','systemctl status','systemctl start'], a:'systemctl enable'},
+      {q:'열린 포트와 프로세스를 확인하는 현대 명령은?', choices:['ss -tulpn','netstat만 가능','dig'], a:'ss -tulpn'},
+      {q:'기존 보조 그룹을 유지하며 그룹을 추가하는 옵션은?', choices:['usermod -aG','usermod -G','useradd -m'], a:'usermod -aG'}
+    ];
+
+    function renderQuiz() {
+      const item = quizItems[quizIndex];
+      document.getElementById('quizCount').textContent = `문제 ${quizIndex + 1}/${quizItems.length}`;
+      document.getElementById('quizQuestion').textContent = item.q;
+      document.getElementById('quizChoices').innerHTML = item.choices.map((choice) =>
+        `<button type="button" class="choice-button" data-quiz="${choice}">${choice}</button>`
+      ).join('');
+      const answer = document.getElementById('quizAnswer');
+      answer.style.display = 'none';
+      document.querySelectorAll('[data-quiz]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const correct = button.dataset.quiz === item.a;
+          answer.style.display = 'block';
+          answer.innerHTML = correct
+            ? `<strong class="good">정답입니다.</strong> 다음 문제로 넘어갑니다.`
+            : `<strong class="bad">오답입니다.</strong> 정답은 <code>${item.a}</code>입니다.`;
+          if (correct) {
+            setTimeout(() => {
+              quizIndex = (quizIndex + 1) % quizItems.length;
+              renderQuiz();
+            }, 900);
+          }
+        });
+      });
+    }
+
+    function renderTraps() {
+      document.getElementById('trapList').innerHTML = commands.map((item) => `
+        <button type="button" class="trap-item">
+          <strong><code>${item.cmd}</code></strong>
+          <span>${item.trap}</span>
+        </button>
+      `).join('');
+    }
+
+    function updateDaily() {
+      const checks = [...document.querySelectorAll('[data-daily]')];
+      const done = checks.filter((item) => item.checked).length;
+      localStorage.setItem('linux-command-daily', checks.map((item) => item.checked ? '1' : '0').join(''));
+      document.getElementById('dailyProgress').style.width = (done / checks.length * 100) + '%';
+      document.getElementById('dailyText').textContent = `오늘 진도 ${done}/${checks.length}`;
+    }
+
+    document.querySelectorAll('.tab-button').forEach((button) => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.tab-button').forEach((item) => item.classList.remove('active'));
+        document.querySelectorAll('.view-panel').forEach((panel) => panel.classList.remove('active'));
+        button.classList.add('active');
+        document.getElementById('view-' + button.dataset.view).classList.add('active');
+      });
+    });
+
+    document.querySelectorAll('[data-daily]').forEach((item, index) => {
+      const saved = localStorage.getItem('linux-command-daily') || '';
+      item.checked = saved[index] === '1';
+      item.addEventListener('change', updateDaily);
+    });
+
+    search.addEventListener('input', renderCards);
+    renderFilters();
+    renderCards();
+    renderMission();
+    renderQuiz();
+    renderTraps();
+    updateDaily();
+  </script>
+  <footer class="footer">명령어는 상황과 목적을 같이 기억하면 문제 선택지가 빨리 지워집니다.</footer>
+</body>
+</html>
