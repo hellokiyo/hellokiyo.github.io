@@ -12,6 +12,7 @@
     <div class="topinner">
       <a class="brand" href="index.html">Linux Master Lab</a>
       <nav class="nav">
+        <a href="learn.html">쉬운 개념</a>
         <a href="summary.html">핵심요약</a>
         <a href="commands.html">명령어 활용</a>
         <a href="practice.html">80문항</a>
@@ -108,6 +109,25 @@
       {title:'부팅할 때 서비스가 자동 실행되게 하고 싶다', body:'지금 실행이 아니라 다음 부팅부터 자동 실행 등록은?', choices:['systemctl enable','systemctl start','tail -f'], answer:'systemctl enable', explain:'enable은 부팅 시 자동 실행 등록, start는 지금 실행입니다.'}
     ];
 
+    const easyHelp = {
+      'ls -al': ['폴더 안을 자세히 보는 돋보기입니다.', '파일 안의 문장을 찾는 용도는 아닙니다. 그때는 grep을 씁니다.', 'list all = ls -al'],
+      'cp -a': ['원본 앨범 구조와 날짜까지 같이 복사하는 느낌입니다.', '파일 이동이나 이름 변경은 mv입니다.', 'archive처럼 보존 = -a'],
+      'mkdir -p': ['없는 길을 중간부터 끝까지 한 번에 만들어 줍니다.', '빈 파일 생성은 touch입니다.', 'parents까지 만든다 = -p'],
+      'grep': ['책 전체에서 특정 단어가 들어간 줄만 형광펜으로 뽑는 도구입니다.', '파일 이름이나 위치를 찾는 명령이 아닙니다.', '내용 검색 = grep'],
+      'tail -f': ['새 로그가 올라오는 화면을 실시간으로 지켜보는 명령입니다.', '과거 로그 전체를 천천히 읽을 때는 less가 더 편합니다.', 'follow의 f'],
+      'sort | uniq -c': ['흩어진 같은 내용을 모아서 몇 번 나왔는지 세는 조합입니다.', 'uniq만 쓰면 떨어져 있는 중복은 잘 못 셉니다.', '정렬 후 중복 세기'],
+      'chmod': ['파일 문에 읽기/쓰기/실행 출입증을 붙이는 명령입니다.', '누구 소유인지 바꾸는 명령은 chown입니다.', 'mode를 change = chmod'],
+      'chown': ['파일의 주인을 바꾸는 명령입니다.', '읽기/쓰기/실행 권한 숫자를 바꾸는 명령은 chmod입니다.', 'owner를 change = chown'],
+      'usermod -aG': ['사용자에게 동아리 하나를 더 가입시키는 느낌입니다.', '새 사용자를 만드는 명령은 useradd입니다.', 'append Group = -aG'],
+      'systemctl': ['서비스의 전원 리모컨입니다.', '로그 자체를 자세히 보는 명령은 journalctl입니다.', 'system control = systemctl'],
+      'journalctl': ['서비스가 남긴 일기장을 보는 명령입니다.', '서비스를 켜고 끄는 명령은 systemctl입니다.', 'journal 로그 = journalctl'],
+      'df -h': ['건물 전체 주차장이 얼마나 찼는지 보는 명령입니다.', '특정 폴더 하나가 얼마나 큰지는 du가 더 맞습니다.', 'disk free = df'],
+      'du -sh': ['특정 방 하나가 짐을 얼마나 차지하는지 재는 명령입니다.', '디스크 전체 여유 공간 확인은 df입니다.', 'disk usage = du'],
+      'ip addr': ['내 컴퓨터의 주소표를 확인하는 명령입니다.', '도메인 이름이 어느 IP인지 보는 건 dig입니다.', 'address 확인 = ip addr'],
+      'ss -tulpn': ['가게 문이 몇 번 포트로 열려 있는지 보는 명령입니다.', '상대 서버까지 길이 닿는지 보는 건 ping입니다.', 'socket status = ss'],
+      'dig': ['도메인 이름을 주소록에서 찾아보는 명령입니다.', '내 IP 주소 확인은 ip addr입니다.', 'DNS를 파본다 = dig']
+    };
+
     let activeCategory = '전체';
     let quizIndex = 0;
 
@@ -143,6 +163,7 @@
             <button class="mini-button" type="button" data-save="${item.cmd}">암기 체크</button>
           </div>
           <h3><code>${item.cmd}</code></h3>
+          <p class="plain-note">${(easyHelp[item.cmd] || [item.use])[0]}</p>
           <p><strong>언제 쓰나</strong><br>${item.use}</p>
           <div class="terminal-demo">
             <div class="terminal-line">$ ${item.sample.replace(/\n/g, '<br>$ ')}</div>
@@ -153,8 +174,13 @@
             <p>${item.why}</p>
           </details>
           <details>
+            <summary>이럴 때는 다른 명령</summary>
+            <p>${(easyHelp[item.cmd] || ['', '비슷한 명령과 목적을 구분해서 외우세요.'])[1]}</p>
+          </details>
+          <details>
             <summary>시험 함정 보기</summary>
             <p>${item.trap}</p>
+            <p class="meta">기억법: ${(easyHelp[item.cmd] || ['', '', item.cmd])[2]}</p>
           </details>
         </article>
       `).join('') || '<p class="meta">검색 결과가 없습니다.</p>';

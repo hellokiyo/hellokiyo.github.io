@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>리눅스 쉬운 개념</title>
+  <meta name="description" content="처음 공부하는 사람을 위한 리눅스 개념 지도">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topinner">
+      <a class="brand" href="index.html">Linux Master Lab</a>
+      <nav class="nav">
+        <a href="learn.html">쉬운 개념</a>
+        <a href="summary.html">핵심요약</a>
+        <a href="commands.html">명령어 활용</a>
+        <a href="practice.html">80문항</a>
+        <a href="supplement.html">보강 40문항</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero compact-hero">
+    <div class="hero-inner">
+      <div class="eyebrow">Beginner Map</div>
+      <h1>리눅스가 어려운 이유부터 풀기</h1>
+      <p>명령어를 외우기 전에 파일, 권한, 프로세스, 서비스, 네트워크가 서로 어떻게 연결되는지 먼저 봅니다.</p>
+    </div>
+  </section>
+
+  <main class="container">
+    <section class="concept-map card">
+      <h2>리눅스 한 장 지도</h2>
+      <div class="map-flow">
+        <button type="button" data-topic="file">파일</button>
+        <button type="button" data-topic="perm">권한</button>
+        <button type="button" data-topic="proc">프로세스</button>
+        <button type="button" data-topic="svc">서비스</button>
+        <button type="button" data-topic="net">네트워크</button>
+      </div>
+      <div class="map-explain" id="mapExplain">
+        <strong>파일</strong>
+        <p>리눅스는 많은 것을 파일처럼 다룹니다. 설정도 파일, 로그도 파일, 장치도 <code>/dev</code> 아래의 파일처럼 보입니다.</p>
+      </div>
+    </section>
+
+    <section class="learning-units">
+      <article class="learn-unit" data-unit="file">
+        <div>
+          <span class="tag">1단계</span>
+          <h2>파일시스템은 “주소가 있는 서랍장”입니다</h2>
+          <p>Windows에서 C드라이브를 떠올리기 쉽지만, 리눅스는 <code>/</code>에서 시작하는 하나의 큰 나무로 보는 편이 쉽습니다.</p>
+        </div>
+        <div class="analogy-box">
+          <div><strong>/etc</strong><span>설정 서랍</span></div>
+          <div><strong>/home</strong><span>사용자 방</span></div>
+          <div><strong>/var</strong><span>계속 변하는 기록</span></div>
+          <div><strong>/dev</strong><span>장치 입구</span></div>
+        </div>
+        <details>
+          <summary>시험에서는 이렇게 나옵니다</summary>
+          <p><code>/etc/passwd</code>, <code>/etc/shadow</code>, <code>/etc/fstab</code>, <code>/var/log</code>처럼 “어느 파일이 무슨 역할인지”를 묻습니다.</p>
+        </details>
+      </article>
+
+      <article class="learn-unit" data-unit="perm">
+        <div>
+          <span class="tag">2단계</span>
+          <h2>권한은 “누가 무엇을 할 수 있나”입니다</h2>
+          <p>권한은 소유자, 그룹, 기타 사용자에게 읽기·쓰기·실행을 나눠 주는 규칙입니다.</p>
+        </div>
+        <div class="permission-demo">
+          <div class="perm-col"><strong>r</strong><span>읽기</span><em>4</em></div>
+          <div class="perm-col"><strong>w</strong><span>쓰기</span><em>2</em></div>
+          <div class="perm-col"><strong>x</strong><span>실행/진입</span><em>1</em></div>
+        </div>
+        <details>
+          <summary><code>755</code>를 바로 이해하기</summary>
+          <p><code>7</code>은 4+2+1이라 소유자는 읽기·쓰기·실행 가능, <code>5</code>는 4+1이라 그룹과 기타 사용자는 읽기·실행만 가능합니다.</p>
+        </details>
+      </article>
+
+      <article class="learn-unit" data-unit="proc">
+        <div>
+          <span class="tag">3단계</span>
+          <h2>프로세스는 “지금 실행 중인 일”입니다</h2>
+          <p>프로그램 파일이 실행되면 프로세스가 됩니다. 각 프로세스에는 PID라는 번호가 붙습니다.</p>
+        </div>
+        <div class="mini-terminal">
+          <span>$ ps aux</span>
+          <span>root  101  sshd</span>
+          <span>user  825  bash</span>
+          <span>$ kill -15 101</span>
+        </div>
+        <details>
+          <summary>자주 나오는 함정</summary>
+          <p><code>kill</code>은 무조건 “삭제”가 아니라 프로세스에 시그널을 보내는 명령입니다. 기본 종료 요청은 TERM 15, 강제 종료는 KILL 9입니다.</p>
+        </details>
+      </article>
+
+      <article class="learn-unit" data-unit="svc">
+        <div>
+          <span class="tag">4단계</span>
+          <h2>서비스는 “계속 켜져 있어야 하는 일”입니다</h2>
+          <p>SSH, 웹 서버, 데이터베이스처럼 백그라운드에서 계속 동작해야 하는 프로그램은 서비스로 관리합니다.</p>
+        </div>
+        <div class="compare-row">
+          <div><code>systemctl start ssh</code><span>지금 켜기</span></div>
+          <div><code>systemctl enable ssh</code><span>부팅 때 자동 켜기</span></div>
+          <div><code>journalctl -u ssh</code><span>서비스 로그 보기</span></div>
+        </div>
+        <details>
+          <summary>시험에서는 이렇게 구분합니다</summary>
+          <p>“현재 실행”이면 <code>start</code>, “부팅 시 자동 실행”이면 <code>enable</code>, “상태 확인”이면 <code>status</code>입니다.</p>
+        </details>
+      </article>
+
+      <article class="learn-unit" data-unit="net">
+        <div>
+          <span class="tag">5단계</span>
+          <h2>네트워크 문제는 순서대로 확인합니다</h2>
+          <p>IP가 있는지, 길이 있는지, 포트가 열렸는지, 이름 해석이 되는지 순서대로 보면 덜 헷갈립니다.</p>
+        </div>
+        <div class="check-flow">
+          <span><code>ip addr</code><small>내 주소</small></span>
+          <span><code>ip route</code><small>가는 길</small></span>
+          <span><code>ping</code><small>도달성</small></span>
+          <span><code>ss -tulpn</code><small>열린 포트</small></span>
+          <span><code>dig</code><small>DNS</small></span>
+        </div>
+        <details>
+          <summary>초보자가 자주 헷갈리는 점</summary>
+          <p><code>ping</code> 성공은 “웹사이트가 정상”이라는 뜻이 아니라, ICMP로 네트워크 도달이 된다는 뜻입니다.</p>
+        </details>
+      </article>
+    </section>
+
+    <section class="card source-card">
+      <h2>공부 방식 참고</h2>
+      <p>이 페이지는 초보자용 학습 사이트처럼 작은 주제, 상황 예시, 직접 눌러보는 확인 과정을 중심으로 만들었습니다. 명령어 의미는 GNU Coreutils, GNU Grep, systemd, Linux man-pages 같은 공식 문서 기준으로 정리했습니다.</p>
+    </section>
+  </main>
+
+  <script>
+    const topicText = {
+      file: ['파일', '설정, 로그, 장치까지 파일처럼 보이는 것이 리눅스의 기본 감각입니다. 그래서 경로를 알면 시스템 구조가 보입니다.'],
+      perm: ['권한', '누가 읽고, 쓰고, 실행할 수 있는지 정하는 규칙입니다. chmod는 권한, chown은 소유자를 바꿉니다.'],
+      proc: ['프로세스', '지금 실행 중인 프로그램입니다. ps로 보고, kill로 시그널을 보내고, top으로 사용량을 봅니다.'],
+      svc: ['서비스', '계속 켜져 있어야 하는 백그라운드 작업입니다. systemctl로 켜고 끄고 자동 실행을 설정합니다.'],
+      net: ['네트워크', '주소, 경로, 도달성, 포트, DNS 순서로 보면 대부분의 기초 문제가 정리됩니다.']
+    };
+
+    document.querySelectorAll('[data-topic]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const [title, body] = topicText[button.dataset.topic];
+        document.getElementById('mapExplain').innerHTML = `<strong>${title}</strong><p>${body}</p>`;
+      });
+    });
+  </script>
+  <footer class="footer">개념을 먼저 잡고 명령어를 붙이면 암기가 훨씬 쉬워집니다.</footer>
+</body>
+</html>
