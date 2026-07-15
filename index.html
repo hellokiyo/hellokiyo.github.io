@@ -3,20 +3,446 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Web AR 예제 모음</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="d-flex align-items-center justify-content-center vh-100 bg-light">
-  
-  <div class="text-center">
-    <h1 class="mb-4">Web AR 예제 모음</h1>
-    
-    <a href="maker1.html" class="btn btn-primary d-block m-2">1. 기본 마커 AR (QR코드 예제)</a>
-    <a href="location.html" class="btn btn-primary d-block m-2">2. 위치 기반 AR (GPS)</a>
-    <a href="virtual-floor.html" class="btn btn-primary d-block m-2">3. 가상 바닥 AR (탭해서 물체 놓기)</a>
-    <a href="booth-street.html" class="btn btn-primary d-block m-2">4. 가상 축제 거리 AR</a>
-  </div>
+  <title>Study & 3D Lab</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #667085;
+      --line: #dce3ef;
+      --linux: #245f4f;
+      --linux-soft: #e6f3ee;
+      --lab: #6843b7;
+      --lab-soft: #efe9fb;
+      --accent: #c96f2d;
+      --shadow: 0 18px 48px rgba(27, 39, 68, 0.1);
+    }
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(135deg, rgba(36, 95, 79, 0.1), transparent 38%),
+        linear-gradient(225deg, rgba(104, 67, 183, 0.12), transparent 42%),
+        var(--bg);
+      color: var(--ink);
+      font-family: Pretendard, "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 22px 54px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: #172033;
+      color: #fff;
+      font-weight: 900;
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 1.05rem;
+    }
+
+    .brand span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav a,
+    .launch {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.78);
+      border-radius: 10px;
+      padding: 9px 13px;
+      text-decoration: none;
+      font-weight: 750;
+      transition: 0.18s ease;
+    }
+
+    .nav a:hover,
+    .launch:hover {
+      border-color: #9aa8c4;
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      min-height: 300px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+      gap: 24px;
+      align-items: stretch;
+      margin-bottom: 24px;
+    }
+
+    .intro {
+      padding: 36px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--accent);
+      font-size: 0.82rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 4rem);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 680px;
+      margin: 18px 0 0;
+      color: #4c586f;
+      font-size: 1.04rem;
+    }
+
+    .preview {
+      min-height: 260px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background:
+        linear-gradient(rgba(23, 32, 51, 0.18), rgba(23, 32, 51, 0.58)),
+        url("index.jpeg") center / cover;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .preview-label {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      color: #fff;
+    }
+
+    .preview-label strong {
+      display: block;
+      font-size: 1.25rem;
+    }
+
+    .preview-label span {
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 0.92rem;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin: 34px 0 14px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 1.45rem;
+    }
+
+    .section-head p {
+      max-width: 580px;
+      margin: 4px 0 0;
+      color: var(--muted);
+    }
+
+    .zone {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      background: rgba(255, 255, 255, 0.64);
+    }
+
+    .zone.linux {
+      border-top: 5px solid var(--linux);
+    }
+
+    .zone.lab {
+      border-top: 5px solid var(--lab);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .grid.two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .item {
+      min-height: 156px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel);
+      text-decoration: none;
+      box-shadow: 0 10px 24px rgba(27, 39, 68, 0.06);
+      transition: 0.18s ease;
+    }
+
+    .item:hover {
+      transform: translateY(-3px);
+      border-color: #a9b7ce;
+      box-shadow: 0 16px 34px rgba(27, 39, 68, 0.11);
+    }
+
+    .badge {
+      width: fit-content;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 0.78rem;
+      font-weight: 900;
+    }
+
+    .linux .badge {
+      background: var(--linux-soft);
+      color: var(--linux);
+    }
+
+    .lab .badge {
+      background: var(--lab-soft);
+      color: var(--lab);
+    }
+
+    .item strong {
+      font-size: 1.08rem;
+      line-height: 1.28;
+    }
+
+    .item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .launch {
+      width: fit-content;
+      margin-top: auto;
+      padding: 8px 11px;
+      background: #fff;
+      font-size: 0.9rem;
+    }
+
+    .footer {
+      margin-top: 34px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .grid,
+      .grid.two {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar,
+      .section-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .shell {
+        padding: 20px 14px 42px;
+      }
+
+      .intro,
+      .zone {
+        padding: 18px;
+      }
+
+      .preview {
+        min-height: 220px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="mark">LAB</div>
+        <div>
+          <strong>Study & 3D Lab</strong>
+          <span>리눅스 학습 파일과 3D 연습 파일을 나눈 작업 공간</span>
+        </div>
+      </div>
+      <nav class="nav" aria-label="빠른 이동">
+        <a href="#linux-zone">Linux</a>
+        <a href="#three-d-zone">3D Practice</a>
+      </nav>
+    </header>
+
+    <section class="hero" aria-labelledby="main-title">
+      <div class="intro">
+        <p class="eyebrow">Workspace Index</p>
+        <h1 id="main-title">파일이 섞이지 않도록 목적별 구역을 나눴습니다.</h1>
+        <p class="lead">
+          리눅스마스터 학습 자료는 하나의 학습 허브로, 기존 3D와 AR 연습 파일은 실험실 구역으로 분리했습니다.
+          아래에서 바로 필요한 화면으로 들어가면 됩니다.
+        </p>
+      </div>
+      <div class="preview" aria-label="3D 연습 미리보기 이미지">
+        <div class="preview-label">
+          <strong>3D Practice Archive</strong>
+          <span>Babylon.js, A-Frame, AR 실험 파일 모음</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="linux-zone" class="zone linux" aria-labelledby="linux-title">
+      <div class="section-head">
+        <div>
+          <h2 id="linux-title">Linux Study Zone</h2>
+          <p>제가 만들어둔 리눅스 학습 파일은 이 구역에 모았습니다. 진도 저장과 문제 풀이 기능은 기존 허브에서 그대로 사용합니다.</p>
+        </div>
+        <a class="launch" href="linux-study-hub/index.html">학습 허브 열기</a>
+      </div>
+      <div class="grid">
+        <a class="item" href="linux-study-hub/index.html">
+          <span class="badge">HOME</span>
+          <strong>리눅스마스터 학습 허브</strong>
+          <p>핵심요약, 실전 문제, 보강 문제로 이동하는 메인 화면입니다.</p>
+          <span class="launch">열기</span>
+        </a>
+        <a class="item" href="linux-study-hub/summary.html">
+          <span class="badge">STEP 1</span>
+          <strong>핵심요약집</strong>
+          <p>명령어, 경로, 권한, 서비스 개념을 빠르게 회독합니다.</p>
+          <span class="launch">요약 보기</span>
+        </a>
+        <a class="item" href="linux-study-hub/practice.html">
+          <span class="badge">STEP 2</span>
+          <strong>80문항 실전 연습</strong>
+          <p>답안 선택, 채점, 오답 확인을 한 화면에서 진행합니다.</p>
+          <span class="launch">문제 풀기</span>
+        </a>
+        <a class="item" href="linux-study-hub/supplement.html">
+          <span class="badge">STEP 3</span>
+          <strong>보강 40문항</strong>
+          <p>영상 강의 범위와 연결해 부족한 개념을 추가로 점검합니다.</p>
+          <span class="launch">보강 풀기</span>
+        </a>
+      </div>
+    </section>
+
+    <section id="three-d-zone" class="zone lab" aria-labelledby="lab-title">
+      <div class="section-head">
+        <div>
+          <h2 id="lab-title">3D Practice Zone</h2>
+          <p>나머지 HTML 파일들은 3D와 AR을 연습한 흔적으로 묶었습니다. 파일은 이동하지 않고, 이 화면에서만 보기 좋게 정리했습니다.</p>
+        </div>
+      </div>
+      <div class="grid two">
+        <a class="item" href="BabylonEx01.html">
+          <span class="badge">Babylon.js</span>
+          <strong>기본 3D 장면</strong>
+          <p>카메라, 조명, 바닥, 텍스처 구체와 간단한 애니메이션 연습입니다.</p>
+          <span class="launch">열기</span>
+        </a>
+        <a class="item" href="BabylonEx02.html">
+          <span class="badge">Babylon.js</span>
+          <strong>도형 배치 연습</strong>
+          <p>상자, 원기둥, 토러스 등 기본 메쉬를 배치한 실험 파일입니다.</p>
+          <span class="launch">열기</span>
+        </a>
+        <a class="item" href="marker1.html">
+          <span class="badge">AR.js</span>
+          <strong>기본 마커 AR</strong>
+          <p>Hiro 마커 위에 회전하는 토러스를 올리는 AR 예제입니다.</p>
+          <span class="launch">열기</span>
+        </a>
+        <a class="item" href="location.html">
+          <span class="badge">GPS AR</span>
+          <strong>위치 기반 AR</strong>
+          <p>현재 위치를 받아 GPS 좌표에 3D 박스를 배치하는 디버그 예제입니다.</p>
+          <span class="launch">열기</span>
+        </a>
+        <a class="item" href="virtual-floor.html">
+          <span class="badge">A-Frame</span>
+          <strong>가상 바닥 배치</strong>
+          <p>커서가 닿은 바닥 위치에 3D 오브젝트를 놓는 연습입니다.</p>
+          <span class="launch">열기</span>
+        </a>
+        <a class="item" href="booth-street.html">
+          <span class="badge">WebXR</span>
+          <strong>가상 축제 거리</strong>
+          <p>부스가 늘어선 길을 만들고 AR 진입 버튼을 붙인 실험입니다.</p>
+          <span class="launch">열기</span>
+        </a>
+        <a class="item" href="moon.html">
+          <span class="badge">Canvas</span>
+          <strong>캔버스 시계 실험</strong>
+          <p>HTML 캔버스에 시계 애니메이션을 그리려던 연습 파일입니다.</p>
+          <span class="launch">열기</span>
+        </a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      루트 화면은 안내판 역할만 합니다. 각 실습 파일과 리눅스 학습 폴더는 그대로 유지했습니다.
+    </footer>
+  </main>
 </body>
 </html>
