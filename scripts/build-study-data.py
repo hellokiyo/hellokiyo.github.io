@@ -101,6 +101,14 @@ plan=[
 ('실전 연습 + 약점 복습','50분 동안 풀고 찍어서 맞힌 문제도 복습해요.','quiz'),
 ('실전 재점검 + 오답','목표는 40/50문항. 부족한 S영역을 보강해요.','wrong'),
 ('최종 체크 · 응시 준비','짧은 오답 복습 후 신분증과 입실 시간을 확인해요.','theory/9')]
+example_rows=json.loads((ROOT/'assets/network/keyword-examples.json').read_text(encoding='utf-8-sig'))
+example_map={example['keyword']:example for example in example_rows}
+if len(example_map)!=len(example_rows):
+    raise ValueError('Duplicate keyword example')
+for keyword in keywords:
+    if keyword['answer'] not in example_map:
+        raise ValueError('Missing example: '+keyword['answer'])
+    keyword['example']={key:value for key,value in example_map[keyword['answer']].items() if key!='keyword'}
 data={'keywords':keywords,'commands':commands,'sections':sections,'plan':[{'day':i,'title':p[0],'description':p[1],'view':p[2]} for i,p in enumerate(plan)]}
 output=ROOT/'assets/network/study-data.js'
 output.write_text('/* README.md에서 생성. 갱신: python scripts/build-study-data.py */\nwindow.STUDY_DATA = '+json.dumps(data,ensure_ascii=False).replace('</','<\\/')+';\n',encoding='utf-8')
