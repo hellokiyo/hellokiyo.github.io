@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Babylon.js Basic Scene</title>
+    <style>
+        html, body {
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #renderCanvas {
+            width: 100%;
+            height: 100%;
+            touch-action: none; /* 터치 이벤트 처리를 위함 */
+        }
+    </style>
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+</head>
+<body>
+
+<canvas id="renderCanvas"></canvas>
+<script>
+    // 여기에 Babylon.js 코드가 들어갑니다.
+    const canvas = document.getElementById("renderCanvas");
+    const engine = new BABYLON.Engine(canvas, true);
+
+    const createScene = function () {
+        // 1. 장면 (Scene) 생성: 3D 오브젝트들이 놓일 공간
+        const scene = new BABYLON.Scene(engine);
+
+        // 2. 카메라 (Camera) 생성: 장면을 볼 시점
+        // ArcRotateCamera는 마우스로 회전/확대/축소 가능한 카메라입니다.
+        const camera = new BABYLON.ArcRotateCamera("camera", -Math.PI / 2, Math.PI / 2.5, 10, BABYLON.Vector3.Zero(), scene);
+        camera.attachControl(canvas, true); // 캔버스에 카메라 컨트롤 연결
+
+        // 3. 조명 (Light) 생성: 장면을 밝게 비춤
+        const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
+        light.intensity = 0.7;
+
+        // 4. 구체 (Sphere) 생성
+        const sphere = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 2, segments: 32}, scene);
+        sphere.position.y = 1;
+
+        // 5. 바닥 (Ground) 생성
+        const ground = BABYLON.MeshBuilder.CreateGround("ground", {width: 6, height: 6}, scene);
+
+        // 6. 재질 (Material) 설정: 구체에 원하는 이미지 텍스처 적용
+        const sphereMaterial = new BABYLON.StandardMaterial("sphereMaterial", scene);
+
+        // 여기에 이미지 경로를 넣어주세요. (웹에 접근 가능한 URL 또는 프로젝트 내 경로)
+        sphereMaterial.diffuseTexture = new BABYLON.Texture("https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demos_1.png", scene);
+        // 만약 이미지가 구겨져 보인다면, sphereMaterial.diffuseTexture.has == false로 설정해볼 수 있습니다. (텍스처 필터링)
+        sphere.material = sphereMaterial;
+
+        /*// 4. 구체 (Sphere) 생성: 움직일 오브젝트
+        const sphere = BABYLON.MeshBuilder.CreateSphere("sphere", { diameter: 2, segments: 32 }, scene);
+        sphere.position.y = 1; // 땅 위로 약간 띄움
+
+        // 5. 바닥 (Ground) 생성: 구체가 놓일 평면
+        const ground = BABYLON.MeshBuilder.CreateGround("ground", { width: 6, height: 6 }, scene);
+
+        // 6. 재질 (Material) 설정: 구체와 바닥의 색깔/표면
+        const sphereMaterial = new BABYLON.StandardMaterial("sphereMaterial", scene);
+        sphereMaterial.diffuseColor = new BABYLON.Color3(0.4, 0.4, 1); // 파란색 구체
+        sphere.material = sphereMaterial;*/
+
+        const groundMaterial = new BABYLON.StandardMaterial("groundMaterial", scene);
+        groundMaterial.diffuseColor = new BABYLON.Color3(0.2, 0.8, 0.2); // 초록색 바닥
+        ground.material = groundMaterial;
+
+        // 7. 애니메이션 (Animation): 구체를 위아래로 움직이게 함
+        let direction = 1; // 움직이는 방향
+        scene.onBeforeRenderObservable.add(() => {
+            sphere.position.y += 0.01 * direction; // y축으로 이동
+            if (sphere.position.y > 2 || sphere.position.y < 1) {
+                direction *= -1; // 방향 전환
+            }
+        });
+
+        return scene;
+    };
+
+    const scene = createScene();
+
+    // 렌더링 루프: 매 프레임마다 장면을 그림
+    engine.runRenderLoop(function () {
+        scene.render();
+    });
+
+    // 창 크기 변경 시 렌더링 엔진도 크기 조절
+    window.addEventListener("resize", function () {
+        engine.resize();
+    });
+</script>
+</body>
+</html>
