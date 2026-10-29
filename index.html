@@ -16,10 +16,10 @@
 <body>
   <a class="skip-link" href="#main">본문 바로가기</a>
   <aside class="sidebar">
-    <a class="brand" href="#dashboard" aria-label="네트워크 노트 홈"><span class="brand-icon" aria-hidden="true">N<span>·</span></span><span>네트워크 노트<small>NETWORK STUDY NOTES</small></span></a>
-    <div class="sidebar-label">MY STUDY SPACE</div>
+    <a class="brand" href="#dashboard" aria-label="네트워크 노트 홈"><span class="brand-icon" aria-hidden="true">N<span>·</span></span><span>네트워크 노트<small>네트워크관리사 2급</small></span></a>
+    
     <nav id="navigation" aria-label="주요 메뉴">
-      <a href="#dashboard" data-view="dashboard"><span aria-hidden="true">◫</span> 학습 대시보드</a>
+      <a href="#dashboard" data-view="dashboard"><span aria-hidden="true">◫</span> 학습 현황</a>
       <a href="#keywords" data-view="keywords"><span aria-hidden="true">◇</span> 키워드 암기 <span class="nav-count" id="keyword-count"></span></a>
       <a href="#theory" data-view="theory"><span aria-hidden="true">▤</span> 핵심 이론</a>
       <a href="#commands" data-view="commands"><span aria-hidden="true">⌘</span> 명령어 노트</a>
@@ -27,12 +27,12 @@
       <a href="#wrong" data-view="wrong"><span aria-hidden="true">↺</span> 오답 복습 <span class="nav-count" id="wrong-count">0</span></a>
       <a href="#plan" data-view="plan"><span aria-hidden="true">☑</span> 14일 학습 계획</a>
     </nav>
-    <div class="sidebar-bottom"><span class="small-label">작게 나눠, 확실하게.</span><p>오늘 외운 한 개념이<br>시험장의 한 문제로.</p><a href="README.md" download="README.md">학습 가이드 내려받기 <span aria-hidden="true">↗</span></a></div>
+    <div class="sidebar-bottom"><a href="README.md" download="README.md">전체 가이드 내려받기 ↓</a></div>
   </aside>
   <div class="workspace">
-    <header class="topbar"><div class="breadcrumb">자격증 학습 <span>/</span> <strong>네트워크관리사 2급</strong></div><div class="topbar-right"><span class="saved-dot" aria-hidden="true"></span><span id="save-status">이 브라우저에 자동 저장</span><button class="icon-button" id="settings-button" aria-label="학습 설정 열기" title="학습 설정">⚙</button></div></header>
+    <header class="topbar"><div class="breadcrumb"><strong>네트워크관리사 2급</strong> · 필기</div><div class="topbar-right"><span class="saved-dot" aria-hidden="true"></span><span id="save-status">자동 저장</span><button class="icon-button" id="settings-button" aria-label="학습 설정 열기" title="학습 설정">⚙</button></div></header>
     <main id="main" tabindex="-1"></main>
-    <footer class="footer"><span>NETWORK NOTES <span class="footer-dot">·</span> 매일 조금씩, 합격에 가까이.</span><span>개인 학습용 · 공식 기출·출제 예고가 아닙니다.</span></footer>
+    <footer class="footer">개인 학습용 · 연습 문제는 공식 기출이 아닙니다.</footer>
   </div>
   <dialog id="settings-dialog" aria-labelledby="settings-title"><form id="settings-form"><div class="dialog-heading"><h2 id="settings-title">학습 설정</h2><button type="button" class="icon-button" data-close aria-label="설정 닫기">×</button></div><p class="muted">시험일을 설정하면 남은 기간과 추천 학습일을 보여드려요.</p><label class="field-label" for="exam-date">시험 날짜</label><input type="date" id="exam-date" name="examDate"><button class="button primary full" type="submit">저장하기</button><p class="fine-print">기록은 현재 브라우저에만 저장됩니다. 다른 기기와 동기화되지 않아요.</p><div class="data-actions"><button type="button" id="export-progress" class="button secondary">학습 기록 내보내기</button><label class="button secondary" for="import-progress">기록 가져오기</label><input type="file" id="import-progress" accept="application/json,.json" hidden></div><button type="button" class="text-button danger" id="reset-progress">학습 기록 초기화</button></form></dialog>
   <dialog id="confirm-dialog" aria-labelledby="confirm-title"><h2 id="confirm-title"></h2><p id="confirm-message"></p><div class="dialog-actions"><button type="button" id="confirm-cancel" class="button secondary">취소</button><button type="button" id="confirm-ok" class="button primary">확인</button></div></dialog>
