@@ -5,11 +5,7 @@ window.LATEST_PAPER = {
   "date": "2026-11-01",
   "source": "https://www.icqa.or.kr/cn/board/dataroom/263",
   "answerStatus": "학습용 풀이 · 공식 정답표 미확인",
-  "pendingNumbers": [
-    23,
-    28,
-    39
-  ],
+  "pendingNumbers": [],
   "questions": [
     {
       "id": "nw2-2026-04-a-01",
@@ -320,6 +316,20 @@ window.LATEST_PAPER = {
       "explanation": "오류 검출·재전송 제어는 세션 계층의 주요 기능이 아니다."
     },
     {
+      "id": "nw2-2026-04-a-23",
+      "number": 23,
+      "category": "네트워크 일반",
+      "question": "다음 설명의 (A)에 들어갈 기술로 옳은 것은?\n\n(A)은/는 기존의 전용 하드웨어에서 수행하던 방화벽, 라우팅 등의 네트워크 기능을 소프트웨어로 구현하여 가상화된 인프라에서 실행하는 기술이다. 가상 머신(VM)이나 컨테이너 기반으로 네트워크 기능을 배포할 수 있으며, ETSI의 관리 및 오케스트레이션(MANO) 구조를 활용하여 네트워크 서비스의 배포와 운영을 효율적으로 관리할 수 있다.",
+      "options": [
+        "NFV (Network Functions Virtualization)",
+        "WMN (Wireless Mesh Network)",
+        "SDN (Software-Defined Networking)",
+        "MEC (Multi-access Edge Computing)"
+      ],
+      "answer": 0,
+      "explanation": "전용 하드웨어의 네트워크 기능을 소프트웨어로 가상화하고 VM·컨테이너에 배포하는 기술은 NFV다. ETSI MANO가 핵심 단서다. SDN의 제어 평면·데이터 평면 분리와 구별한다."
+    },
+    {
       "id": "nw2-2026-04-a-24",
       "number": 24,
       "category": "네트워크 일반",
@@ -374,6 +384,20 @@ window.LATEST_PAPER = {
       ],
       "answer": 0,
       "explanation": "생성 다항식으로 검사값을 계산하는 방식은 CRC다."
+    },
+    {
+      "id": "nw2-2026-04-a-28",
+      "number": 28,
+      "category": "NOS",
+      "question": "서버 관리자가 Windows Server 2022 환경에서 여러 서버가 중앙의 스토리지 자원에 접근할 수 있도록 시스템을 구축하려고 한다. 다음 조건을 충족하는 스토리지 구성 방식으로 가장 적절한 것은?\n\n<조건>\n- 여러 서버가 네트워크를 통해 중앙의 스토리지 자원에 접근할 수 있다.\n- 서버에 저장 공간을 블록 단위의 장치로 제공한다.\n- Fibre Channel 또는 iSCSI 등의 연결 방식을 사용할 수 있다.\n- 대규모 서버 환경에서 고성능 스토리지 구성을 지원한다.",
+      "options": [
+        "NAS (Network Attached Storage)",
+        "SAN (Storage Area Network)",
+        "RAID (Redundant Array of Independent Disks)",
+        "SSD (Solid-State Drive)"
+      ],
+      "answer": 1,
+      "explanation": "블록 단위 저장 장치 제공, Fibre Channel·iSCSI는 SAN의 단서다. NAS의 파일 단위 접근과 구별한다."
     },
     {
       "id": "nw2-2026-04-a-29",
@@ -514,6 +538,20 @@ window.LATEST_PAPER = {
       ],
       "answer": 0,
       "explanation": "7=rwx, 5=r-x, 4=r--이므로 rwxr-xr--이다."
+    },
+    {
+      "id": "nw2-2026-04-a-39",
+      "number": 39,
+      "category": "NOS",
+      "question": "서버 관리자는 Linux 시스템에서 디렉터리를 정리하기 위해 다음 작업을 순서대로 수행하려고 한다. 각 작업에 사용할 명령어가 순서대로 올바르게 나열된 것은? (단, 명령어 실행에 필요한 권한은 모두 가지고 있다고 가정한다.)\n\n(1) backup이라는 새 디렉터리를 생성한다.\n(2) 파일과 하위 디렉터리가 포함된 old_backup 디렉터리를 재귀적으로 삭제하되, 쓰기 방지된 파일에 대해서도 확인 메시지를 표시하지 않도록 한다.\n(3) backup 디렉터리의 이름을 backup_new로 변경한다.",
+      "options": [
+        "mkdir, rmdir, mv",
+        "mkdir, rm -r, rename",
+        "mkdir, rm -rf, mv",
+        "mkdir, rm -f, mv"
+      ],
+      "answer": 2,
+      "explanation": "생성은 mkdir, 하위 항목을 포함한 재귀 삭제와 확인 메시지 생략은 rm -rf, 디렉터리 이름 변경은 mv다. -r은 재귀 처리, -f는 강제 처리 옵션이다."
     },
     {
       "id": "nw2-2026-04-a-40",
