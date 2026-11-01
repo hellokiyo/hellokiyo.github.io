@@ -1,0 +1,11 @@
+from pathlib import Path
+p=Path('assets/network/materials-page.js');s=p.read_text(encoding='utf-8-sig')
+s=s.replace('if (!active) return;\n      const list', "if (!active) return;\n      dropzone.setAttribute('aria-busy',String(busy));\n      const list")
+s=s.replace("async function addFiles(fileList) {\n      if (busy)", "async function addFiles(fileList) {\n      if (loading) { toast('자료 목록을 불러오는 중입니다. 잠시 후 다시 넣어 주세요.'); return; }\n      if (busy)")
+s=s.replace('async function publish() {\n      if(busy)return;', 'async function publish() {\n      if(busy||loading)return;')
+p.write_text(s,encoding='utf-8')
+p=Path('SITE-GUIDE.md');s=p.read_text(encoding='utf-8-sig')
+s=s.replace('- 14일 계획:', '- 시험 자료: 드래그 드롭·파일 선택, 회차·분류·메모 관리, 원본 보관, 검토 체크, 게시용 ZIP.\n- 14일 계획:')
+s=s.replace('    app.js\n','    app.js\n    materials-store.js\n    materials-page.js\n    public-materials.js\n')
+s += '''\n## 시험 자료 추가와 공개 게시\n\n사이드 메뉴의 **시험 자료**에서 파일을 드래그하거나 **파일 선택**을 누릅니다. 한 번에 최대 10개, 파일당 30MB까지이며 HWP·HWPX·PDF·TXT·MD·PNG·JPG·WEBP를 지원합니다. 파일 이름에 연도·회차·필기/실기/해설 표현이 있으면 해당 정보를 추정하고, 추가 후 **정보 수정**에서 바꿀 수 있습니다.\n\n파일은 서버에 업로드되지 않고 현재 접속 주소의 브라우저 IndexedDB(`network-notes-materials:v1`)에 원본 사본으로 저장됩니다. 컴퓨터의 원본 파일은 바뀌지 않습니다. 시크릿 창 종료, 브라우저 저장소 정리, 접속 주소·기기 변경 시 로컬 보관 자료가 보이지 않을 수 있으므로 필요한 파일은 별도로 보관하세요. 기존 학습 기록 JSON 내보내기에는 원본 파일이 포함되지 않습니다.\n\nPDF·이미지·텍스트는 미리보기로 확인합니다. HWP/HWPX 본문 해석·미리보기와 자동 문제 추출은 지원하지 않으며, 원본 내려받기를 이용하거나 PDF로 변환해 추가합니다. 자료를 넣는다고 기존 72문항 퀴즈에 자동 반영되지는 않습니다.\n\n다른 방문자도 볼 수 있는 공개 자료를 추가할 때는 다음 순서를 따릅니다.\n\n1. 브라우저에서 자료를 추가하고 제목·회차·분류·메모를 정리합니다.\n2. **게시용 ZIP 받기**를 누릅니다. 새 파일은 합계 250MB까지 묶을 수 있습니다.\n3. ZIP을 풀어 나온 `materials/`와 `assets/`를 프로젝트 루트에 넣습니다. 새 원본은 `materials/files/`에, 자료 목록은 `assets/network/public-materials.js`에 들어갑니다.\n4. 사용자가 직접 Git 관리와 GitHub Pages 게시를 진행합니다.\n\n게시용 ZIP은 기존 공개 목록을 유지하고 브라우저에 추가한 새 원본을 포함합니다. 기존에 공개한 원본 파일은 프로젝트에서 유지해야 합니다. 제목·메모·검토 표시도 목록에 포함됩니다. ZIP 생성만으로 파일 시스템이나 Git, 배포 상태가 변경되지는 않습니다.\n\n공개 자료는 정적 목록에서 관리합니다. 브라우저의 **삭제**는 로컬 사본·메모에만 적용되며, 공개 목록을 서버에서 삭제하거나 컴퓨터 원본을 지우지 않습니다. 전체 학습 기록 초기화는 별도로 보관된 시험 자료를 지우지 않습니다.\n\n자료 기능 검증:\n\n```powershell\nnode --test scripts/test-study.cjs scripts/test-materials.cjs scripts/test-materials-page.cjs\n```\n'''
+p.write_text(s,encoding='utf-8')

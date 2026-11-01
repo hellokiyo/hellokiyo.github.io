@@ -24,9 +24,9 @@
     const qids=questions.map(q=>q.id), kids=data.keywords.map(k=>k.id), rids=data.sections.map(s=>s.id);
     const result={version:1,examDate:validDate(source.examDate)?source.examDate:'',mastered:allowed(source.mastered,kids),read:allowed(source.read,rids),plans:allowed(source.plans,data.plan.map(p=>p.day)),wrong:allowed(source.wrong,qids),routines:{},records:[],session:null,lastResult:null};
     if(source.routines&&typeof source.routines==='object')for(const [date,tasks] of Object.entries(source.routines)){if(validDate(date))result.routines[date]=allowed(tasks,[0,1,2]);}
-    if(Array.isArray(source.records))result.records=source.records.filter(r=>r&&Number.isFinite(r.score)&&r.score>=0&&r.score<=100&&Number.isInteger(r.total)&&r.total>0&&r.total<=questions.length&&Number.isInteger(r.correct)&&r.correct>=0&&r.correct<=r.total&&typeof r.at==='string'&&!Number.isNaN(Date.parse(r.at))).slice(-30).map(r=>({score:Math.round(r.correct/r.total*100),total:r.total,correct:r.correct,at:r.at,mode:['exam','quick','wrong'].includes(r.mode)?r.mode:'quick'}));
+    if(Array.isArray(source.records))result.records=source.records.filter(r=>r&&Number.isFinite(r.score)&&r.score>=0&&r.score<=100&&Number.isInteger(r.total)&&r.total>0&&r.total<=questions.length&&Number.isInteger(r.correct)&&r.correct>=0&&r.correct<=r.total&&typeof r.at==='string'&&!Number.isNaN(Date.parse(r.at))).slice(-30).map(r=>({score:Math.round(r.correct/r.total*100),total:r.total,correct:r.correct,at:r.at,mode:['exam','quick','wrong','paper'].includes(r.mode)?r.mode:'quick'}));
     const cleanSession=s=>{
-      if(!s||typeof s!=='object'||!['exam','quick','wrong'].includes(s.mode)||!Array.isArray(s.ids))return null;
+      if(!s||typeof s!=='object'||!['exam','quick','wrong','paper'].includes(s.mode)||!Array.isArray(s.ids))return null;
       const ids=allowed(s.ids,qids);if(!ids.length)return null;
       const answers={},checked=[];
       for(const id of ids){const q=questions.find(q=>q.id===id);if(Number.isInteger(s.answers?.[id])&&s.answers[id]>=0&&s.answers[id]<q.options.length)answers[id]=s.answers[id];}
