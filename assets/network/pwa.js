@@ -8,7 +8,7 @@
   help.textContent=ios?'iPhone: Safari의 공유 메뉴 → 홈 화면에 추가를 선택하세요.':'휴대폰 브라우저 메뉴에서 앱 설치 또는 홈 화면에 추가를 선택하세요. 설치 버튼은 브라우저가 지원할 때만 표시됩니다.';
  }
  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installEvent=e;button.hidden=standalone();});
- window.addEventListener('appinstalled',()=>{installEvent=null;button.hidden=true;help.textContent='설치되었습니다. 홈 화면에서 네트워크 노트를 열어보세요.';});
+ window.addEventListener('appinstalled',()=>{installEvent=null;button.hidden=true;help.textContent='설치되었습니다. 홈 화면에서 합격루틴를 열어보세요.';});
  button.addEventListener('click',async()=>{if(!installEvent)return;const e=installEvent;installEvent=null;button.hidden=true;await e.prompt();await e.userChoice;});
  function updateBanner(worker){
   if(!worker)return;banner.hidden=false;banner.innerHTML='<span>새 학습 자료가 준비되었습니다. 답안을 저장한 뒤 업데이트하세요.</span><button type="button" class="button secondary" id="apply-update">지금 업데이트</button><button type="button" class="text-button" id="later-update">나중에</button>';
@@ -25,18 +25,13 @@
   let reloading=false;const hadController=!!navigator.serviceWorker.controller;
   navigator.serviceWorker.addEventListener('controllerchange',()=>{if((hadController||applying)&&!reloading){reloading=true;location.reload();}});
  }else status.textContent='설치·오프라인 학습은 HTTPS 사이트 또는 localhost에서 사용할 수 있습니다.';
- const themeButton=$('#theme-toggle');
- function theme(value){document.documentElement.dataset.theme=value;themeButton.textContent=value==='dark'?'밝은 화면으로 변경':'어두운 화면으로 변경';}
- let saved;try{saved=localStorage.getItem('network-notes:theme');}catch{}
- theme(saved==='dark'?'dark':'light');
- themeButton.addEventListener('click',()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';theme(next);try{localStorage.setItem('network-notes:theme',next);}catch{}});
  installHelp();
  const updateButton=document.createElement('button');updateButton.type='button';updateButton.className='button secondary full';updateButton.textContent='업데이트 확인';
  status.after(updateButton);
  updateButton.addEventListener('click',async()=>{
   if(!registration){status.textContent='업데이트를 확인하려면 인터넷에 연결하고 다시 열어주세요.';return;}
   updateButton.disabled=true;
-  try{await registration.update();if(registration.waiting){updateBanner(registration.waiting);$('#settings-dialog').close();banner.scrollIntoView({block:'start'});}else status.textContent=registration.installing?'새 파일을 준비하고 있습니다. 준비가 끝나면 업데이트 안내가 표시됩니다.':'이 브라우저에서 확인한 최신 버전입니다. 화면 하단에 모바일 학습 v9가 있는지 확인하세요.';}catch{status.textContent='업데이트를 확인하지 못했습니다. 인터넷 연결 후 다시 시도하세요.';}finally{updateButton.disabled=false;}
+  try{await registration.update();if(registration.waiting){updateBanner(registration.waiting);$('#settings-dialog').close();banner.scrollIntoView({block:'start'});}else status.textContent=registration.installing?'새 파일을 준비하고 있습니다. 준비가 끝나면 업데이트 안내가 표시됩니다.':'이 브라우저에서 확인한 최신 버전입니다. 화면 하단에 합격루틴 v11가 있는지 확인하세요.';}catch{status.textContent='업데이트를 확인하지 못했습니다. 인터넷 연결 후 다시 시도하세요.';}finally{updateButton.disabled=false;}
  });
  // 앱을 닫은 상태의 예약 알림은 서버 없이 제공하지 않습니다.
 })();

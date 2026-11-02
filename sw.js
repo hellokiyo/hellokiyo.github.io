@@ -1,8 +1,8 @@
 /* 배포 시 VERSION을 변경하세요. 사용자 학습 기록은 CacheStorage와 별개입니다. */
-const VERSION='network-notes-pwa-v9';
+const VERSION='network-notes-pwa-v11';
 const BASE=new URL('./',self.location.href);
 const FILES=['./','index.html','manifest.webmanifest','README.md','SITE-GUIDE.md',
- 'assets/network/styles.css','assets/network/mobile.css','assets/network/home.css','assets/network/keyword-game.css',
+ 'assets/network/styles.css','assets/network/mobile.css','assets/network/home.css','assets/network/themes.css','assets/network/themes.js','assets/network/keyword-game.css',
  'assets/network/study-data.js','assets/network/questions.js','assets/network/latest-paper.js',
  'assets/network/review-core.js','assets/network/daily-study.js','assets/network/core.js',
  'assets/network/materials-store.js','assets/network/public-materials.js','assets/network/materials-page.js',

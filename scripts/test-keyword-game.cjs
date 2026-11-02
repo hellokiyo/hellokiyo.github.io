@@ -1,10 +1,10 @@
 const test=require('node:test'),assert=require('node:assert/strict'),vm=require('node:vm'),fs=require('node:fs');
-function setup(){
+function setup(initial={}){
  let now=0,interval,clears=0;const handlers={},docHandlers={},nodes={};
  const node=s=>nodes[s]??=( {textContent:'',innerHTML:'',hidden:false,style:{},value:s==='#rain-mode'?'choice':'',clientHeight:380,offsetHeight:90,focus(){},addEventListener(type,fn){handlers[s+type]=fn;}} );
  const root={querySelector:node,addEventListener:(type,fn)=>handlers[type]=fn};
  const keywords=Array.from({length:5},(_,i)=>({id:'k'+i,cue:'cue'+i,answer:'answer'+i,category:'category',hint:'hint'+i}));
- const storage={};const context={window:{STUDY_DATA:{keywords},StudyCore:{shuffle:a=>[...a]}},document:{addEventListener:(type,fn)=>docHandlers[type]=fn},localStorage:{getItem:k=>storage[k],setItem:(k,v)=>storage[k]=v},performance:{now:()=>now},AbortController,setInterval:fn=>(interval=fn,1),clearInterval:()=>{clears++;interval=null;}};
+ const storage={...initial};const context={window:{STUDY_DATA:{keywords},StudyCore:{shuffle:a=>[...a]}},document:{addEventListener:(type,fn)=>docHandlers[type]=fn},localStorage:{getItem:k=>storage[k],setItem:(k,v)=>storage[k]=v},performance:{now:()=>now},AbortController,setInterval:fn=>(interval=fn,1),clearInterval:()=>{clears++;interval=null;}};
  vm.runInNewContext(fs.readFileSync('assets/network/keyword-game.js','utf8'),context);context.window.KeywordGame.mount({root});
  return {node,storage,context,click:(id,dataset={})=>handlers.click({target:{closest:()=>({id,dataset})}}),advance:ms=>{now+=ms;interval?.();},submit:value=>{node('#rain-input').value=value;handlers['#rain-formsubmit']({preventDefault(){}});},get clears(){return clears;}};
 }
@@ -12,8 +12,20 @@ test('정답 점수·오답 복습·종료·다시 시작',()=>{
  const g=setup();g.click('rain-start');g.click('',{rainAnswer:'0'});assert.equal(g.node('#rain-score').textContent,'100');
  g.click('rain-skip');assert.match(g.node('#rain-feedback').textContent,/answer3/);
  g.click('rain-end');assert.match(g.node('#rain-result').innerHTML,/cue3/);assert.match(g.node('#rain-result').innerHTML,/정답률 50%/);assert.match(g.node('#rain-result').innerHTML,/100 GP/);
- assert.equal(Object.values(g.storage).length,0);assert.doesNotMatch(g.node('#rain-result').innerHTML,/새로운 최고 기록/);
+ assert.equal(JSON.parse(Object.values(g.storage)[0]).totalGP,100);assert.equal(JSON.parse(Object.values(g.storage)[0]).choice,undefined);assert.doesNotMatch(g.node('#rain-result').innerHTML,/새로운 최고 기록/);
  g.click('rain-restart');g.click('rain-start');assert.equal(g.node('#rain-score').textContent,'0');
+});
+test('선택한 오답과 정답, 시간 초과·건너뛰기를 문항별로 구분한다',()=>{
+ const g=setup();g.click('rain-start');g.click('',{rainAnswer:'1'});g.advance(10001);g.click('rain-skip');
+ const html=g.node('#rain-result').innerHTML;assert.match(html,/내 답 · 2번 · answer0/);assert.match(html,/정답 · answer4/);assert.match(html,/미응답 \(시간 초과\)/);assert.match(html,/모르겠어요 \(건너뜀\)/);
+});
+test('누적 GP 배지 획득·중복 적립 방지·기존 최고 기록 보존',()=>{
+ const key='network-keyword-rain:v1',g=setup({[key]:JSON.stringify({choice:800,type:700,totalGP:400})});g.click('rain-start');g.click('',{rainAnswer:'0'});g.click('rain-end');
+ assert.match(g.node('#rain-result').innerHTML,/새 배지 획득 · 키워드 새싹/);const saved=JSON.parse(g.storage[key]);assert.equal(saved.totalGP,500);assert.equal(saved.choice,800);assert.equal(saved.type,700);
+ g.click('rain-end');assert.equal(JSON.parse(g.storage[key]).totalGP,500);
+});
+test('직접 입력한 답은 결과에서 안전하게 표시한다',()=>{
+ const g=setup();g.node('#rain-mode').value='type';g.click('rain-start');g.submit('<img src=x>');g.click('rain-end');assert.match(g.node('#rain-result').innerHTML,/내 답 · &lt;img src=x&gt;/);assert.doesNotMatch(g.node('#rain-result').innerHTML,/<img src=x>/);
 });
 test('1개 정답·3개 오답은 25%이며 짧은 도전은 최고 기록으로 올리지 않는다',()=>{
  const g=setup();g.click('rain-start');g.click('',{rainAnswer:'0'});
