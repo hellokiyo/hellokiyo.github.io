@@ -1,0 +1,252 @@
+[
+  {
+    "profile": "작은 휴대폰",
+    "requested": [
+      320,
+      740
+    ],
+    "bottomMenu": [
+      "dashboard",
+      "daily",
+      "game",
+      "quiz",
+      "wrong"
+    ],
+    "duplicates": 0,
+    "largestUiIcon": 19,
+    "scrollWidth": 305,
+    "smallestHomeLink": 44,
+    "topMenu": [
+      "keywords",
+      "theory",
+      "commands",
+      "materials",
+      "plan"
+    ],
+    "topOverflow": false,
+    "topRows": 2,
+    "viewport": 305
+  },
+  {
+    "profile": "Galaxy S24 Ultra 대표 폭",
+    "requested": [
+      412,
+      915
+    ],
+    "bottomMenu": [
+      "dashboard",
+      "daily",
+      "game",
+      "quiz",
+      "wrong"
+    ],
+    "duplicates": 0,
+    "largestUiIcon": 19,
+    "scrollWidth": 397,
+    "smallestHomeLink": 44,
+    "topMenu": [
+      "keywords",
+      "theory",
+      "commands",
+      "materials",
+      "plan"
+    ],
+    "topOverflow": false,
+    "topRows": 2,
+    "viewport": 397
+  },
+  {
+    "profile": "iPhone 15 Pro Max 대표 폭",
+    "requested": [
+      430,
+      932
+    ],
+    "bottomMenu": [
+      "dashboard",
+      "daily",
+      "game",
+      "quiz",
+      "wrong"
+    ],
+    "duplicates": 0,
+    "largestUiIcon": 19,
+    "scrollWidth": 415,
+    "smallestHomeLink": 44,
+    "topMenu": [
+      "keywords",
+      "theory",
+      "commands",
+      "materials",
+      "plan"
+    ],
+    "topOverflow": false,
+    "topRows": 2,
+    "viewport": 415
+  },
+  {
+    "profile": "iPad 대표 세로",
+    "requested": [
+      820,
+      1180
+    ],
+    "bottomMenu": [
+      "dashboard",
+      "daily",
+      "game",
+      "quiz",
+      "wrong"
+    ],
+    "duplicates": 0,
+    "largestUiIcon": 19,
+    "scrollWidth": 805,
+    "smallestHomeLink": 44,
+    "topMenu": [
+      "keywords",
+      "theory",
+      "commands",
+      "materials",
+      "plan"
+    ],
+    "topOverflow": false,
+    "topRows": 2,
+    "viewport": 805
+  },
+  {
+    "profile": "iPad 큰 세로",
+    "requested": [
+      1024,
+      1366
+    ],
+    "bottomMenu": [
+      "dashboard",
+      "daily",
+      "game",
+      "quiz",
+      "wrong"
+    ],
+    "duplicates": 0,
+    "largestUiIcon": 19,
+    "scrollWidth": 1009,
+    "smallestHomeLink": 44,
+    "topMenu": [
+      "keywords",
+      "theory",
+      "commands",
+      "materials",
+      "plan"
+    ],
+    "topOverflow": false,
+    "topRows": 2,
+    "viewport": 1009
+  },
+  {
+    "profile": "Galaxy Tab S9 FE 대표 세로",
+    "requested": [
+      800,
+      1280
+    ],
+    "bottomMenu": [
+      "dashboard",
+      "daily",
+      "game",
+      "quiz",
+      "wrong"
+    ],
+    "duplicates": 0,
+    "largestUiIcon": 19,
+    "scrollWidth": 785,
+    "smallestHomeLink": 44,
+    "topMenu": [
+      "keywords",
+      "theory",
+      "commands",
+      "materials",
+      "plan"
+    ],
+    "topOverflow": false,
+    "topRows": 2,
+    "viewport": 785
+  },
+  {
+    "profile": "태블릿 가로",
+    "requested": [
+      1280,
+      800
+    ],
+    "bottomMenu": [],
+    "duplicates": 0,
+    "largestUiIcon": 18,
+    "scrollWidth": 1265,
+    "smallestHomeLink": 44,
+    "topMenu": [
+      "dashboard",
+      "daily",
+      "keywords",
+      "theory",
+      "commands",
+      "quiz",
+      "game",
+      "wrong",
+      "materials",
+      "plan"
+    ],
+    "topOverflow": false,
+    "topRows": 10,
+    "viewport": 1265
+  },
+  {
+    "profile": "휴대폰 가로",
+    "requested": [
+      932,
+      430
+    ],
+    "bottomMenu": [
+      "dashboard",
+      "daily",
+      "game",
+      "quiz",
+      "wrong"
+    ],
+    "duplicates": 0,
+    "largestUiIcon": 19,
+    "scrollWidth": 917,
+    "smallestHomeLink": 44,
+    "topMenu": [
+      "keywords",
+      "theory",
+      "commands",
+      "materials",
+      "plan"
+    ],
+    "topOverflow": false,
+    "topRows": 2,
+    "viewport": 917
+  },
+  {
+    "profile": "24인치 PC 예시 해상도",
+    "requested": [
+      1920,
+      1080
+    ],
+    "bottomMenu": [],
+    "duplicates": 0,
+    "largestUiIcon": 18,
+    "scrollWidth": 1905,
+    "smallestHomeLink": 44,
+    "topMenu": [
+      "dashboard",
+      "daily",
+      "keywords",
+      "theory",
+      "commands",
+      "quiz",
+      "game",
+      "wrong",
+      "materials",
+      "plan"
+    ],
+    "topOverflow": false,
+    "topRows": 10,
+    "viewport": 1905
+  }
+]

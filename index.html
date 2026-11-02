@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="assets/network/styles.css">
   <link rel="stylesheet" href="assets/network/keyword-game.css">
   <link rel="stylesheet" href="assets/network/mobile.css">
+  <link rel="stylesheet" href="assets/network/home.css">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="apple-touch-icon" href="assets/network/icon-192.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -50,13 +51,13 @@
     <div id="pwa-banner" hidden role="status"></div>
     <main id="main" tabindex="-1"></main>
     <nav class="mobile-nav" aria-label="빠른 학습">
-      <a href="#dashboard" data-view="dashboard"><span class="mobile-tab-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v9a2 2 0 0 1-2 2h-4v-7H9v7H5a2 2 0 0 1-2-2z"/></svg></span><span>홈</span></a>
-      <a href="#daily" data-view="daily"><span class="mobile-tab-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5C7 4 9 4 12 6c3-2 5-2 8-.5V20c-3-1.5-5-1.5-8 .5C9 18.5 7 18.5 4 20zM12 6v14.5"/></svg></span><span>오늘의 학습</span></a>
-      <a href="#game" data-view="game"><span class="mobile-tab-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13 2-9 12h7l-1 8 10-13h-7z"/></svg></span><span>산성비</span></a>
-      <a href="#quiz" data-view="quiz"><span class="mobile-tab-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="3"/><path d="M9 3h6v4H9zM9 12l2 2 4-4M9 18h6"/></svg></span><span>문제 풀이</span></a>
-      <a href="#wrong" data-view="wrong"><span class="mobile-tab-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10a8 8 0 1 1 .8 7M4 4v6h6M12 8v5l3 2"/></svg></span><span>오답</span></a>
+      <a href="#dashboard" data-view="dashboard"><span class="mobile-tab-icon"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v9a2 2 0 0 1-2 2h-4v-7H9v7H5a2 2 0 0 1-2-2z"/></svg></span><span>홈</span></a>
+      <a href="#daily" data-view="daily"><span class="mobile-tab-icon"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5C7 4 9 4 12 6c3-2 5-2 8-.5V20c-3-1.5-5-1.5-8 .5C9 18.5 7 18.5 4 20zM12 6v14.5"/></svg></span><span>오늘의 학습</span></a>
+      <a href="#game" data-view="game"><span class="mobile-tab-icon"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="m13 2-9 12h7l-1 8 10-13h-7z"/></svg></span><span>산성비</span></a>
+      <a href="#quiz" data-view="quiz"><span class="mobile-tab-icon"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="3"/><path d="M9 3h6v4H9zM9 12l2 2 4-4M9 18h6"/></svg></span><span>문제 풀이</span></a>
+      <a href="#wrong" data-view="wrong"><span class="mobile-tab-icon"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10a8 8 0 1 1 .8 7M4 4v6h6M12 8v5l3 2"/></svg></span><span>오답</span></a>
     </nav>
-    <footer class="footer">개인 학습용 · 자체 연습과 회차별 기출을 구분해 제공합니다. <span>모바일 학습 v6</span></footer>
+    <footer class="footer">개인 학습용 · 자체 연습과 회차별 기출을 구분해 제공합니다. <span>모바일 학습 v9</span></footer>
   </div>
   <dialog id="settings-dialog" aria-labelledby="settings-title"><form id="settings-form"><div class="dialog-heading"><h2 id="settings-title">학습 설정</h2><button type="button" class="icon-button" data-close aria-label="설정 닫기">×</button></div><p class="muted">시험일을 설정하면 남은 기간과 추천 학습일을 보여드려요.</p><label class="field-label" for="exam-date">시험 날짜</label><input type="date" id="exam-date" name="examDate"><button class="button primary full" type="submit">저장하기</button><p class="fine-print">기록은 현재 브라우저에만 저장됩니다. 다른 기기와 동기화되지 않아요.</p><div class="pwa-settings"><button type="button" class="button secondary full" id="pwa-install" hidden>홈 화면에 설치</button><p id="pwa-help" class="fine-print"></p><button type="button" class="button secondary full" id="theme-toggle">화면 테마 변경</button><p id="pwa-offline" class="fine-print"></p></div><div class="data-actions"><button type="button" id="export-progress" class="button secondary">학습 기록 내보내기</button><label class="button secondary" for="import-progress">기록 가져오기</label><input type="file" id="import-progress" accept="application/json,.json" hidden></div><button type="button" class="text-button danger" id="reset-progress">학습 기록 초기화</button></form></dialog>
   <dialog id="confirm-dialog" aria-labelledby="confirm-title"><h2 id="confirm-title"></h2><p id="confirm-message"></p><div class="dialog-actions"><button type="button" id="confirm-cancel" class="button secondary">취소</button><button type="button" id="confirm-ok" class="button primary">확인</button></div></dialog>

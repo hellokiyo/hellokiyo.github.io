@@ -1,7 +1,7 @@
 (() => {
  'use strict';let dispose=()=>{};
  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- function mount({root,state,items,save,toast}){
+ function mount({root,state,items,save,toast,presetMinutes=null}){
   dispose();const R=window.ReviewCore,abort=new AbortController();let timer;
   const $=s=>root.querySelector(s),A=()=>state.adaptive;
   function setup(){
@@ -19,7 +19,7 @@
    const q=items.find(i=>i.id===s.queue[s.index]);
    if(s.intro){
     const fresh=s.queue.map(id=>items.find(i=>i.id===id)).filter(i=>i.cue&&!A().entries[i.id]).slice(0,3);
-    root.innerHTML=`<div class="page-heading"><div><h1>먼저 개념 3분</h1><p>새 개념을 확인한 뒤, 다음 화면에서 기억을 꺼내봅니다.</p></div></div><section class="panel">${fresh.length?fresh.map(i=>`<article class="daily-concept"><h2>${esc(i.cue)} → ${esc(i.concept)}</h2><p>${esc(i.explanation)}</p></article>`).join(''):'<h2>오늘은 기억 꺼내기부터</h2><p>복습할 문제와 취약한 개념이 준비되어 있습니다.</p>'}<p class="fine-print">12분 기준: 개념 3분 → 인출 4분 → 이유 설명 3분 → 놓친 내용 복습 2분. 학습 속도에 맞게 진행하세요.</p><button class="button primary" id="daily-recall">이제 가리고 떠올리기 →</button></section>`;return;
+    root.innerHTML=`<div class="page-heading"><div><h1>${s.minutes===12?'먼저 개념 3분':'먼저 핵심 개념'}</h1><p>새 개념을 확인한 뒤, 다음 화면에서 기억을 꺼내봅니다.</p></div></div><section class="panel">${fresh.length?fresh.map(i=>`<article class="daily-concept"><h2>${esc(i.cue)} → ${esc(i.concept)}</h2><p>${esc(i.explanation)}</p></article>`).join(''):'<h2>오늘은 기억 꺼내기부터</h2><p>복습할 문제와 취약한 개념이 준비되어 있습니다.</p>'}<p class="fine-print">12분 기준: 개념 3분 → 인출 4분 → 이유 설명 3분 → 놓친 내용 복습 2분. 학습 속도에 맞게 진행하세요.</p><button class="button primary" id="daily-recall">이제 가리고 떠올리기 →</button></section>`;return;
    }
    root.innerHTML=`<div class="page-heading"><div><h1>기억 꺼내기</h1><p>${s.index+1} / ${s.queue.length} · ${esc(q.category)}</p></div><span id="daily-clock" class="quiz-status"></span></div><div class="progress-track"><div style="width:${s.index/s.queue.length*100}%"></div></div><section class="panel daily-question"><span class="label-tag">${q.id.startsWith('nw2-')?'2026년 4회 기출 · 학습용 풀이':'학습 가이드 기반 자체 연습'}</span><h2>${esc(q.question)}</h2><div class="answers" aria-label="답안 선택">${q.options.map((option,i)=>`<button class="answer ${s.selected===i?'selected':''} ${s.revealed&&i===q.answer?'correct':''}" data-daily-answer="${i}" ${s.revealed?'disabled':''}><span>${i+1}</span>${esc(option)}</button>`).join('')}</div>${s.revealed?`<div class="explanation"><strong>${s.selected===q.answer?'정답입니다.':'다시 기억해 두세요.'} 정답 ${q.answer+1}번</strong><p>${esc(q.explanation)}</p>${q.trap?`<p>구별할 점 · ${esc(q.trap)}</p>`:''}</div><label for="daily-note">왜 이 답일까요? 한 문장으로 설명해 보세요. (선택)</label><textarea id="daily-note" maxlength="500" placeholder="직접 설명하고 위 해설과 비교해 보세요. 자동 채점하지 않습니다.">${esc(s.note||A().entries[q.id]?.note||'')}</textarea><p>맞혔어도 찍었다면 ‘헷갈림’을 선택하세요.</p><div class="memory-actions"><button class="button secondary" data-daily-rate="unknown">모름 · 다시 연습</button><button class="button secondary" data-daily-rate="unsure">헷갈림 · 내일 복습</button><button class="button primary" data-daily-rate="remember">기억남 →</button></div>`:`<button class="button primary full" id="daily-check" ${s.selected===null?'disabled':''}>정답과 이유 확인</button>`}<button class="text-button" id="daily-finish">여기까지 학습 마치기</button></section>`;
    clock();
@@ -51,7 +51,7 @@
   },{signal:abort.signal});
   root.addEventListener('input',e=>{if(e.target.id==='daily-note'){const s=A().session,q=s&&items.find(i=>i.id===s.queue[s.index]);if(q){s.note=e.target.value.slice(0,500);save();}}},{signal:abort.signal});
   timer=setInterval(clock,1000);dispose=()=>{clearInterval(timer);abort.abort();};
-  if(A().session)render();else setup();
+  if(A().session)render();else{setup();if(presetMinutes===5){$('#daily-minutes').value='5';start();}}
  }
  window.DailyStudy={mount,unmount:()=>dispose()};
 })();

@@ -36,7 +36,7 @@
  updateButton.addEventListener('click',async()=>{
   if(!registration){status.textContent='업데이트를 확인하려면 인터넷에 연결하고 다시 열어주세요.';return;}
   updateButton.disabled=true;
-  try{await registration.update();if(registration.waiting){updateBanner(registration.waiting);$('#settings-dialog').close();banner.scrollIntoView({block:'start'});}else status.textContent=registration.installing?'새 파일을 준비하고 있습니다. 준비가 끝나면 업데이트 안내가 표시됩니다.':'이 브라우저에서 확인한 최신 버전입니다. 화면 하단에 모바일 학습 v6가 있는지 확인하세요.';}catch{status.textContent='업데이트를 확인하지 못했습니다. 인터넷 연결 후 다시 시도하세요.';}finally{updateButton.disabled=false;}
+  try{await registration.update();if(registration.waiting){updateBanner(registration.waiting);$('#settings-dialog').close();banner.scrollIntoView({block:'start'});}else status.textContent=registration.installing?'새 파일을 준비하고 있습니다. 준비가 끝나면 업데이트 안내가 표시됩니다.':'이 브라우저에서 확인한 최신 버전입니다. 화면 하단에 모바일 학습 v9가 있는지 확인하세요.';}catch{status.textContent='업데이트를 확인하지 못했습니다. 인터넷 연결 후 다시 시도하세요.';}finally{updateButton.disabled=false;}
  });
  // 앱을 닫은 상태의 예약 알림은 서버 없이 제공하지 않습니다.
 })();

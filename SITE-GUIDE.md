@@ -122,5 +122,7 @@ node --test scripts/test-study.cjs scripts/test-materials.cjs scripts/test-mater
 
 # 모바일·PWA와 오늘의 학습
 
+배너형 홈, 중복 없는 모바일 메뉴, 요청 기기를 대표하는 9개 화면 크기의 검증은 [UI-AUDIT.md](UI-AUDIT.md)에 기록했습니다. 기능별 학습 자료로 2026년 4회 문제의 정답을 도출할 수 있는지 대조한 결과와 50문항 근거표는 [FEATURE-COVERAGE.md](FEATURE-COVERAGE.md)에 있습니다. 이 값은 실제 응시자의 예상 점수가 아닙니다.
+
 설치 방법, 새 학습 기록·복습 규칙, 직접 게시할 파일, 업데이트와 기기 테스트 범위는 [PWA-GUIDE.md](PWA-GUIDE.md)에 정리했습니다. 메뉴의 ‘오늘의 학습’에서 5·12·25분 또는 자유 학습을 시작할 수 있습니다. 기존 문제·오답·게임·기록 기능은 유지됩니다.
 
