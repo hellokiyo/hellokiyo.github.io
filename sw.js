@@ -1,5 +1,5 @@
 /* 배포 시 VERSION을 변경하세요. 사용자 학습 기록은 CacheStorage와 별개입니다. */
-const VERSION='network-notes-pwa-v3';
+const VERSION='network-notes-pwa-v6';
 const BASE=new URL('./',self.location.href);
 const FILES=['./','index.html','manifest.webmanifest','README.md','SITE-GUIDE.md',
  'assets/network/styles.css','assets/network/mobile.css','assets/network/keyword-game.css',

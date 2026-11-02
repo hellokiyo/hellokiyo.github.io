@@ -3,3 +3,25 @@
 :root[data-theme=dark]{color-scheme:dark;--bg:#131d18;--ink:#e4eee5;--green:#82b58d;--muted:#acb9a9;--line:#3a4b3d}html[data-theme=dark] body,html[data-theme=dark] .workspace{background:var(--bg);color:var(--ink)}html[data-theme=dark] :is(.sidebar,.topbar,.panel,.flash-card,.command-card,.reader,.mode-card,.question-box,.question-map,.score-card,.review-item,.material-card,.materials-dropzone,.materials-dashboard-link,.session-banner,.exam-summary,.study-launch a,.routine-panel,dialog){background:#1c2b21;color:var(--ink);border-color:var(--line)}html[data-theme=dark] :is(input,select,textarea,.answer,.button.secondary,.map-button,.search-input){background:#24372a;color:var(--ink);border-color:#536a51}html[data-theme=dark] .button.primary{background:#82b58d;color:#122416}html[data-theme=dark] :is(.explanation,.daily-launch,.keyword-example,.example-body,.example-feedback,.reader pre,.command-card pre,.rain-feedback,#pwa-banner){background:#253b2b;color:#dfebdb}html[data-theme=dark] :is(.muted,.section-description,.fine-print,.timer-note,.results-meta,.page-heading p,.quiz-status){color:#bac8b6}html[data-theme=dark] .answer.correct{background:#315539;color:#f2fff1}html[data-theme=dark] .answer.selected{border-color:#bdde97}html[data-theme=dark] .mobile-nav a.active{color:#102115}html[data-theme=dark] .rain-option{background:#24372a;color:#e4eee5}html[data-theme=dark] .sidebar nav a.active{background:#314836;color:#edffe7}html[data-theme=dark] .rain-option b{background:#3e5742}
 @media print{.mobile-nav,#pwa-banner{display:none}}
 :root{--bg:#fff;color-scheme:light}
+
+@media(max-width:900px){body{padding-bottom:calc(76px + env(safe-area-inset-bottom))}.mobile-nav{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:30;padding:8px 6px calc(8px + env(safe-area-inset-bottom));background:var(--bg);border-top:1px solid var(--line);gap:3px}.mobile-nav a{flex:1;min-width:0;min-height:48px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:12px;padding:10px 2px;border-radius:9px;white-space:nowrap}.mobile-nav a.active{background:var(--green);color:white}}
+/* 한 손으로 누르기 편한, 살짝 떠 있는 모바일 탭 바 */
+@media(max-width:900px){
+ body{padding-bottom:calc(102px + env(safe-area-inset-bottom))}
+ nav.mobile-nav{left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom));max-width:560px;margin:0 auto;padding:7px 6px;gap:2px;border:1px solid #e3eae3;border-radius:24px;background:rgba(255,255,255,.97);box-shadow:0 8px 32px #193c261a,0 2px 6px #193c2608;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+ nav.mobile-nav a{flex-direction:column;gap:3px;min-height:62px;padding:4px 1px;border-radius:17px;color:#7a877e;font-size:11px;font-weight:500;line-height:1.4;background:transparent;transition:color .16s,background .16s}
+ .mobile-tab-icon{display:flex;align-items:center;justify-content:center;width:42px;height:30px;border-radius:12px;transition:background .16s}
+ .mobile-tab-icon svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+ nav.mobile-nav a.active{background:transparent;color:#254f3d;font-weight:700}
+ nav.mobile-nav a.active .mobile-tab-icon{background:#e5efdc}
+ nav.mobile-nav a:active .mobile-tab-icon{background:#edf3e7}
+ nav.mobile-nav a:focus-visible{outline:2px solid #72955c;outline-offset:-2px}
+ html[data-theme=dark] nav.mobile-nav{background:rgba(28,43,33,.97);border-color:#405646;box-shadow:0 8px 32px #0004}
+ html[data-theme=dark] nav.mobile-nav a{color:#9cad9d}
+ html[data-theme=dark] nav.mobile-nav a.active{color:#d2e9c3}
+ html[data-theme=dark] nav.mobile-nav a.active .mobile-tab-icon{background:#3c553e}
+}
+@media(prefers-reduced-motion:reduce){nav.mobile-nav a,.mobile-tab-icon{transition:none}}
+@media(max-width:900px){nav.mobile-nav{left:max(12px,env(safe-area-inset-left));right:max(12px,env(safe-area-inset-right));bottom:max(10px,env(safe-area-inset-bottom))}}
+@media(hover:none) and (pointer:coarse){button,a,summary{touch-action:manipulation}.answer,.rain-option{min-height:48px}}
+@media(max-height:500px) and (orientation:landscape) and (max-width:900px){nav.mobile-nav{padding:4px 6px;border-radius:18px}nav.mobile-nav a{min-height:44px;flex-direction:row;gap:4px}nav.mobile-nav .mobile-tab-icon{width:28px;height:28px}body{padding-bottom:calc(70px + env(safe-area-inset-bottom))}}
