@@ -1,0 +1,72 @@
+[
+  {
+    "id": "8556444",
+    "date": "20250525",
+    "url": "https://img.comcbt.com/xe/download/cb6e919c1eca355e3f86336d88885cb5/9489556/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC%EA%B4%80%EB%A6%AC%EC%82%AC2%EA%B8%8920250525(%EA%B5%90%EC%82%AC%EC%9A%A9).pdf"
+  },
+  {
+    "id": "8472210",
+    "date": "20250223",
+    "url": "https://img.comcbt.com/xe/download/a80e9328168ca61fd7e32b157006776a/9489499/네트워크관리사2급20250223(교사용).pdf"
+  },
+  {
+    "id": "8472194",
+    "date": "20241103",
+    "error": "Internal Error ()\nciteturn35view0 [wordlim: 200] Source: click({\"ref_id\":\"turn31view0\",\"id\":797}); \nFailed to fetch https://www.comcbt.com/xe/?act=procFileDownload&file_srl=9489452&module=file&module_srl=555664&sid=9b773597fc2aa507b2c423d0a1cb15cd: (400) Unsupported content-type: application/octet-stream"
+  },
+  {
+    "id": "8133913",
+    "date": "20240825",
+    "error": "Internal Error ()\nciteturn49view0 [wordlim: 200] Source: click({\"ref_id\":\"turn38view0\",\"id\":797}); \nFailed to fetch https://www.comcbt.com/xe/?act=procFileDownload&file_srl=9489374&module=file&module_srl=555664&sid=b6f6e75f68a0a77e808f491bf41ada82: Cache miss"
+  },
+  {
+    "id": "8133879",
+    "date": "20240519",
+    "url": "https://img.comcbt.com/xe/download/624edf57dd186a05baae8b488fa30ab9/9489338/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC%EA%B4%80%EB%A6%AC%EC%82%AC2%EA%B8%8920240519(%EA%B5%90%EC%82%AC%EC%9A%A9).pdf"
+  },
+  {
+    "id": "7748123",
+    "date": "20240225",
+    "error": "Internal Error ()\nciteturn42view0 [wordlim: 200] Source: click({\"ref_id\":\"turn39view0\",\"id\":797}); \nFailed to fetch https://www.comcbt.com/xe/?act=procFileDownload&file_srl=9489301&module=file&module_srl=555664&sid=0968b7d4a16eefb609f3d5f63e3381b6: Cache miss"
+  },
+  {
+    "id": "7068310",
+    "date": "20231105",
+    "error": "Internal Error ()\nciteturn55view0 [wordlim: 200] Source: click({\"ref_id\":\"turn52view0\",\"id\":797}); \nFailed to fetch https://www.comcbt.com/xe/?act=procFileDownload&file_srl=9489261&module=file&module_srl=555664&sid=c98f9d48f6666756bebaad26fdaa244e: Cache miss"
+  },
+  {
+    "id": "6966836",
+    "date": "20230820",
+    "error": "Internal Error ()\nciteturn36view0 [wordlim: 200] Source: click({\"ref_id\":\"turn32view0\",\"id\":797}); \nFailed to fetch https://www.comcbt.com/xe/?act=procFileDownload&file_srl=9489226&module=file&module_srl=555664&sid=9bf837a98a10eaacf05c9df28788f2c6: Cache miss"
+  },
+  {
+    "id": "6896000",
+    "date": "20230521",
+    "error": "Internal Error ()\nciteturn45view0 [wordlim: 200] Source: click({\"ref_id\":\"turn33view0\",\"id\":797}); \nFailed to fetch https://www.comcbt.com/xe/?act=procFileDownload&file_srl=9489188&module=file&module_srl=555664&sid=46b7919dd124d28bbf2f4a76baa76e9b: (400) OK"
+  },
+  {
+    "id": "6650773",
+    "date": "20230226",
+    "error": "Internal Error ()\nciteturn41view0 [wordlim: 200] Source: click({\"ref_id\":\"turn30view0\",\"id\":797}); \nFailed to fetch https://www.comcbt.com/xe/?act=procFileDownload&file_srl=9489167&module=file&module_srl=555664&sid=72bfb26adc59f99681dea6b03fcbc3e2: (400) Unsupported content-type: application/octet-stream"
+  },
+  {
+    "id": "6518510",
+    "date": "20221106",
+    "error": "Internal Error ()\nciteturn47view0 [wordlim: 200] Source: click({\"ref_id\":\"turn37view0\",\"id\":797}); \nFailed to fetch https://www.comcbt.com/xe/?act=procFileDownload&file_srl=9489112&module=file&module_srl=555664&sid=77e7d684581e2206eb295fb8a8c3d8dd: Cache miss"
+  },
+  {
+    "id": "6058072",
+    "date": "20220821",
+    "url": "https://img.comcbt.com/xe/download/30267e4684d9796255fb606e66febc2e/9489060/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC%EA%B4%80%EB%A6%AC%EC%82%AC2%EA%B8%8920220821(%EA%B5%90%EC%82%AC%EC%9A%A9).pdf"
+  },
+  {
+    "id": "5867343",
+    "date": "20220522",
+    "error": "Internal Error ()\nciteturn50view0 [wordlim: 200] Source: click({\"ref_id\":\"turn43view0\",\"id\":797}); \nFailed to fetch https://www.comcbt.com/xe/?act=procFileDownload&file_srl=9489014&module=file&module_srl=555664&sid=f31a9827a3a9c901ed663c360f3fa8d3: Cache miss"
+  },
+  {
+    "id": "5684305",
+    "date": "20220227",
+    "error": "Internal Error ()\nciteturn46view0 [wordlim: 200] Source: click({\"ref_id\":\"turn40view0\",\"id\":797}); \nFailed to fetch https://www.comcbt.com/xe/?act=procFileDownload&file_srl=9488980&module=file&module_srl=555664&sid=4688df637434acde55b2ab7f41153c71: Cache miss"
+  }
+]

@@ -21,10 +21,11 @@
   function cleanState(source,data,questions){
     if(!source||typeof source!=='object'||Array.isArray(source))throw new Error('학습 기록 형식이 올바르지 않습니다.');
     const allowed=(input,ids)=>Array.isArray(input)?[...new Set(input.filter(id=>ids.includes(id)))]:[];
+    const safePaper=id=>typeof id==='string'&&/^nw2-\d{4}-\d{2}(?:-a)?$/.test(id)&&questions.some(q=>q.id.startsWith(id+'-'))?id:null;
     const qids=questions.map(q=>q.id), kids=data.keywords.map(k=>k.id), rids=data.sections.map(s=>s.id);
     const result={version:1,examDate:validDate(source.examDate)?source.examDate:'',mastered:allowed(source.mastered,kids),read:allowed(source.read,rids),plans:allowed(source.plans,data.plan.map(p=>p.day)),wrong:allowed(source.wrong,qids),routines:{},records:[],session:null,lastResult:null};
     if(source.routines&&typeof source.routines==='object')for(const [date,tasks] of Object.entries(source.routines)){if(validDate(date))result.routines[date]=allowed(tasks,[0,1,2]);}
-    if(Array.isArray(source.records))result.records=source.records.filter(r=>r&&Number.isFinite(r.score)&&r.score>=0&&r.score<=100&&Number.isInteger(r.total)&&r.total>0&&r.total<=questions.length&&Number.isInteger(r.correct)&&r.correct>=0&&r.correct<=r.total&&typeof r.at==='string'&&!Number.isNaN(Date.parse(r.at))).slice(-30).map(r=>({score:Math.round(r.correct/r.total*100),total:r.total,correct:r.correct,at:r.at,mode:['exam','quick','wrong','paper'].includes(r.mode)?r.mode:'quick'}));
+    if(Array.isArray(source.records))result.records=source.records.filter(r=>r&&Number.isFinite(r.score)&&r.score>=0&&r.score<=100&&Number.isInteger(r.total)&&r.total>0&&r.total<=questions.length&&Number.isInteger(r.correct)&&r.correct>=0&&r.correct<=r.total&&typeof r.at==='string'&&!Number.isNaN(Date.parse(r.at))).slice(-30).map(r=>({score:Math.round(r.correct/r.total*100),total:r.total,correct:r.correct,at:r.at,mode:['exam','quick','wrong','paper'].includes(r.mode)?r.mode:'quick',...(safePaper(r.paperId)?{paperId:r.paperId}:{})}));
     const cleanSession=s=>{
       if(!s||typeof s!=='object'||!['exam','quick','wrong','paper'].includes(s.mode)||!Array.isArray(s.ids))return null;
       const ids=allowed(s.ids,qids);if(!ids.length)return null;
@@ -32,7 +33,7 @@
       for(const id of ids){const q=questions.find(q=>q.id===id);if(Number.isInteger(s.answers?.[id])&&s.answers[id]>=0&&s.answers[id]<q.options.length)answers[id]=s.answers[id];}
       if(s.mode!=='exam'&&Array.isArray(s.checked))for(const id of s.checked)if(ids.includes(id)&&Object.hasOwn(answers,id))checked.push(id);
       if(s.mode==='exam'&&(!Number.isFinite(s.endsAt)||s.endsAt<0))return null;
-      return {mode:s.mode,ids,answers,checked,index:Number.isInteger(s.index)?Math.max(0,Math.min(s.index,ids.length-1)):0,endsAt:s.mode==='exam'?s.endsAt:null,startedAt:Number.isFinite(s.startedAt)?s.startedAt:Date.now()};
+      return {mode:s.mode,...(s.mode==='paper'&&safePaper(s.paperId)?{paperId:s.paperId}:{}),ids,answers,checked,index:Number.isInteger(s.index)?Math.max(0,Math.min(s.index,ids.length-1)):0,endsAt:s.mode==='exam'?s.endsAt:null,startedAt:Number.isFinite(s.startedAt)?s.startedAt:Date.now()};
     };
     result.session=cleanSession(source.session);
     const last=cleanSession(source.lastResult);

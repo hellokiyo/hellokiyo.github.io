@@ -1,0 +1,1062 @@
+[
+  {
+    "date": "20260802",
+    "sha256": "3d60b2a928cf955a340f5dd83668edb4e860e6aa3e1fd026e4a63f6e14a0ef60",
+    "sourceFile": "materials/papers/network-20260802-teacher.pdf",
+    "inlineAnswersMatched": true,
+    "questions": 50,
+    "answerTableMatched": true,
+    "diagrams": [
+      {
+        "number": 24,
+        "page": 2,
+        "path": "assets/network/papers/20260802-24-1.png",
+        "top": 65.08899999999994
+      },
+      {
+        "number": 33,
+        "page": 3,
+        "path": "assets/network/papers/20260802-33-1.png",
+        "top": 442.67600000000004
+      },
+      {
+        "number": 36,
+        "page": 3,
+        "path": "assets/network/papers/20260802-36-1.png",
+        "top": 689.006
+      },
+      {
+        "number": 41,
+        "page": 3,
+        "path": "assets/network/papers/20260802-41-1.png",
+        "top": 425.894
+      },
+      {
+        "number": 45,
+        "page": 4,
+        "path": "assets/network/papers/20260802-45-1.png",
+        "top": 253.28300000000002
+      },
+      {
+        "number": 47,
+        "page": 4,
+        "path": "assets/network/papers/20260802-47-1.png",
+        "top": 555.712
+      },
+      {
+        "number": 48,
+        "page": 4,
+        "path": "assets/network/papers/20260802-48-1.png",
+        "top": 711.182
+      }
+    ]
+  },
+  {
+    "date": "20260517",
+    "sha256": "a00407913888169c1f43713a52ff5e56df0f67d8c4cedb82c9d2ad122177f34b",
+    "sourceFile": "materials/papers/network-20260517-teacher.pdf",
+    "inlineAnswersMatched": true,
+    "questions": 50,
+    "answerTableMatched": true,
+    "diagrams": [
+      {
+        "number": 10,
+        "page": 1,
+        "path": "assets/network/papers/20260517-10-1.png",
+        "top": 104.64600000000007
+      },
+      {
+        "number": 21,
+        "page": 2,
+        "path": "assets/network/papers/20260517-21-1.png",
+        "top": 65.08899999999994
+      },
+      {
+        "number": 23,
+        "page": 2,
+        "path": "assets/network/papers/20260517-23-1.png",
+        "top": 288.645
+      },
+      {
+        "number": 24,
+        "page": 2,
+        "path": "assets/network/papers/20260517-24-1.png",
+        "top": 474.68
+      },
+      {
+        "number": 29,
+        "page": 3,
+        "path": "assets/network/papers/20260517-29-1.png",
+        "top": 519.392
+      },
+      {
+        "number": 40,
+        "page": 3,
+        "path": "assets/network/papers/20260517-40-1.png",
+        "top": 738.752
+      },
+      {
+        "number": 41,
+        "page": 4,
+        "path": "assets/network/papers/20260517-41-1.png",
+        "top": 119.38999999999999
+      },
+      {
+        "number": 42,
+        "page": 4,
+        "path": "assets/network/papers/20260517-42-1.png",
+        "top": 356.61
+      },
+      {
+        "number": 45,
+        "page": 4,
+        "path": "assets/network/papers/20260517-45-1.png",
+        "top": 65.08900000000006
+      },
+      {
+        "number": 49,
+        "page": 4,
+        "path": "assets/network/papers/20260517-49-1.png",
+        "top": 537.972
+      }
+    ]
+  },
+  {
+    "date": "20260201",
+    "sha256": "d9853a1303890e39609e7e2320c2601927eeeaa29822c06cbec04b33257466db",
+    "sourceFile": "materials/papers/network-20260201-teacher.pdf",
+    "inlineAnswersMatched": true,
+    "questions": 50,
+    "answerTableMatched": true,
+    "diagrams": [
+      {
+        "number": 1,
+        "page": 1,
+        "path": "assets/network/papers/20260201-01-1.png",
+        "top": 112.91700000000003
+      },
+      {
+        "number": 3,
+        "page": 1,
+        "path": "assets/network/papers/20260201-03-1.png",
+        "top": 362.483
+      },
+      {
+        "number": 6,
+        "page": 1,
+        "path": "assets/network/papers/20260201-06-1.png",
+        "top": 65.08899999999994
+      },
+      {
+        "number": 7,
+        "page": 1,
+        "path": "assets/network/papers/20260201-07-1.png",
+        "top": 266.7080000000001
+      },
+      {
+        "number": 9,
+        "page": 1,
+        "path": "assets/network/papers/20260201-09-1.png",
+        "top": 459.697
+      },
+      {
+        "number": 14,
+        "page": 2,
+        "path": "assets/network/papers/20260201-14-1.png",
+        "top": 311.659
+      },
+      {
+        "number": 20,
+        "page": 2,
+        "path": "assets/network/papers/20260201-20-1.png",
+        "top": 145.04100000000005
+      },
+      {
+        "number": 28,
+        "page": 3,
+        "path": "assets/network/papers/20260201-28-1.png",
+        "top": 231.70600000000002
+      },
+      {
+        "number": 30,
+        "page": 3,
+        "path": "assets/network/papers/20260201-30-1.png",
+        "top": 623.318
+      },
+      {
+        "number": 32,
+        "page": 3,
+        "path": "assets/network/papers/20260201-32-1.png",
+        "top": 235.66200000000003
+      },
+      {
+        "number": 35,
+        "page": 3,
+        "path": "assets/network/papers/20260201-35-1.png",
+        "top": 714.779
+      },
+      {
+        "number": 43,
+        "page": 4,
+        "path": "assets/network/papers/20260201-43-1.png",
+        "top": 553.315
+      }
+    ]
+  },
+  {
+    "date": "20251102",
+    "sha256": "92f161ba325db53e01c127ed79874d8347f75fafd6772166d498f051c2609579",
+    "sourceFile": "materials/papers/network-20251102-teacher.pdf",
+    "inlineAnswersMatched": true,
+    "questions": 50,
+    "answerTableMatched": true,
+    "diagrams": [
+      {
+        "number": 20,
+        "page": 2,
+        "path": "assets/network/papers/20251102-20-1.png",
+        "top": 554.9929999999999
+      },
+      {
+        "number": 22,
+        "page": 2,
+        "path": "assets/network/papers/20251102-22-1.png",
+        "top": 119.38999999999999
+      },
+      {
+        "number": 30,
+        "page": 3,
+        "path": "assets/network/papers/20251102-30-1.png",
+        "top": 387.895
+      },
+      {
+        "number": 37,
+        "page": 3,
+        "path": "assets/network/papers/20251102-37-1.png",
+        "top": 303.62799999999993
+      },
+      {
+        "number": 44,
+        "page": 4,
+        "path": "assets/network/papers/20251102-44-1.png",
+        "top": 412.709
+      },
+      {
+        "number": 46,
+        "page": 4,
+        "path": "assets/network/papers/20251102-46-1.png",
+        "top": 634.106
+      },
+      {
+        "number": 50,
+        "page": 4,
+        "path": "assets/network/papers/20251102-50-1.png",
+        "top": 399.163
+      }
+    ]
+  },
+  {
+    "date": "20250824",
+    "sha256": "663c94e2f098799becfe9fe2bbb851190219114dc3a55d929b9d0a285bf0ec8e",
+    "sourceFile": "materials/papers/network-20250824-teacher.pdf",
+    "inlineAnswersMatched": true,
+    "questions": 50,
+    "answerTableMatched": true,
+    "diagrams": [
+      {
+        "number": 12,
+        "page": 1,
+        "path": "assets/network/papers/20250824-12-1.png",
+        "top": 394.36899999999997
+      },
+      {
+        "number": 17,
+        "page": 2,
+        "path": "assets/network/papers/20250824-17-1.png",
+        "top": 181.36199999999997
+      },
+      {
+        "number": 28,
+        "page": 2,
+        "path": "assets/network/papers/20250824-28-1.png",
+        "top": 561.346
+      },
+      {
+        "number": 29,
+        "page": 3,
+        "path": "assets/network/papers/20250824-29-1.png",
+        "top": 65.08899999999994
+      },
+      {
+        "number": 36,
+        "page": 3,
+        "path": "assets/network/papers/20250824-36-1.png",
+        "top": 749.54
+      },
+      {
+        "number": 45,
+        "page": 4,
+        "path": "assets/network/papers/20250824-45-1.png",
+        "top": 65.08900000000006
+      },
+      {
+        "number": 49,
+        "page": 4,
+        "path": "assets/network/papers/20250824-49-1.png",
+        "top": 586.279
+      }
+    ]
+  },
+  {
+    "date": "20250525",
+    "sha256": "b0538961eb546e0d86890b0cb6b8341ee111ab225469f0bdb365f3a871a7c61d",
+    "sourceFile": "materials/papers/network-20250525-teacher.pdf",
+    "inlineAnswersMatched": true,
+    "questions": 50,
+    "answerTableMatched": true,
+    "diagrams": [
+      {
+        "number": 15,
+        "page": 2,
+        "path": "assets/network/papers/20250525-15-1.png",
+        "top": 65.08799999999997
+      },
+      {
+        "number": 23,
+        "page": 2,
+        "path": "assets/network/papers/20250525-23-1.png",
+        "top": 304.826
+      },
+      {
+        "number": 37,
+        "page": 3,
+        "path": "assets/network/papers/20250525-37-1.png",
+        "top": 380.344
+      },
+      {
+        "number": 38,
+        "page": 3,
+        "path": "assets/network/papers/20250525-38-1.png",
+        "top": 631.23
+      },
+      {
+        "number": 43,
+        "page": 4,
+        "path": "assets/network/papers/20250525-43-1.png",
+        "top": 515.4359999999999
+      },
+      {
+        "number": 44,
+        "page": 4,
+        "path": "assets/network/papers/20250525-44-1.png",
+        "top": 100.68999999999994
+      },
+      {
+        "number": 50,
+        "page": 5,
+        "path": "assets/network/papers/20250525-50-1.png",
+        "top": 65.08799999999997
+      }
+    ]
+  },
+  {
+    "date": "20250223",
+    "sha256": "0d39bc0dbc26126337a32a45f297db73e32eb10b0a5a2af0c7ef4ed1ef93a162",
+    "sourceFile": "materials/papers/network-20250223-teacher.pdf",
+    "inlineAnswersMatched": true,
+    "questions": 50,
+    "answerTableMatched": true,
+    "diagrams": [
+      {
+        "number": 16,
+        "page": 2,
+        "path": "assets/network/papers/20250223-16-1.png",
+        "top": 65.08900000000006
+      },
+      {
+        "number": 21,
+        "page": 2,
+        "path": "assets/network/papers/20250223-21-1.png",
+        "top": 661.077
+      },
+      {
+        "number": 23,
+        "page": 2,
+        "path": "assets/network/papers/20250223-23-1.png",
+        "top": 165.779
+      },
+      {
+        "number": 26,
+        "page": 3,
+        "path": "assets/network/papers/20250223-26-1.png",
+        "top": 65.08899999999994
+      },
+      {
+        "number": 34,
+        "page": 3,
+        "path": "assets/network/papers/20250223-34-1.png",
+        "top": 315.615
+      },
+      {
+        "number": 36,
+        "page": 3,
+        "path": "assets/network/papers/20250223-36-1.png",
+        "top": 519.0319999999999
+      },
+      {
+        "number": 41,
+        "page": 4,
+        "path": "assets/network/papers/20250223-41-1.png",
+        "top": 256.519
+      },
+      {
+        "number": 47,
+        "page": 4,
+        "path": "assets/network/papers/20250223-47-1.png",
+        "top": 272.102
+      },
+      {
+        "number": 49,
+        "page": 4,
+        "path": "assets/network/papers/20250223-49-1.png",
+        "top": 623.438
+      }
+    ]
+  },
+  {
+    "date": "20241103",
+    "sha256": "d369c39029e51d22b7bf6e68f16f8b10033df3da1e6fea05739f4784bde8062b",
+    "sourceFile": "materials/papers/network-20241103-student.pdf",
+    "inlineAnswersMatched": false,
+    "questions": 50,
+    "answerTableMatched": true,
+    "diagrams": [
+      {
+        "number": 12,
+        "page": 1,
+        "path": "assets/network/papers/20241103-12-1.png",
+        "top": 329.16
+      },
+      {
+        "number": 15,
+        "page": 2,
+        "path": "assets/network/papers/20241103-15-1.png",
+        "top": 79.832
+      },
+      {
+        "number": 16,
+        "page": 2,
+        "path": "assets/network/papers/20241103-16-1.png",
+        "top": 208.93200000000002
+      },
+      {
+        "number": 17,
+        "page": 2,
+        "path": "assets/network/papers/20241103-17-1.png",
+        "top": 382.50100000000003
+      },
+      {
+        "number": 20,
+        "page": 2,
+        "path": "assets/network/papers/20241103-20-1.png",
+        "top": 65.08900000000006
+      },
+      {
+        "number": 21,
+        "page": 2,
+        "path": "assets/network/papers/20241103-21-1.png",
+        "top": 236.74099999999999
+      },
+      {
+        "number": 24,
+        "page": 2,
+        "path": "assets/network/papers/20241103-24-1.png",
+        "top": 640.22
+      },
+      {
+        "number": 46,
+        "page": 4,
+        "path": "assets/network/papers/20241103-46-1.png",
+        "top": 621.281
+      },
+      {
+        "number": 47,
+        "page": 4,
+        "path": "assets/network/papers/20241103-47-1.png",
+        "top": 65.08899999999994
+      }
+    ]
+  },
+  {
+    "date": "20240519",
+    "sha256": "72117935e9ae893c710ba474e0982d6ef74ed5d2aedfdde42ab932fb1307268a",
+    "sourceFile": "materials/papers/network-20240519-teacher.pdf",
+    "inlineAnswersMatched": true,
+    "questions": 50,
+    "answerTableMatched": true,
+    "diagrams": [
+      {
+        "number": 15,
+        "page": 1,
+        "path": "assets/network/papers/20240519-15-1.png",
+        "top": 490.264
+      },
+      {
+        "number": 16,
+        "page": 1,
+        "path": "assets/network/papers/20240519-16-1.png",
+        "top": 659.039
+      },
+      {
+        "number": 17,
+        "page": 2,
+        "path": "assets/network/papers/20240519-17-1.png",
+        "top": 65.08899999999994
+      },
+      {
+        "number": 19,
+        "page": 2,
+        "path": "assets/network/papers/20240519-19-1.png",
+        "top": 339.34900000000005
+      },
+      {
+        "number": 28,
+        "page": 3,
+        "path": "assets/network/papers/20240519-28-1.png",
+        "top": 65.08900000000006
+      },
+      {
+        "number": 35,
+        "page": 3,
+        "path": "assets/network/papers/20240519-35-1.png",
+        "top": 79.83299999999997
+      },
+      {
+        "number": 36,
+        "page": 3,
+        "path": "assets/network/papers/20240519-36-1.png",
+        "top": 229.909
+      },
+      {
+        "number": 40,
+        "page": 3,
+        "path": "assets/network/papers/20240519-40-1.png",
+        "top": 585.56
+      },
+      {
+        "number": 42,
+        "page": 4,
+        "path": "assets/network/papers/20240519-42-1.png",
+        "top": 238.539
+      },
+      {
+        "number": 43,
+        "page": 4,
+        "path": "assets/network/papers/20240519-43-1.png",
+        "top": 354.932
+      },
+      {
+        "number": 49,
+        "page": 4,
+        "path": "assets/network/papers/20240519-49-1.png",
+        "top": 275.21899999999994
+      },
+      {
+        "number": 50,
+        "page": 4,
+        "path": "assets/network/papers/20240519-50-1.png",
+        "top": 433.086
+      }
+    ]
+  },
+  {
+    "date": "20240225",
+    "sha256": "4397ed083b1569e64711f91268e85c3a80e6a7ea4c4ca6babbf9e65a5e47507e",
+    "sourceFile": "materials/papers/network-20240225-student.pdf",
+    "inlineAnswersMatched": false,
+    "questions": 50,
+    "answerTableMatched": true,
+    "diagrams": [
+      {
+        "number": 10,
+        "page": 1,
+        "path": "assets/network/papers/20240225-10-1.png",
+        "top": 196.10500000000002
+      },
+      {
+        "number": 16,
+        "page": 2,
+        "path": "assets/network/papers/20240225-16-1.png",
+        "top": 89.90100000000007
+      },
+      {
+        "number": 18,
+        "page": 2,
+        "path": "assets/network/papers/20240225-18-1.png",
+        "top": 443.874
+      },
+      {
+        "number": 20,
+        "page": 2,
+        "path": "assets/network/papers/20240225-20-1.png",
+        "top": 65.08899999999994
+      },
+      {
+        "number": 22,
+        "page": 2,
+        "path": "assets/network/papers/20240225-22-1.png",
+        "top": 303.029
+      },
+      {
+        "number": 25,
+        "page": 2,
+        "path": "assets/network/papers/20240225-25-1.png",
+        "top": 645.014
+      },
+      {
+        "number": 27,
+        "page": 3,
+        "path": "assets/network/papers/20240225-27-1.png",
+        "top": 198.144
+      },
+      {
+        "number": 42,
+        "page": 4,
+        "path": "assets/network/papers/20240225-42-1.png",
+        "top": 366.32000000000005
+      },
+      {
+        "number": 44,
+        "page": 4,
+        "path": "assets/network/papers/20240225-44-1.png",
+        "top": 691.764
+      }
+    ]
+  },
+  {
+    "date": "20231105",
+    "sha256": "887948485fc6837bcc27ea99c26f320ccdba145c04e5495b41e3bc66729fe846",
+    "sourceFile": "materials/papers/network-20231105-student.pdf",
+    "inlineAnswersMatched": false,
+    "questions": 50,
+    "answerTableMatched": true,
+    "diagrams": [
+      {
+        "number": 9,
+        "page": 1,
+        "path": "assets/network/papers/20231105-09-1.png",
+        "top": 65.08900000000006
+      },
+      {
+        "number": 15,
+        "page": 1,
+        "path": "assets/network/papers/20231105-15-1.png",
+        "top": 630.63
+      },
+      {
+        "number": 18,
+        "page": 2,
+        "path": "assets/network/papers/20231105-18-1.png",
+        "top": 316.45399999999995
+      },
+      {
+        "number": 23,
+        "page": 2,
+        "path": "assets/network/papers/20231105-23-1.png",
+        "top": 65.08799999999997
+      },
+      {
+        "number": 24,
+        "page": 2,
+        "path": "assets/network/papers/20231105-24-1.png",
+        "top": 356.13
+      },
+      {
+        "number": 25,
+        "page": 2,
+        "path": "assets/network/papers/20231105-25-1.png",
+        "top": 626.914
+      },
+      {
+        "number": 26,
+        "page": 3,
+        "path": "assets/network/papers/20231105-26-1.png",
+        "top": 65.08900000000006
+      },
+      {
+        "number": 27,
+        "page": 3,
+        "path": "assets/network/papers/20231105-27-1.png",
+        "top": 320.1700000000001
+      },
+      {
+        "number": 35,
+        "page": 3,
+        "path": "assets/network/papers/20231105-35-1.png",
+        "top": 538.9300000000001
+      },
+      {
+        "number": 49,
+        "page": 4,
+        "path": "assets/network/papers/20231105-49-1.png",
+        "top": 442.676
+      }
+    ]
+  },
+  {
+    "date": "20230521",
+    "sha256": "53cc36f5395d4a1214f383e6a50940dad6d080e10ef631bdc5b03afa5ae60e65",
+    "sourceFile": "materials/papers/network-20230521-student.pdf",
+    "inlineAnswersMatched": false,
+    "questions": 50,
+    "answerTableMatched": true,
+    "diagrams": [
+      {
+        "number": 14,
+        "page": 1,
+        "path": "assets/network/papers/20230521-14-1.png",
+        "top": 590.4739999999999
+      },
+      {
+        "number": 18,
+        "page": 2,
+        "path": "assets/network/papers/20230521-18-1.png",
+        "top": 279.2940000000001
+      },
+      {
+        "number": 22,
+        "page": 2,
+        "path": "assets/network/papers/20230521-22-1.png",
+        "top": 104.64499999999998
+      },
+      {
+        "number": 23,
+        "page": 2,
+        "path": "assets/network/papers/20230521-23-1.png",
+        "top": 257.11799999999994
+      },
+      {
+        "number": 27,
+        "page": 3,
+        "path": "assets/network/papers/20230521-27-1.png",
+        "top": 145.04100000000005
+      },
+      {
+        "number": 33,
+        "page": 3,
+        "path": "assets/network/papers/20230521-33-1.png",
+        "top": 65.08899999999994
+      },
+      {
+        "number": 35,
+        "page": 3,
+        "path": "assets/network/papers/20230521-35-1.png",
+        "top": 338.98999999999995
+      },
+      {
+        "number": 50,
+        "page": 4,
+        "path": "assets/network/papers/20230521-50-1.png",
+        "top": 257.23800000000006
+      }
+    ]
+  },
+  {
+    "date": "20230226",
+    "sha256": "577dbf612c6ce1ec29cd9b7de2d5946b06b06afc01701273809c2bfb2600af7f",
+    "sourceFile": "materials/papers/network-20230226-student.pdf",
+    "inlineAnswersMatched": false,
+    "questions": 50,
+    "answerTableMatched": true,
+    "diagrams": [
+      {
+        "number": 7,
+        "page": 1,
+        "path": "assets/network/papers/20230226-07-1.png",
+        "top": 598.0260000000001
+      },
+      {
+        "number": 11,
+        "page": 1,
+        "path": "assets/network/papers/20230226-11-1.png",
+        "top": 184.59799999999996
+      },
+      {
+        "number": 21,
+        "page": 2,
+        "path": "assets/network/papers/20230226-21-1.png",
+        "top": 399.523
+      },
+      {
+        "number": 23,
+        "page": 2,
+        "path": "assets/network/papers/20230226-23-1.png",
+        "top": 610.4929999999999
+      },
+      {
+        "number": 26,
+        "page": 2,
+        "path": "assets/network/papers/20230226-26-1.png",
+        "top": 264.43100000000004
+      },
+      {
+        "number": 29,
+        "page": 2,
+        "path": "assets/network/papers/20230226-29-1.png",
+        "top": 632.069
+      },
+      {
+        "number": 36,
+        "page": 3,
+        "path": "assets/network/papers/20230226-36-1.png",
+        "top": 695.958
+      },
+      {
+        "number": 42,
+        "page": 3,
+        "path": "assets/network/papers/20230226-42-1.png",
+        "top": 615.6469999999999
+      }
+    ]
+  },
+  {
+    "date": "20221106",
+    "sha256": "72d6dc714054bfcc83641722c40f02d0dc1c079b047c1241f1b85c499e9754dc",
+    "sourceFile": "materials/papers/network-20221106-student.pdf",
+    "inlineAnswersMatched": false,
+    "questions": 50,
+    "answerTableMatched": true,
+    "diagrams": [
+      {
+        "number": 7,
+        "page": 1,
+        "path": "assets/network/papers/20221106-07-1.png",
+        "top": 584.481
+      },
+      {
+        "number": 13,
+        "page": 1,
+        "path": "assets/network/papers/20221106-13-1.png",
+        "top": 489.784
+      },
+      {
+        "number": 15,
+        "page": 2,
+        "path": "assets/network/papers/20221106-15-1.png",
+        "top": 65.08899999999994
+      },
+      {
+        "number": 16,
+        "page": 2,
+        "path": "assets/network/papers/20221106-16-1.png",
+        "top": 219.48000000000002
+      },
+      {
+        "number": 17,
+        "page": 2,
+        "path": "assets/network/papers/20221106-17-1.png",
+        "top": 365.6
+      },
+      {
+        "number": 18,
+        "page": 2,
+        "path": "assets/network/papers/20221106-18-1.png",
+        "top": 539.769
+      },
+      {
+        "number": 19,
+        "page": 2,
+        "path": "assets/network/papers/20221106-19-1.png",
+        "top": 134.25300000000004
+      },
+      {
+        "number": 23,
+        "page": 2,
+        "path": "assets/network/papers/20221106-23-1.png",
+        "top": 573.932
+      },
+      {
+        "number": 25,
+        "page": 3,
+        "path": "assets/network/papers/20221106-25-1.png",
+        "top": 65.08899999999994
+      },
+      {
+        "number": 27,
+        "page": 3,
+        "path": "assets/network/papers/20221106-27-1.png",
+        "top": 348.818
+      },
+      {
+        "number": 29,
+        "page": 3,
+        "path": "assets/network/papers/20221106-29-1.png",
+        "top": 65.08900000000006
+      },
+      {
+        "number": 30,
+        "page": 3,
+        "path": "assets/network/papers/20221106-30-1.png",
+        "top": 203.77699999999993
+      },
+      {
+        "number": 33,
+        "page": 3,
+        "path": "assets/network/papers/20221106-33-1.png",
+        "top": 550.797
+      },
+      {
+        "number": 44,
+        "page": 4,
+        "path": "assets/network/papers/20221106-44-1.png",
+        "top": 65.08899999999994
+      },
+      {
+        "number": 49,
+        "page": 4,
+        "path": "assets/network/papers/20221106-49-1.png",
+        "top": 488.465
+      }
+    ]
+  },
+  {
+    "date": "20220821",
+    "sha256": "386c940f6637b0c5126f195d80c5bd72161d1508058ef5ce234003f8c7e549dd",
+    "sourceFile": "materials/papers/network-20220821-teacher.pdf",
+    "inlineAnswersMatched": true,
+    "questions": 50,
+    "answerTableMatched": true,
+    "diagrams": [
+      {
+        "number": 19,
+        "page": 2,
+        "path": "assets/network/papers/20220821-19-1.png",
+        "top": 188.553
+      },
+      {
+        "number": 20,
+        "page": 2,
+        "path": "assets/network/papers/20220821-20-1.png",
+        "top": 401.67999999999995
+      },
+      {
+        "number": 22,
+        "page": 2,
+        "path": "assets/network/papers/20220821-22-1.png",
+        "top": 682.773
+      },
+      {
+        "number": 25,
+        "page": 2,
+        "path": "assets/network/papers/20220821-25-1.png",
+        "top": 341.146
+      },
+      {
+        "number": 28,
+        "page": 3,
+        "path": "assets/network/papers/20220821-28-1.png",
+        "top": 126.2220000000001
+      },
+      {
+        "number": 30,
+        "page": 3,
+        "path": "assets/network/papers/20220821-30-1.png",
+        "top": 436.323
+      },
+      {
+        "number": 32,
+        "page": 3,
+        "path": "assets/network/papers/20220821-32-1.png",
+        "top": 643.696
+      },
+      {
+        "number": 34,
+        "page": 3,
+        "path": "assets/network/papers/20220821-34-1.png",
+        "top": 261.31399999999996
+      },
+      {
+        "number": 49,
+        "page": 4,
+        "path": "assets/network/papers/20220821-49-1.png",
+        "top": 65.08900000000006
+      }
+    ]
+  },
+  {
+    "date": "20220522",
+    "sha256": "ce9bceb599c49a7c8efc7cd3ef2bcdc3837324d825e80cb445005dc213e64aea",
+    "sourceFile": "materials/papers/network-20220522-student.pdf",
+    "inlineAnswersMatched": false,
+    "questions": 50,
+    "answerTableMatched": true,
+    "diagrams": [
+      {
+        "number": 13,
+        "page": 1,
+        "path": "assets/network/papers/20220522-13-1.png",
+        "top": 318.851
+      },
+      {
+        "number": 15,
+        "page": 1,
+        "path": "assets/network/papers/20220522-15-1.png",
+        "top": 534.0160000000001
+      },
+      {
+        "number": 20,
+        "page": 2,
+        "path": "assets/network/papers/20220522-20-1.png",
+        "top": 308.063
+      },
+      {
+        "number": 21,
+        "page": 2,
+        "path": "assets/network/papers/20220522-21-1.png",
+        "top": 436.442
+      },
+      {
+        "number": 23,
+        "page": 2,
+        "path": "assets/network/papers/20220522-23-1.png",
+        "top": 649.4490000000001
+      },
+      {
+        "number": 25,
+        "page": 2,
+        "path": "assets/network/papers/20220522-25-1.png",
+        "top": 119.38999999999999
+      },
+      {
+        "number": 26,
+        "page": 2,
+        "path": "assets/network/papers/20220522-26-1.png",
+        "top": 277.256
+      },
+      {
+        "number": 27,
+        "page": 2,
+        "path": "assets/network/papers/20220522-27-1.png",
+        "top": 493.38
+      },
+      {
+        "number": 38,
+        "page": 3,
+        "path": "assets/network/papers/20220522-38-1.png",
+        "top": 111.47800000000007
+      },
+      {
+        "number": 41,
+        "page": 3,
+        "path": "assets/network/papers/20220522-41-1.png",
+        "top": 536.413
+      },
+      {
+        "number": 49,
+        "page": 4,
+        "path": "assets/network/papers/20220522-49-1.png",
+        "top": 65.08900000000006
+      }
+    ]
+  }
+]

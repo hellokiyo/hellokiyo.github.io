@@ -119,3 +119,8 @@ v12부터 온라인에서는 HTTP 캐시를 우회하여 파일을 먼저 요청
 ```powershell
 node --test scripts/test-study.cjs scripts/test-materials.cjs scripts/test-materials-page.cjs scripts/test-latest-paper.cjs scripts/test-keyword-game.cjs scripts/test-review.cjs scripts/test-pwa.cjs scripts/test-daily-study.cjs
 ```
+
+
+## v13 기출 자료 추가
+
+`assets/network/past-papers.js`, `paper-archive.js`, `assets/network/papers/`의 문제 그림, `materials/papers/`의 원본 PDF와 목록을 함께 게시합니다. 현재 확보된 17회차 850문항과 그림을 오프라인 캐시 목록에 포함했습니다. 출처만 표시하는 확보 대기 3개 회차와 외부 자료실은 오프라인 대상이 아닙니다. 핵심정리·README 우선순위도 함께 갱신됩니다. 화면 하단 버전은 합격루틴 v13입니다.
