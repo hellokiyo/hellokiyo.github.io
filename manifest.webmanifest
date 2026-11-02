@@ -1,0 +1,17 @@
+{
+ "id":"./",
+ "name":"네트워크 노트 · 네트워크관리사 2급",
+ "short_name":"네트워크 노트",
+ "lang":"ko",
+ "start_url":"./#dashboard",
+ "scope":"./",
+ "display":"standalone",
+ "background_color":"#ffffff",
+ "theme_color":"#254f3d",
+ "description":"오늘의 복습과 기출 문제를 휴대폰에서 가볍게 학습하세요.",
+ "icons":[
+  {"src":"assets/network/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},
+  {"src":"assets/network/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any"},
+  {"src":"assets/network/icon-maskable.png","sizes":"512x512","type":"image/png","purpose":"maskable"}
+ ]
+}

@@ -37,6 +37,8 @@
     result.session=cleanSession(source.session);
     const last=cleanSession(source.lastResult);
     if(last)result.lastResult={...last,finishedAt:Number.isFinite(source.lastResult.finishedAt)?source.lastResult.finishedAt:Date.now()};
+    const R=root.ReviewCore||(typeof require==='function'?require('./review-core.js'):null);
+    if(R)result.adaptive=R.clean(source.adaptive,R.catalog(data,questions));
     return result;
   }
   const api={subnet,shuffle,localDate,validDate,daysUntil,cleanState};
