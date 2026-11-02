@@ -5,13 +5,16 @@ test('PWA 리소스·상대 경로·아이콘 크기',()=>{
  const source=fs.readFileSync('sw.js','utf8'),names=[...source.matchAll(/'((?:assets|materials)\/[^']+)'/g)].map(m=>m[1]);for(const n of names)assert.ok(fs.existsSync(n),n);
 });
 test('캐시 설치·오프라인 응답·안전한 업데이트 및 범위 격리',async()=>{
- const events={},db=new Map(),base='https://example.com/study/',cache={addAll:async requests=>{for(const r of requests)db.set(r.url,{ok:true,body:r.url});},match:async r=>db.get(r.url),put:async(r,v)=>db.set(r.url,v)};let skipped=0,claimed=0,network=0,deleted=[];
+ const events={},db=new Map(),base='https://example.com/study/',cache={addAll:async requests=>{for(const r of requests)db.set(r.url,{ok:true,body:r.url});},match:async r=>{const v=db.get(r.url);return v?.clone?v.clone():v;},put:async(r,v)=>db.set(r.url,v)};let skipped=0,claimed=0,network=0,deleted=[];
  const self={location:{href:base+'sw.js'},addEventListener:(n,f)=>events[n]=f,clients:{claim:async()=>claimed++},skipWaiting:()=>skipped++};
- const context={self,URL,Request,caches:{open:async()=>cache,keys:async()=>['network-notes-pwa-old','unrelated-cache'],delete:async key=>deleted.push(key)},fetch:async()=>{network++;throw Error('offline');}};
+ const context={self,URL,Request,AbortController,setTimeout,clearTimeout,caches:{open:async()=>cache,keys:async()=>['network-notes-pwa-old','unrelated-cache'],delete:async key=>deleted.push(key)},fetch:async()=>{network++;throw Error('offline');}};
  vm.runInNewContext(fs.readFileSync('sw.js','utf8'),context);
  let promise;events.install({waitUntil:p=>promise=p});await promise;assert.ok(db.has(base+'index.html'));assert.equal(skipped,0);
  events.activate({waitUntil:p=>promise=p});await promise;assert.equal(claimed,1);assert.deepEqual(deleted,['network-notes-pwa-old']);
- const req={method:'GET',url:base+'assets/network/questions.js'};events.fetch({request:req,respondWith:p=>promise=p});assert.equal((await promise).body,req.url);assert.equal(network,0);
+ const req=new Request(base+'assets/network/questions.js');events.fetch({request:req,respondWith:p=>promise=p});assert.equal((await promise).body,req.url);assert.equal(network,1);
+ context.fetch=async request=>{assert.equal(request.cache,'no-store');return new Response('new content');};events.fetch({request:req,respondWith:p=>promise=p});assert.equal(await (await promise).text(),'new content');assert.equal(await db.get(req.url).clone().text(),'new content');
+ context.fetch=async()=>new Response('server failed',{status:503});events.fetch({request:req,respondWith:p=>promise=p});assert.equal(await (await promise).text(),'new content');
+ context.fetch=async()=>new Response('cache full safe');cache.put=async()=>{throw Error('quota');};events.fetch({request:req,respondWith:p=>promise=p});assert.equal(await (await promise).text(),'cache full safe');
  let intercepted=false;events.fetch({request:{method:'GET',url:'https://example.com/other.html'},respondWith:()=>intercepted=true});assert.equal(intercepted,false);
  events.message({data:{type:'APPLY_UPDATE'}});assert.equal(skipped,1);
 });

@@ -4,7 +4,7 @@
  const KEY='network-keyword-rain:v1';
  const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const normalize=s=>String(s).normalize('NFKC').toLowerCase().replace(/[\s·.,()（）_\-]/g,'');
- let dispose=()=>{};
+ let dispose=()=>{},active=false;
  function mount({root}){
   dispose();
   const controller=new AbortController(),opts={signal:controller.signal},data=window.STUDY_DATA.keywords;
@@ -33,7 +33,7 @@
   }
   function finish(reason){
    if(!playing)return;
-   playing=false;clearInterval(timer);timer=null;$('#rain-drop').hidden=true;$('#rain-zone').hidden=true;$('#rain-intro').hidden=true;
+   playing=false;active=false;clearInterval(timer);timer=null;$('#rain-drop').hidden=true;$('#rain-zone').hidden=true;$('#rain-intro').hidden=true;
    const accuracy=total?Math.round(correct/total*100):0,eligible=total>=5,previous=Number(best[mode])||0,newBest=eligible&&score>previous,oldGP=lifetime();if(eligible)best[mode]=Math.max(previous,score);best.totalGP=oldGP+score;const unlocked=badges.filter(([n])=>oldGP<n&&lifetime()>=n);let saved=true;try{localStorage.setItem(KEY,JSON.stringify(best));}catch{saved=false;}
    $('#rain-result').hidden=false;
    $('#rain-result').innerHTML=`<section class="panel rain-result"><span class="label-tag">${escape(reason)}</span><h2>정답률 ${accuracy}%</h2><p><strong>${score.toLocaleString()} GP${newBest?' · 새로운 최고 기록!':''}</strong> · 게임 포인트</p><p>정답 ${correct} / ${total} · 최고 연속 정답 ${maxCombo} · ${mode==='choice'?'4지선다':'직접 입력'}</p>${unlocked.length?`<p class="rain-unlocked">새 배지 획득 · ${unlocked.map(([,title])=>escape(title)).join(' · ')}</p>`:''}<p>${!eligible?'5문항 이상 도전하면 최고 포인트 기록에 반영됩니다.':''} ${saved?'이번 GP가 누적 포인트에 저장되었습니다.':'포인트를 저장하지 못했습니다. 이 화면을 닫으면 기록이 사라질 수 있습니다.'}</p><button class="button primary" id="rain-restart">다시 도전 ↺</button><h3>문항별 결과 · 놓친 키워드 ${review.length}개</h3>${attempts.length?attempts.map((k,i)=>`<article class="rain-review"><span class="category">${i+1} · ${k.correct?'정답':k.reason==='timeout'?'시간 초과':k.reason==='skip'?'건너뜀':'오답'}</span><strong>${escape(k.cue)}</strong><p class="rain-my-answer">내 답 · ${k.selected===null?(k.reason==='timeout'?'미응답 (시간 초과)':'모르겠어요 (건너뜀)'):escape(k.selected)}</p><p class="rain-right-answer">정답 · ${escape(k.answer)}</p><small>${escape(k.hint)}</small></article>`).join(''):'<p>아직 답을 판정한 문제가 없습니다.</p>'}<a class="text-button" href="#keywords">전체 키워드 암기 →</a></section>`;
@@ -56,7 +56,7 @@
    $('#rain-drop').style.transform=`translateY(${Math.max(0,1-(deadline-now)/duration)*distance}px)`;hud();
   }
   function start(){
-   mode=$('#rain-mode').value;score=combo=maxCombo=correct=total=0;lives=3;remaining=90000;bag=[];review=[];attempts=[];paused=false;playing=true;$('#rain-collection').hidden=true;
+   mode=$('#rain-mode').value;score=combo=maxCombo=correct=total=0;lives=3;remaining=90000;bag=[];review=[];attempts=[];paused=false;playing=true;active=true;$('#rain-collection').hidden=true;
    $('#rain-intro').hidden=true;$('#rain-result').hidden=true;$('#rain-drop').hidden=false;$('#rain-zone').hidden=false;$('#rain-choices').hidden=mode!=='choice';$('#rain-form').hidden=mode!=='type';$('#rain-pause').textContent='일시정지';
    $('#rain-feedback').textContent='시작! 떨어지는 단서의 정답을 맞히세요.';last=performance.now();next(last);hud();clearInterval(timer);timer=setInterval(tick,50);if(mode==='type')$('#rain-input').focus();
   }
@@ -73,7 +73,7 @@
   $('#rain-form').addEventListener('submit',e=>{e.preventDefault();if(!playing||paused)return;const value=$('#rain-input').value.trim().slice(0,200);if(!value)return;const id=current.id;tick();if(playing&&id===current.id)resolve(normalize(value)===normalize(current.answer),performance.now(),value);},opts);
   document.addEventListener('keydown',e=>{if(!playing||paused||mode!=='choice'||e.repeat||e.ctrlKey||e.altKey||e.metaKey||!/^([1-4])$/.test(e.key))return;e.preventDefault();$(`[data-rain-answer="${Number(e.key)-1}"]`).click();},opts);
   document.addEventListener('visibilitychange',()=>{if(document.hidden&&playing&&!paused)pause();},opts);
-  dispose=()=>{playing=false;clearInterval(timer);controller.abort();};
+  dispose=()=>{playing=false;active=false;clearInterval(timer);controller.abort();};
  }
- window.KeywordGame={mount,unmount:()=>dispose()};
+ window.KeywordGame={mount,unmount:()=>dispose(),isPlaying:()=>active};
 })();

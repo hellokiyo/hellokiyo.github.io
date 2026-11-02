@@ -12,7 +12,7 @@
  button.addEventListener('click',async()=>{if(!installEvent)return;const e=installEvent;installEvent=null;button.hidden=true;await e.prompt();await e.userChoice;});
  function updateBanner(worker){
   if(!worker)return;banner.hidden=false;banner.innerHTML='<span>새 학습 자료가 준비되었습니다. 답안을 저장한 뒤 업데이트하세요.</span><button type="button" class="button secondary" id="apply-update">지금 업데이트</button><button type="button" class="text-button" id="later-update">나중에</button>';
-  $('#apply-update').onclick=()=>{applying=true;worker.postMessage({type:'APPLY_UPDATE'});};$('#later-update').onclick=()=>{banner.hidden=true;};
+  $('#apply-update').onclick=()=>requestRefresh(()=>{applying=true;worker.postMessage({type:'APPLY_UPDATE'});});$('#later-update').onclick=()=>{banner.hidden=true;};
  }
  if('serviceWorker'in navigator&&window.isSecureContext){
   status.textContent='오프라인 학습 파일을 준비하고 있습니다.';
@@ -23,15 +23,34 @@
    reg.update().catch(()=>{});
   }).catch(()=>{status.textContent='오프라인 파일을 준비하지 못했습니다. 온라인에서는 계속 학습할 수 있습니다.';});
   let reloading=false;const hadController=!!navigator.serviceWorker.controller;
-  navigator.serviceWorker.addEventListener('controllerchange',()=>{if((hadController||applying)&&!reloading){reloading=true;location.reload();}});
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(applying&&!reloading){reloading=true;location.reload();}else if(hadController){showReloadBanner();}});
  }else status.textContent='설치·오프라인 학습은 HTTPS 사이트 또는 localhost에서 사용할 수 있습니다.';
  installHelp();
- const updateButton=document.createElement('button');updateButton.type='button';updateButton.className='button secondary full';updateButton.textContent='업데이트 확인';
+ function requestRefresh(action){if(window.StudyApp)window.StudyApp.requestRefresh(action);else action();}
+ function showReloadBanner(){banner.hidden=false;banner.innerHTML='<span>새 버전을 사용할 수 있습니다. 저장 후 화면을 새로 불러오세요.</span><button type="button" class="button secondary" id="reload-app">새로 불러오기</button>';$('#reload-app').onclick=()=>requestRefresh(()=>location.reload());}
+ const updateButton=document.createElement('button');updateButton.type='button';updateButton.className='button secondary full';updateButton.textContent='최신 화면 불러오기';
  status.after(updateButton);
- updateButton.addEventListener('click',async()=>{
-  if(!registration){status.textContent='업데이트를 확인하려면 인터넷에 연결하고 다시 열어주세요.';return;}
+ async function refreshLatest(){
   updateButton.disabled=true;
-  try{await registration.update();if(registration.waiting){updateBanner(registration.waiting);$('#settings-dialog').close();banner.scrollIntoView({block:'start'});}else status.textContent=registration.installing?'새 파일을 준비하고 있습니다. 준비가 끝나면 업데이트 안내가 표시됩니다.':'이 브라우저에서 확인한 최신 버전입니다. 화면 하단에 합격루틴 v11가 있는지 확인하세요.';}catch{status.textContent='업데이트를 확인하지 못했습니다. 인터넷 연결 후 다시 시도하세요.';}finally{updateButton.disabled=false;}
- });
+  try{
+   if(!navigator.onLine)throw Error('offline');
+   if(registration){
+    await registration.update();
+    const worker=registration.installing;
+    if(worker)await new Promise((resolve,reject)=>{
+     const timer=setTimeout(()=>{worker.removeEventListener('statechange',check);reject(Error('timeout'));},20000);
+     function check(){if(worker.state==='installed'||worker.state==='activated'){clearTimeout(timer);worker.removeEventListener('statechange',check);resolve();}else if(worker.state==='redundant'){clearTimeout(timer);worker.removeEventListener('statechange',check);reject(Error('install'));}}
+     worker.addEventListener('statechange',check);check();
+    });
+    if(registration.waiting){applying=true;registration.waiting.postMessage({type:'APPLY_UPDATE'});return;}
+   }
+   location.reload();
+  }catch{status.textContent='새 파일을 가져오지 못했습니다. 연결을 확인하고 다시 시도하세요. 저장한 학습은 계속할 수 있습니다.';}
+  finally{updateButton.disabled=false;}
+ }
+ updateButton.addEventListener('click',()=>requestRefresh(refreshLatest));
+ let lastCheck=0;
+ function checkUpdate(){if(!registration||!navigator.onLine||document.visibilityState==='hidden'||Date.now()-lastCheck<60000)return;lastCheck=Date.now();registration.update().then(()=>updateBanner(registration.waiting)).catch(()=>{});}
+ window.addEventListener('online',checkUpdate);window.addEventListener('focus',checkUpdate);document.addEventListener('visibilitychange',checkUpdate);
  // 앱을 닫은 상태의 예약 알림은 서버 없이 제공하지 않습니다.
 })();
