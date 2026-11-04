@@ -1,7 +1,7 @@
 (() => {
  'use strict';let dispose=()=>{};
  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- function mount({root,state,items,save,toast,presetMinutes=null}){
+ function mount({root,state,items,save,toast,presetMinutes=null,onReview=()=>{}}){
   dispose();const R=window.ReviewCore,abort=new AbortController();let timer;
   const $=s=>root.querySelector(s),A=()=>state.adaptive;
   function setup(){
@@ -43,6 +43,7 @@
     const q=items.find(i=>i.id===s.queue[s.index]),correct=s.selected===q.answer,rating=b.dataset.dailyRate;
     R.review(A(),q,{correct,rating,responseTime:Date.now()-s.questionAt,note:$('#daily-note').value},state.examDate);
     if(!q.id.startsWith('k')){if(!correct&&!state.wrong.includes(q.id))state.wrong.push(q.id);if(correct&&rating==='remember')state.wrong=state.wrong.filter(id=>id!==q.id);}
+    onReview(q.id,correct&&rating==='remember');
     s.results.push({id:q.id,correct,rating});
     if((!correct||rating==='unknown')&&!s.retried.includes(q.id)){s.queue.push(q.id);s.retried.push(q.id);}
     s.index++;s.selected=null;s.revealed=false;s.note='';s.questionAt=Date.now();save();render();window.scrollTo({top:0,behavior:'instant'});return;

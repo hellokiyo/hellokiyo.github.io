@@ -1,0 +1,5 @@
+const test=require('node:test'),assert=require('node:assert/strict'),vm=require('node:vm'),fs=require('node:fs');
+const ctx={window:{}};vm.runInNewContext(fs.readFileSync('assets/network/feature-helper.js','utf8'),ctx);const search=ctx.window.FeatureHelper.search;
+test('일상 표현으로 연도별 기출·테마·파일 보관을 찾는다',()=>{assert.equal(search('22년 기출 어디 있어?')[0].href,'#quiz');assert.equal(search('테마 바꾸기')[0].settings,true);assert.equal(search('파일 추가')[0].href,'#materials');});
+test('산성비만 사용하는 질문은 근거의 한계와 보완 기능을 알려준다',()=>{const r=search('산성비만 해도 돼?');assert.match(r[0].text,/44개\(22%\)/);assert.match(r[0].text,/실제 시험 비중이나 예상 점수가 아니/);assert.equal(r[1].href,'#theory');});
+test('사이트 원천 용어·명령어로 해당 검색 화면을 연결한다',()=>{const d={keywords:[{answer:'ARP',cue:'IP 주소에서 MAC 주소',hint:'DNS와 구별'}],commands:[{command:'ipconfig /all',purpose:'전체 설정',hint:'Windows'}]};assert.equal(search('arp가 뭐야',d)[0].term,'ARP');assert.equal(search('IPCONFIG 사용법',d)[0].term,'ipconfig');assert.equal(search('알수없는외계문자',d).length,0);assert.equal(search('',d).length,0);});

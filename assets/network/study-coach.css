@@ -1,0 +1,8 @@
+.study-coach{margin:20px 0;padding:22px;border:1px solid var(--line,#dce5df);border-radius:18px;background:var(--paper,#fff);color:var(--ink,#263b31);max-width:100%;box-sizing:border-box}
+.coach-eyebrow{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:12px;font-weight:700;color:var(--muted,#66746e)}
+.coach-eyebrow button{width:32px;height:32px;border:0;border-radius:50%;background:transparent;color:inherit;font-size:23px;cursor:pointer}
+.study-coach h2{font-size:18px;line-height:1.5;margin:8px 0}.study-coach p{font-size:14px;line-height:1.7;margin:8px 0;overflow-wrap:anywhere}
+.coach-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:14px 0}
+.study-coach .coach-reason{font-size:12px;color:var(--muted,#66746e);border-top:1px solid var(--line,#dce5df);padding-top:12px}
+.coach-evidence summary{font-size:12px;cursor:pointer;padding:8px 0;line-height:1.5}.coach-evidence p,.coach-evidence a{font-size:12px}.coach-evidence table{width:100%;table-layout:fixed;border-collapse:collapse;font-size:12px;margin:12px 0}.coach-evidence caption{text-align:left;font-size:11px;padding:6px 0}.coach-evidence th,.coach-evidence td{padding:8px 2px;text-align:center;border-bottom:1px solid var(--line,#dce5df)}.coach-evidence th:first-child{width:25%;text-align:left;overflow-wrap:anywhere}
+@media(max-width:480px){.study-coach{padding:16px;border-radius:14px}.study-coach h2{font-size:16px}.coach-actions{gap:8px}.coach-actions .button{font-size:13px}}

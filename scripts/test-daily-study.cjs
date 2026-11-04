@@ -1,10 +1,10 @@
 const test=require('node:test'),assert=require('node:assert/strict'),vm=require('node:vm'),fs=require('node:fs'),R=require('../assets/network/review-core');
-function setup(presetMinutes=null){
+function setup(presetMinutes=null,onReview=()=>{}){
  const items=[{id:'k0',category:'A',question:'Q0',options:['A0','A1','A2','A3'],answer:0,explanation:'설명 0',cue:'단서 0',concept:'A0'},{id:'q1',category:'B',question:'Q1',options:['B0','B1','B2','B3'],answer:1,explanation:'설명 1'}];
  const state={adaptive:R.clean({},items),wrong:[],examDate:'2026-11-14'},nodes={},events={};let saves=0;
  const root={innerHTML:'',querySelector:s=>nodes[s]??={value:s==='#daily-minutes'?'5':s==='#daily-category'?'전체':'',textContent:''},addEventListener:(n,f)=>events[n]=f};
  const c={window:{ReviewCore:R,scrollTo(){}},AbortController,setInterval:()=>1,clearInterval(){},Date};vm.runInNewContext(fs.readFileSync('assets/network/daily-study.js','utf8'),c);
- c.window.DailyStudy.mount({root,state,items,save:()=>saves++,toast(){},presetMinutes});
+ c.window.DailyStudy.mount({root,state,items,save:()=>saves++,toast(){},presetMinutes,onReview});
  return {state,root,nodes,events,get saves(){return saves;},click:(id,dataset={})=>events.click({target:{closest:()=>({id,dataset})}})};
 }
 test('답안 확인·기억 평가 순서 준수와 중복 집계 방지',()=>{
@@ -25,3 +25,5 @@ test('첫 학습 항목의 자기 설명 초안도 평가 전에 저장한다',(
 test('홈 배너의 5분 바로 시작은 설정 없이 세션을 만들고 진행 중 세션을 보존한다',()=>{
  const g=setup(5);assert.equal(g.state.adaptive.session.minutes,5);assert.equal(g.state.adaptive.session.intro,true);assert.match(g.root.innerHTML,/먼저 핵심 개념/);assert.doesNotMatch(g.root.innerHTML,/id="daily-start"/);
 });
+
+test('키워드의 헷갈림도 오늘의 학습 복습 목록으로 전달한다',()=>{const events=[],g=setup(null,(id,correct)=>events.push({id,correct}));g.click('daily-start');g.click('daily-recall');g.click('',{dailyAnswer:'0'});g.click('daily-check');g.click('',{dailyRate:'unsure'});assert.deepEqual(events,[{id:'k0',correct:false}]);});
