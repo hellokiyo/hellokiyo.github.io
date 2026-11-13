@@ -1,0 +1,137 @@
+전자정부 표준프레임워크 기반 내부망 웹 시스템 구성 설계서
+사전 아키텍처 및 개발환경 구성안  |  Windows · Maven · 실행형 JAR · Nexus · SVN
+문서 상태: 검토 초안  |  작성 기준: 2026년 11월 4일  |  프로젝트명·보안정책·운영 규모는 확정 전
+1 문서 목적 및 결론
+본 문서는 실제 코딩·설치 이전에 기술 선택의 근거, 서버 및 프로젝트 구조, 내부망 의존성 공급, 형상관리, 배포·검증 방식을 합의하기 위한 설계 초안이다. 권장안은 Vue 3 프론트엔드와 eGovFrame 5.0 기반 Spring Boot 3.5 계열 REST 백엔드를 개발 시 분리하고, 운영에서는 Vue 정적 산출물을 Spring Boot 실행형 JAR에 포함해 단일 포트로 서비스하는 방식이다. 별도 WEB 서버는 보안·운영 기준이 요구하는 경우 추가한다.
+2 확정 조건과 잠정 기준
+영역
+확정 조건
+설계 기준 / 확인 필요
+운영·개발
+Windows 및 폐쇄/내부망
+운영 Windows Server 버전, 망 분리 수준 확인
+백엔드
+eGovFrame 5.x, Spring Boot 3.x
+5.0 + Boot 3.5.x 조합 우선 검증; Java 17
+프론트
+Vue 3, Pinia, SCSS, jQuery
+기존 HTML/CSS/JS 자산 단계적 이관
+DB
+Oracle, MyBatis
+Oracle 서버/드라이버/계정·스키마 확정
+빌드·배포
+Maven, JAR
+Maven Wrapper 사내 승인, 내장 Tomcat
+의존성·형상
+Nexus, SVN
+Maven 및 npm 레지스트리 프록시·호스팅 구성
+주의: eGovFrame 개발도구(Eclipse 기반 구현도구)는 JDK 21 요구사항이 있지만, 본 설계의 VS Code + Maven + eGovFrame 실행환경은 JDK 17을 기본 후보로 한다. 공식 구현도구를 병행할 경우 별도 JDK 21 준비가 필요하다.
+3 시스템 논리 아키텍처
+브라우저 → Vue 3(라우터·Pinia·SCSS·기존 jQuery 플러그인) → /api REST/JSON → Spring MVC Controller → Service/트랜잭션 → MyBatis Mapper(XML) → Oracle. 운영 시 같은 Spring Boot 서버에서 /assets 등 정적 파일을 제공하며 /api만 백엔드 API로 처리한다.
+개발 모드: Vite 개발 서버와 Spring Boot API 서버를 별도 실행하고 Vite proxy로 /api 연결. CORS 의존을 최소화한다.
+운영 모드: npm 빌드의 dist 산출물만 JAR의 static 리소스로 포함. Node.js 개발 도구는 운영 서버 필수 아님.
+인증·세션: 사내 SSO 여부부터 확인. 쿠키 세션 또는 토큰 방식은 보안 정책에 따라 결정; CSRF/CORS/쿠키 속성까지 함께 설계.
+WEB 서버: 최초에는 내장 Tomcat + JAR을 선택. TLS 종료, DMZ, WAF, 접속 통제, 공통 리버스 프록시 정책이 있으면 기존 WEB 서버 앞단 배치.
+4 기술 선택 및 대안 비교
+선택
+채택 이유
+대안 장점 및 단점
+Maven
+eGovFrame 예제·기업 표준 친화적, pom.xml 선언과 Nexus 연계가 명확
+Gradle: 유연·증분 빌드 우수 / 스크립트 복잡성·사내 정책 검토
+실행형 JAR
+내장 Tomcat으로 배포 단순화, 환경별 재현성
+WAR: 기존 공동 WAS와 중앙 관리 유리 / 외부 WAS 설정·버전 결합
+Vue 3 + Pinia
+컴포넌트 재사용·화면 상태 분리, Pinia가 Vue 3에 적합
+Thymeleaf: 단순 화면과 단일 기술에 유리 / SPA 상호작용 제약
+MyBatis
+SQL 및 Oracle 최적화 쿼리를 명시적으로 관리
+JPA: 객체 모델 생산성 / 복잡 SQL·성능 예측 추가 학습
+SCSS
+기존 스타일을 변수·부분 파일로 체계화
+CSS: 도구 단순 / 대규모 공통 규칙 관리 번거로움
+SVN
+사내 지정 형상관리 체계 준수
+Git: 브랜치·병합 유연 / 사내 표준·접근 제약
+Nexus
+Maven/npm 패키지 유입 승인·캐싱·감사 가능
+각 PC 로컬 저장: 단순 / 재현·업데이트·통제가 어려움
+5 버전 호환성 및 의존성 원칙
+eGovFrame 5.0 실행환경은 Spring Framework 6.2.11, Java 17 이상, Spring Boot 구성 시 Servlet 6.0 이상을 기준으로 공식 안내한다.
+Spring Boot 3.5.x와 MyBatis Spring Boot Starter 3.0 계열을 우선 검토한다. MyBatis 공식 표에서는 Starter 3.0이 Boot 3.2~3.5를 지원한다.
+eGovFrame Boot 부모 BOM과 Spring Boot BOM의 중복 관리·버전 충돌을 dependency:tree로 확인한다. eGov 데이터접근 모듈과 MyBatis 자동구성을 중복 적용하지 않도록 구성 방식을 선택한다.
+Oracle JDBC 드라이버는 DB 서버 버전·JDK 17 지원·사내 라이선스·Nexus 반입 가능 여부를 DBA와 확인 후 고정한다.
+Java·Node·npm·Vite·Vue·Pinia·jQuery·Sass·Maven 버전은 검증 완료 시 lock/bom 및 버전표로 동결한다.
+6 프로젝트 디렉터리 및 SVN 구조
+SVN 저장소: /trunk, /branches, /tags. /trunk 아래 backend/, frontend/, docs/, deploy/를 두고, 프로젝트 전체를 한 번에 체크아웃한다. 운영 산출물과 비밀값은 SVN에 커밋하지 않는다.
+backend/src/main/java/{기관패키지}/common, feature/{업무}/controller, service, mapper, dto; backend/src/main/resources/application.yml, application-dev.yml, application-prod.yml, mapper/oracle/*.xml; backend/src/test; frontend/src/components, views, router, stores, api, styles, legacy; frontend/public; docs/architecture, environment, deployment, test; deploy/scripts, templates.
+프론트엔드: Vue가 DOM을 소유하는 영역에서는 jQuery로 동일 요소를 직접 변경하지 않는다. 레거시 플러그인은 Vue 컴포넌트 mount/unmount 시 초기화·해제를 래핑한다.
+기존 퍼블리싱 이관: 화면별 HTML→Vue SFC, CSS→SCSS, JS→컴포넌트 로직으로 구분. 외부 CDN·폰트·이미지 링크는 내부 자산으로 전환한다.
+SVN ignore: target/, node_modules/, dist/, .env.local, 로그, IDE 개인 설정, 인증서·비밀번호. .vscode/extensions.json 및 검증된 공용 설정은 버전 관리한다.
+7 내부망 Nexus와 개발환경
+대상
+구성
+검증 항목
+Java
+Maven settings.xml mirror → 사내 Nexus Maven group
+mvn -U 의존성 해석 및 오프라인 재빌드
+JavaScript
+프로젝트 .npmrc registry → 사내 Nexus npm group
+npm ci 성공, lockfile 사내 URL 점검
+패키지 반입
+연결망에서 승인·취약점 검사 후 Nexus 업로드
+전이 의존성 누락·라이선스 목록
+개발 도구
+승인된 JDK 17, Maven, Node LTS, VS Code 확장
+설치 파일/확장 VSIX 반입 및 해시 기록
+개발자 PC에는 JAVA_HOME, PATH, Maven settings.xml, npm registry, Oracle 접속정보의 보안 저장 방식을 공통 문서화한다. Nexus 계정 비밀번호나 DB 패스워드를 pom.xml, .npmrc, SVN에 평문 저장하지 않는다. 폐쇄망이므로 패키지 다운로드 성공뿐 아니라 최초 캐시 없는 환경의 재현성을 검증한다.
+8 데이터·API·보안 설계
+계층: Controller는 요청 검증·응답, Service는 업무 규칙·트랜잭션, Mapper는 SQL을 담당한다. Oracle SQL과 Java 객체 필드 매핑 규칙을 명시한다.
+DB: 전용 최소 권한 계정, JDBC 연결 풀, 쿼리 타임아웃, 커밋·롤백, 날짜·타임존, 페이징, 시퀀스/키 생성 방식을 협의한다.
+API: /api/v1 경로, JSON UTF-8, 공통 오류 응답, 입력 검증, 예외 처리, 접근 로그에서 개인정보 마스킹을 정의한다.
+보안: 인증 연동, 인가, CSRF, XSS, SQL 파라미터 바인딩, 파일 업로드, 비밀번호/비밀키 보관, TLS, 감사 로그 정책을 승인받는다.
+9 빌드 및 Windows 운영 배포
+빌드 흐름: SVN trunk/tag 체크아웃 → npm ci → Vue 빌드 → dist 산출물 검증 → 백엔드 static 포함 → Maven verify/package → 실행형 JAR 생성 → 승인된 서버로 반입 → 구성파일 주입 → 서비스 등록 및 기동 → 헬스·기능 점검. CI가 없다면 동일 순서의 표준 수동 배포 절차를 운영한다.
+설정: application.yml에는 공통값, application-dev/prod.yml에는 환경별 비밀 아닌 설정을 두고 DB 비밀번호 등은 환경변수·외부 보안 저장소로 주입한다.
+Windows 운영: 전용 서비스 계정과 권한, 서비스 래퍼/사내 승인 도구, 자동 재시작, 로그 경로, 백업 및 롤백(이전 JAR+설정)을 정의한다.
+기동 확인: 지정 포트 리슨, /actuator/health 공개 범위 통제, Oracle 연결·API 응답·Vue 새로고침 라우팅 확인.
+네트워크: 방화벽 인바운드 최소 개방, Oracle은 WAS→DB만 허용. HTTPS 인증서와 프록시 헤더 적용 여부는 보안부서 정책에 따른다.
+10 검증 계획과 승인 게이트
+단계
+검증 방법
+통과 기준
+기반
+JDK/Maven/Node/VS Code 및 SVN checkout
+동일 버전 설치·빌드 재현
+의존성
+Nexus만 사용한 mvn verify, npm ci
+외부 인터넷 없이 전체 빌드
+DB
+Oracle 연결·CRUD·트랜잭션 롤백
+Mapper·권한·인코딩 정상
+화면
+레거시 jQuery 포함 Vue 화면 테스트
+콘솔 오류·DOM 충돌 없음
+배포
+JAR 서비스 기동·재부팅·롤백
+자동 기동·복구 성공
+보안
+권한·취약점·로그·비밀값 점검
+내부 보안 기준 충족
+11 미결정 사항과 담당자 확인 목록
+운영 Windows Server 정확한 버전, 동시 사용자/성능 목표, HA·무중단 요구 여부
+Oracle 버전·접속 방식·스키마·테스트 DB 제공 여부 및 JDBC 드라이버
+사내 Nexus Maven/npm 저장소 URL, 외부 반입 승인·취약점 검증 정책
+사내 SSO·인증 방식, HTTPS 종단, WEB 서버 의무화 여부, 방화벽 허용 경로
+SVN 저장소 명명 규칙·접근권한·태그·릴리스 승인 및 배포 자동화 가능 여부
+기존 퍼블리싱 파일의 jQuery 플러그인 목록, Vue와 충돌 가능 부분, 외부 CDN 의존성
+12 산출 문서 목록 및 작성 순서
+① 아키텍처 구성·선정 근거(본 문서) → ② 버전 호환성 및 의존성 목록 → ③ Windows·VS Code 개발환경 설치서 → ④ SVN·폴더·코딩 규칙서 → ⑤ Oracle/MyBatis/API 설계서 → ⑥ Nexus 반입·오프라인 빌드 절차서 → ⑦ Windows JAR 배포·운영 절차서 → ⑧ 보안·통합 검증 결과서. 1~2 승인 후 최소 동작 샘플로 기술 리스크를 확인하고 실제 업무 개발을 시작한다.
+13 공식 근거 자료
+https://www.egovframe.go.kr/docs/5.0/getting-started/
+https://www.egovframe.go.kr/docs/5.0/egovframe-development/deployment-tool/build-tool/gradle/boot-to-gradle/
+https://mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/
+https://docs.spring.io/spring-boot/3.5/how-to/deployment/installing.html
+https://pinia.vuejs.org/getting-started
+https://docs.npmjs.com/cli/using-npm/config/

@@ -1,5 +1,5 @@
 const test=require('node:test'),assert=require('node:assert/strict'),vm=require('node:vm'),fs=require('node:fs'),R=require('../assets/network/review-core');
-function setup(presetMinutes=null,onReview=()=>{}){
+function setup(presetMinutes=null,onReview=null){
  const items=[{id:'k0',category:'A',question:'Q0',options:['A0','A1','A2','A3'],answer:0,explanation:'설명 0',cue:'단서 0',concept:'A0'},{id:'q1',category:'B',question:'Q1',options:['B0','B1','B2','B3'],answer:1,explanation:'설명 1'}];
  const state={adaptive:R.clean({},items),wrong:[],examDate:'2026-11-14'},nodes={},events={};let saves=0;
  const root={innerHTML:'',querySelector:s=>nodes[s]??={value:s==='#daily-minutes'?'5':s==='#daily-category'?'전체':'',textContent:''},addEventListener:(n,f)=>events[n]=f};
@@ -27,3 +27,5 @@ test('홈 배너의 5분 바로 시작은 설정 없이 세션을 만들고 진�
 });
 
 test('키워드의 헷갈림도 오늘의 학습 복습 목록으로 전달한다',()=>{const events=[],g=setup(null,(id,correct)=>events.push({id,correct}));g.click('daily-start');g.click('daily-recall');g.click('',{dailyAnswer:'0'});g.click('daily-check');g.click('',{dailyRate:'unsure'});assert.deepEqual(events,[{id:'k0',correct:false}]);});
+
+test('오답 확인 뒤 기억 평가 전 화면을 떠나도 오답 연결은 전달된다',()=>{const events=[],g=setup(null,(id,correct)=>events.push({id,correct}));g.click('daily-start');g.click('daily-recall');g.click('',{dailyAnswer:'1'});g.click('daily-check');assert.deepEqual(events,[{id:'k0',correct:false}]);g.click('daily-check');assert.equal(events.length,1);});

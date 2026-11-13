@@ -1,0 +1,9 @@
+# 생성 데이터와 검토 증거는 소스 포맷 범위에서 제외합니다.
+assets/network/study-data.js
+assets/network/questions.js
+assets/network/latest-paper.js
+assets/network/past-papers.js
+audits/
+materials/
+work/
+other-projects/

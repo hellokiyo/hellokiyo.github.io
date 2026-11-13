@@ -25,5 +25,5 @@ test('이전 회차의 답안·오답·결과·회차명이 재실행·내보내
 });
 test('핵심정리 우선순위와 바로가기가 개정 이후 기출부터 안내한다',()=>{
  const section=w.STUDY_DATA.sections[0];assert.match(section.html,/2025년 3회차 이후 문제부터 풀고/);assert.match(section.html,/그다음 이전 회차/);assert.match(section.html,/#quiz\/current/);
- assert.match(fs.readFileSync('assets/network/app.js','utf8'),/data-paper="\$\{esc\(paperOf\(r\)\.id\)\}"/);
+ assert.match(fs.readFileSync('assets/network/quiz-page.js','utf8'),/data-paper="\$\{esc\(paperOf\(r\)\.id\)\}"/);
 });

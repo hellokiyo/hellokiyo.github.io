@@ -1,0 +1,52 @@
+[
+  {
+    "view": "daily",
+    "heading": "오늘의 학습",
+    "overflow": false
+  },
+  {
+    "view": "keywords",
+    "heading": "키워드 암기",
+    "overflow": false
+  },
+  {
+    "view": "commands",
+    "heading": "명령어 노트",
+    "overflow": false
+  },
+  {
+    "view": "theory",
+    "heading": "핵심정리",
+    "overflow": false
+  },
+  {
+    "view": "quiz",
+    "heading": "문제 풀이",
+    "overflow": false
+  },
+  {
+    "view": "wrong",
+    "heading": "오답노트",
+    "overflow": false
+  },
+  {
+    "view": "plan",
+    "heading": "14일 학습 계획",
+    "overflow": false
+  },
+  {
+    "view": "materials",
+    "heading": "시험 자료",
+    "overflow": false
+  },
+  {
+    "view": "game",
+    "heading": "키워드 산성비",
+    "overflow": false
+  },
+  {
+    "view": "dashboard",
+    "heading": "오늘 공부할 문제를 골라보세요.",
+    "overflow": false
+  }
+]

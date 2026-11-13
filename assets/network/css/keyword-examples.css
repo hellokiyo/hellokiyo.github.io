@@ -1,0 +1,169 @@
+/* 키워드별 출제 형태 예시: 필요할 때만 펼쳐 봅니다. */
+.flash-grid {
+  align-items: start;
+}
+.keyword-example {
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+  margin: 0 0 12px;
+  font-size: 12px;
+}
+.keyword-example > summary {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #526b44;
+  list-style: none;
+  min-height: 30px;
+}
+.keyword-example > summary::-webkit-details-marker,
+.example-solution > summary::-webkit-details-marker {
+  display: none;
+}
+.keyword-example > summary::before {
+  content: "＋";
+  font-size: 14px;
+  font-weight: 400;
+}
+.keyword-example[open] > summary::before {
+  content: "−";
+}
+.keyword-example > summary span {
+  margin-left: auto;
+  font-size: 10px;
+  color: #7b8673;
+  font-weight: 400;
+}
+.example-body {
+  padding: 12px 0 0;
+}
+.example-label {
+  font-size: 10px;
+  color: #7c8575;
+  line-height: 1.6;
+  margin-bottom: 9px;
+}
+.flash-card .example-question {
+  font-size: 13px;
+  line-height: 1.9;
+  color: #293d30;
+  margin: 0 0 12px;
+}
+.example-options {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 13px;
+  display: grid;
+  gap: 7px;
+}
+.example-options li {
+  display: flex;
+  gap: 9px;
+  font-size: 12px;
+  line-height: 1.75;
+  color: #52614d;
+}
+.example-options li > span {
+  font-size: 10px;
+  display: grid;
+  place-content: center;
+  flex-shrink: 0;
+  width: 19px;
+  height: 20px;
+  margin-top: 1px;
+  border: 1px solid #e0e6d8;
+  border-radius: 4px;
+  color: #78866c;
+  font-variant-numeric: tabular-nums;
+}
+.example-solution {
+  background: #f2f6ec;
+  border: 1px solid #e1e8d7;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.example-solution > summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 10px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #466038;
+  line-height: 1.6;
+}
+.example-solution > summary:after {
+  content: " ＋";
+  float: right;
+  font-size: 13px;
+  font-weight: 400;
+}
+.example-solution[open] > summary:after {
+  content: " −";
+}
+.example-feedback {
+  padding: 2px 12px 11px;
+}
+.example-feedback > strong {
+  font-size: 13px;
+  color: var(--green);
+  line-height: 1.8;
+}
+.example-clues {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 10px 0;
+}
+.example-clues mark {
+  font-size: 10px;
+  line-height: 1.6;
+  background: #e0ebcd;
+  color: #476135;
+  padding: 3px 6px;
+  border-radius: 3px;
+}
+.flash-card .example-feedback p {
+  font-size: 12px;
+  line-height: 1.85;
+  margin: 0 0 8px;
+  color: #53664a;
+}
+.flash-card .example-feedback .example-trap {
+  padding-top: 9px;
+  margin: 10px 0 0;
+  border-top: 1px solid #dce5d1;
+  color: #69775d;
+}
+.example-trap b {
+  font-size: 10px;
+  display: block;
+  color: #7d805e;
+  margin-bottom: 3px;
+}
+@media (max-width: 640px) {
+  .keyword-example {
+    margin-bottom: 8px;
+  }
+  .keyword-example > summary {
+    min-height: 36px;
+  }
+  .flash-card .example-question {
+    font-size: 14px;
+  }
+  .example-options li {
+    font-size: 13px;
+  }
+  .example-solution > summary {
+    min-height: 42px;
+  }
+  .example-label {
+    font-size: 11px;
+  }
+}
+@media (min-width: 641px) {
+  .flash-card:has(> .keyword-example[open]) {
+    grid-column: span 2;
+  }
+}

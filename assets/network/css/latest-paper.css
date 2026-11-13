@@ -1,0 +1,15 @@
+.latest-paper {
+  margin-bottom: 24px;
+  border-left: 4px solid var(--green, #254f3d);
+}
+.latest-paper h2 {
+  font-size: 21px;
+  margin: 12px 0;
+}
+.latest-paper p {
+  line-height: 1.7;
+}
+.latest-paper .score-actions {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}

@@ -1,0 +1,892 @@
+/* 앱 조립부: 상태·저장·내비게이션·페이지 간 이벤트를 연결합니다. 모듈 책임표는 docs/architecture.md 참고. */
+(() => {
+  "use strict";
+  const D = window.STUDY_DATA,
+    B = window.STUDY_QUESTIONS,
+    P = window.LATEST_PAPER,
+    A = window.PaperArchive.create(P, window.PAST_PAPERS),
+    Q = [...B, ...A.papers.flatMap((p) => p.questions)],
+    C = window.StudyCore;
+  const W = window.WrongNotebook;
+  const KEY = "network-notes:v1",
+    R = window.ReviewCore,
+    items = R.catalog(D, Q);
+  try {
+    const old = localStorage.getItem(KEY);
+    if (old && !localStorage.getItem(KEY + ":before-adaptive"))
+      localStorage.setItem(KEY + ":before-adaptive", old);
+  } catch {}
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const esc = (value) =>
+    String(value ?? "").replace(
+      /[&<>"']/g,
+      (ch) =>
+        ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+        })[ch],
+    );
+  let storageOK = true,
+    state;
+  try {
+    state = C.cleanState(JSON.parse(localStorage.getItem(KEY) || "{}"), D, Q);
+  } catch {
+    state = C.cleanState({}, D, Q);
+    storageOK = false;
+  }
+  if (!state.examDate) state.examDate = R.DEFAULT_EXAM;
+  let filter = "전체",
+    query = "",
+    onlyUnlearned = false,
+    toastTimer,
+    currentView = "dashboard";
+  const main = $("#main");
+  let navigation,
+    paperYear = String(A.years[0]),
+    currentPapersOnly = false;
+  function persist() {
+    try {
+      localStorage.setItem(KEY, JSON.stringify(state));
+    } catch {
+      storageOK = false;
+    }
+    updateStorage();
+    updateBadges();
+  }
+  function updateStorage() {
+    const e = $("#save-status");
+    e.textContent = storageOK ? "자동 저장" : "자동 저장 불가 · 기록 내보내기 권장";
+    e.classList.toggle("storage-warning", !storageOK);
+  }
+  function updateBadges() {
+    $("#keyword-count").textContent = D.keywords.length;
+    $("#wrong-count").textContent = W.count(state);
+  }
+  function toast(message) {
+    const t = $("#toast");
+    t.textContent = message;
+    t.classList.add("visible");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove("visible"), 2800);
+  }
+  function toggle(list, value) {
+    const i = list.indexOf(value);
+    if (i < 0) list.push(value);
+    else list.splice(i, 1);
+  }
+  function heading(kicker, title, description, extra = "") {
+    const titles = {
+      "KEYWORD FLASHCARDS": "키워드 암기",
+      "COMMAND REFERENCE": "명령어 노트",
+      "CORE CONCEPTS": "핵심정리",
+      "14-DAY STUDY PLAN": "14일 학습 계획",
+      "PRACTICE MAKES PROGRESS": "문제 풀이",
+      "REVIEW YOUR MISTAKES": "오답노트",
+      "SESSION COMPLETE": "채점 결과",
+    };
+    const descriptions = {
+      "KEYWORD FLASHCARDS": "단서를 암기하고, 문제 예시에서 어떻게 쓰이는지 확인하세요.",
+      "COMMAND REFERENCE": "목적 · 명령어 · 옵션을 함께 확인하세요.",
+      "CORE CONCEPTS": "시험에 필요한 개념과 계산을 정리했습니다.",
+      "14-DAY STUDY PLAN": "하루 한 주제씩 완료 체크하세요.",
+      "PRACTICE MAKES PROGRESS": "최근 5년 기출 · 회차별 반복 풀이와 오답 복습",
+      "REVIEW YOUR MISTAKES": "다시 맞힌 문제는 오답장에서 제외됩니다.",
+      "SESSION COMPLETE": "틀린 문제와 미응답은 오답장에 저장됩니다.",
+    };
+    return `<div class="page-heading"><div><h1>${titles[kicker] || title}</h1><p>${descriptions[kicker] || description}</p></div>${extra}</div>`;
+  }
+  function empty(title, description, action = "") {
+    return `<div class="empty-state"><h2>${title}</h2><p>${description}</p>${action}</div>`;
+  }
+  function dday() {
+    const d = C.daysUntil(state.examDate);
+    return d === null ? "D-DAY 설정" : d > 0 ? "D−" + d : d === 0 ? "D-DAY" : "시험일 지남";
+  }
+  function todayPlan() {
+    const days = C.daysUntil(state.examDate);
+    if (days !== null && days >= 1 && days <= 14) return 14 - days;
+    if (days === 0) return 13;
+    const next = D.plan.find((p) => !state.plans.includes(p.day));
+    return next ? next.day : 13;
+  }
+  function dailyCard() {
+    const a = R.summary(state.adaptive, items),
+      p = R.plan(state.examDate);
+    return `<section class="panel daily-launch"><span class="label-tag">${dday()} · ${esc(p.title)}</span><h2>${a.today ? "오늘도 학습 중 · " + a.today + "회 회상" : "오늘은 무엇을 공부할까요?"}</h2><p>${esc(p.goal)}</p><div class="daily-metrics"><span>복습 <b>${a.due}</b>개</span><span>취약 <b>${a.weak}</b>개</span><span>최근 정답률 <b>${a.recent === null ? "—" : a.recent + "%"}</b></span><span>연속 학습 <b>${a.streak}</b>일</span></div><p>학습한 항목 ${a.learned} / ${a.total} · ${Math.round((a.learned / a.total) * 100)}% · ${state.adaptive.lastResult?.date === C.localDate() ? "오늘의 학습 완료 ✓" : "한 번에 5~20문항, 무리 없이 이어가세요."}</p><a class="button primary full" href="#daily">${state.adaptive.session ? "오늘의 학습 이어서" : "오늘의 학습 시작"} →</a></section>`;
+  }
+  function homeIcon(name) {
+    const paths = {
+      book: '<path d="M4 5c3-1 5-1 8 1 3-2 5-2 8-1v15c-3-1-5-1-8 1-3-2-5-2-8-1zM12 6v15"/>',
+      bolt: '<path d="m13 2-9 12h7l-1 8 10-13h-7z"/>',
+      check:
+        '<rect x="5" y="4" width="14" height="17" rx="3"/><path d="M9 3h6v4H9zM9 12l2 2 4-4M9 18h6"/>',
+      retry: '<path d="M4 10a8 8 0 1 1 .8 7M4 4v6h6M12 8v5l3 2"/>',
+      terminal: '<rect x="3" y="4" width="18" height="16" rx="3"/><path d="m7 9 3 3-3 3M13 15h4"/>',
+      folder: '<path d="M3 7V5h7l2 3h9v12H3z"/>',
+      calendar:
+        '<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v5M17 3v5M3 11h18M8 15h2M14 15h2"/>',
+    };
+    return `<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">${paths[name] || paths.book}</svg>`;
+  }
+  // 홈: 주 행동은 최신 기출, 보조 행동은 짧은 복습입니다.
+  function dashboard() {
+    const a = R.summary(state.adaptive, items),
+      p = R.plan(state.examDate),
+      current = state.session,
+      resume = state.adaptive.session,
+      tasks = state.routines[C.localDate()] || [],
+      plan = D.plan[todayPlan()];
+    main.innerHTML = `<div class="home-greeting"><div><span class="home-eyebrow">네트워크관리사 2급 필기</span><h1>오늘의 시험 공부</h1><p>기출 풀이 · 오답 복습 · 핵심정리</p></div><button class="home-dday" data-settings aria-label="시험일 설정 · ${dday()}"><span>시험까지</span><strong>${dday()}</strong></button></div>
+ <section class="home-hero" aria-labelledby="hero-title"><div class="home-hero-copy"><span class="hero-chip">${A.get(P.id).year}년 ${A.get(P.id).round}회 · 최신 기출 ${P.questions.length}문항</span><h2 id="hero-title">기출을 풀고,<br>틀린 이유를 확인해요.</h2><p>문제를 풀면 오답노트에 자동으로 모여요.<br>헷갈린 개념은 핵심정리에서 확인하세요.</p><div class="hero-actions"><a class="button primary" href="#quiz/current">최신 기출 풀기 →</a><a class="button secondary" href="${resume ? "#daily" : "#daily/5"}">${resume ? "오늘의 학습 이어서" : "5분 복습"}</a></div></div></section>
+ <div class="home-pulse" aria-label="나의 복습 현황"><div><strong>${a.due}</strong><span>오늘 복습</span></div><div><strong>${a.recent === null ? "—" : a.recent + "%"}</strong><span>최근 정답률</span></div><div><strong>${a.streak}<small>일</small></strong><span>연속 학습</span></div></div>
+ ${current ? `<a class="home-resume" href="#quiz"><span class="home-tile-icon">${homeIcon("check")}</span><span><strong>풀던 문제 이어서</strong><small>${modeName(current.mode)} · ${current.index + 1} / ${current.ids.length}</small></span><b aria-hidden="true">→</b></a>` : ""}
+ <section class="home-paths" aria-labelledby="home-path-title"><div class="home-section-heading"><h2 id="home-path-title">어떤 공부를 할까요?</h2><span>나에게 맞는 속도로</span></div><div class="home-card-grid">
+ <a class="home-study-card tone-green" href="#quiz"><span class="home-tile-icon">${homeIcon("check")}</span><span class="home-card-tag">최신 기출</span><h3>기출문제</h3><p>2022~2026년 기출<br>연도를 골라 같은 회차 반복하기</p><span class="home-card-go">연도 선택하고 풀기 <b aria-hidden="true">↗</b></span></a>
+ <a class="home-study-card tone-lilac" href="#game"><span class="home-tile-icon">${homeIcon("bolt")}</span><span class="home-card-tag">90초 챌린지</span><h3>산성비</h3><p>떨어지는 단서를 맞혀보세요.<br>산성비로 키워드 순발력 쌓기</p><span class="home-card-go">산성비 시작 <b aria-hidden="true">↗</b></span></a>
+ <a class="home-study-card tone-peach" href="#wrong"><span class="home-tile-icon">${homeIcon("retry")}</span><span class="home-card-tag">복습</span><h3>오답노트</h3><p>${W.count(state) ? `${W.count(state)}개 오답이 기다리고 있어요.` : "아직 모인 오답이 없어요."}<br>해설을 보고 다시 맞혀보세요.</p><span class="home-card-go">오답 복습 <b aria-hidden="true">↗</b></span></a>
+ <a class="home-study-card tone-blue" href="#theory"><span class="home-tile-icon">${homeIcon("book")}</span><span class="home-card-tag">이론 · 계산</span><h3>핵심정리</h3><p>개념·포트·계산을 한곳에<br>필기 핵심 이론 ${D.sections.length}단원</p><span class="home-card-go">핵심 확인 <b aria-hidden="true">↗</b></span></a>
+ </div></section>
+ <section class="home-library" aria-labelledby="library-title"><div class="home-section-heading"><h2 id="library-title">필요할 때 찾아보기</h2></div><div class="home-library-grid">${[
+   ["keywords", "book", "키워드 암기", "54개 카드·문제 예시"],
+   ["commands", "terminal", "명령어 노트", "Windows · Linux"],
+   ["materials", "folder", "시험 자료", "기출 원본·내 자료"],
+   ["plan", "calendar", "학습 계획", "남은 기간에 맞춰"],
+ ]
+   .map(
+     ([path, icon, title, sub]) =>
+       `<a href="#${path}"><span class="home-tile-icon">${homeIcon(icon)}</span><span><strong>${title}</strong><small>${sub}</small></span><b aria-hidden="true">›</b></a>`,
+   )
+   .join("")}</div></section>
+ <section class="panel home-progress"><div class="home-section-heading"><h2>오늘의 작은 목표</h2><span>${tasks.length} / 3 완료</span></div>${["키워드 10개 암기", "명령어와 옵션 복습", "10문제 풀고 오답 확인"].map((t, i) => `<div class="routine-row"><input class="routine-check" type="checkbox" id="routine-${i}" data-routine="${i}" ${tasks.includes(i) ? "checked" : ""}><label for="routine-${i}" class="${tasks.includes(i) ? "routine-complete" : ""}">${t}</label></div>`).join("")}<a class="today-study" href="#${plan.view}">오늘의 추천 · ${esc(plan.title)} →</a></section>`;
+  }
+  // 학습 계획: 시험일까지 남은 날짜와 체크 상태를 화면에 투영합니다.
+  function renderPlan() {
+    const completed = state.plans.length,
+      day = todayPlan();
+    main.innerHTML =
+      heading(
+        "14-DAY STUDY PLAN",
+        "하루 한 주제, 2주를 단단하게.",
+        "하루 2~3시간 기준. 시간이 적다면 S영역과 오답 복습부터 챙겨요.",
+        `<button class="button secondary" data-settings>${dday()} ↗</button>`,
+      ) +
+      dailyCard() +
+      `<p class="inline-note">복습 20분 → 주제 학습 40~60분 → 문제 풀이 40~50분 → 오답 20~40분</p><div class="plan-header"><h2 style="font-size:15px;margin:0">나의 학습 진도</h2><span class="quiz-status">${completed} / 14일 완료 · ${Math.round((completed / 14) * 100)}%</span></div><div class="progress-track"><div style="width:${(completed / 14) * 100}%"></div></div><p class="results-meta">${state.examDate ? "시험일 " + esc(state.examDate) + " · 날짜에 맞춘 추천 학습일을 표시해요." : "시험일을 설정하지 않으면 첫 미완료 학습일을 추천해요."}</p><div class="plan-list">${D.plan.map((p) => `<article class="plan-row ${state.plans.includes(p.day) ? "done" : ""} ${day === p.day ? "today" : ""}"><div class="plan-day">DAY ${String(p.day + 1).padStart(2, "0")}<br><small>D−${14 - p.day}</small></div><div class="plan-content"><h3><a href="#${p.view}">${esc(p.title)}</a>${day === p.day ? '<span class="today-tag">추천</span>' : ""}</h3><p>${esc(p.description)}</p></div><input type="checkbox" class="routine-check" data-plan="${p.day}" aria-label="Day ${p.day + 1} 학습 완료" ${state.plans.includes(p.day) ? "checked" : ""}></article>`).join("")}</div>`;
+  }
+  function latestPaperCard() {
+    return P
+      ? `<section class="panel latest-paper"><span class="label-tag">최신 회차 · ${esc(P.date)} · A형</span><h2>${esc(P.title)}</h2><p>원문 순서와 보기 고정 · 같은 문제를 반복해서 암기하세요.</p><p class="muted">현재 ${P.questions.length}/50문항 · ${esc(P.answerStatus)}${P.pendingNumbers.length ? `<br>${P.pendingNumbers.join("·")}번은 표 지문 확인 중이며 채점 대상에서 제외했습니다.` : ""}</p><div class="score-actions"><button class="button primary" data-start="paper">최신 회차 풀어보기 →</button><a class="button secondary" href="materials/files/network-2026-04-a.hwp" download>원본 시험지 ↓</a><a class="text-button" href="${esc(P.source)}" target="_blank" rel="noopener">공식 출처 ↗</a></div></section>`
+      : "";
+  }
+  function paperLibrary() {
+    return `<section class="panel paper-library" aria-labelledby="paper-library-title"><div class="paper-library-heading"><div><h2 id="paper-library-title">연도별 기출문제</h2><p>최근 5년 · ${A.papers.length}회차 · ${A.papers.reduce((n, p) => n + p.questions.length, 0)}문항</p></div><label class="paper-year-label" for="paper-year">연도<select id="paper-year" aria-label="기출 연도 선택"><option value="all" ${paperYear === "all" ? "selected" : ""}>전체 연도</option>${A.years.map((y) => `<option value="${y}" ${paperYear === String(y) ? "selected" : ""}>${y}년</option>`).join("")}</select></label></div><label class="paper-current-filter"><input type="checkbox" id="paper-current-only" ${currentPapersOnly ? "checked" : ""}>2025.08 개정 이후만 보기</label><div id="paper-rounds">${paperRounds()}</div>${(window.PENDING_PAPERS || []).length ? `<details class="paper-pending"><summary>원본 확보 대기 ${(window.PENDING_PAPERS || []).length}회차</summary><p>다운로드 응답을 확인하지 못한 회차는 채점 문제에 포함하지 않았습니다.</p>${window.PENDING_PAPERS.map((p) => `<a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title.replace("네트워크관리사 2급 필기 기출문제 및 CBT ", ""))} · 원문 자료실 ↗</a>`).join("")}</details>` : ""}<p class="paper-source-note">2025.08.01부터 Windows Server 2022 기준으로 변경되었습니다. 이전 회차의 운영체제 문제는 당시 기준입니다. <a href="https://exam.icqa.or.kr/cn/board/notice/463" target="_blank" rel="noopener">출제기준 안내 ↗</a></p></section>`;
+  }
+  function paperRounds() {
+    const papers = A.filter(paperYear, currentPapersOnly);
+    return papers.length
+      ? `<div class="paper-round-grid">${papers.map((p) => `<article class="paper-round"><div class="paper-round-top"><span>${esc(p.date)}</span><span class="paper-standard ${p.previousStandard ? "previous" : ""}">${p.previousStandard ? "이전 출제기준" : "개정 이후"}</span></div><h3>${p.year}년 ${p.round}회${p.id === P.id ? " · 최신" : ""}</h3><p>${p.questions.length}문항 · 원문·보기 순서 고정</p><button class="button ${p.id === P.id ? "primary" : "secondary"} full" data-start="paper" data-paper="${esc(p.id)}" aria-label="${p.year}년 ${p.round}회 풀기">풀어보기 →</button><div class="paper-links"><a href="${esc(p.original)}" download>원본 ${p.id === P.id ? "HWP" : "PDF"} ↓</a><a href="${esc(p.source)}" target="_blank" rel="noopener">${esc(p.sourceName)} 출처 ↗</a></div></article>`).join("")}</div>`
+      : empty("해당 회차가 없어요.", "다른 연도를 선택하거나 개정 이후 필터를 해제하세요.");
+  }
+  function paperOf(value) {
+    return A.get(value?.paperId) || A.forIds(value?.ids) || P;
+  }
+  function questionFigures(q) {
+    return (q.images || [])
+      .map(
+        (src, i) =>
+          `<figure class="paper-figure"><img src="${esc(src)}" alt="원문 ${q.number}번의 표·그림 ${i + 1}"><figcaption>원문 표·그림 · ${q.number}번</figcaption></figure>`,
+      )
+      .join("");
+  }
+  function paperNote(q) {
+    const p = A.forIds([q.id]);
+    return p
+      ? `<p class="paper-question-note">${p.year}년 ${p.round}회 · ${esc(p.answerStatus)}${p.previousStandard ? " · 이전 출제기준" : ""}</p>`
+      : "";
+  }
+  // 문제풀이 진입: 회차 선택과 자체 연습을 구분합니다.
+  function quizLanding() {
+    main.innerHTML =
+      heading(
+        "PRACTICE MAKES PROGRESS",
+        "아는 것을, 맞히는 힘으로.",
+        "학습 가이드 기반 자체 제작 문제입니다. 공식 기출이 아니에요.",
+      ) +
+      `<div class="paper-discovery"><div><strong>2022~2026년 기출이 준비돼 있어요</strong><p>아래에서 연도를 선택하고 원하는 회차를 풀어보세요.</p></div><button class="button secondary" id="find-past-papers">연도별 기출 찾기 ↓</button></div>` +
+      latestPaperCard() +
+      paperLibrary() +
+      `<div class="quiz-modes"><article class="mode-card"><span class="label-tag">10 QUESTIONS</span><h3>10문제 연습</h3><p>시간 제한 없음 · 문제별 해설</p><button class="button primary" data-start="quick">빠른 연습 시작 →</button></article><article class="mode-card"><span class="label-tag">50 MINUTES</span><h3>50문제 실전</h3><p>50분 제한 · 제출 후 일괄 채점</p><button class="button primary" data-start="exam">실전 연습 시작 →</button></article><article class="mode-card"><span class="label-tag">REVIEW</span><h3>오답 다시 풀기</h3><p>${state.wrong.length}문제 · 맞히면 오답에서 제외</p><button class="button secondary" data-start="wrong" ${state.wrong.length ? "" : "disabled"}>오답 다시 풀기 ↺</button></article></div><section class="panel"><div class="section-heading"><h2>나의 최근 연습</h2><span class="quiz-status">자체 연습 ${B.length}문항 · 기출 회차 별도</span></div>${
+        state.records.length
+          ? `<div class="table-wrap"><table><thead><tr><th>날짜</th><th>연습 방식</th><th>정답</th><th>점수</th></tr></thead><tbody>${state.records
+              .slice(-8)
+              .reverse()
+              .map(
+                (r) =>
+                  `<tr><td>${esc(new Date(r.at).toLocaleDateString("ko-KR"))}</td><td>${modeName(r.mode, r)}</td><td>${r.correct} / ${r.total}</td><td>${r.score}점</td></tr>`,
+              )
+              .join("")}</tbody></table></div>`
+          : '<p class="section-description">첫 연습을 마치면 이곳에 기록이 쌓여요.</p>'
+      }</section>`;
+  }
+  function modeName(mode, value = state.session) {
+    return mode === "paper"
+      ? `${paperOf(value).title.replace(" 네트워크관리사 2급 필기", "")} 반복 풀이`
+      : { exam: "실전 연습", quick: "빠른 연습", wrong: "오답노트" }[mode] || "연습";
+  }
+  function startQuiz(mode, paperId = P.id) {
+    const paper = A.get(paperId);
+    if (mode === "paper" && !paper) {
+      toast("회차를 찾을 수 없어요.");
+      return;
+    }
+    const ids =
+      mode === "paper"
+        ? paper.questions.map((q) => q.id)
+        : C.shuffle(mode === "wrong" ? Q.filter((q) => state.wrong.includes(q.id)) : B)
+            .slice(0, mode === "exam" ? 50 : mode === "quick" ? 10 : Q.length)
+            .map((q) => q.id);
+    if (!ids.length) {
+      toast("아직 오답이 없어요. 먼저 문제를 풀어 보세요.");
+      return;
+    }
+    state.session = {
+      mode,
+      ...(mode === "paper" ? { paperId: paper.id } : {}),
+      ids,
+      index: 0,
+      answers: {},
+      checked: [],
+      startedAt: Date.now(),
+      endsAt: mode === "exam" ? Date.now() + 50 * 60 * 1000 : null,
+    };
+    state.lastResult = null;
+    persist();
+    if (location.hash !== "#quiz") navigation.go("#quiz");
+    else renderQuiz();
+  }
+  function remaining(session) {
+    return Math.max(0, Math.ceil((session.endsAt - Date.now()) / 1000));
+  }
+  function timeString(seconds) {
+    return (
+      String(Math.floor(seconds / 60)).padStart(2, "0") +
+      ":" +
+      String(seconds % 60).padStart(2, "0")
+    );
+  }
+  function renderQuiz() {
+    if (!state.session) {
+      if (state.lastResult) renderResult();
+      else quizLanding();
+      return;
+    }
+    const s = state.session;
+    if (s.mode === "exam" && remaining(s) <= 0) {
+      finishQuiz(true);
+      return;
+    }
+    const q = Q.find((q) => q.id === s.ids[s.index]),
+      answer = s.answers[q.id],
+      checked = s.checked.includes(q.id);
+    main.innerHTML =
+      heading(
+        "PRACTICE SESSION",
+        modeName(s.mode),
+        s.mode === "exam"
+          ? "실전 연습 중에는 정답이 표시되지 않아요. 모든 답안을 확인하고 제출하세요."
+          : "답을 선택한 뒤 확인하면 해설을 읽을 수 있어요.",
+      ) +
+      `<div class="quiz-layout"><section class="question-box"><div class="quiz-meta"><span>${esc(q.category)} <span style="margin-left:12px">${s.index + 1} / ${s.ids.length}</span></span>${s.mode === "exam" ? `<span class="timer" id="quiz-timer" aria-label="남은 시간">${timeString(remaining(s))}</span>` : "<span>시간 제한 없음</span>"}</div><h2 style="white-space:pre-line">${q.number ? `[원문 ${q.number}번] ` : ""}${esc(q.question)}</h2>${paperNote(q)}${questionFigures(q)}<div class="answers" role="group" aria-label="답안 선택">${q.options.map((option, i) => `<button type="button" class="answer ${answer === i ? "selected" : ""} ${checked && i === q.answer ? "correct" : ""} ${checked && answer === i && i !== q.answer ? "incorrect" : ""}" data-answer="${i}" aria-pressed="${answer === i}" ${checked ? "disabled" : ""}><span>${i + 1}</span>${esc(option)}</button>`).join("")}</div>${checked ? `<div class="explanation" role="status"><strong>${answer === q.answer ? "✓ 정답입니다." : "다시 기억해 두세요."} 정답 ${q.answer + 1}번 · ${esc(q.options[q.answer])}</strong><p>${esc(q.explanation)}</p></div>` : ""}<div class="quiz-controls"><button class="button secondary" data-question="${s.index - 1}" ${s.index === 0 ? "disabled" : ""}>← 이전</button>${s.mode !== "exam" && !checked ? `<button class="button primary" id="check-answer" ${answer === undefined ? "disabled" : ""}>정답 확인</button>` : ""}<button class="button ${s.mode === "exam" || checked ? "primary" : "secondary"}" data-question="${s.index + 1}" ${s.index === s.ids.length - 1 ? "disabled" : ""}>다음 →</button></div></section><aside class="question-map"><h3>문제 이동</h3><div class="map-grid">${s.ids.map((id, i) => `<button type="button" class="map-button ${s.answers[id] !== undefined ? "answered" : ""} ${i === s.index ? "current" : ""}" data-question="${i}" aria-label="${i + 1}번 문제${s.answers[id] !== undefined ? ", 답안 선택됨" : ""}" ${i === s.index ? 'aria-current="step"' : ""}>${i + 1}</button>`).join("")}</div><p>색칠된 번호는 답안을 선택한 문제입니다.<br>선택 ${Object.keys(s.answers).length} / ${s.ids.length}</p><button class="button primary full" id="submit-quiz">제출하고 채점</button><button class="text-button full" style="margin-top:12px" id="discard-quiz">이 연습 그만두기</button></aside></div><p class="timer-note">답안과 진행 상황은 자동 저장됩니다.${s.mode === "exam" ? " 다른 메뉴를 보거나 창을 닫아도 시험 시간은 계속 흐릅니다." : ""}</p>`;
+  }
+  // 채점·오답 저장은 여기서 끝내며 화면 모듈은 점수를 임의 변경하지 않습니다.
+  function finishQuiz(auto = false) {
+    if (!state.session) return;
+    const s = state.session;
+    let correct = 0;
+    for (const id of s.ids) {
+      const q = Q.find((q) => q.id === id);
+      R.review(
+        state.adaptive,
+        q,
+        {
+          correct: s.answers[id] === q.answer,
+          rating: s.answers[id] === q.answer ? "remember" : "unknown",
+        },
+        state.examDate,
+      );
+      if (s.answers[id] === q.answer) correct++;
+      recordQuizWrong(s, id, s.answers[id] === q.answer);
+    }
+    state.lastResult = { ...s, finishedAt: Date.now() };
+    state.records.push({
+      mode: s.mode,
+      ...(s.mode === "paper" ? { paperId: paperOf(s).id } : {}),
+      score: Math.round((correct / s.ids.length) * 100),
+      total: s.ids.length,
+      correct,
+      at: new Date().toISOString(),
+    });
+    state.records = state.records.slice(-30);
+    state.session = null;
+    persist();
+    if (auto) toast("50분이 지나 답안을 자동 제출했어요.");
+    if (currentView === "quiz") renderResult();
+  }
+  function renderResult() {
+    const r = state.lastResult;
+    if (!r) {
+      quizLanding();
+      return;
+    }
+    const correct = r.ids.filter(
+        (id) => Q.find((q) => q.id === id).answer === r.answers[id],
+      ).length,
+      score = Math.round((correct / r.ids.length) * 100);
+    main.innerHTML =
+      heading(
+        "SESSION COMPLETE",
+        "오늘의 연습을 마쳤어요.",
+        "맞힌 문제보다, 다음에 맞힐 문제를 하나 더 기억해요.",
+      ) +
+      `<section class="score-card"><span class="pill">${modeName(r.mode, r)} · ${r.ids.length}문항</span><div class="big-score">${score}<small style="font-size:20px">점</small></div><h2>${score >= 80 ? "잘 쌓이고 있어요. 이 감각을 이어가세요." : "오답의 이유를 알면 다음 점수가 달라져요."}</h2><p>${correct}문제 정답 · ${r.ids.length - correct}문제 오답/미응답<br>${r.mode === "paper" ? `${r.ids.length}문항 기준 · ${esc(paperOf(r).answerStatus)}` : "자체 연습 점수이며 실제 합격을 보장하지 않습니다."}</p><div class="score-actions">${r.mode === "paper" ? `<button class="button primary" data-start="paper" data-paper="${esc(paperOf(r).id)}">같은 회차 다시 풀기 ↺</button>` : ""}<button class="button secondary" id="new-quiz">다른 문제로 연습 →</button><a class="button secondary" href="#wrong">오답장 보기 ↗</a></div></section><div class="section-heading"><h2>문항별 해설</h2><span class="quiz-status">틀린 문제는 오답장에 저장됐어요.</span></div>${r.ids
+        .map((id, i) => {
+          const q = Q.find((q) => q.id === id),
+            a = r.answers[id],
+            right = a === q.answer;
+          return `<details class="review-item"><summary>${right ? "✓" : "○"} ${i + 1}. ${esc(q.question)}</summary><div class="review-detail">${paperNote(q)}${questionFigures(q)}내 답: ${a === undefined ? "미응답" : `${a + 1}번 · ${esc(q.options[a])}`}<br><strong>정답: ${q.answer + 1}번 · ${esc(q.options[q.answer])}</strong><p>${esc(q.explanation)}</p><button class="text-button" data-wrong-toggle="${id}">${state.wrong.includes(id) ? "✓ 오답장에 저장됨 · 제외하기" : "복습을 위해 오답장에 추가"}</button></div></details>`;
+        })
+        .join("")}`;
+    coach.refresh();
+  }
+  function recordQuizWrong(session, id, correct) {
+    if (session.mode === "wrong") {
+      if (correct) W.remove(state, id);
+      return;
+    }
+    W.update(state, session.mode === "paper" ? "past" : "practice", id, correct);
+  }
+
+  // 경로 전환 전 각 페이지의 타이머/리스너/레이아웃 관찰자를 해제합니다.
+  function route() {
+    window.KeywordLayout?.unmount();
+    window.DailyStudy?.unmount();
+    window.KeywordGame?.unmount();
+    window.StudyMaterialsPage?.unmount();
+    const [view = "dashboard", id] = location.hash.slice(1).split("/");
+    currentView = [
+      "dashboard",
+      "keywords",
+      "commands",
+      "theory",
+      "quiz",
+      "wrong",
+      "plan",
+      "materials",
+      "game",
+      "daily",
+    ].includes(view)
+      ? view
+      : "dashboard";
+    filter = "전체";
+    query = "";
+    if (currentView === "quiz" && id === "current") {
+      paperYear = "all";
+      currentPapersOnly = true;
+    }
+    document.querySelectorAll("[data-view]").forEach((a) => {
+      a.classList.toggle("active", a.dataset.view === currentView);
+      if (a.dataset.view === currentView) a.setAttribute("aria-current", "page");
+      else a.removeAttribute("aria-current");
+    });
+    ({
+      dashboard,
+      keywords,
+      commands,
+      daily: () =>
+        window.DailyStudy.mount({
+          root: main,
+          state,
+          items,
+          save: persist,
+          toast,
+          presetMinutes: id === "5" ? 5 : null,
+          onReview: (id, correct) => {
+            W.update(state, "daily", id, correct);
+            persist();
+          },
+        }),
+      game: () =>
+        window.KeywordGame.mount({
+          root: main,
+          onFinish: () => {
+            coach.refresh();
+            helper.setGameActive(false);
+          },
+          onActivity: () => {
+            coach.refresh();
+            helper.setGameActive(window.KeywordGame.isPlaying());
+          },
+          onReview: (id, correct) => {
+            W.update(state, "game", id, correct);
+            persist();
+          },
+        }),
+      theory: () => theory(id),
+      quiz: renderQuiz,
+      wrong: wrongView,
+      plan: renderPlan,
+      materials: () => window.StudyMaterialsPage.mount({ root: main, toast, confirmAction }),
+    })[currentView]();
+    updateBadges();
+    updateStorage();
+    window.scrollTo({ top: 0, behavior: "instant" });
+    document.title =
+      {
+        dashboard: "학습 현황",
+        keywords: "키워드 암기",
+        commands: "명령어 노트",
+        theory: "핵심정리",
+        quiz: "문제 풀이",
+        wrong: "오답노트",
+        plan: "14일 학습 계획",
+        materials: "시험 자료",
+        game: "키워드 산성비",
+        daily: "오늘의 학습",
+      }[currentView] + " · 합격루틴";
+    coach.route();
+    helper.setGameActive(window.KeywordGame.isPlaying());
+  }
+  function openSettings() {
+    $("#exam-date").value = state.examDate;
+    $("#settings-dialog").showModal();
+  }
+  function confirmAction(title, message, action) {
+    $("#confirm-title").textContent = title;
+    $("#confirm-message").textContent = message;
+    const dialog = $("#confirm-dialog");
+    $("#confirm-ok").onclick = () => {
+      dialog.close();
+      action();
+    };
+    $("#confirm-cancel").onclick = () => dialog.close();
+    dialog.showModal();
+  }
+  async function copyCommand(id) {
+    const c = D.commands.find((c) => c.id === id);
+    try {
+      if (navigator.clipboard && window.isSecureContext)
+        await navigator.clipboard.writeText(c.command);
+      else {
+        const t = document.createElement("textarea");
+        t.value = c.command;
+        t.style.position = "fixed";
+        t.style.opacity = "0";
+        document.body.append(t);
+        t.select();
+        const ok = document.execCommand("copy");
+        t.remove();
+        if (!ok) throw new Error("copy");
+      }
+      toast("명령·설정을 복사했어요.");
+    } catch {
+      toast("복사할 수 없어요. 명령어 텍스트를 선택해 복사해 주세요.");
+    }
+  }
+  document.addEventListener("change", (event) => {
+    if (event.target.id === "paper-year") {
+      paperYear = event.target.value;
+      $("#paper-rounds").innerHTML = paperRounds();
+    }
+    if (event.target.id === "paper-current-only") {
+      currentPapersOnly = event.target.checked;
+      $("#paper-rounds").innerHTML = paperRounds();
+    }
+  });
+  document.addEventListener("click", (event) => {
+    const target = event.target.closest("button,a");
+    if (!target) return;
+    if (target.getAttribute("href") === "#main") {
+      event.preventDefault();
+      main.focus();
+      main.scrollIntoView();
+      return;
+    }
+    if (
+      target.tagName === "A" &&
+      target.getAttribute("href")?.startsWith("#") &&
+      !target.hasAttribute("download") &&
+      !target.target &&
+      !event.ctrlKey &&
+      !event.metaKey &&
+      !event.shiftKey &&
+      !event.altKey &&
+      (!event.button || event.button === 0)
+    ) {
+      event.preventDefault();
+      navigation.go(target.getAttribute("href"));
+      return;
+    }
+    if (target.id === "find-past-papers") {
+      const year = $("#paper-year");
+      year.scrollIntoView({ block: "center", behavior: "smooth" });
+      year.focus({ preventScroll: true });
+      return;
+    }
+    if (target.matches("[data-settings],#settings-button")) {
+      openSettings();
+      return;
+    }
+    if (target.hasAttribute("data-close")) {
+      $("#settings-dialog").close();
+      return;
+    }
+    if (target.dataset.filter !== undefined) {
+      filter = target.dataset.filter;
+      document.querySelectorAll("[data-filter]").forEach((b) => {
+        b.classList.toggle("active", b === target);
+        b.setAttribute("aria-pressed", b === target ? "true" : "false");
+      });
+      currentView === "keywords" ? keywordResults() : commandResults();
+    }
+    if (target.id === "unlearned-toggle") {
+      onlyUnlearned = !onlyUnlearned;
+      target.classList.toggle("active", onlyUnlearned);
+      target.setAttribute("aria-pressed", String(onlyUnlearned));
+      keywordResults();
+    }
+    if (notebookPage.handle(target)) return;
+    if (target.dataset.memory) {
+      const k = D.keywords.find((k) => k.id === target.dataset.memory),
+        rating = target.dataset.rating;
+      R.review(
+        state.adaptive,
+        items.find((i) => i.id === k.id),
+        { correct: rating === "remember", rating },
+        state.examDate,
+      );
+      W.update(state, "keywords", k.id, rating === "remember");
+      persist();
+      target
+        .closest(".memory-actions")
+        .querySelectorAll("button")
+        .forEach((b) => (b.disabled = true));
+      toast("다음 복습 · " + state.adaptive.entries[k.id].nextReviewAt);
+      return;
+    }
+    if (target.dataset.reveal) {
+      const k = D.keywords.find((k) => k.id === target.dataset.reveal),
+        open = target.getAttribute("aria-expanded") === "true";
+      target.textContent = open ? "정답 보기" : "정답 접기";
+      const answerBox = target.closest(".flash-card").querySelector(".keyword-answer");
+      if (answerBox) answerBox.hidden = open;
+      target.setAttribute("aria-expanded", String(!open));
+      const ratings = target.closest(".flash-card").querySelector(".memory-actions");
+      if (ratings) ratings.hidden = open;
+    }
+    if (target.dataset.master) {
+      toggle(state.mastered, target.dataset.master);
+      persist();
+      $("#mastery-count").textContent = `암기 완료 ${state.mastered.length} / ${D.keywords.length}`;
+      keywordResults();
+    }
+    if (target.dataset.copy) copyCommand(target.dataset.copy);
+    if (target.dataset.read) {
+      toggle(state.read, target.dataset.read);
+      persist();
+      theory(target.dataset.read);
+    }
+    if (target.dataset.start) {
+      const mode = target.dataset.start,
+        paperId = target.dataset.paper || P.id;
+      if (state.session)
+        confirmAction(
+          "진행 중인 연습이 있어요.",
+          "기존 연습을 그만두고 새로 시작할까요? 기존 답안은 채점되지 않습니다.",
+          () => startQuiz(mode, paperId),
+        );
+      else startQuiz(mode, paperId);
+    }
+    if (target.dataset.answer !== undefined && state.session) {
+      const s = state.session,
+        q = s.ids[s.index];
+      if (!s.checked.includes(q)) {
+        s.answers[q] = Number(target.dataset.answer);
+        persist();
+        renderQuiz();
+      }
+    }
+    if (target.dataset.question !== undefined && state.session) {
+      const index = Number(target.dataset.question);
+      if (index >= 0 && index < state.session.ids.length) {
+        state.session.index = index;
+        persist();
+        renderQuiz();
+      }
+    }
+    if (target.id === "check-answer" && state.session) {
+      const s = state.session,
+        id = s.ids[s.index];
+      if (s.answers[id] !== undefined && !s.checked.includes(id)) {
+        s.checked.push(id);
+        recordQuizWrong(s, id, s.answers[id] === Q.find((q) => q.id === id).answer);
+        persist();
+        renderQuiz();
+      }
+    }
+    if (target.id === "submit-quiz" && state.session) {
+      const s = state.session,
+        n = s.ids.length - Object.keys(s.answers).length;
+      confirmAction(
+        "답안을 제출할까요?",
+        n
+          ? `아직 ${n}문제를 풀지 않았어요. 미응답은 오답으로 처리됩니다.`
+          : "모든 답안이 선택되었습니다. 제출 후 점수와 해설을 확인할 수 있어요.",
+        () => finishQuiz(),
+      );
+    }
+    if (target.id === "discard-quiz")
+      confirmAction(
+        "이 연습을 그만둘까요?",
+        "현재 답안은 채점되지 않습니다. 완료된 학습 기록은 유지됩니다.",
+        () => {
+          state.session = null;
+          persist();
+          quizLanding();
+        },
+      );
+    if (target.id === "new-quiz") {
+      state.lastResult = null;
+      persist();
+      quizLanding();
+    }
+    if (target.dataset.removeWrong) {
+      W.remove(state, target.dataset.removeWrong);
+      persist();
+      wrongView();
+    }
+    if (target.dataset.wrongToggle) {
+      if (state.wrong.includes(target.dataset.wrongToggle))
+        W.remove(state, target.dataset.wrongToggle);
+      else
+        W.update(
+          state,
+          target.dataset.wrongToggle.startsWith("nw2-") ? "past" : "practice",
+          target.dataset.wrongToggle,
+          false,
+        );
+      persist();
+      target.textContent = state.wrong.includes(target.dataset.wrongToggle)
+        ? "✓ 오답장에 저장됨 · 제외하기"
+        : "복습을 위해 오답장에 추가";
+    }
+    if (target.id === "reset-progress")
+      confirmAction(
+        "학습 기록을 초기화할까요?",
+        "키워드·오답·진도·연습 기록·진행 중인 답안이 지워집니다. 필요하면 먼저 기록을 내보내 주세요.",
+        () => {
+          state = C.cleanState({}, D, Q);
+          coach.reset();
+          persist();
+          $("#settings-dialog").close();
+          route();
+          toast("학습 기록을 초기화했어요.");
+        },
+      );
+    if (target.id === "export-progress") {
+      const blob = new Blob(
+          [
+            JSON.stringify(
+              { app: "network-notes", ...state, gameProgress: window.KeywordGame.exportProgress() },
+              null,
+              2,
+            ),
+          ],
+          { type: "application/json" },
+        ),
+        url = URL.createObjectURL(blob),
+        a = document.createElement("a");
+      a.href = url;
+      a.download = "network-notes-" + C.localDate() + ".json";
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      toast("학습 기록 파일을 내보냈어요.");
+    }
+  });
+  document.addEventListener("change", (event) => {
+    const target = event.target;
+    if (target.dataset.routine !== undefined) {
+      const date = C.localDate();
+      state.routines[date] ??= [];
+      toggle(state.routines[date], Number(target.dataset.routine));
+      persist();
+      const label = $(`label[for="${target.id}"]`);
+      if (label) label.classList.toggle("routine-complete", target.checked);
+    }
+    if (target.dataset.plan !== undefined) {
+      toggle(state.plans, Number(target.dataset.plan));
+      persist();
+      renderPlan();
+    }
+  });
+  document.addEventListener("input", (event) => {
+    if (event.target.id === "search") {
+      query = event.target.value;
+      currentView === "keywords" ? keywordResults() : commandResults();
+    }
+  });
+  document.addEventListener("submit", (event) => {
+    if (event.target.id === "settings-form") {
+      event.preventDefault();
+      state.examDate = $("#exam-date").value;
+      R.reschedule(state.adaptive, state.examDate);
+      persist();
+      $("#settings-dialog").close();
+      if (["dashboard", "plan"].includes(currentView)) route();
+      toast("시험 날짜를 저장했어요.");
+    }
+    if (event.target.id === "subnet-form") {
+      event.preventDefault();
+      const ip = $("#ip-input").value.trim(),
+        prefix = Number($("#prefix-input").value);
+      try {
+        const r = C.subnet(ip, prefix);
+        $("#subnet-result").innerHTML = `<div class="calc-results">${[
+          ["네트워크 주소", r.network],
+          ["서브넷 마스크", r.mask],
+          ["브로드캐스트", r.broadcast],
+          ["사용 가능한 호스트", r.hosts.toLocaleString() + "개"],
+          ["사용 가능 범위", r.first + " ~ " + r.last],
+        ]
+          .map(
+            ([label, value]) =>
+              `<div class="calc-result"><span>${label}</span><strong>${esc(value)}</strong></div>`,
+          )
+          .join("")}</div><p class="fine-print">${esc(r.note)}</p>`;
+      } catch (error) {
+        $("#subnet-result").textContent = error.message;
+      }
+    }
+  });
+  $("#import-progress").addEventListener("change", async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+    try {
+      if (file.size > 2 * 1024 * 1024) throw new Error("파일은 2MB 이하로 선택해 주세요.");
+      const source = JSON.parse(await file.text());
+      if (source.app !== "network-notes" || source.version !== 1)
+        throw new Error("합격루틴의 기록 파일을 선택해 주세요.");
+      const imported = C.cleanState(source, D, Q);
+      confirmAction(
+        "학습 기록을 가져올까요?",
+        "이 파일의 기록으로 현재 브라우저의 학습 기록을 덮어씁니다.",
+        () => {
+          const gameSaved = window.KeywordGame.importProgress(source.gameProgress);
+          state = imported;
+          persist();
+          $("#settings-dialog").close();
+          route();
+          toast(
+            gameSaved
+              ? "학습·게임 기록을 가져왔어요."
+              : "학습 기록을 가져왔지만 게임 기록은 저장하지 못했어요.",
+          );
+        },
+      );
+    } catch (error) {
+      toast(error.message || "기록을 읽지 못했어요.");
+    }
+    event.target.value = "";
+  });
+  navigation = window.AppNavigation.create(window, route);
+  window.StudyApp = {
+    requestRefresh(action) {
+      persist();
+      if (window.KeywordGame?.isPlaying())
+        confirmAction(
+          "지금 업데이트할까요?",
+          "학습 답안과 기존 기록은 유지됩니다. 진행 중인 산성비 라운드는 종료되며 이번 라운드의 미적립 GP는 저장되지 않습니다.",
+          action,
+        );
+      else action();
+    },
+  };
+  setInterval(() => {
+    if (state.session?.mode !== "exam") return;
+    const left = remaining(state.session);
+    if (left <= 0) {
+      finishQuiz(true);
+      return;
+    }
+    const timer = $("#quiz-timer");
+    if (timer) {
+      timer.textContent = timeString(left);
+      timer.classList.toggle("urgent", left <= 300);
+    }
+  }, 1000);
+  const coach = window.StudyCoach.mount({
+    root: main,
+    getView: () => currentView,
+    getMode: () =>
+      currentView === "game"
+        ? window.KeywordGame.isPlaying()
+          ? "game"
+          : null
+        : currentView === "quiz"
+          ? state.session
+            ? state.session.mode === "paper"
+              ? "past"
+              : "practice"
+            : null
+          : currentView,
+  });
+  document.addEventListener("study-helper-search", (e) => {
+    const { view, term } = e.detail || {};
+    if (view === "quiz") {
+      paperYear = "all";
+      currentPapersOnly = false;
+      navigation.go("#quiz");
+      renderQuiz();
+      return;
+    }
+    if (!["keywords", "commands"].includes(view) || typeof term !== "string") return;
+    navigation.go("#" + view);
+    query = term.slice(0, 160);
+    $("#search").value = query;
+    if (view === "keywords") keywordResults();
+    else commandResults();
+  });
+  const helper = window.FeatureHelper.mount();
+  // 가져오기·초기화 후에도 페이지는 getState로 최신 상태를 읽습니다.
+  const { keywords, keywordResults, commands, commandResults, theory } =
+    window.ReferencePages.create({
+      D,
+      getState: () => state,
+      getUI: () => ({ filter, query, onlyUnlearned }),
+      main,
+      heading,
+      empty,
+      $,
+      esc,
+    });
+  const notebookPage = window.WrongNotebookPage.create({
+    getState: () => state,
+    W,
+    D,
+    items,
+    main,
+    heading,
+    empty,
+    paperNote,
+    questionFigures,
+    esc,
+    persist,
+    toast,
+  });
+  const wrongView = () => notebookPage.render();
+  updateBadges();
+  updateStorage();
+  navigation.init();
+})();

@@ -1,0 +1,29 @@
+[
+  {
+    "entry": "styles.css",
+    "files": [
+      "assets/network/css/foundation.css",
+      "assets/network/css/reference.css",
+      "assets/network/css/assessment.css",
+      "assets/network/css/progress-dialogs.css",
+      "assets/network/css/responsive.css",
+      "assets/network/css/study-layout.css",
+      "assets/network/css/keyword-examples.css",
+      "assets/network/css/materials.css",
+      "assets/network/css/latest-paper.css"
+    ],
+    "originalSha256": "737dd87bae3c5cfe542464591b25bb4cef1233a4a1628bac644d662b261252f6",
+    "exactCascadePreserved": true
+  },
+  {
+    "entry": "mobile.css",
+    "files": [
+      "assets/network/css/daily-pwa.css",
+      "assets/network/css/navigation-layout.css",
+      "assets/network/css/keyword-disclosure.css",
+      "assets/network/css/paper-library.css"
+    ],
+    "originalSha256": "0f46f735eb2d9d330ddfdb7027714bc2c37e1f33809036112e044d969ec28eb1",
+    "exactCascadePreserved": true
+  }
+]

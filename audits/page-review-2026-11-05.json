@@ -1,0 +1,72 @@
+[
+  {
+    "view": "daily",
+    "brokenImages": 0,
+    "heading": "오늘의 학습",
+    "overflow": false,
+    "title": "오늘의 학습 · 합격루틴"
+  },
+  {
+    "view": "keywords",
+    "brokenImages": 0,
+    "heading": "키워드 암기",
+    "overflow": false,
+    "title": "키워드 암기 · 합격루틴"
+  },
+  {
+    "view": "commands",
+    "brokenImages": 0,
+    "heading": "명령어 노트",
+    "overflow": false,
+    "title": "명령어 노트 · 합격루틴"
+  },
+  {
+    "view": "theory",
+    "brokenImages": 0,
+    "heading": "핵심정리",
+    "overflow": false,
+    "title": "핵심정리 · 합격루틴"
+  },
+  {
+    "view": "quiz",
+    "brokenImages": 0,
+    "heading": "문제 풀이",
+    "overflow": false,
+    "title": "문제 풀이 · 합격루틴"
+  },
+  {
+    "view": "wrong",
+    "brokenImages": 0,
+    "heading": "오답노트",
+    "overflow": false,
+    "title": "오답노트 · 합격루틴"
+  },
+  {
+    "view": "plan",
+    "brokenImages": 0,
+    "heading": "14일 학습 계획",
+    "overflow": false,
+    "title": "14일 학습 계획 · 합격루틴"
+  },
+  {
+    "view": "materials",
+    "brokenImages": 0,
+    "heading": "시험 자료",
+    "overflow": false,
+    "title": "시험 자료 · 합격루틴"
+  },
+  {
+    "view": "game",
+    "brokenImages": 0,
+    "heading": "키워드 산성비",
+    "overflow": false,
+    "title": "키워드 산성비 · 합격루틴"
+  },
+  {
+    "view": "dashboard",
+    "brokenImages": 0,
+    "heading": "오늘 공부할 문제를 골라보세요.",
+    "overflow": false,
+    "title": "학습 현황 · 합격루틴"
+  }
+]

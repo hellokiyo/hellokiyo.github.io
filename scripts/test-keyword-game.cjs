@@ -60,3 +60,12 @@ test('정답 목록은 기본 접힘·오답만 표시하며 전체로 전환할
 test('정답·건너뜀·시간 초과 판정이 오답노트 연결로 즉시 전달된다',()=>{const events=[],g=setup({},(id,right)=>events.push({id,right}));g.click('rain-start');g.click('',{rainAnswer:'0'});g.click('rain-skip');g.advance(10001);assert.equal(events.length,3);assert.equal(events[0].right,true);assert.equal(events[1].right,false);assert.equal(events[2].right,false);assert.ok(events.every(e=>e.id.startsWith('k')));});
 
 test('한 판 목표 달성으로 해당 모드 배지만 열리고 같은 점수에 재획득하지 않는다',()=>{const g=setup();g.node('#rain-mode').value='type';g.click('rain-start');for(let i=0;i<8;i++)g.submit('answer'+(4-i%5));g.click('rain-end');assert.match(g.node('#rain-result').innerHTML,/직접 입력 새 배지 획득 · 집중 도전자/);assert.equal(JSON.parse(Object.values(g.storage)[0]).type,1080);assert.equal((g.node('#rain-collection').innerHTML.match(/rain-badge earned/g)||[]).length,1);g.click('rain-restart');g.click('rain-start');for(let i=0;i<8;i++)g.submit('answer'+(4-i%5));g.click('rain-end');assert.doesNotMatch(g.node('#rain-result').innerHTML,/새 배지 획득/);});
+
+
+test('백업은 최고점과 누적값을 왕복하고 구버전 복원은 기존 게임을 지우지 않는다',()=>{
+ const key='network-keyword-rain:v1',g=setup({[key]:JSON.stringify({choice:2500,type:1200,totalGP:9000})}),api=g.context.window.KeywordGame;
+ const backup=JSON.parse(JSON.stringify(api.exportProgress()));assert.deepEqual(backup,{choice:2500,type:1200,totalGP:9000});
+ api.importProgress(undefined);assert.equal(JSON.parse(g.storage[key]).choice,2500);
+ api.importProgress({choice:-1,type:3000,totalGP:'bad',unknown:100});assert.deepEqual(JSON.parse(g.storage[key]),{type:3000});
+ api.importProgress(backup);assert.deepEqual(JSON.parse(g.storage[key]),backup);
+});
