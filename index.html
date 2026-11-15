@@ -1,95 +1,250 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#254f3d">
-  <meta name="description" content="네트워크관리사 2급 시험 전 2주. 키워드 암기, 핵심 이론, 명령어, 문제 풀이와 오답 복습을 한곳에서 준비하세요.">
-  <title>합격루틴 · 네트워크관리사 2급</title>
-  <link rel="icon" href="assets/network/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/network/css/foundation.css">
-  <link rel="stylesheet" href="assets/network/css/reference.css">
-  <link rel="stylesheet" href="assets/network/css/assessment.css">
-  <link rel="stylesheet" href="assets/network/css/progress-dialogs.css">
-  <link rel="stylesheet" href="assets/network/css/responsive.css">
-  <link rel="stylesheet" href="assets/network/css/study-layout.css">
-  <link rel="stylesheet" href="assets/network/css/keyword-examples.css">
-  <link rel="stylesheet" href="assets/network/css/materials.css">
-  <link rel="stylesheet" href="assets/network/css/latest-paper.css">
-  <link rel="stylesheet" href="assets/network/keyword-game.css">
-  <link rel="stylesheet" href="assets/network/css/daily-pwa.css">
-  <link rel="stylesheet" href="assets/network/css/navigation-layout.css">
-  <link rel="stylesheet" href="assets/network/css/keyword-disclosure.css">
-  <link rel="stylesheet" href="assets/network/css/paper-library.css">
-  <link rel="stylesheet" href="assets/network/home.css">
-  <link rel="stylesheet" href="assets/network/themes.css">
-  <link rel="stylesheet" href="assets/network/study-coach.css">
-  <script src="assets/network/themes.js"></script>
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="apple-touch-icon" href="assets/network/icon-192.png">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <script defer src="assets/network/study-data.js"></script>
-  <script defer src="assets/network/questions.js"></script>
-  <script defer src="assets/network/latest-paper.js"></script>
-  <script defer src="assets/network/past-papers.js"></script>
-  <script defer src="assets/network/paper-archive.js"></script>
-  <script defer src="assets/network/review-core.js"></script>
-  <script defer src="assets/network/daily-study.js"></script>
-  <script defer src="assets/network/wrong-notebook.js"></script>
-  <script defer src="assets/network/core.js"></script>
-  <script defer src="assets/network/materials-store.js"></script>
-  <script defer src="assets/network/public-materials.js"></script>
-  <script defer src="assets/network/materials-page.js"></script>
-  <script defer src="assets/network/keyword-game.js"></script>
-  <script defer src="assets/network/navigation.js"></script>
-  <script defer src="assets/network/keyword-layout.js"></script>
-  <script defer src="assets/network/study-coach.js"></script>
-  <script defer src="assets/network/feature-helper.js"></script>
-  <link rel="stylesheet" href="assets/network/feature-helper.css">
-  <script defer src="assets/network/reference-pages.js"></script>
-  <script defer src="assets/network/wrong-notebook-page.js"></script>
-  <script defer src="assets/network/home-pages.js"></script>
-  <script defer src="assets/network/quiz-page.js"></script>
-  <script defer src="assets/network/settings-controller.js"></script>
-  <script defer src="assets/network/app.js"></script>
-  <script defer src="assets/network/pwa.js"></script>
-</head>
-<body>
-  <a class="skip-link" href="#main">본문 바로가기</a>
-  <aside class="sidebar">
-    <a class="brand" href="#dashboard" aria-label="합격루틴 홈"><span class="brand-icon" aria-hidden="true">N<span>·</span></span><span>합격루틴<small>네트워크관리사 2급</small></span></a>
-    
-    <nav id="navigation" aria-label="주요 메뉴">
-      <a href="#dashboard" data-view="dashboard"><span aria-hidden="true">◫</span> 학습 현황</a>
-      <a href="#daily" data-view="daily"><span aria-hidden="true">▷</span> 오늘의 학습</a>
-      <a href="#keywords" data-view="keywords"><span aria-hidden="true">◇</span> 키워드 암기 <span class="nav-count" id="keyword-count"></span></a>
-      <a href="#theory" data-view="theory"><span aria-hidden="true">▤</span> 핵심정리</a>
-      <a href="#commands" data-view="commands"><span aria-hidden="true">⌘</span> 명령어 노트</a>
-      <a href="#quiz" data-view="quiz"><span aria-hidden="true">▣</span> 문제 풀이</a>
-      <a href="#game" data-view="game"><span aria-hidden="true">⚡</span> 키워드 산성비</a>
-      <a href="#wrong" data-view="wrong"><span aria-hidden="true">↺</span> 오답노트 <span class="nav-count" id="wrong-count">0</span></a>
-      <a href="#materials" data-view="materials"><span aria-hidden="true">▥</span> 시험 자료</a>
-      <a href="#plan" data-view="plan"><span aria-hidden="true">☑</span> 14일 학습 계획</a>
-    </nav>
-    <div class="sidebar-bottom"><a href="README.md" download="README.md">전체 가이드 내려받기 ↓</a></div>
-  </aside>
-  <div class="workspace">
-    <header class="topbar"><div class="breadcrumb"><strong>네트워크관리사 2급</strong> · 필기</div><div class="topbar-right"><span class="saved-dot" aria-hidden="true"></span><span id="save-status">자동 저장</span><button class="icon-button" id="settings-button" aria-label="학습 설정 열기" title="학습 설정">⚙</button></div></header>
-    <div id="pwa-banner" hidden role="status"></div>
-    <main id="main" tabindex="-1"></main>
-    <nav class="mobile-nav" aria-label="빠른 학습">
-      <a href="#dashboard" data-view="dashboard"><span class="mobile-tab-icon"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v9a2 2 0 0 1-2 2h-4v-7H9v7H5a2 2 0 0 1-2-2z"/></svg></span><span>홈</span></a>
-      <a href="#daily" data-view="daily"><span class="mobile-tab-icon"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5C7 4 9 4 12 6c3-2 5-2 8-.5V20c-3-1.5-5-1.5-8 .5C9 18.5 7 18.5 4 20zM12 6v14.5"/></svg></span><span>오늘의 학습</span></a>
-      <a href="#game" data-view="game"><span class="mobile-tab-icon"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="m13 2-9 12h7l-1 8 10-13h-7z"/></svg></span><span>산성비</span></a>
-      <a href="#quiz" data-view="quiz"><span class="mobile-tab-icon"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="3"/><path d="M9 3h6v4H9zM9 12l2 2 4-4M9 18h6"/></svg></span><span>문제 풀이</span></a>
-      <a href="#wrong" data-view="wrong"><span class="mobile-tab-icon"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10a8 8 0 1 1 .8 7M4 4v6h6M12 8v5l3 2"/></svg></span><span>오답</span></a>
-    </nav>
-    <footer class="footer">개인 학습용 · 자체 연습과 회차별 기출을 구분해 제공합니다. <span>합격루틴 v21</span></footer>
-  </div>
-  <dialog id="settings-dialog" aria-labelledby="settings-title"><form id="settings-form"><div class="dialog-heading"><h2 id="settings-title">학습 설정</h2><button type="button" class="icon-button" data-close aria-label="설정 닫기">×</button></div><p class="muted">시험일을 설정하면 남은 기간과 추천 학습일을 보여드려요.</p><label class="field-label" for="exam-date">시험 날짜</label><input type="date" id="exam-date" name="examDate"><button class="button primary full" type="submit">저장하기</button><p class="fine-print">기록은 현재 브라우저에만 저장됩니다. 다른 기기와 동기화되지 않아요.</p><div class="pwa-settings"><button type="button" class="button secondary full" id="pwa-install" hidden>홈 화면에 설치</button><p id="pwa-help" class="fine-print"></p><fieldset class="theme-picker"><legend>화면 테마</legend><p>원하는 배경색을 선택하세요. 선택 즉시 적용됩니다.</p><div class="theme-options"><label class="theme-option"><input type="radio" name="display-theme" value="system"><span class="theme-swatch swatch-system" aria-hidden="true"></span><span>시스템 설정</span></label><label class="theme-option"><input type="radio" name="display-theme" value="light"><span class="theme-swatch swatch-light" aria-hidden="true"></span><span>화이트</span></label><label class="theme-option"><input type="radio" name="display-theme" value="dark"><span class="theme-swatch swatch-dark" aria-hidden="true"></span><span>블랙</span></label><label class="theme-option"><input type="radio" name="display-theme" value="warm"><span class="theme-swatch swatch-warm" aria-hidden="true"></span><span>웜 베이지</span></label><label class="theme-option"><input type="radio" name="display-theme" value="sage"><span class="theme-swatch swatch-sage" aria-hidden="true"></span><span>소프트 그린</span></label></div><p id="theme-status" class="theme-status" role="status"></p><p class="fine-print">눈에 편한 밝기와 색은 개인·주변 조명에 따라 다릅니다.</p></fieldset><p id="pwa-offline" class="fine-print"></p></div><div class="data-actions"><button type="button" id="export-progress" class="button secondary">학습 기록 내보내기</button><label class="button secondary" for="import-progress">기록 가져오기</label><input type="file" id="import-progress" accept="application/json,.json" hidden></div><button type="button" class="text-button danger" id="reset-progress">학습 기록 초기화</button></form></dialog>
-  <dialog id="confirm-dialog" aria-labelledby="confirm-title"><h2 id="confirm-title"></h2><p id="confirm-message"></p><div class="dialog-actions"><button type="button" id="confirm-cancel" class="button secondary">취소</button><button type="button" id="confirm-ok" class="button primary">확인</button></div></dialog>
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <noscript><div class="noscript">학습 도구를 사용하려면 JavaScript를 켜 주세요. <a href="README.md">전체 학습 가이드 읽기</a></div></noscript>
-</body>
-</html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#254f3d" />
+    <meta
+      name="description"
+      content="네트워크관리사 2급 시험 전 2주. 키워드 암기, 핵심 이론, 명령어, 문제 풀이와 오답 복습을 한곳에서 준비하세요."
+    />
+    <title>합격루틴 · 네트워크관리사 2급</title>
+    <link rel="icon" href="assets/network/icons/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="assets/network/css/foundation.css" />
+    <link rel="stylesheet" href="assets/network/css/reference.css" />
+    <link rel="stylesheet" href="assets/network/css/assessment.css" />
+    <link rel="stylesheet" href="assets/network/css/progress-dialogs.css" />
+    <link rel="stylesheet" href="assets/network/css/responsive.css" />
+    <link rel="stylesheet" href="assets/network/css/study-layout.css" />
+    <link rel="stylesheet" href="assets/network/css/keyword-examples.css" />
+    <link rel="stylesheet" href="assets/network/css/materials.css" />
+    <link rel="stylesheet" href="assets/network/css/latest-paper.css" />
+    <link rel="stylesheet" href="assets/network/css/keyword-game.css" />
+    <link rel="stylesheet" href="assets/network/css/daily-pwa.css" />
+    <link rel="stylesheet" href="assets/network/css/navigation-layout.css" />
+    <link rel="stylesheet" href="assets/network/css/keyword-disclosure.css" />
+    <link rel="stylesheet" href="assets/network/css/paper-library.css" />
+    <link rel="stylesheet" href="assets/network/css/home.css" />
+    <link rel="stylesheet" href="assets/network/css/themes.css" />
+    <link rel="stylesheet" href="assets/network/css/study-coach.css" />
+    <script src="assets/network/platform/themes.js"></script>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="assets/network/icons/icon-192.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <script defer src="assets/network/data/study-data.js"></script>
+    <script defer src="assets/network/data/questions.js"></script>
+    <script defer src="assets/network/data/latest-paper.js"></script>
+    <script defer src="assets/network/data/past-papers.js"></script>
+    <script defer src="assets/network/data/paper-archive.js"></script>
+    <script defer src="assets/network/domain/review-core.js"></script>
+    <script defer src="assets/network/pages/daily-study.js"></script>
+    <script defer src="assets/network/domain/wrong-notebook.js"></script>
+    <script defer src="assets/network/domain/core.js"></script>
+    <script defer src="assets/network/platform/materials-store.js"></script>
+    <script defer src="assets/network/data/public-materials.js"></script>
+    <script defer src="assets/network/pages/materials-page.js"></script>
+    <script defer src="assets/network/pages/keyword-game.js"></script>
+    <script defer src="assets/network/platform/navigation.js"></script>
+    <script defer src="assets/network/ui/keyword-layout.js"></script>
+    <script defer src="assets/network/ui/study-coach.js"></script>
+    <script defer src="assets/network/ui/feature-helper.js"></script>
+    <link rel="stylesheet" href="assets/network/css/feature-helper.css" />
+    <link rel="stylesheet" href="assets/network/css/theory-visuals.css" />
+    <script defer src="assets/network/pages/reference-pages.js"></script>
+    <script defer src="assets/network/pages/wrong-notebook-page.js"></script>
+    <script defer src="assets/network/pages/home-pages.js"></script>
+    <script defer src="assets/network/pages/quiz-page.js"></script>
+    <script defer src="assets/network/platform/settings-controller.js"></script>
+    <script defer src="assets/network/ui/page-ui.js"></script>
+    <script defer src="assets/network/ui/theory-visuals.js"></script>
+    <script defer src="assets/network/pages/user-guide-page.js"></script>
+    <script defer src="assets/network/app.js"></script>
+    <script defer src="assets/network/platform/pwa.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">본문 바로가기</a>
+    <aside class="sidebar">
+      <a class="brand" href="#dashboard" aria-label="합격루틴 홈"
+        ><span class="brand-icon" aria-hidden="true">N<span>·</span></span
+        ><span>합격루틴<small>네트워크관리사 2급</small></span></a
+      >
 
+      <nav id="navigation" aria-label="주요 메뉴">
+        <a href="#dashboard" data-view="dashboard"><span aria-hidden="true">◫</span> 학습 현황</a>
+        <a href="#daily" data-view="daily"><span aria-hidden="true">▷</span> 오늘의 학습</a>
+        <a href="#keywords" data-view="keywords"
+          ><span aria-hidden="true">◇</span> 키워드 암기
+          <span class="nav-count" id="keyword-count"></span
+        ></a>
+        <a href="#theory" data-view="theory"><span aria-hidden="true">▤</span> 핵심정리</a>
+        <a href="#commands" data-view="commands"><span aria-hidden="true">⌘</span> 명령어 노트</a>
+        <a href="#quiz" data-view="quiz"><span aria-hidden="true">▣</span> 문제 풀이</a>
+        <a href="#game" data-view="game"><span aria-hidden="true">⚡</span> 키워드 산성비</a>
+        <a href="#wrong" data-view="wrong"
+          ><span aria-hidden="true">↺</span> 오답노트
+          <span class="nav-count" id="wrong-count">0</span></a
+        >
+        <a href="#materials" data-view="materials"><span aria-hidden="true">▥</span> 시험 자료</a>
+        <a href="#plan" data-view="plan"><span aria-hidden="true">☑</span> 14일 학습 계획</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <a href="docs/study/exam-guide.md" download="network-exam-guide.md"
+          >전체 가이드 내려받기 ↓</a
+        >
+      </div>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <div class="breadcrumb"><strong>네트워크관리사 2급</strong> · 필기</div>
+        <div class="topbar-right">
+          <span class="saved-dot" aria-hidden="true"></span><span id="save-status">자동 저장</span
+          ><button
+            class="icon-button"
+            id="settings-button"
+            aria-label="학습 설정 열기"
+            title="학습 설정"
+          >
+            ⚙
+          </button>
+        </div>
+      </header>
+      <div id="pwa-banner" hidden role="status"></div>
+      <main id="main" tabindex="-1"></main>
+      <nav class="mobile-nav" aria-label="빠른 학습">
+        <a href="#dashboard" data-view="dashboard"
+          ><span class="mobile-tab-icon"
+            ><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m3 10 9-7 9 7v9a2 2 0 0 1-2 2h-4v-7H9v7H5a2 2 0 0 1-2-2z" /></svg></span
+          ><span>홈</span></a
+        >
+        <a href="#daily" data-view="daily"
+          ><span class="mobile-tab-icon"
+            ><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M4 5.5C7 4 9 4 12 6c3-2 5-2 8-.5V20c-3-1.5-5-1.5-8 .5C9 18.5 7 18.5 4 20zM12 6v14.5"
+              /></svg></span
+          ><span>오늘의 학습</span></a
+        >
+        <a href="#game" data-view="game"
+          ><span class="mobile-tab-icon"
+            ><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m13 2-9 12h7l-1 8 10-13h-7z" /></svg></span
+          ><span>산성비</span></a
+        >
+        <a href="#quiz" data-view="quiz"
+          ><span class="mobile-tab-icon"
+            ><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="5" y="4" width="14" height="17" rx="3" />
+              <path d="M9 3h6v4H9zM9 12l2 2 4-4M9 18h6" /></svg></span
+          ><span>문제 풀이</span></a
+        >
+        <a href="#wrong" data-view="wrong"
+          ><span class="mobile-tab-icon"
+            ><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 10a8 8 0 1 1 .8 7M4 4v6h6M12 8v5l3 2" /></svg></span
+          ><span>오답</span></a
+        >
+      </nav>
+      <footer class="footer">
+        개인 학습용 · 자체 연습과 회차별 기출을 구분해 제공합니다. <span>합격루틴 v23</span>
+      </footer>
+    </div>
+    <dialog id="settings-dialog" aria-labelledby="settings-title">
+      <form id="settings-form">
+        <div class="dialog-heading">
+          <h2 id="settings-title">학습 설정</h2>
+          <button type="button" class="icon-button" data-close aria-label="설정 닫기">×</button>
+        </div>
+        <p class="fine-print">
+          처음이라면 <a href="#help" data-guide-link>1분 사용법</a>을 읽어 보세요.
+        </p>
+        <fieldset class="settings-group">
+          <legend>시험 일정</legend>
+          <p class="muted">시험일을 설정하면 남은 기간과 추천 학습일을 보여드려요.</p>
+          <label class="field-label" for="exam-date">시험 날짜</label>
+          <input type="date" id="exam-date" name="examDate" />
+          <button class="button primary full" type="submit">시험일 저장</button>
+        </fieldset>
+        <fieldset class="theme-picker">
+          <legend>화면 테마</legend>
+          <p>원하는 배경색을 선택하세요. 선택 즉시 적용됩니다.</p>
+          <div class="theme-options">
+            <label class="theme-option"
+              ><input type="radio" name="display-theme" value="system" /><span
+                class="theme-swatch swatch-system"
+                aria-hidden="true"
+              ></span
+              ><span>시스템 설정</span></label
+            ><label class="theme-option"
+              ><input type="radio" name="display-theme" value="light" /><span
+                class="theme-swatch swatch-light"
+                aria-hidden="true"
+              ></span
+              ><span>화이트</span></label
+            ><label class="theme-option"
+              ><input type="radio" name="display-theme" value="dark" /><span
+                class="theme-swatch swatch-dark"
+                aria-hidden="true"
+              ></span
+              ><span>블랙</span></label
+            ><label class="theme-option"
+              ><input type="radio" name="display-theme" value="warm" /><span
+                class="theme-swatch swatch-warm"
+                aria-hidden="true"
+              ></span
+              ><span>웜 베이지</span></label
+            ><label class="theme-option"
+              ><input type="radio" name="display-theme" value="sage" /><span
+                class="theme-swatch swatch-sage"
+                aria-hidden="true"
+              ></span
+              ><span>소프트 그린</span></label
+            >
+          </div>
+          <p id="theme-status" class="theme-status" role="status"></p>
+          <p class="fine-print">눈에 편한 밝기와 색은 개인·주변 조명에 따라 다릅니다.</p>
+        </fieldset>
+        <fieldset class="settings-group pwa-settings">
+          <legend>앱 설치와 업데이트</legend>
+          <button type="button" class="button secondary full" id="pwa-install" hidden>
+            홈 화면에 설치
+          </button>
+          <p id="pwa-help" class="fine-print"></p>
+          <p id="pwa-offline" class="fine-print"></p>
+        </fieldset>
+        <fieldset class="settings-group">
+          <legend>학습 기록 관리</legend>
+          <p class="fine-print">
+            기록은 현재 브라우저에만 저장되며 다른 기기와 동기화되지 않아요. JSON에는 학습·게임
+            기록이 포함됩니다. 개인 자료 파일과 테마는 별도입니다.
+          </p>
+          <div class="data-actions">
+            <button type="button" id="export-progress" class="button secondary">
+              학습 기록 내보내기
+            </button>
+            <label class="button secondary" for="import-progress">기록 가져오기</label>
+            <input type="file" id="import-progress" accept="application/json,.json" hidden />
+          </div>
+          <button type="button" class="text-button danger" id="reset-progress">
+            학습 기록 초기화
+          </button>
+        </fieldset>
+      </form>
+    </dialog>
+    <dialog id="confirm-dialog" aria-labelledby="confirm-title">
+      <h2 id="confirm-title"></h2>
+      <p id="confirm-message"></p>
+      <div class="dialog-actions">
+        <button type="button" id="confirm-cancel" class="button secondary">취소</button
+        ><button type="button" id="confirm-ok" class="button primary">확인</button>
+      </div>
+    </dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <noscript
+      ><div class="noscript">
+        학습 도구를 사용하려면 JavaScript를 켜 주세요.
+        <a href="docs/study/exam-guide.md">전체 학습 가이드 읽기</a>
+      </div></noscript
+    >
+  </body>
+</html>

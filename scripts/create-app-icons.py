@@ -1,7 +1,7 @@
 """기존 favicon.svg의 N· 로고를 PNG 앱 아이콘으로 재현합니다."""
 import struct,zlib,binascii
 from pathlib import Path
-out=Path(__file__).resolve().parents[1]/'assets/network'
+out=Path(__file__).resolve().parents[1]/'assets/network/icons'
 for name,size,scale in [('icon-192.png',192,1),('icon-512.png',512,1),('icon-maskable.png',512,.82)]:
     poly=[(17,45),(17,19),(23,19),(41,45),(47,45),(47,19),(41,19),(41,35),(29,19),(17,19)]
     def inside(x,y):

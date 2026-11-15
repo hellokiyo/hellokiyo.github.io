@@ -1,0 +1,340 @@
+{
+  "desktop": [
+    {
+      "heading": "오늘의 시험 공부",
+      "overflow": false,
+      "route": "#dashboard"
+    },
+    {
+      "heading": "기억 꺼내기",
+      "overflow": false,
+      "route": "#daily"
+    },
+    {
+      "heading": "키워드 암기",
+      "overflow": false,
+      "route": "#keywords"
+    },
+    {
+      "heading": "명령어 노트",
+      "overflow": false,
+      "route": "#commands"
+    },
+    {
+      "heading": "핵심정리",
+      "overflow": false,
+      "route": "#theory"
+    },
+    {
+      "heading": "채점 결과",
+      "overflow": false,
+      "route": "#quiz"
+    },
+    {
+      "heading": "오답노트",
+      "overflow": false,
+      "route": "#wrong"
+    },
+    {
+      "heading": "14일 학습 계획",
+      "overflow": false,
+      "route": "#plan"
+    },
+    {
+      "heading": "시험 자료",
+      "overflow": false,
+      "route": "#materials"
+    },
+    {
+      "heading": "키워드 산성비",
+      "overflow": false,
+      "route": "#game"
+    },
+    {
+      "heading": "처음이라면? 1분 사용법",
+      "overflow": false,
+      "route": "#help"
+    }
+  ],
+  "mobile": [
+    {
+      "heading": "오늘의 시험 공부",
+      "overflow": false,
+      "route": "#dashboard"
+    },
+    {
+      "heading": "기억 꺼내기",
+      "overflow": false,
+      "route": "#daily"
+    },
+    {
+      "heading": "키워드 암기",
+      "overflow": false,
+      "route": "#keywords"
+    },
+    {
+      "heading": "명령어 노트",
+      "overflow": false,
+      "route": "#commands"
+    },
+    {
+      "heading": "핵심정리",
+      "overflow": false,
+      "route": "#theory"
+    },
+    {
+      "heading": "채점 결과",
+      "overflow": false,
+      "route": "#quiz"
+    },
+    {
+      "heading": "오답노트",
+      "overflow": false,
+      "route": "#wrong"
+    },
+    {
+      "heading": "14일 학습 계획",
+      "overflow": false,
+      "route": "#plan"
+    },
+    {
+      "heading": "시험 자료",
+      "overflow": false,
+      "route": "#materials"
+    },
+    {
+      "heading": "키워드 산성비",
+      "overflow": false,
+      "route": "#game"
+    },
+    {
+      "heading": "처음이라면? 1분 사용법",
+      "overflow": false,
+      "route": "#help"
+    }
+  ],
+  "theoryDesktop": [
+    {
+      "overflow": false,
+      "route": "#theory/0",
+      "title": "공부는 작은 네 칸으로"
+    },
+    {
+      "overflow": false,
+      "route": "#theory/1",
+      "title": "DNS와 ARP: 무엇을 알고, 무엇을 찾을까?"
+    },
+    {
+      "overflow": false,
+      "route": "#theory/2",
+      "title": "OSI 7계층: 택배가 지나가는 일곱 층"
+    },
+    {
+      "overflow": false,
+      "route": "#theory/3",
+      "title": "서브넷: 큰 동네를 작은 동네로 나누기"
+    },
+    {
+      "overflow": false,
+      "route": "#theory/4",
+      "title": "Linux 폴더 정리: 만들기 → 지우기 → 이름 바꾸기"
+    },
+    {
+      "overflow": false,
+      "route": "#theory/5",
+      "title": "ACK는 ‘잘 받았어!’라는 답장"
+    },
+    {
+      "overflow": false,
+      "route": "#theory/6",
+      "title": "비슷해 보여도 역할이 달라요"
+    },
+    {
+      "overflow": false,
+      "route": "#theory/7",
+      "title": "복습은 한 바퀴씩"
+    },
+    {
+      "overflow": false,
+      "route": "#theory/8",
+      "title": "시험 문제는 세 바퀴로"
+    },
+    {
+      "overflow": false,
+      "route": "#theory/9",
+      "title": "마지막 점검: 숫자는 용도와 짝지어요"
+    },
+    {
+      "overflow": false,
+      "route": "#theory/10",
+      "title": "Cisco 명령 모드는 방을 옮기듯"
+    },
+    {
+      "overflow": false,
+      "route": "#theory/11",
+      "title": "정답을 믿기 전에 근거를 확인해요"
+    }
+  ],
+  "theoryMobile": [
+    {
+      "menuOpen": false,
+      "overflow": false,
+      "route": "#theory/0",
+      "title": "공부는 작은 네 칸으로"
+    },
+    {
+      "menuOpen": false,
+      "overflow": false,
+      "route": "#theory/1",
+      "title": "DNS와 ARP: 무엇을 알고, 무엇을 찾을까?"
+    },
+    {
+      "menuOpen": false,
+      "overflow": false,
+      "route": "#theory/2",
+      "title": "OSI 7계층: 택배가 지나가는 일곱 층"
+    },
+    {
+      "menuOpen": false,
+      "overflow": false,
+      "route": "#theory/3",
+      "title": "서브넷: 큰 동네를 작은 동네로 나누기"
+    },
+    {
+      "menuOpen": false,
+      "overflow": false,
+      "route": "#theory/4",
+      "title": "Linux 폴더 정리: 만들기 → 지우기 → 이름 바꾸기"
+    },
+    {
+      "menuOpen": false,
+      "overflow": false,
+      "route": "#theory/5",
+      "title": "ACK는 ‘잘 받았어!’라는 답장"
+    },
+    {
+      "menuOpen": false,
+      "overflow": false,
+      "route": "#theory/6",
+      "title": "비슷해 보여도 역할이 달라요"
+    },
+    {
+      "menuOpen": false,
+      "overflow": false,
+      "route": "#theory/7",
+      "title": "복습은 한 바퀴씩"
+    },
+    {
+      "menuOpen": false,
+      "overflow": false,
+      "route": "#theory/8",
+      "title": "시험 문제는 세 바퀴로"
+    },
+    {
+      "menuOpen": false,
+      "overflow": false,
+      "route": "#theory/9",
+      "title": "마지막 점검: 숫자는 용도와 짝지어요"
+    },
+    {
+      "menuOpen": false,
+      "overflow": false,
+      "route": "#theory/10",
+      "title": "Cisco 명령 모드는 방을 옮기듯"
+    },
+    {
+      "menuOpen": false,
+      "overflow": false,
+      "route": "#theory/11",
+      "title": "정답을 믿기 전에 근거를 확인해요"
+    }
+  ],
+  "extraSizes": [
+    {
+      "height": 640,
+      "overflow": false,
+      "route": "#theory/2",
+      "width": 320
+    },
+    {
+      "height": 640,
+      "overflow": false,
+      "route": "#theory/3",
+      "width": 320
+    },
+    {
+      "height": 640,
+      "overflow": false,
+      "route": "#theory/5",
+      "width": 320
+    },
+    {
+      "height": 640,
+      "overflow": false,
+      "route": "#help",
+      "width": 320
+    },
+    {
+      "height": 1024,
+      "overflow": false,
+      "route": "#theory/2",
+      "width": 768
+    },
+    {
+      "height": 1024,
+      "overflow": false,
+      "route": "#theory/3",
+      "width": 768
+    },
+    {
+      "height": 1024,
+      "overflow": false,
+      "route": "#theory/5",
+      "width": 768
+    },
+    {
+      "height": 1024,
+      "overflow": false,
+      "route": "#help",
+      "width": 768
+    },
+    {
+      "height": 390,
+      "overflow": false,
+      "route": "#theory/2",
+      "width": 844
+    },
+    {
+      "height": 390,
+      "overflow": false,
+      "route": "#theory/3",
+      "width": 844
+    },
+    {
+      "height": 390,
+      "overflow": false,
+      "route": "#theory/5",
+      "width": 844
+    },
+    {
+      "height": 390,
+      "overflow": false,
+      "route": "#help",
+      "width": 844
+    }
+  ],
+  "operations": [
+    "홈→사용법→5분 학습",
+    "오늘의 학습 오답→오답노트",
+    "키워드 검색·정답·예시",
+    "명령어 검색",
+    "본문 포커스·서브넷 정상/오류",
+    "2022 회차필터·빠른연습 채점",
+    "계획 체크",
+    "합성 TXT 저장·검색·미리보기",
+    "게임 일시정지·종료·정답목록",
+    "사용법 검색·설정닫힘",
+    "어두운 테마 텍스트 대비 수정 후 확인"
+  ],
+  "errors": []
+}

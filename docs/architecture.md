@@ -26,20 +26,20 @@ flowchart TD
 | 관심사 | 파일 | 바꿀 때 확인할 것 |
 |---|---|---|
 | 조립·공통 상태·이벤트 위임 | `assets/network/app.js` | 경로 전환, 저장, 가져오기 후 최신 상태 |
-| 홈·학습 계획 | `home-pages.js` | 최신 회차·복습·체크 상태 |
-| 문제풀이 컨트롤러 | `quiz-page.js` | 회차 필터·답안·채점·실전 마감·오답 |
-| 설정·기록 입출력 | `settings-controller.js` | 확인 다이얼로그·JSON 백업/가져오기 |
-| 키워드·명령어·핵심정리 화면 | `reference-pages.js` | 검색·분류·읽음·펼침·레이아웃 |
-| 기능별 오답 화면 | `wrong-notebook-page.js` | 필터·재풀이·해당 출처만 완료 |
-| 오답 저장 규칙 | `wrong-notebook.js` | 중복·레거시 이관·출처별 상태 |
-| 계산·학습 상태 정제 | `core.js` | IPv4 경계값·위조/알 수 없는 ID |
-| 복습 선택·간격 | `review-core.js` | 시험일 상한·날짜·반복 제한 |
-| 오늘의 학습 화면 | `daily-study.js` | 확인 즉시 오답 전달·평가·중복 방지 |
-| 산성비·배지·게임 백업 | `keyword-game.js` | 90초·일시정지·모드별 최고점·정답 목록 |
-| 학습 추천 | `study-coach.js` | 7일 활성 시간·근거 수치·숨기기 |
-| 기능 검색 | `feature-helper.js` | 동의어·검색 연결·재열기 초기화 |
-| 자료 화면/저장 | `materials-page.js` / `materials-store.js` | 파일 검증·중복·ZIP·IndexedDB 실패 |
-| 내비게이션·테마·PWA | `navigation.js` / `themes.js` / `pwa.js` / `sw.js` | 뒤로가기·시스템 테마·업데이트·오프라인 |
+| 홈·학습 계획 | `pages/home-pages.js` | 최신 회차·복습·체크 상태 |
+| 문제풀이 컨트롤러 | `pages/quiz-page.js` | 회차 필터·답안·채점·실전 마감·오답 |
+| 설정·기록 입출력 | `platform/settings-controller.js` | 확인 다이얼로그·JSON 백업/가져오기 |
+| 키워드·명령어·핵심정리 화면 | `pages/reference-pages.js` | 검색·분류·읽음·펼침·레이아웃 |
+| 기능별 오답 화면 | `pages/wrong-notebook-page.js` | 필터·재풀이·해당 출처만 완료 |
+| 오답 저장 규칙 | `domain/wrong-notebook.js` | 중복·레거시 이관·출처별 상태 |
+| 계산·학습 상태 정제 | `domain/core.js` | IPv4 경계값·위조/알 수 없는 ID |
+| 복습 선택·간격 | `domain/review-core.js` | 시험일 상한·날짜·반복 제한 |
+| 오늘의 학습 화면 | `pages/daily-study.js` | 확인 즉시 오답 전달·평가·중복 방지 |
+| 산성비·배지·게임 백업 | `pages/keyword-game.js` | 90초·일시정지·모드별 최고점·정답 목록 |
+| 학습 추천 | `ui/study-coach.js` | 7일 활성 시간·근거 수치·숨기기 |
+| 기능 검색 | `ui/feature-helper.js` | 동의어·검색 연결·재열기 초기화 |
+| 자료 화면/저장 | `pages/materials-page.js` / `platform/materials-store.js` | 파일 검증·중복·ZIP·IndexedDB 실패 |
+| 내비게이션·테마·PWA | `platform/navigation.js` / `platform/themes.js` / `platform/pwa.js` / `sw.js` | 뒤로가기·시스템 테마·업데이트·오프라인 |
 
 `index.html`의 defer 순서로 데이터 → 규칙 모듈 → 화면 모듈 → 조립부를 로드한다. ES modules로 일괄 변경하면 `file://` 열기와 충돌할 수 있어 현재는 이름을 가진 IIFE 전역 모듈을 유지한다. 화면 모듈은 `getState()`로 상태를 받아 가져오기·초기화 후 예전 객체를 계속 참조하지 않게 한다.
 
@@ -80,3 +80,48 @@ flowchart TD
 실제 HTML은 index의 link 순서로 로드한다. 기존 styles.css/mobile.css는 기존 경로를 사용하는 경우를 위한 import 진입점이다. 분리 시 원본 규칙 순서를 그대로 유지했고, 모듈을 순서대로 합친 내용의 SHA256이 원본과 동일함을 확인했다. 근거는 audits/css-module-split.json이다. 이 기록은 분리 당시의 무변경 증거이며 이후 정당한 CSS 수정을 금지하는 테스트가 아니다.
 
 다른 모듈로 규칙을 옮길 때 선택자 우선순위·@media 범위·전후 순서를 확인한다. 기존 반응형 규칙은 공유하는 화면이 많아 responsive/study-layout 모듈로 보존했다. 파일 수만 늘리는 대신 앞으로 바뀌는 규칙의 책임 범위를 좁혀간다.
+
+## 2026-11-13 폴더 경계 정리
+
+루트 README는 사용/개발 진입점이고 학습 원문은 `docs/study/exam-guide.md`다. 생성 스크립트 입력을 새 원문으로 바꿨으며 기존 문항 ID·저장 키를 유지한다. `docs/features.md`는 기능 인벤토리, `docs/settings.md`는 설정·저장 계약이다.
+
+```text
+assets/network/
+  app.js       공통 상태·라우팅·이벤트 연결
+  data/        학습 데이터·회차 인덱스·공개 자료 목록
+  domain/      순수 계산·복습·상태 정제·오답 규칙
+  pages/       화면 렌더링과 해당 화면의 상호작용
+  platform/    브라우저 저장·대화상자 설정·테마·경로·PWA
+  ui/          공통 출력·키워드 배치·기능 검색·학습 추천
+  css/         공통/기능별 스타일 (로드 순서 보존)
+  icons/       앱 아이콘
+  papers/      원본 문제의 표·그림
+scripts/       생성·다운로드·검사 도구
+tests/         Node 회귀 테스트
+  support/     브라우저 스크립트 경로 탐색 등 테스트 공통 코드
+docs/          현재 기능·설정·구조·운영 문서
+  guides/      사용 안내
+  study/       학습 원문과 공부 계획
+  history/     당시 구현 기록
+  development/ 질문·실행·승인 일지
+  learning/    기술 개념·선택 이유
+materials/     공개 자료·원본 (source 포함)
+audits/        당시 검증 증거
+work/          일회 작업과 중간 결과 (런타임 의존 금지)
+```
+
+루트의 `sw.js`는 서비스 워커 범위를, manifest는 앱 시작 경로를 유지한다. `.nojekyll`, `_config.yml`, 포매터 파일, AGENTS는 도구가 찾는 진입점이므로 루트에 남긴다. 루트 파일을 두 개만 남기기 위해 이 파일을 옮기면 설치/오프라인이나 도구 설정이 달라질 수 있다. `.git`, `.idea`, `.agents`와 다른 프로젝트 보관 폴더는 임의 삭제하지 않는다.
+
+공통 제목·빈 상태·HTML 이스케이프는 `ui/page-ui.js`로 분리하고 app이 페이지에 필요한 함수를 주입한다. 도메인 모듈은 UI에 의존하지 않는다. VM 테스트의 `tests/support/browser-path.cjs`는 실제 파일명을 재귀 탐색하고 중복 파일명을 오류로 처리해 테스트에 폴더 맵을 반복 복제하지 않는다.
+
+체커는 자산 하위 폴더의 JS를 재귀 검사하며 index 참조·서비스 워커 문서/자산·CSS import/url을 확인한다. PWA 등록 스크립트는 `platform/` 이동에 맞춰 루트 워커까지의 상대 깊이를 갱신했다. 자료 ZIP도 새 `data/public-materials.js` 경로를 사용한다.
+
+상세 파일별 수정 위치는 [파일 지도](file-map.md)를 참조한다. 옛 경로와 새 경로 대응은 `audits/structure-migration-2026-11-13.json`에 기록했다. HTML 템플릿의 길이와 이전 반응형 스타일 중첩은 남아 있는 부채이며 프레임워크 전환이나 모든 중복 제거를 완료했다고 해석하지 않는다.
+
+## 이론 그림과 사용자 안내 (v23)
+
+`ui/theory-visuals.js`는 단원 ID에 맞는 보조 개념 그림을 HTML/CSS로 출력한다. 학습 원본과 점수·저장 상태를 변경하지 않는다. 원본 HTML은 기존 생성 데이터를 그대로 표시하며 그림 아래에서 읽는다. bitmap 대신 코드 기반 도식으로 확대·줄바꿈·테마와 텍스트 접근성을 유지했다. 공식 정답/검토 상태는 기존 안내와 일치시킨다.
+
+`pages/user-guide-page.js`는 #help의 정적 설명 화면이다. 홈·설정·기능 검색에서 연결한다. `css/theory-visuals.css`는 새 도식/안내 책임을 갖고 기존 참고 화면/테마 CSS 뒤에서 로드해 예전 reader 문단 색이 어두운 테마의 도식에 덮어쓰이지 않게 했다. 기존 CSS의 순서는 유지한다.
+
+본문 내부 이동은 data-scroll-target으로 표시하고 app이 같은 문서의 대상에 스크롤/포커스를 옮긴다. 앱 라우팅 해시를 새로 만들지 않는다. 목차는 모바일에서 처음에 접혀 있으며 브라우저 기본 details 조작으로 열 수 있다. 화면을 넓히더라도 summary를 남겨 닫힌 목차에 접근할 수 있다. 새 상태나 별도 리스너는 없다.

@@ -10,8 +10,8 @@
  "theme_color":"#254f3d",
  "description":"오늘의 복습과 기출 문제를 휴대폰에서 가볍게 학습하세요.",
  "icons":[
-  {"src":"assets/network/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},
-  {"src":"assets/network/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any"},
-  {"src":"assets/network/icon-maskable.png","sizes":"512x512","type":"image/png","purpose":"maskable"}
+  {"src":"assets/network/icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},
+  {"src":"assets/network/icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any"},
+  {"src":"assets/network/icons/icon-maskable.png","sizes":"512x512","type":"image/png","purpose":"maskable"}
  ]
 }

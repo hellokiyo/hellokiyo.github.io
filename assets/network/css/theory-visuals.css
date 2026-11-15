@@ -1,0 +1,254 @@
+/* 확대·색 테마·좁은 화면에서도 텍스트를 읽을 수 있는 코드 기반 개념 그림. */
+.theory-visual {
+  container-type: inline-size;
+  margin: 0 0 28px;
+  padding: 0 0 24px;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+}
+.theory-visual p {
+  color: var(--ink);
+}
+.theory-visual .text-button {
+  color: var(--green);
+}
+.concept-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.theory-visual h2 {
+  margin: 16px 0 10px;
+}
+.theory-visual .concept-intro {
+  color: var(--muted);
+  line-height: 1.8;
+}
+.concept-cells {
+  display: grid;
+  gap: 16px;
+  margin: 20px 0;
+}
+.concept-flow {
+  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+}
+.concept-compare {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+.concept-cell {
+  position: relative;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg, var(--paper));
+  overflow-wrap: anywhere;
+}
+.concept-cell strong {
+  display: block;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.concept-cell p {
+  margin: 8px 0 0;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.concept-step {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  background: var(--green);
+  color: var(--paper);
+  font-size: 12px;
+  font-weight: 700;
+}
+.concept-flow .concept-cell:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  right: -15px;
+  top: 43%;
+  color: var(--green);
+  z-index: 1;
+}
+.concept-stack {
+  gap: 6px;
+}
+.concept-stack .concept-cell {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 14px;
+  border-left: 5px solid var(--green);
+}
+.concept-stack .concept-step {
+  display: none;
+}
+.concept-stack .concept-cell p {
+  margin: 0;
+}
+.theory-visual .concept-key {
+  padding: 14px 16px;
+  border-left: 3px solid var(--green);
+  background: var(--green-light);
+  color: var(--ink);
+  line-height: 1.85;
+  font-size: 14px;
+}
+.concept-key strong {
+  display: block;
+}
+.concept-check {
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.concept-check summary {
+  cursor: pointer;
+  font-weight: 600;
+  line-height: 1.7;
+}
+#theory-text {
+  scroll-margin-top: 20px;
+}
+@media (max-width: 640px) {
+  .concept-flow,
+  .concept-compare {
+    grid-template-columns: 1fr;
+  }
+  .concept-flow .concept-cell:not(:last-child)::after {
+    content: "↓";
+    right: 50%;
+    top: auto;
+    bottom: -20px;
+  }
+  .concept-stack .concept-cell {
+    grid-template-columns: 1fr;
+  }
+  .theory-visual h2 {
+    font-size: 20px;
+  }
+}
+@media print {
+  .concept-heading .text-button {
+    display: none;
+  }
+  .theory-visual {
+    break-inside: avoid;
+  }
+}
+
+.reader-menu {
+  min-width: 0;
+}
+.reader-menu > summary {
+  cursor: pointer;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.reader-menu .reader-nav {
+  margin-top: 12px;
+}
+.guide-entry {
+  margin: 8px 0 18px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.guide-entry a {
+  color: var(--green);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: 16px;
+}
+.guide-welcome {
+  margin-bottom: 20px;
+}
+.guide-grid .panel {
+  margin: 0;
+}
+.guide-welcome p,
+.guide-grid p,
+.guide-questions p {
+  color: var(--ink);
+  line-height: 1.85;
+}
+.guide-questions {
+  margin-top: 20px;
+}
+.guide-questions details {
+  border-top: 1px solid var(--line);
+  padding: 16px 0;
+}
+.guide-questions summary {
+  cursor: pointer;
+  line-height: 1.7;
+  font-weight: 600;
+}
+
+@container (max-width:600px) {
+  .concept-flow {
+    grid-template-columns: 1fr;
+  }
+  .concept-flow .concept-cell:not(:last-child)::after {
+    content: "↓";
+    right: 50%;
+    top: auto;
+    bottom: -20px;
+  }
+}
+
+.address-picture {
+  margin: 18px 0;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.address-picture figcaption,
+.address-picture p {
+  font-size: 12px;
+  line-height: 1.7;
+}
+.address-dots {
+  display: grid;
+  grid-template-columns: repeat(16, minmax(0, 1fr));
+  gap: 4px;
+  margin: 10px 0;
+}
+.address-dots span {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: var(--green-light);
+  font-size: 10px;
+}
+.address-dots .address-edge {
+  background: var(--green);
+  color: var(--paper);
+  border-color: var(--green);
+  font-weight: 700;
+}
+@container (max-width:400px) {
+  .address-dots {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "desktop": [
+    {
+      "hash": "#daily",
+      "heading": "오늘의 학습",
+      "overflow": false
+    },
+    {
+      "hash": "#keywords",
+      "heading": "키워드 암기",
+      "overflow": false
+    },
+    {
+      "hash": "#commands",
+      "heading": "명령어 노트",
+      "overflow": false
+    },
+    {
+      "hash": "#theory",
+      "heading": "핵심정리",
+      "overflow": false
+    },
+    {
+      "hash": "#quiz",
+      "heading": "문제 풀이",
+      "overflow": false
+    },
+    {
+      "hash": "#wrong",
+      "heading": "오답노트",
+      "overflow": false
+    },
+    {
+      "hash": "#plan",
+      "heading": "14일 학습 계획",
+      "overflow": false
+    },
+    {
+      "hash": "#materials",
+      "heading": "시험 자료",
+      "overflow": false
+    },
+    {
+      "hash": "#game",
+      "heading": "키워드 산성비",
+      "overflow": false
+    },
+    {
+      "hash": "#dashboard",
+      "heading": "오늘의 시험 공부",
+      "overflow": false
+    }
+  ],
+  "mobile": [
+    {
+      "hash": "#daily",
+      "heading": "오늘의 학습",
+      "overflow": false
+    },
+    {
+      "hash": "#keywords",
+      "heading": "키워드 암기",
+      "overflow": false
+    },
+    {
+      "hash": "#commands",
+      "heading": "명령어 노트",
+      "overflow": false
+    },
+    {
+      "hash": "#theory",
+      "heading": "핵심정리",
+      "overflow": false
+    },
+    {
+      "hash": "#quiz",
+      "heading": "문제 풀이",
+      "overflow": false
+    },
+    {
+      "hash": "#wrong",
+      "heading": "오답노트",
+      "overflow": false
+    },
+    {
+      "hash": "#plan",
+      "heading": "14일 학습 계획",
+      "overflow": false
+    },
+    {
+      "hash": "#materials",
+      "heading": "시험 자료",
+      "overflow": false
+    },
+    {
+      "hash": "#game",
+      "heading": "키워드 산성비",
+      "overflow": false
+    },
+    {
+      "hash": "#dashboard",
+      "heading": "오늘의 시험 공부",
+      "overflow": false
+    }
+  ],
+  "checks": [
+    "설정 그룹 표시 및 시험일 저장",
+    "오늘의 학습 오답 → 기억남 평가 후에도 오답 유지",
+    "평가 바와 도우미 겹침 수정 후 시각 확인"
+  ],
+  "errors": []
+}

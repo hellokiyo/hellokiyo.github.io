@@ -220,3 +220,19 @@ dialog input[type="date"] {
   font-size: 12px;
   color: #839074;
 }
+
+/* 설정은 일정·화면·설치·기록 관리로 구분하고 기존 입력 ID/이벤트 계약을 유지합니다. */
+.settings-group {
+  min-width: 0;
+  margin: 22px 0 0;
+  padding: 16px 0 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+.settings-group legend {
+  padding: 0 8px 0 0;
+  font-weight: 700;
+}
+.settings-group .data-actions {
+  flex-wrap: wrap;
+}

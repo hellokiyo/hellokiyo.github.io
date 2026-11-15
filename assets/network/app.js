@@ -17,18 +17,7 @@
       localStorage.setItem(KEY + ":before-adaptive", old);
   } catch {}
   const $ = (selector, root = document) => root.querySelector(selector);
-  const esc = (value) =>
-    String(value ?? "").replace(
-      /[&<>"']/g,
-      (ch) =>
-        ({
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': "&quot;",
-          "'": "&#39;",
-        })[ch],
-    );
+  const { escapeHTML: esc, heading, empty } = window.PageUI;
   let storageOK = true,
     state;
   try {
@@ -75,30 +64,6 @@
     if (i < 0) list.push(value);
     else list.splice(i, 1);
   }
-  function heading(kicker, title, description, extra = "") {
-    const titles = {
-      "KEYWORD FLASHCARDS": "키워드 암기",
-      "COMMAND REFERENCE": "명령어 노트",
-      "CORE CONCEPTS": "핵심정리",
-      "14-DAY STUDY PLAN": "14일 학습 계획",
-      "PRACTICE MAKES PROGRESS": "문제 풀이",
-      "REVIEW YOUR MISTAKES": "오답노트",
-      "SESSION COMPLETE": "채점 결과",
-    };
-    const descriptions = {
-      "KEYWORD FLASHCARDS": "단서를 암기하고, 문제 예시에서 어떻게 쓰이는지 확인하세요.",
-      "COMMAND REFERENCE": "목적 · 명령어 · 옵션을 함께 확인하세요.",
-      "CORE CONCEPTS": "시험에 필요한 개념과 계산을 정리했습니다.",
-      "14-DAY STUDY PLAN": "하루 한 주제씩 완료 체크하세요.",
-      "PRACTICE MAKES PROGRESS": "최근 5년 기출 · 회차별 반복 풀이와 오답 복습",
-      "REVIEW YOUR MISTAKES": "다시 맞힌 문제는 오답장에서 제외됩니다.",
-      "SESSION COMPLETE": "틀린 문제와 미응답은 오답장에 저장됩니다.",
-    };
-    return `<div class="page-heading"><div><h1>${titles[kicker] || title}</h1><p>${descriptions[kicker] || description}</p></div>${extra}</div>`;
-  }
-  function empty(title, description, action = "") {
-    return `<div class="empty-state"><h2>${title}</h2><p>${description}</p>${action}</div>`;
-  }
   // 경로 전환 전 각 페이지의 타이머/리스너/레이아웃 관찰자를 해제합니다.
   function route() {
     window.KeywordLayout?.unmount();
@@ -117,6 +82,7 @@
       "materials",
       "game",
       "daily",
+      "help",
     ].includes(view)
       ? view
       : "dashboard";
@@ -131,6 +97,9 @@
       else a.removeAttribute("aria-current");
     });
     ({
+      help: () => {
+        main.innerHTML = window.UserGuidePage.render();
+      },
       dashboard,
       keywords,
       commands,
@@ -174,6 +143,7 @@
     window.scrollTo({ top: 0, behavior: "instant" });
     document.title =
       {
+        help: "사용법",
         dashboard: "학습 현황",
         keywords: "키워드 암기",
         commands: "명령어 노트",
@@ -218,6 +188,17 @@
       main.scrollIntoView();
       return;
     }
+    // 본문 안 이동은 앱 경로로 처리하지 않아 해시 라우팅이 그림 링크를 삼키지 않게 합니다.
+    if (target.dataset.scrollTarget) {
+      const destination = document.getElementById(target.dataset.scrollTarget);
+      if (destination) {
+        event.preventDefault();
+        destination.setAttribute("tabindex", "-1");
+        destination.focus({ preventScroll: true });
+        destination.scrollIntoView({ block: "start" });
+      }
+      return;
+    }
     if (
       target.tagName === "A" &&
       target.getAttribute("href")?.startsWith("#") &&
@@ -230,6 +211,7 @@
       (!event.button || event.button === 0)
     ) {
       event.preventDefault();
+      if (target.hasAttribute("data-guide-link")) $("#settings-dialog").close();
       navigation.go(target.getAttribute("href"));
       return;
     }
