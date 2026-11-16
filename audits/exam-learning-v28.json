@@ -1,0 +1,2116 @@
+{
+  "date": "2026-11-16",
+  "desktopScreens": [
+    {
+      "examId": "network",
+      "screen": "dashboard",
+      "overflow": false,
+      "text": 662
+    },
+    {
+      "examId": "network",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 563
+    },
+    {
+      "examId": "network",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 4027
+    },
+    {
+      "examId": "network",
+      "screen": "theory",
+      "overflow": false,
+      "text": 1494
+    },
+    {
+      "examId": "network",
+      "screen": "commands",
+      "overflow": false,
+      "text": 4838
+    },
+    {
+      "examId": "network",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 584
+    },
+    {
+      "examId": "network",
+      "screen": "plan",
+      "overflow": false,
+      "text": 1173
+    },
+    {
+      "examId": "network",
+      "screen": "materials",
+      "overflow": false,
+      "text": 245
+    },
+    {
+      "examId": "network",
+      "screen": "help",
+      "overflow": false,
+      "text": 749
+    },
+    {
+      "examId": "pc",
+      "screen": "dashboard",
+      "overflow": false,
+      "text": 474
+    },
+    {
+      "examId": "pc",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 568
+    },
+    {
+      "examId": "pc",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 2037
+    },
+    {
+      "examId": "pc",
+      "screen": "theory",
+      "overflow": false,
+      "text": 556
+    },
+    {
+      "examId": "pc",
+      "screen": "commands",
+      "overflow": false,
+      "text": 1056
+    },
+    {
+      "examId": "pc",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 540
+    },
+    {
+      "examId": "pc",
+      "screen": "plan",
+      "overflow": false,
+      "text": 1006
+    },
+    {
+      "examId": "pc",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "pc",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    },
+    {
+      "examId": "linux-master-2",
+      "screen": "dashboard",
+      "overflow": false,
+      "text": 469
+    },
+    {
+      "examId": "linux-master-2",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 328
+    },
+    {
+      "examId": "linux-master-2",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 2078
+    },
+    {
+      "examId": "linux-master-2",
+      "screen": "theory",
+      "overflow": false,
+      "text": 514
+    },
+    {
+      "examId": "linux-master-2",
+      "screen": "commands",
+      "overflow": false,
+      "text": 1094
+    },
+    {
+      "examId": "linux-master-2",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 220
+    },
+    {
+      "examId": "linux-master-2",
+      "screen": "plan",
+      "overflow": false,
+      "text": 1000
+    },
+    {
+      "examId": "linux-master-2",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "linux-master-2",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    },
+    {
+      "examId": "information-processing-engineer",
+      "screen": "dashboard",
+      "overflow": false,
+      "text": 465
+    },
+    {
+      "examId": "information-processing-engineer",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 328
+    },
+    {
+      "examId": "information-processing-engineer",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 1965
+    },
+    {
+      "examId": "information-processing-engineer",
+      "screen": "theory",
+      "overflow": false,
+      "text": 500
+    },
+    {
+      "examId": "information-processing-engineer",
+      "screen": "commands",
+      "overflow": false,
+      "text": 654
+    },
+    {
+      "examId": "information-processing-engineer",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 220
+    },
+    {
+      "examId": "information-processing-engineer",
+      "screen": "plan",
+      "overflow": false,
+      "text": 999
+    },
+    {
+      "examId": "information-processing-engineer",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "information-processing-engineer",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    },
+    {
+      "examId": "geospatial-convergence-industrial",
+      "screen": "dashboard",
+      "overflow": false,
+      "text": 469
+    },
+    {
+      "examId": "geospatial-convergence-industrial",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 328
+    },
+    {
+      "examId": "geospatial-convergence-industrial",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 2892
+    },
+    {
+      "examId": "geospatial-convergence-industrial",
+      "screen": "theory",
+      "overflow": false,
+      "text": 499
+    },
+    {
+      "examId": "geospatial-convergence-industrial",
+      "screen": "commands",
+      "overflow": false,
+      "text": 551
+    },
+    {
+      "examId": "geospatial-convergence-industrial",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 220
+    },
+    {
+      "examId": "geospatial-convergence-industrial",
+      "screen": "plan",
+      "overflow": false,
+      "text": 999
+    },
+    {
+      "examId": "geospatial-convergence-industrial",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "geospatial-convergence-industrial",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    },
+    {
+      "examId": "information-equipment-craftsman",
+      "screen": "dashboard",
+      "overflow": false,
+      "text": 468
+    },
+    {
+      "examId": "information-equipment-craftsman",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 328
+    },
+    {
+      "examId": "information-equipment-craftsman",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 2152
+    },
+    {
+      "examId": "information-equipment-craftsman",
+      "screen": "theory",
+      "overflow": false,
+      "text": 591
+    },
+    {
+      "examId": "information-equipment-craftsman",
+      "screen": "commands",
+      "overflow": false,
+      "text": 515
+    },
+    {
+      "examId": "information-equipment-craftsman",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 220
+    },
+    {
+      "examId": "information-equipment-craftsman",
+      "screen": "plan",
+      "overflow": false,
+      "text": 999
+    },
+    {
+      "examId": "information-equipment-craftsman",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "information-equipment-craftsman",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    },
+    {
+      "examId": "information-security-engineer",
+      "screen": "dashboard",
+      "overflow": false,
+      "text": 465
+    },
+    {
+      "examId": "information-security-engineer",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 328
+    },
+    {
+      "examId": "information-security-engineer",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 2127
+    },
+    {
+      "examId": "information-security-engineer",
+      "screen": "theory",
+      "overflow": false,
+      "text": 551
+    },
+    {
+      "examId": "information-security-engineer",
+      "screen": "commands",
+      "overflow": false,
+      "text": 307
+    },
+    {
+      "examId": "information-security-engineer",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 220
+    },
+    {
+      "examId": "information-security-engineer",
+      "screen": "plan",
+      "overflow": false,
+      "text": 999
+    },
+    {
+      "examId": "information-security-engineer",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "information-security-engineer",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    },
+    {
+      "examId": "digital-forensics-2",
+      "screen": "dashboard",
+      "overflow": false,
+      "text": 471
+    },
+    {
+      "examId": "digital-forensics-2",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 328
+    },
+    {
+      "examId": "digital-forensics-2",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 2011
+    },
+    {
+      "examId": "digital-forensics-2",
+      "screen": "theory",
+      "overflow": false,
+      "text": 562
+    },
+    {
+      "examId": "digital-forensics-2",
+      "screen": "commands",
+      "overflow": false,
+      "text": 861
+    },
+    {
+      "examId": "digital-forensics-2",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 220
+    },
+    {
+      "examId": "digital-forensics-2",
+      "screen": "plan",
+      "overflow": false,
+      "text": 999
+    },
+    {
+      "examId": "digital-forensics-2",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "digital-forensics-2",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    },
+    {
+      "examId": "information-security-industrial",
+      "screen": "dashboard",
+      "overflow": false,
+      "text": 467
+    },
+    {
+      "examId": "information-security-industrial",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 328
+    },
+    {
+      "examId": "information-security-industrial",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 1991
+    },
+    {
+      "examId": "information-security-industrial",
+      "screen": "theory",
+      "overflow": false,
+      "text": 549
+    },
+    {
+      "examId": "information-security-industrial",
+      "screen": "commands",
+      "overflow": false,
+      "text": 861
+    },
+    {
+      "examId": "information-security-industrial",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 220
+    },
+    {
+      "examId": "information-security-industrial",
+      "screen": "plan",
+      "overflow": false,
+      "text": 999
+    },
+    {
+      "examId": "information-security-industrial",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "information-security-industrial",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    },
+    {
+      "examId": "network-manager-1",
+      "screen": "dashboard",
+      "overflow": false,
+      "text": 469
+    },
+    {
+      "examId": "network-manager-1",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 328
+    },
+    {
+      "examId": "network-manager-1",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 3133
+    },
+    {
+      "examId": "network-manager-1",
+      "screen": "theory",
+      "overflow": false,
+      "text": 599
+    },
+    {
+      "examId": "network-manager-1",
+      "screen": "commands",
+      "overflow": false,
+      "text": 515
+    },
+    {
+      "examId": "network-manager-1",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 220
+    },
+    {
+      "examId": "network-manager-1",
+      "screen": "plan",
+      "overflow": false,
+      "text": 999
+    },
+    {
+      "examId": "network-manager-1",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "network-manager-1",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    },
+    {
+      "examId": "internet-security-2",
+      "screen": "dashboard",
+      "overflow": false,
+      "text": 470
+    },
+    {
+      "examId": "internet-security-2",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 328
+    },
+    {
+      "examId": "internet-security-2",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 2127
+    },
+    {
+      "examId": "internet-security-2",
+      "screen": "theory",
+      "overflow": false,
+      "text": 551
+    },
+    {
+      "examId": "internet-security-2",
+      "screen": "commands",
+      "overflow": false,
+      "text": 307
+    },
+    {
+      "examId": "internet-security-2",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 220
+    },
+    {
+      "examId": "internet-security-2",
+      "screen": "plan",
+      "overflow": false,
+      "text": 999
+    },
+    {
+      "examId": "internet-security-2",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "internet-security-2",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    },
+    {
+      "examId": "computer-systems-engineer",
+      "screen": "dashboard",
+      "overflow": false,
+      "text": 467
+    },
+    {
+      "examId": "computer-systems-engineer",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 328
+    },
+    {
+      "examId": "computer-systems-engineer",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 2021
+    },
+    {
+      "examId": "computer-systems-engineer",
+      "screen": "theory",
+      "overflow": false,
+      "text": 535
+    },
+    {
+      "examId": "computer-systems-engineer",
+      "screen": "commands",
+      "overflow": false,
+      "text": 861
+    },
+    {
+      "examId": "computer-systems-engineer",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 220
+    },
+    {
+      "examId": "computer-systems-engineer",
+      "screen": "plan",
+      "overflow": false,
+      "text": 999
+    },
+    {
+      "examId": "computer-systems-engineer",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "computer-systems-engineer",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    },
+    {
+      "examId": "information-processing-industrial",
+      "screen": "dashboard",
+      "overflow": false,
+      "text": 467
+    },
+    {
+      "examId": "information-processing-industrial",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 328
+    },
+    {
+      "examId": "information-processing-industrial",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 1965
+    },
+    {
+      "examId": "information-processing-industrial",
+      "screen": "theory",
+      "overflow": false,
+      "text": 500
+    },
+    {
+      "examId": "information-processing-industrial",
+      "screen": "commands",
+      "overflow": false,
+      "text": 654
+    },
+    {
+      "examId": "information-processing-industrial",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 220
+    },
+    {
+      "examId": "information-processing-industrial",
+      "screen": "plan",
+      "overflow": false,
+      "text": 999
+    },
+    {
+      "examId": "information-processing-industrial",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "information-processing-industrial",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    },
+    {
+      "examId": "geospatial-convergence-craftsman",
+      "screen": "dashboard",
+      "overflow": false,
+      "text": 468
+    },
+    {
+      "examId": "geospatial-convergence-craftsman",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 328
+    },
+    {
+      "examId": "geospatial-convergence-craftsman",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 1944
+    },
+    {
+      "examId": "geospatial-convergence-craftsman",
+      "screen": "theory",
+      "overflow": false,
+      "text": 489
+    },
+    {
+      "examId": "geospatial-convergence-craftsman",
+      "screen": "commands",
+      "overflow": false,
+      "text": 659
+    },
+    {
+      "examId": "geospatial-convergence-craftsman",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 220
+    },
+    {
+      "examId": "geospatial-convergence-craftsman",
+      "screen": "plan",
+      "overflow": false,
+      "text": 999
+    },
+    {
+      "examId": "geospatial-convergence-craftsman",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "geospatial-convergence-craftsman",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    },
+    {
+      "examId": "surveying-geospatial-engineer",
+      "screen": "dashboard",
+      "overflow": false,
+      "text": 470
+    },
+    {
+      "examId": "surveying-geospatial-engineer",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 328
+    },
+    {
+      "examId": "surveying-geospatial-engineer",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 1944
+    },
+    {
+      "examId": "surveying-geospatial-engineer",
+      "screen": "theory",
+      "overflow": false,
+      "text": 524
+    },
+    {
+      "examId": "surveying-geospatial-engineer",
+      "screen": "commands",
+      "overflow": false,
+      "text": 717
+    },
+    {
+      "examId": "surveying-geospatial-engineer",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 220
+    },
+    {
+      "examId": "surveying-geospatial-engineer",
+      "screen": "plan",
+      "overflow": false,
+      "text": 999
+    },
+    {
+      "examId": "surveying-geospatial-engineer",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "surveying-geospatial-engineer",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    },
+    {
+      "examId": "pc-master-kie",
+      "screen": "dashboard",
+      "overflow": false,
+      "text": 473
+    },
+    {
+      "examId": "pc-master-kie",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 328
+    },
+    {
+      "examId": "pc-master-kie",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 2037
+    },
+    {
+      "examId": "pc-master-kie",
+      "screen": "theory",
+      "overflow": false,
+      "text": 556
+    },
+    {
+      "examId": "pc-master-kie",
+      "screen": "commands",
+      "overflow": false,
+      "text": 1056
+    },
+    {
+      "examId": "pc-master-kie",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 220
+    },
+    {
+      "examId": "pc-master-kie",
+      "screen": "plan",
+      "overflow": false,
+      "text": 999
+    },
+    {
+      "examId": "pc-master-kie",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "pc-master-kie",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    },
+    {
+      "examId": "ccna",
+      "screen": "dashboard",
+      "overflow": false,
+      "text": 463
+    },
+    {
+      "examId": "ccna",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 328
+    },
+    {
+      "examId": "ccna",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 2152
+    },
+    {
+      "examId": "ccna",
+      "screen": "theory",
+      "overflow": false,
+      "text": 591
+    },
+    {
+      "examId": "ccna",
+      "screen": "commands",
+      "overflow": false,
+      "text": 515
+    },
+    {
+      "examId": "ccna",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 220
+    },
+    {
+      "examId": "ccna",
+      "screen": "plan",
+      "overflow": false,
+      "text": 999
+    },
+    {
+      "examId": "ccna",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "ccna",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    }
+  ],
+  "mobileHome": [
+    {
+      "examId": "network",
+      "overflow": false,
+      "text": 662
+    },
+    {
+      "examId": "pc",
+      "overflow": false,
+      "text": 474
+    },
+    {
+      "examId": "linux-master-2",
+      "overflow": false,
+      "text": 469
+    },
+    {
+      "examId": "information-processing-engineer",
+      "overflow": false,
+      "text": 465
+    },
+    {
+      "examId": "geospatial-convergence-industrial",
+      "overflow": false,
+      "text": 469
+    },
+    {
+      "examId": "information-equipment-craftsman",
+      "overflow": false,
+      "text": 468
+    },
+    {
+      "examId": "information-security-engineer",
+      "overflow": false,
+      "text": 465
+    },
+    {
+      "examId": "digital-forensics-2",
+      "overflow": false,
+      "text": 471
+    },
+    {
+      "examId": "information-security-industrial",
+      "overflow": false,
+      "text": 467
+    },
+    {
+      "examId": "network-manager-1",
+      "overflow": false,
+      "text": 469
+    },
+    {
+      "examId": "internet-security-2",
+      "overflow": false,
+      "text": 470
+    },
+    {
+      "examId": "computer-systems-engineer",
+      "overflow": false,
+      "text": 467
+    },
+    {
+      "examId": "information-processing-industrial",
+      "overflow": false,
+      "text": 467
+    },
+    {
+      "examId": "geospatial-convergence-craftsman",
+      "overflow": false,
+      "text": 468
+    },
+    {
+      "examId": "surveying-geospatial-engineer",
+      "overflow": false,
+      "text": 470
+    },
+    {
+      "examId": "pc-master-kie",
+      "overflow": false,
+      "text": 473
+    },
+    {
+      "examId": "ccna",
+      "overflow": false,
+      "text": 463
+    }
+  ],
+  "mobileScreens": [
+    {
+      "examId": "network",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 563
+    },
+    {
+      "examId": "network",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 4027
+    },
+    {
+      "examId": "network",
+      "screen": "theory",
+      "overflow": false,
+      "text": 1326
+    },
+    {
+      "examId": "network",
+      "screen": "commands",
+      "overflow": false,
+      "text": 4838
+    },
+    {
+      "examId": "network",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 584
+    },
+    {
+      "examId": "network",
+      "screen": "plan",
+      "overflow": false,
+      "text": 1173
+    },
+    {
+      "examId": "network",
+      "screen": "materials",
+      "overflow": false,
+      "text": 245
+    },
+    {
+      "examId": "network",
+      "screen": "help",
+      "overflow": false,
+      "text": 749
+    },
+    {
+      "examId": "network",
+      "screen": "daily",
+      "overflow": false,
+      "text": 215
+    },
+    {
+      "examId": "network",
+      "screen": "game",
+      "overflow": false,
+      "text": 778
+    },
+    {
+      "examId": "pc",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 568
+    },
+    {
+      "examId": "pc",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 2037
+    },
+    {
+      "examId": "pc",
+      "screen": "theory",
+      "overflow": false,
+      "text": 539
+    },
+    {
+      "examId": "pc",
+      "screen": "commands",
+      "overflow": false,
+      "text": 1056
+    },
+    {
+      "examId": "pc",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 540
+    },
+    {
+      "examId": "pc",
+      "screen": "plan",
+      "overflow": false,
+      "text": 1006
+    },
+    {
+      "examId": "pc",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "pc",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    },
+    {
+      "examId": "pc",
+      "screen": "daily",
+      "overflow": false,
+      "text": 312
+    },
+    {
+      "examId": "pc",
+      "screen": "game",
+      "overflow": false,
+      "text": 778
+    },
+    {
+      "examId": "linux-master-2",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 173
+    },
+    {
+      "examId": "linux-master-2",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 2078
+    },
+    {
+      "examId": "linux-master-2",
+      "screen": "theory",
+      "overflow": false,
+      "text": 496
+    },
+    {
+      "examId": "linux-master-2",
+      "screen": "commands",
+      "overflow": false,
+      "text": 1094
+    },
+    {
+      "examId": "linux-master-2",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 220
+    },
+    {
+      "examId": "linux-master-2",
+      "screen": "plan",
+      "overflow": false,
+      "text": 1000
+    },
+    {
+      "examId": "linux-master-2",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "linux-master-2",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    },
+    {
+      "examId": "linux-master-2",
+      "screen": "daily",
+      "overflow": false,
+      "text": 345
+    },
+    {
+      "examId": "linux-master-2",
+      "screen": "game",
+      "overflow": false,
+      "text": 778
+    },
+    {
+      "examId": "information-processing-engineer",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 196
+    },
+    {
+      "examId": "information-processing-engineer",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 1965
+    },
+    {
+      "examId": "information-processing-engineer",
+      "screen": "theory",
+      "overflow": false,
+      "text": 481
+    },
+    {
+      "examId": "information-processing-engineer",
+      "screen": "commands",
+      "overflow": false,
+      "text": 654
+    },
+    {
+      "examId": "information-processing-engineer",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 220
+    },
+    {
+      "examId": "information-processing-engineer",
+      "screen": "plan",
+      "overflow": false,
+      "text": 999
+    },
+    {
+      "examId": "information-processing-engineer",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "information-processing-engineer",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    },
+    {
+      "examId": "information-processing-engineer",
+      "screen": "daily",
+      "overflow": false,
+      "text": 312
+    },
+    {
+      "examId": "information-processing-engineer",
+      "screen": "game",
+      "overflow": false,
+      "text": 778
+    },
+    {
+      "examId": "geospatial-convergence-industrial",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 203
+    },
+    {
+      "examId": "geospatial-convergence-industrial",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 2892
+    },
+    {
+      "examId": "geospatial-convergence-industrial",
+      "screen": "theory",
+      "overflow": false,
+      "text": 472
+    },
+    {
+      "examId": "geospatial-convergence-industrial",
+      "screen": "commands",
+      "overflow": false,
+      "text": 551
+    },
+    {
+      "examId": "geospatial-convergence-industrial",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 220
+    },
+    {
+      "examId": "geospatial-convergence-industrial",
+      "screen": "plan",
+      "overflow": false,
+      "text": 999
+    },
+    {
+      "examId": "geospatial-convergence-industrial",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "geospatial-convergence-industrial",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    },
+    {
+      "examId": "geospatial-convergence-industrial",
+      "screen": "daily",
+      "overflow": false,
+      "text": 317
+    },
+    {
+      "examId": "geospatial-convergence-industrial",
+      "screen": "game",
+      "overflow": false,
+      "text": 778
+    },
+    {
+      "examId": "information-equipment-craftsman",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 199
+    },
+    {
+      "examId": "information-equipment-craftsman",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 2152
+    },
+    {
+      "examId": "information-equipment-craftsman",
+      "screen": "theory",
+      "overflow": false,
+      "text": 570
+    },
+    {
+      "examId": "information-equipment-craftsman",
+      "screen": "commands",
+      "overflow": false,
+      "text": 515
+    },
+    {
+      "examId": "information-equipment-craftsman",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 220
+    },
+    {
+      "examId": "information-equipment-craftsman",
+      "screen": "plan",
+      "overflow": false,
+      "text": 999
+    },
+    {
+      "examId": "information-equipment-craftsman",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "information-equipment-craftsman",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    },
+    {
+      "examId": "information-equipment-craftsman",
+      "screen": "daily",
+      "overflow": false,
+      "text": 314
+    },
+    {
+      "examId": "information-equipment-craftsman",
+      "screen": "game",
+      "overflow": false,
+      "text": 778
+    },
+    {
+      "examId": "information-security-engineer",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 201
+    },
+    {
+      "examId": "information-security-engineer",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 2127
+    },
+    {
+      "examId": "information-security-engineer",
+      "screen": "theory",
+      "overflow": false,
+      "text": 533
+    },
+    {
+      "examId": "information-security-engineer",
+      "screen": "commands",
+      "overflow": false,
+      "text": 307
+    },
+    {
+      "examId": "information-security-engineer",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 220
+    },
+    {
+      "examId": "information-security-engineer",
+      "screen": "plan",
+      "overflow": false,
+      "text": 999
+    },
+    {
+      "examId": "information-security-engineer",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "information-security-engineer",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    },
+    {
+      "examId": "information-security-engineer",
+      "screen": "daily",
+      "overflow": false,
+      "text": 311
+    },
+    {
+      "examId": "information-security-engineer",
+      "screen": "game",
+      "overflow": false,
+      "text": 778
+    },
+    {
+      "examId": "digital-forensics-2",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 212
+    },
+    {
+      "examId": "digital-forensics-2",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 2011
+    },
+    {
+      "examId": "digital-forensics-2",
+      "screen": "theory",
+      "overflow": false,
+      "text": 544
+    },
+    {
+      "examId": "digital-forensics-2",
+      "screen": "commands",
+      "overflow": false,
+      "text": 861
+    },
+    {
+      "examId": "digital-forensics-2",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 220
+    },
+    {
+      "examId": "digital-forensics-2",
+      "screen": "plan",
+      "overflow": false,
+      "text": 999
+    },
+    {
+      "examId": "digital-forensics-2",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "digital-forensics-2",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    },
+    {
+      "examId": "digital-forensics-2",
+      "screen": "daily",
+      "overflow": false,
+      "text": 311
+    },
+    {
+      "examId": "digital-forensics-2",
+      "screen": "game",
+      "overflow": false,
+      "text": 778
+    },
+    {
+      "examId": "information-security-industrial",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 183
+    },
+    {
+      "examId": "information-security-industrial",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 1991
+    },
+    {
+      "examId": "information-security-industrial",
+      "screen": "theory",
+      "overflow": false,
+      "text": 533
+    },
+    {
+      "examId": "information-security-industrial",
+      "screen": "commands",
+      "overflow": false,
+      "text": 861
+    },
+    {
+      "examId": "information-security-industrial",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 220
+    },
+    {
+      "examId": "information-security-industrial",
+      "screen": "plan",
+      "overflow": false,
+      "text": 999
+    },
+    {
+      "examId": "information-security-industrial",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "information-security-industrial",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    },
+    {
+      "examId": "information-security-industrial",
+      "screen": "daily",
+      "overflow": false,
+      "text": 309
+    },
+    {
+      "examId": "information-security-industrial",
+      "screen": "game",
+      "overflow": false,
+      "text": 778
+    },
+    {
+      "examId": "network-manager-1",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 191
+    },
+    {
+      "examId": "network-manager-1",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 3133
+    },
+    {
+      "examId": "network-manager-1",
+      "screen": "theory",
+      "overflow": false,
+      "text": 570
+    },
+    {
+      "examId": "network-manager-1",
+      "screen": "commands",
+      "overflow": false,
+      "text": 515
+    },
+    {
+      "examId": "network-manager-1",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 220
+    },
+    {
+      "examId": "network-manager-1",
+      "screen": "plan",
+      "overflow": false,
+      "text": 999
+    },
+    {
+      "examId": "network-manager-1",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "network-manager-1",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    },
+    {
+      "examId": "network-manager-1",
+      "screen": "daily",
+      "overflow": false,
+      "text": 319
+    },
+    {
+      "examId": "network-manager-1",
+      "screen": "game",
+      "overflow": false,
+      "text": 778
+    },
+    {
+      "examId": "internet-security-2",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 185
+    },
+    {
+      "examId": "internet-security-2",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 2127
+    },
+    {
+      "examId": "internet-security-2",
+      "screen": "theory",
+      "overflow": false,
+      "text": 533
+    },
+    {
+      "examId": "internet-security-2",
+      "screen": "commands",
+      "overflow": false,
+      "text": 307
+    },
+    {
+      "examId": "internet-security-2",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 220
+    },
+    {
+      "examId": "internet-security-2",
+      "screen": "plan",
+      "overflow": false,
+      "text": 999
+    },
+    {
+      "examId": "internet-security-2",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "internet-security-2",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    },
+    {
+      "examId": "internet-security-2",
+      "screen": "daily",
+      "overflow": false,
+      "text": 311
+    },
+    {
+      "examId": "internet-security-2",
+      "screen": "game",
+      "overflow": false,
+      "text": 778
+    },
+    {
+      "examId": "computer-systems-engineer",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 200
+    },
+    {
+      "examId": "computer-systems-engineer",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 2021
+    },
+    {
+      "examId": "computer-systems-engineer",
+      "screen": "theory",
+      "overflow": false,
+      "text": 517
+    },
+    {
+      "examId": "computer-systems-engineer",
+      "screen": "commands",
+      "overflow": false,
+      "text": 861
+    },
+    {
+      "examId": "computer-systems-engineer",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 220
+    },
+    {
+      "examId": "computer-systems-engineer",
+      "screen": "plan",
+      "overflow": false,
+      "text": 999
+    },
+    {
+      "examId": "computer-systems-engineer",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "computer-systems-engineer",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    },
+    {
+      "examId": "computer-systems-engineer",
+      "screen": "daily",
+      "overflow": false,
+      "text": 311
+    },
+    {
+      "examId": "computer-systems-engineer",
+      "screen": "game",
+      "overflow": false,
+      "text": 778
+    },
+    {
+      "examId": "information-processing-industrial",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 185
+    },
+    {
+      "examId": "information-processing-industrial",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 1965
+    },
+    {
+      "examId": "information-processing-industrial",
+      "screen": "theory",
+      "overflow": false,
+      "text": 481
+    },
+    {
+      "examId": "information-processing-industrial",
+      "screen": "commands",
+      "overflow": false,
+      "text": 654
+    },
+    {
+      "examId": "information-processing-industrial",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 220
+    },
+    {
+      "examId": "information-processing-industrial",
+      "screen": "plan",
+      "overflow": false,
+      "text": 999
+    },
+    {
+      "examId": "information-processing-industrial",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "information-processing-industrial",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    },
+    {
+      "examId": "information-processing-industrial",
+      "screen": "daily",
+      "overflow": false,
+      "text": 312
+    },
+    {
+      "examId": "information-processing-industrial",
+      "screen": "game",
+      "overflow": false,
+      "text": 778
+    },
+    {
+      "examId": "geospatial-convergence-craftsman",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 196
+    },
+    {
+      "examId": "geospatial-convergence-craftsman",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 1944
+    },
+    {
+      "examId": "geospatial-convergence-craftsman",
+      "screen": "theory",
+      "overflow": false,
+      "text": 472
+    },
+    {
+      "examId": "geospatial-convergence-craftsman",
+      "screen": "commands",
+      "overflow": false,
+      "text": 659
+    },
+    {
+      "examId": "geospatial-convergence-craftsman",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 220
+    },
+    {
+      "examId": "geospatial-convergence-craftsman",
+      "screen": "plan",
+      "overflow": false,
+      "text": 999
+    },
+    {
+      "examId": "geospatial-convergence-craftsman",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "geospatial-convergence-craftsman",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    },
+    {
+      "examId": "geospatial-convergence-craftsman",
+      "screen": "daily",
+      "overflow": false,
+      "text": 310
+    },
+    {
+      "examId": "geospatial-convergence-craftsman",
+      "screen": "game",
+      "overflow": false,
+      "text": 778
+    },
+    {
+      "examId": "surveying-geospatial-engineer",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 189
+    },
+    {
+      "examId": "surveying-geospatial-engineer",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 1944
+    },
+    {
+      "examId": "surveying-geospatial-engineer",
+      "screen": "theory",
+      "overflow": false,
+      "text": 507
+    },
+    {
+      "examId": "surveying-geospatial-engineer",
+      "screen": "commands",
+      "overflow": false,
+      "text": 717
+    },
+    {
+      "examId": "surveying-geospatial-engineer",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 220
+    },
+    {
+      "examId": "surveying-geospatial-engineer",
+      "screen": "plan",
+      "overflow": false,
+      "text": 999
+    },
+    {
+      "examId": "surveying-geospatial-engineer",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "surveying-geospatial-engineer",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    },
+    {
+      "examId": "surveying-geospatial-engineer",
+      "screen": "daily",
+      "overflow": false,
+      "text": 310
+    },
+    {
+      "examId": "surveying-geospatial-engineer",
+      "screen": "game",
+      "overflow": false,
+      "text": 778
+    },
+    {
+      "examId": "pc-master-kie",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 195
+    },
+    {
+      "examId": "pc-master-kie",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 2037
+    },
+    {
+      "examId": "pc-master-kie",
+      "screen": "theory",
+      "overflow": false,
+      "text": 539
+    },
+    {
+      "examId": "pc-master-kie",
+      "screen": "commands",
+      "overflow": false,
+      "text": 1056
+    },
+    {
+      "examId": "pc-master-kie",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 220
+    },
+    {
+      "examId": "pc-master-kie",
+      "screen": "plan",
+      "overflow": false,
+      "text": 999
+    },
+    {
+      "examId": "pc-master-kie",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "pc-master-kie",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    },
+    {
+      "examId": "pc-master-kie",
+      "screen": "daily",
+      "overflow": false,
+      "text": 310
+    },
+    {
+      "examId": "pc-master-kie",
+      "screen": "game",
+      "overflow": false,
+      "text": 778
+    },
+    {
+      "examId": "ccna",
+      "screen": "quiz",
+      "overflow": false,
+      "text": 231
+    },
+    {
+      "examId": "ccna",
+      "screen": "keywords",
+      "overflow": false,
+      "text": 2152
+    },
+    {
+      "examId": "ccna",
+      "screen": "theory",
+      "overflow": false,
+      "text": 570
+    },
+    {
+      "examId": "ccna",
+      "screen": "commands",
+      "overflow": false,
+      "text": 515
+    },
+    {
+      "examId": "ccna",
+      "screen": "wrong",
+      "overflow": false,
+      "text": 220
+    },
+    {
+      "examId": "ccna",
+      "screen": "plan",
+      "overflow": false,
+      "text": 999
+    },
+    {
+      "examId": "ccna",
+      "screen": "materials",
+      "overflow": false,
+      "text": 306
+    },
+    {
+      "examId": "ccna",
+      "screen": "help",
+      "overflow": false,
+      "text": 230
+    },
+    {
+      "examId": "ccna",
+      "screen": "daily",
+      "overflow": false,
+      "text": 314
+    },
+    {
+      "examId": "ccna",
+      "screen": "game",
+      "overflow": false,
+      "text": 778
+    }
+  ],
+  "flows": [
+    {
+      "examId": "pc",
+      "quizChoices": 0,
+      "gameRunning": 1
+    },
+    {
+      "examId": "linux-master-2",
+      "quizChoices": 4,
+      "gameRunning": 1
+    },
+    {
+      "examId": "information-processing-engineer",
+      "quizChoices": 4,
+      "gameRunning": 1
+    },
+    {
+      "examId": "geospatial-convergence-industrial",
+      "quizChoices": 4,
+      "gameRunning": 1
+    },
+    {
+      "examId": "information-equipment-craftsman",
+      "quizChoices": 4,
+      "gameRunning": 1
+    },
+    {
+      "examId": "information-security-engineer",
+      "quizChoices": 4,
+      "gameRunning": 1
+    },
+    {
+      "examId": "digital-forensics-2",
+      "quizChoices": 4,
+      "gameRunning": 1
+    },
+    {
+      "examId": "information-security-industrial",
+      "quizChoices": 4,
+      "gameRunning": 1
+    },
+    {
+      "examId": "network-manager-1",
+      "quizChoices": 4,
+      "gameRunning": 1
+    },
+    {
+      "examId": "internet-security-2",
+      "quizChoices": 4,
+      "gameRunning": 1
+    },
+    {
+      "examId": "computer-systems-engineer",
+      "quizChoices": 4,
+      "gameRunning": 1
+    },
+    {
+      "examId": "information-processing-industrial",
+      "quizChoices": 4,
+      "gameRunning": 1
+    },
+    {
+      "examId": "geospatial-convergence-craftsman",
+      "quizChoices": 4,
+      "gameRunning": 1
+    },
+    {
+      "examId": "surveying-geospatial-engineer",
+      "quizChoices": 4,
+      "gameRunning": 1
+    },
+    {
+      "examId": "pc-master-kie",
+      "quizChoices": 4,
+      "gameRunning": 1
+    },
+    {
+      "examId": "ccna",
+      "quizChoices": 4,
+      "gameRunning": 1
+    }
+  ],
+  "pcQuickAfterResult": 4,
+  "limits": "Viewport testing; no physical devices; new exams contain basic self-authored practice, not historical banks."
+}

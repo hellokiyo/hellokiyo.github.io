@@ -308,7 +308,7 @@ html[data-theme="dark"]
   border-color: var(--line);
 }
 html[data-theme="dark"]
-  :is(input, select, textarea, .answer, .button.secondary, .map-button, .search-input) {
+  :is(input, select, textarea, .answer:not(.selected):not(.correct):not(.incorrect), .button.secondary, .map-button, .search-input) {
   background: #24372a;
   color: var(--ink);
   border-color: #536a51;
@@ -347,6 +347,10 @@ html[data-theme="dark"]
 html[data-theme="dark"] .answer.correct {
   background: #315539;
   color: #f2fff1;
+}
+html[data-theme="dark"] .answer.incorrect {
+  background: #543a30;
+  color: #fff1e9;
 }
 html[data-theme="dark"] .answer.selected {
   border-color: #bdde97;

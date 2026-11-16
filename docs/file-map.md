@@ -99,3 +99,28 @@
 - `work`: 작업용 스크립트와 중간 자료. 사이트가 이 폴더를 import하면 안 된다.
 - `other-projects`: 이전 별도 프로젝트 보관. 이 앱의 자동 검사/리팩토링 범위에서 제외했다.
 - 숨김 관리 폴더 `.git`, `.idea`, `.agents`는 임의 삭제하지 않았다. Git 명령은 사용하지 않았다.
+# v25 추가 파일
+
+- `assets/network/pages/exam-workspace.js`: 두 시험 선택, 공통 셸의 시험명·선택 상태, PC정비사 준비 화면. 저장 없음.
+- `assets/network/css/exam-workspace.css`: 시험 카드·모바일1열·선택 중 공통 메뉴 숨김.
+- `tests/test-exam-workspace.cjs`: 이전 주소 해석과 PC 진입 시 네트워크 상태/저장 조립 방지.
+
+## v26 추가 파일
+
+- `assets/network/data/exam-catalog.js`:17개 시험의 이름·ID·분야·공식 경로·준비 상태와 순수 필터. 문제·개인 기록과 분리.
+- `tests/test-exam-workspace.cjs`:17개ID 왕복·별칭/분야 복합 검색·16개 준비 화면의 네트워크 저장 접근 방지.
+
+
+## v27 기출 출처 화면
+
+- `docs/research/paper-inventory-2022-2026.json`: 조사 원본.
+- `scripts/build-exam-paper-sources.cjs`: 원본 검증 후 공개 출처 데이터 생성. 네트워크 호출 없음.
+- `assets/network/data/exam-paper-sources.js`: 생성 자산, 직접 수정 금지.
+- `assets/network/pages/paper-sources-page.js`: 공통 외부 출처 필터·상태 출력, 이탈 시 이벤트 해제.
+- `assets/network/css/paper-sources.css`: 회차 카드·필터·모바일 배치.
+- `tests/test-paper-sources.cjs`: 종목/연도/개정 복합 필터·자료 유형 분리·리스너 정리.
+
+
+## 2026-11-16 시험별 학습 업데이트
+
+17개 시험에서 공통 학습 화면을 사용합니다. 네트워크관리사 2급은 기존 기출을 유지하고, 다른 16개는 자체 제작 기초 연습 20~30문항·해설·오늘의 학습·키워드 예시·산성비·기능별 오답·핵심정리·14일 계획을 제공합니다. 실제 기출/전 범위/공식 검수 완료를 뜻하지 않습니다. 상세 경계와 추가 방법은 [시험별 학습 설계](exam-learning.md)를 참고하세요.

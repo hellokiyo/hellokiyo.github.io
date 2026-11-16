@@ -24,7 +24,7 @@
         : [];
     return { days, dismissed: { day: localDay(now), ids } };
   }
-  function choose(data, sessionTheory = 0) {
+  function choose(data, sessionTheory = 0, basicOnly = false) {
     const totals = Object.fromEntries(
       MODES.map((m) => [m, Object.values(data.days).reduce((sum, d) => sum + (d[m] || 0), 0)]),
     );
@@ -39,6 +39,40 @@
         href: "#game",
         label: "산성비로 짧게 복습",
       };
+    // 다른 시험에는 네트워크 기출의 충족도 수치를 전용하지 않습니다.
+    if (basicOnly) {
+      if (total >= 600 && totals.game >= 300 && totals.game / total >= 0.6)
+        return {
+          id: "game-balance",
+          title: "키워드를 문제에도 적용해 볼까요?",
+          body: `최근 7일 활성 학습 시간의 ${Math.round((totals.game / total) * 100)}%가 산성비예요. 이번에는 문장으로 된 문제를 풀고 해설을 확인해요.`,
+          reason:
+            "이 비율은 이 브라우저의 이용 시간입니다. 게임과 문제풀이를 번갈아 하자는 서비스 제안이며 시험 점수나 학습 효과를 예측하지 않습니다.",
+          href: "#quiz",
+          label: "기초 문제 풀기",
+          secondary: ["#theory", "핵심정리 보기"],
+        };
+      if (total >= 600 && totals.practice / total >= 0.65)
+        return {
+          id: "practice-balance",
+          title: "답을 고른 이유도 설명할 수 있나요?",
+          body: "최근 학습이 문제풀이에 집중되어 있어요. 핵심정리에서 헷갈린 개념을 확인해 보세요.",
+          reason:
+            "같은 답을 외우는 연습에 이유를 설명하는 시간을 더하자는 제안입니다. 공식 시험 성적의 근거가 아닙니다.",
+          href: "#theory",
+          label: "개념과 이유 확인",
+        };
+      return {
+        id: "start",
+        title: "문제를 풀고, 모르는 개념을 보충해요.",
+        body: "기초 연습 → 해설 확인 → 오답 복습 순서로 시작해 보세요. 산성비는 짧은 용어 복습에 활용해요.",
+        reason:
+          "현재 제공되는 자체 기초 연습을 활용하는 순서입니다. 실제 기출과 시험 전 범위 학습은 별도로 필요합니다.",
+        href: "#quiz",
+        label: "기초 문제 풀기",
+        secondary: ["#daily/5", "5분 복습"],
+      };
+    }
     if (total >= 600 && totals.game >= 300 && totals.game / total >= 0.6)
       return {
         id: "game-balance",
@@ -83,13 +117,13 @@
           "'": "&#39;",
         })[c],
     );
-  function markup(p) {
-    return `<section class="study-coach" aria-label="다음 학습 제안"><div class="coach-eyebrow">다음 공부, 이렇게 해볼까요?<button type="button" data-coach-dismiss="${p.id}" aria-label="이 제안 오늘 숨기기">×</button></div><h2>${esc(p.title)}</h2><p>${esc(p.body)}</p><div class="coach-actions"><a class="button secondary" href="${p.href}">${p.label} →</a>${p.secondary ? `<a class="text-button" href="${p.secondary[0]}">${p.secondary[1]}</a>` : ""}</div><p class="coach-reason"><b>추천 이유</b> ${esc(p.reason)}</p><details class="coach-evidence"><summary>숫자의 근거와 계산 기준 보기</summary><p>2026년 1~4회 200문항을 수동 검토했어요. 2026년 기출을 학습 원천에서 제외하고, 충분한 정답 근거를 확인한 문항만 2점으로 환산했어요.</p><table><caption>자료 충족도 환산점 · 실제 응시 성적 아님</caption><thead><tr><th scope="col">자료</th><th scope="col">1회</th><th scope="col">2회</th><th scope="col">3회</th><th scope="col">4회</th><th scope="col">평균</th></tr></thead><tbody><tr><th scope="row">산성비</th><td>30</td><td>22</td><td>16</td><td>20</td><td>22</td></tr><tr><th scope="row">핵심정리</th><td>68</td><td>70</td><td>66</td><td>66</td><td>67.5</td></tr><tr><th scope="row">이전 기출</th><td>80</td><td>82</td><td>78</td><td>64</td><td>76</td></tr><tr><th scope="row">기출+정리</th><td>90</td><td>92</td><td>90</td><td>80</td><td>88</td></tr></tbody></table><p>산성비 44/200문항 = 22%. 전체 콘텐츠 기준이며 한 번의 이용 효과가 아니에요. 단일 검토자의 수동 판정이고, 4회차는 공식 대조 전 학습용 정답 기준이에요. 이용 비율은 이 브라우저에서 기록한 최근 7일 활성 시간이며, 새 기록부터 집계해요. 추천 기준(산성비 60%·기출 65%, 누적 10분 이상)은 서비스 운영 규칙이며 학습 효과 실험값이 아니에요.</p><a href="docs/study/study-plan-7-days.md" download>전체 31개 조합·7일 계획 내려받기 ↓</a></details></section>`;
+  function markup(p, basicOnly = false) {
+    return `<section class="study-coach" aria-label="다음 학습 제안"><div class="coach-eyebrow">다음 공부, 이렇게 해볼까요?<button type="button" data-coach-dismiss="${p.id}" aria-label="이 제안 오늘 숨기기">×</button></div><h2>${esc(p.title)}</h2><p>${esc(p.body)}</p><div class="coach-actions"><a class="button secondary" href="${p.href}">${p.label} →</a>${p.secondary ? `<a class="text-button" href="${p.secondary[0]}">${p.secondary[1]}</a>` : ""}</div><p class="coach-reason"><b>추천 이유</b> ${esc(p.reason)}</p>${basicOnly ? "" : `<details class="coach-evidence"><summary>숫자의 근거와 계산 기준 보기</summary><p>2026년 1~4회 200문항을 수동 검토했어요. 2026년 기출을 학습 원천에서 제외하고, 충분한 정답 근거를 확인한 문항만 2점으로 환산했어요.</p><table><caption>자료 충족도 환산점 · 실제 응시 성적 아님</caption><thead><tr><th scope="col">자료</th><th scope="col">1회</th><th scope="col">2회</th><th scope="col">3회</th><th scope="col">4회</th><th scope="col">평균</th></tr></thead><tbody><tr><th scope="row">산성비</th><td>30</td><td>22</td><td>16</td><td>20</td><td>22</td></tr><tr><th scope="row">핵심정리</th><td>68</td><td>70</td><td>66</td><td>66</td><td>67.5</td></tr><tr><th scope="row">이전 기출</th><td>80</td><td>82</td><td>78</td><td>64</td><td>76</td></tr><tr><th scope="row">기출+정리</th><td>90</td><td>92</td><td>90</td><td>80</td><td>88</td></tr></tbody></table><p>산성비 44/200문항 = 22%. 전체 콘텐츠 기준이며 한 번의 이용 효과가 아니에요. 단일 검토자의 수동 판정이고, 4회차는 공식 대조 전 학습용 정답 기준이에요. 이용 비율은 이 브라우저에서 기록한 최근 7일 활성 시간이며, 새 기록부터 집계해요. 추천 기준(산성비 60%·기출 65%, 누적 10분 이상)은 서비스 운영 규칙이며 학습 효과 실험값이 아니에요.</p><a href="docs/study/study-plan-7-days.md" download>전체 31개 조합·7일 계획 내려받기 ↓</a></details>`}</section>`;
   }
-  function mount({ root, getMode, getView }) {
+  function mount({ root, getMode, getView, storageKey = KEY, basicOnly = false }) {
     let data;
     try {
-      data = clean(JSON.parse(localStorage.getItem(KEY) || "{}"));
+      data = clean(JSON.parse(localStorage.getItem(storageKey) || "{}"));
     } catch {
       data = clean({});
     }
@@ -99,7 +133,7 @@
       theoryRun = 0;
     function save() {
       try {
-        localStorage.setItem(KEY, JSON.stringify(data));
+        localStorage.setItem(storageKey, JSON.stringify(data));
       } catch {}
     }
     function draw() {
@@ -115,7 +149,7 @@
         host?.remove();
         return;
       }
-      const p = choose(data, theoryRun);
+      const p = choose(data, theoryRun, basicOnly);
       if (view !== "dashboard" && p.id === "start") {
         host?.remove();
         return;
@@ -135,8 +169,8 @@
         host.dataset.recommendation = p.id;
         host.innerHTML =
           p.id === "start"
-            ? `<details class="coach-guide"><summary>학습 방법·비교 근거와 7일 계획</summary>${markup(p)}</details>`
-            : markup(p);
+            ? `<details class="coach-guide"><summary>${basicOnly ? "학습 방법과 추천 이유" : "학습 방법·비교 근거와 7일 계획"}</summary>${markup(p, basicOnly)}</details>`
+            : markup(p, basicOnly);
       }
     }
     function tick() {

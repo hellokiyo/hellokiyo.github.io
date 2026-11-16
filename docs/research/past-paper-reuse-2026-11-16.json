@@ -1,0 +1,245 @@
+{
+  "checkedAt": "2026-11-16",
+  "requestedYears": [
+    2022,
+    2026
+  ],
+  "scope": "Publication/reuse review, not a completed question import or definitive absence finding",
+  "userClarification": "사용허가·별도 이용 조건을 받은 적 없음",
+  "newQuestionsAdded": 0,
+  "existingQuestionDataChanged": false,
+  "contactedPublishers": false,
+  "policies": {
+    "icqa": {
+      "status": "permission-required-for-content-use",
+      "sourceUrl": "https://www.icqa.or.kr/cn/board/dataroom/264",
+      "finding": "공식 게시물은 교육·출판·콘텐츠 제작 계획 시 문의하도록 안내한다. 공개 다운로드를 재수록 허가로 처리하지 않는다.",
+      "verification": "official-post-read"
+    },
+    "kait": {
+      "status": "unauthorized-use-prohibited",
+      "sourceUrl": "https://ihd.or.kr/guidequestion.do?exam_kind=LMS&pre_exam_kind=LMF&search_flag=1",
+      "finding": "공식 문제공개 페이지가 무단 이용 금지와 사용허가 신청을 명시한다.",
+      "verification": "official-policy-read"
+    },
+    "qnet": {
+      "status": "per-document-license-not-confirmed",
+      "sourceUrl": "https://www.q-net.or.kr/cst006.do?brdId=Q006&id=cst00601s01",
+      "finding": "기술사140회부터의 공공누리 공지는 확인했지만 현재 대상7종목의 과거 필기 전체에 적용된다고 확인하지 못했다. 전문자격/기술사의 공공누리 허용을 다른 종목에 전용하지 않는다.",
+      "verification": "official-list-read-scope-limited"
+    },
+    "kca": {
+      "status": "per-document-license-not-confirmed",
+      "sourceUrl": "https://www.cq.or.kr/copyrightPolicy.do",
+      "finding": "공공누리 표시가 있는 자료는 해당 조건에 따르고 표시 없는 자료는 사전 협의를 안내한다. 대상 기사/산업기사 회차 원문에서 이용표시를 확인하지 못했다.",
+      "verification": "official-policy-read-document-license-pending"
+    },
+    "cisco": {
+      "status": "confidential-exam-content",
+      "sourceUrl": "https://www.cisco.com/site/us/en/learn/training-certifications/exams/policies.html",
+      "finding": "실제 시험의 문제·정답·그림은 비밀/독점 자료이며 명시적 허가 없는 복제·배포를 금지한다. 공식 주제별 자체 연습과 구분한다.",
+      "verification": "official-policy-read"
+    },
+    "kie": {
+      "status": "public-bank-and-reuse-not-confirmed",
+      "sourceUrl": "https://kie.or.kr/kiehomepage/fc/licencePCMasterG2?licence=PCMaster",
+      "finding": "종목/일정 및 FAQ 목록을 열었지만 이번 확인에서는 최근3~5년 공개 문제은행이나 재수록 허가를 확인하지 못했다. 부재를 확정한 것은 아니다.",
+      "verification": "official-page-read-incomplete"
+    },
+    "forensic": {
+      "status": "public-bank-and-reuse-not-confirmed",
+      "sourceUrl": "https://forensickorea.org/",
+      "finding": "공식 홈페이지 본문이 검색 도구에서 읽히지 않았다. 공개 기출/재이용 조건 미확인.",
+      "verification": "official-page-no-readable-body"
+    }
+  },
+  "exams": [
+    {
+      "certificationId": "network",
+      "sourceGroup": "icqa",
+      "knownRoundLinks": 20,
+      "newQuestionsAdded": 0,
+      "decision": "no-bulk-republication",
+      "status": "permission-required-for-content-use",
+      "sourceUrl": "https://www.icqa.or.kr/cn/board/dataroom/264",
+      "finding": "공식 게시물은 교육·출판·콘텐츠 제작 계획 시 문의하도록 안내한다. 공개 다운로드를 재수록 허가로 처리하지 않는다.",
+      "verification": "official-post-read"
+    },
+    {
+      "certificationId": "pc",
+      "sourceGroup": "icqa",
+      "knownRoundLinks": 20,
+      "newQuestionsAdded": 0,
+      "decision": "no-bulk-republication",
+      "status": "permission-required-for-content-use",
+      "sourceUrl": "https://www.icqa.or.kr/cn/board/dataroom/264",
+      "finding": "공식 게시물은 교육·출판·콘텐츠 제작 계획 시 문의하도록 안내한다. 공개 다운로드를 재수록 허가로 처리하지 않는다.",
+      "verification": "official-post-read"
+    },
+    {
+      "certificationId": "linux-master-2",
+      "sourceGroup": "kait",
+      "knownRoundLinks": 7,
+      "newQuestionsAdded": 0,
+      "decision": "no-bulk-republication",
+      "status": "unauthorized-use-prohibited",
+      "sourceUrl": "https://ihd.or.kr/guidequestion.do?exam_kind=LMS&pre_exam_kind=LMF&search_flag=1",
+      "finding": "공식 문제공개 페이지가 무단 이용 금지와 사용허가 신청을 명시한다.",
+      "verification": "official-policy-read"
+    },
+    {
+      "certificationId": "information-processing-engineer",
+      "sourceGroup": "qnet",
+      "knownRoundLinks": 2,
+      "newQuestionsAdded": 0,
+      "decision": "no-bulk-republication",
+      "status": "per-document-license-not-confirmed",
+      "sourceUrl": "https://www.q-net.or.kr/cst006.do?brdId=Q006&id=cst00601s01",
+      "finding": "기술사140회부터의 공공누리 공지는 확인했지만 현재 대상7종목의 과거 필기 전체에 적용된다고 확인하지 못했다. 전문자격/기술사의 공공누리 허용을 다른 종목에 전용하지 않는다.",
+      "verification": "official-list-read-scope-limited"
+    },
+    {
+      "certificationId": "geospatial-convergence-industrial",
+      "sourceGroup": "qnet",
+      "knownRoundLinks": 0,
+      "newQuestionsAdded": 0,
+      "decision": "no-bulk-republication",
+      "status": "per-document-license-not-confirmed",
+      "sourceUrl": "https://www.q-net.or.kr/cst006.do?brdId=Q006&id=cst00601s01",
+      "finding": "기술사140회부터의 공공누리 공지는 확인했지만 현재 대상7종목의 과거 필기 전체에 적용된다고 확인하지 못했다. 전문자격/기술사의 공공누리 허용을 다른 종목에 전용하지 않는다.",
+      "verification": "official-list-read-scope-limited"
+    },
+    {
+      "certificationId": "information-equipment-craftsman",
+      "sourceGroup": "qnet",
+      "knownRoundLinks": 0,
+      "newQuestionsAdded": 0,
+      "decision": "no-bulk-republication",
+      "status": "per-document-license-not-confirmed",
+      "sourceUrl": "https://www.q-net.or.kr/cst006.do?brdId=Q006&id=cst00601s01",
+      "finding": "기술사140회부터의 공공누리 공지는 확인했지만 현재 대상7종목의 과거 필기 전체에 적용된다고 확인하지 못했다. 전문자격/기술사의 공공누리 허용을 다른 종목에 전용하지 않는다.",
+      "verification": "official-list-read-scope-limited"
+    },
+    {
+      "certificationId": "information-security-engineer",
+      "sourceGroup": "kca",
+      "knownRoundLinks": 3,
+      "newQuestionsAdded": 0,
+      "decision": "no-bulk-republication",
+      "status": "per-document-license-not-confirmed",
+      "sourceUrl": "https://www.cq.or.kr/copyrightPolicy.do",
+      "finding": "공공누리 표시가 있는 자료는 해당 조건에 따르고 표시 없는 자료는 사전 협의를 안내한다. 대상 기사/산업기사 회차 원문에서 이용표시를 확인하지 못했다.",
+      "verification": "official-policy-read-document-license-pending"
+    },
+    {
+      "certificationId": "digital-forensics-2",
+      "sourceGroup": "forensic",
+      "knownRoundLinks": 0,
+      "newQuestionsAdded": 0,
+      "decision": "no-bulk-republication",
+      "status": "public-bank-and-reuse-not-confirmed",
+      "sourceUrl": "https://forensickorea.org/",
+      "finding": "공식 홈페이지 본문이 검색 도구에서 읽히지 않았다. 공개 기출/재이용 조건 미확인.",
+      "verification": "official-page-no-readable-body"
+    },
+    {
+      "certificationId": "information-security-industrial",
+      "sourceGroup": "kca",
+      "knownRoundLinks": 0,
+      "newQuestionsAdded": 0,
+      "decision": "no-bulk-republication",
+      "status": "per-document-license-not-confirmed",
+      "sourceUrl": "https://www.cq.or.kr/copyrightPolicy.do",
+      "finding": "공공누리 표시가 있는 자료는 해당 조건에 따르고 표시 없는 자료는 사전 협의를 안내한다. 대상 기사/산업기사 회차 원문에서 이용표시를 확인하지 못했다.",
+      "verification": "official-policy-read-document-license-pending"
+    },
+    {
+      "certificationId": "network-manager-1",
+      "sourceGroup": "icqa",
+      "knownRoundLinks": 10,
+      "newQuestionsAdded": 0,
+      "decision": "no-bulk-republication",
+      "status": "permission-required-for-content-use",
+      "sourceUrl": "https://www.icqa.or.kr/cn/board/dataroom/264",
+      "finding": "공식 게시물은 교육·출판·콘텐츠 제작 계획 시 문의하도록 안내한다. 공개 다운로드를 재수록 허가로 처리하지 않는다.",
+      "verification": "official-post-read"
+    },
+    {
+      "certificationId": "internet-security-2",
+      "sourceGroup": "icqa",
+      "knownRoundLinks": 10,
+      "newQuestionsAdded": 0,
+      "decision": "no-bulk-republication",
+      "status": "permission-required-for-content-use",
+      "sourceUrl": "https://www.icqa.or.kr/cn/board/dataroom/264",
+      "finding": "공식 게시물은 교육·출판·콘텐츠 제작 계획 시 문의하도록 안내한다. 공개 다운로드를 재수록 허가로 처리하지 않는다.",
+      "verification": "official-post-read"
+    },
+    {
+      "certificationId": "computer-systems-engineer",
+      "sourceGroup": "qnet",
+      "knownRoundLinks": 1,
+      "newQuestionsAdded": 0,
+      "decision": "no-bulk-republication",
+      "status": "per-document-license-not-confirmed",
+      "sourceUrl": "https://www.q-net.or.kr/cst006.do?brdId=Q006&id=cst00601s01",
+      "finding": "기술사140회부터의 공공누리 공지는 확인했지만 현재 대상7종목의 과거 필기 전체에 적용된다고 확인하지 못했다. 전문자격/기술사의 공공누리 허용을 다른 종목에 전용하지 않는다.",
+      "verification": "official-list-read-scope-limited"
+    },
+    {
+      "certificationId": "information-processing-industrial",
+      "sourceGroup": "qnet",
+      "knownRoundLinks": 0,
+      "newQuestionsAdded": 0,
+      "decision": "no-bulk-republication",
+      "status": "per-document-license-not-confirmed",
+      "sourceUrl": "https://www.q-net.or.kr/cst006.do?brdId=Q006&id=cst00601s01",
+      "finding": "기술사140회부터의 공공누리 공지는 확인했지만 현재 대상7종목의 과거 필기 전체에 적용된다고 확인하지 못했다. 전문자격/기술사의 공공누리 허용을 다른 종목에 전용하지 않는다.",
+      "verification": "official-list-read-scope-limited"
+    },
+    {
+      "certificationId": "geospatial-convergence-craftsman",
+      "sourceGroup": "qnet",
+      "knownRoundLinks": 0,
+      "newQuestionsAdded": 0,
+      "decision": "no-bulk-republication",
+      "status": "per-document-license-not-confirmed",
+      "sourceUrl": "https://www.q-net.or.kr/cst006.do?brdId=Q006&id=cst00601s01",
+      "finding": "기술사140회부터의 공공누리 공지는 확인했지만 현재 대상7종목의 과거 필기 전체에 적용된다고 확인하지 못했다. 전문자격/기술사의 공공누리 허용을 다른 종목에 전용하지 않는다.",
+      "verification": "official-list-read-scope-limited"
+    },
+    {
+      "certificationId": "surveying-geospatial-engineer",
+      "sourceGroup": "qnet",
+      "knownRoundLinks": 1,
+      "newQuestionsAdded": 0,
+      "decision": "no-bulk-republication",
+      "status": "per-document-license-not-confirmed",
+      "sourceUrl": "https://www.q-net.or.kr/cst006.do?brdId=Q006&id=cst00601s01",
+      "finding": "기술사140회부터의 공공누리 공지는 확인했지만 현재 대상7종목의 과거 필기 전체에 적용된다고 확인하지 못했다. 전문자격/기술사의 공공누리 허용을 다른 종목에 전용하지 않는다.",
+      "verification": "official-list-read-scope-limited"
+    },
+    {
+      "certificationId": "pc-master-kie",
+      "sourceGroup": "kie",
+      "knownRoundLinks": 0,
+      "newQuestionsAdded": 0,
+      "decision": "no-bulk-republication",
+      "status": "public-bank-and-reuse-not-confirmed",
+      "sourceUrl": "https://kie.or.kr/kiehomepage/fc/licencePCMasterG2?licence=PCMaster",
+      "finding": "종목/일정 및 FAQ 목록을 열었지만 이번 확인에서는 최근3~5년 공개 문제은행이나 재수록 허가를 확인하지 못했다. 부재를 확정한 것은 아니다.",
+      "verification": "official-page-read-incomplete"
+    },
+    {
+      "certificationId": "ccna",
+      "sourceGroup": "cisco",
+      "knownRoundLinks": 0,
+      "newQuestionsAdded": 0,
+      "decision": "no-bulk-republication",
+      "status": "confidential-exam-content",
+      "sourceUrl": "https://www.cisco.com/site/us/en/learn/training-certifications/exams/policies.html",
+      "finding": "실제 시험의 문제·정답·그림은 비밀/독점 자료이며 명시적 허가 없는 복제·배포를 금지한다. 공식 주제별 자체 연습과 구분한다.",
+      "verification": "official-policy-read"
+    }
+  ]
+}

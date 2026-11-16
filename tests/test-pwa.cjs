@@ -5,7 +5,7 @@ const test = require("node:test"),
 test("PWA 리소스·상대 경로·아이콘 크기", () => {
   const m = JSON.parse(fs.readFileSync("manifest.webmanifest", "utf8"));
   assert.equal(m.scope, "./");
-  assert.equal(m.start_url, "./#dashboard");
+  assert.equal(m.start_url, "./#exams");
   assert.equal(m.display, "standalone");
   for (const i of m.icons) {
     const b = fs.readFileSync(i.src),

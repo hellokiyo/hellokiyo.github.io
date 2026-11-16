@@ -95,8 +95,14 @@
 }
 .answer.selected {
   border-color: var(--green);
-  background: #f0f5e9;
-  color: var(--green);
+  background: var(--green-light);
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--green);
+}
+.answer.selected span {
+  background: var(--green);
+  color: var(--paper);
+  font-weight: 700;
 }
 .answer.correct {
   border-color: #74a563;

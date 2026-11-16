@@ -18,11 +18,18 @@
         })[ch],
     );
 
-  function mount({ root, toast, confirmAction }) {
+  function mount({
+    root,
+    toast,
+    confirmAction,
+    store = S,
+    publicMaterials = window.PUBLIC_MATERIALS || [],
+  }) {
+    const S = store;
     dispose();
     let active = true,
       locals = [],
-      published = S.normalizePublic(window.PUBLIC_MATERIALS || []);
+      published = S.normalizePublic(publicMaterials);
     let loading = true,
       busy = false,
       storageError = "",

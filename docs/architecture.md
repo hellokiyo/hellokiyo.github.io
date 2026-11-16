@@ -1,5 +1,17 @@
 # 합격루틴 구조와 기술 선정 이유
 
+## v27 기출 출처와 채점 문제의 분리
+
+연구 JSON→`scripts/build-exam-paper-sources.cjs`→`data/exam-paper-sources.js`로 공개 출처만 생성한다. 생성기는 네트워크 접근 없이 중복 회차·종목·날짜 형식·HTTPS를 확인하며 문제/정답을 생성하지 않는다. `pages/paper-sources-page.js`는 종목/연도/개정 필터와 출력만 담당하고 학습 저장에 접근하지 않는다.
+
+공통 `#sources`는 네트워크 조립부와 다른 시험의 작업 공간에서 같은 화면 모듈을 사용한다. mount 전/경로 이탈 때 unmount로 필터 이벤트를 제거한다. 필터는 개인 저장소가 아닌 해당 화면 수명에만 유지하며 재진입 시 초기화한다. 기존 Q 카탈로그·wrongByFeature·quiz 세션과 출처 인덱스를 섞지 않는다. 실제 문항 제공은 별도의 권한/원문/정답/해설 검수와 시험별 채점/저장 어댑터 도입이 필요하다.
+
+## v26 다종목 준비 카탈로그
+
+`data/exam-catalog.js`는17개 선택 대상과 순수 검색/분야 필터를 소유하고, `pages/exam-workspace.js`는 출력/선택 화면 이벤트를 맡는다. 새 시험은 페이지 복사 대신 카탈로그에 등록한다. app은 id===pc 조건 대신 ready가false인 모든 시험을 네트워크 조립 전 준비 화면으로 보낸다. 아직 네트워크 문제은행이 범용화된 구조는 아니다. 준비 중 시험에는 별도 학습 저장소도 만들지 않는다.
+
+공식 자료 링크는 이전 조사 경로이며 공개 수록 허가/최신 기준 전수 검수를 의미하지 않는다. 향후 콘텐츠를 열 때 ready만 변경하지 말고 시험별 문제·채점·저장 어댑터를 먼저 연결해야 한다. 테마/PWA 외 개인 학습 상태를 여러 시험에서 공유하지 않는다. 검색 리스너는 문서당1회 이벤트 위임으로 설치하고 화면 재진입 시 검색을 초기화한다.
+
 ## 목적과 범위
 
 현재 목적은 네트워크관리사 2급 필기 문제 반복·오답 복습·핵심 개념 확인이다. 계정·결제·공유 DB가 없는 정적 앱으로 운영한다. 예시 DOCX에서는 ‘조건 → 기술 선정 → 구조 → 데이터 → 배포 → 검증 → 미결정 사항’의 설명 순서를 참고했다. 예시에 등장하는 내부망·eGovFrame·Oracle·SVN 구성을 이 서비스의 요구사항으로 취급하지 않는다.
@@ -75,7 +87,7 @@ flowchart TD
 
 ## CSS 모듈과 로딩 순서
 
-`assets/network/css/`에 foundation, reference, assessment, progress-dialogs, responsive, study-layout, keyword-examples, materials, latest-paper, daily-pwa, navigation-layout, keyword-disclosure, paper-library의 13개 파일을 둔다. 공통 스타일과 여러 학습 화면에서 공유하는 답안/진행 UI는 함께 유지했다.
+`assets/network/css/`에 foundation, reference, assessment, progress-dialogs, responsive, study-layout, keyword-examples, materials, latest-paper, daily-pwa, navigation-layout, keyword-disclosure, paper-library의 초기 13개 파일을 분리했다. 현재는 home, themes, keyword-game, study-coach, feature-helper, theory-visuals를 포함한 19개 CSS 파일을 index에서 로드한다. 공통 스타일과 여러 학습 화면에서 공유하는 답안/진행 UI는 함께 유지했다.
 
 실제 HTML은 index의 link 순서로 로드한다. 기존 styles.css/mobile.css는 기존 경로를 사용하는 경우를 위한 import 진입점이다. 분리 시 원본 규칙 순서를 그대로 유지했고, 모듈을 순서대로 합친 내용의 SHA256이 원본과 동일함을 확인했다. 근거는 audits/css-module-split.json이다. 이 기록은 분리 당시의 무변경 증거이며 이후 정당한 CSS 수정을 금지하는 테스트가 아니다.
 
@@ -125,3 +137,19 @@ work/          일회 작업과 중간 결과 (런타임 의존 금지)
 `pages/user-guide-page.js`는 #help의 정적 설명 화면이다. 홈·설정·기능 검색에서 연결한다. `css/theory-visuals.css`는 새 도식/안내 책임을 갖고 기존 참고 화면/테마 CSS 뒤에서 로드해 예전 reader 문단 색이 어두운 테마의 도식에 덮어쓰이지 않게 했다. 기존 CSS의 순서는 유지한다.
 
 본문 내부 이동은 data-scroll-target으로 표시하고 app이 같은 문서의 대상에 스크롤/포커스를 옮긴다. 앱 라우팅 해시를 새로 만들지 않는다. 목차는 모바일에서 처음에 접혀 있으며 브라우저 기본 details 조작으로 열 수 있다. 화면을 넓히더라도 summary를 남겨 닫힌 목차에 접근할 수 있다. 새 상태나 별도 리스너는 없다.
+# v25 시험 작업 공간 경계
+
+`pages/exam-workspace.js`는 시험 선택과 PC정비사 준비 화면을 담당한다. `app.js`는 query의 허용된 exam을 확인하고 PC이면 네트워크 모듈 조립 전에 준비 화면으로 진입한다. 시험 변경은 query가 다른 문서를 다시 열어 상태·타이머를 공유하지 않는다. 테마와 서비스 워커만 공통이다. PC에는 학습 저장소가 아직 없으며 ‘시험별 저장 구현 완료’를 의미하지 않는다.
+
+추후 PC 문제 검수가 끝나면 시험별 데이터·채점 규칙·저장 어댑터를 주입하도록 확장한다. 이번에는 기존922문항·ID·정답·network-notes:v1을 옮기지 않았다. 준비 화면은 문서 수명의 hashchange 리스너만 소유하며 학습 기록을 읽거나 쓰지 않는다. 개발 근거는 [확장 조사](research/exam-expansion-2026-11-15.md)를 따른다.
+
+
+
+## 2026-11-16 시험별 학습 업데이트
+
+17개 시험에서 공통 학습 화면을 사용합니다. 네트워크관리사 2급은 기존 기출을 유지하고, 다른 16개는 자체 제작 기초 연습 20~30문항·해설·오늘의 학습·키워드 예시·산성비·기능별 오답·핵심정리·14일 계획을 제공합니다. 실제 기출/전 범위/공식 검수 완료를 뜻하지 않습니다. 상세 경계와 추가 방법은 [시험별 학습 설계](exam-learning.md)를 참고하세요.
+
+
+### v29 시험별 화면 비교 수정
+
+홈·사용법을 공통 렌더러로 통합해 시험일 설정/이어가기/복습 현황/오늘 목표를 제공한다. 확장 시험의 학습 추천은 시험별 활성 시간만 사용하고 네트워크 점수 근거를 표시하지 않는다. 추천 기록은 `cert-coach:{id}:v1`이며 학습 JSON 백업 대상이 아니다. [비교·검증 결과](exam-parity-2026-11-16.md)를 참고한다.

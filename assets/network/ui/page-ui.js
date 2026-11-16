@@ -14,7 +14,7 @@
           "'": "&#39;",
         })[ch],
     );
-  function heading(kicker, title, description, extra = "") {
+  function heading(kicker, title, description, extra = "", practiceOnly = false) {
     const titles = {
       "KEYWORD FLASHCARDS": "키워드 암기",
       "COMMAND REFERENCE": "명령어 노트",
@@ -30,10 +30,10 @@
       "CORE CONCEPTS": "시험에 필요한 개념과 계산을 정리했습니다.",
       "14-DAY STUDY PLAN": "하루 한 주제씩 완료 체크하세요.",
       "PRACTICE MAKES PROGRESS": "최근 5년 기출 · 회차별 반복 풀이와 오답 복습",
-      "REVIEW YOUR MISTAKES": "다시 맞힌 문제는 오답장에서 제외됩니다.",
-      "SESSION COMPLETE": "틀린 문제와 미응답은 오답장에 저장됩니다.",
+      "REVIEW YOUR MISTAKES": "다시 맞힌 문제는 오답노트에서 제외됩니다.",
+      "SESSION COMPLETE": "틀린 문제와 미응답은 오답노트에 저장됩니다.",
     };
-    return `<div class="page-heading"><div><h1>${titles[kicker] || title}</h1><p>${descriptions[kicker] || description}</p></div>${extra}</div>`;
+    return `<div class="page-heading"><div><h1>${practiceOnly && kicker === "COMMAND REFERENCE" ? "명령어·표현 노트" : titles[kicker] || title}</h1><p>${practiceOnly && kicker === "PRACTICE MAKES PROGRESS" ? "자체 제작 기초 연습 · 해설 확인과 반복 복습" : practiceOnly && kicker === "CORE CONCEPTS" ? "자체 기초 연습과 연결된 개념 정리입니다. 시험 전 범위를 대신하지 않습니다." : descriptions[kicker] || description}</p></div>${extra}</div>`;
   }
   function empty(title, description, action = "") {
     return `<div class="empty-state"><h2>${title}</h2><p>${description}</p>${action}</div>`;

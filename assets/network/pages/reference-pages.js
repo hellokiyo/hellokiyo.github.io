@@ -5,7 +5,7 @@
     // 키워드: 공개/예시/암기 상태와 masonry 재배치를 함께 갱신합니다.
     function searchBar(placeholder, categories) {
       const { filter, query } = getUI();
-      return `<div class="toolbar"><label class="sr-only" for="search">검색</label><input class="search-input" id="search" type="search" placeholder="${placeholder}" value="${esc(query)}" autocomplete="off"></div><div class="filter-group">${categories.map((c) => `<button type="button" class="filter ${filter === c ? "active" : ""}" data-filter="${esc(c)}" aria-pressed="${filter === c}">${esc(c)}</button>`).join("")}</div>`;
+      return `<div class="toolbar"><label class="sr-only" for="search">검색</label><input class="search-input" id="search" type="search" placeholder="${esc(placeholder)}" value="${esc(query)}" autocomplete="off"></div><div class="filter-group">${categories.map((c) => `<button type="button" class="filter ${filter === c ? "active" : ""}" data-filter="${esc(c)}" aria-pressed="${filter === c}">${esc(c)}</button>`).join("")}</div>`;
     }
     function keywords() {
       const state = getState();
@@ -18,10 +18,15 @@
           "키워드를 읽고 정답을 떠올린 뒤 카드를 열어 보세요.",
         ) +
         `` +
-        searchBar("ARP, 미러링, 역방향 조회…", [
-          "전체",
-          ...new Set(D.keywords.map((k) => k.category)),
-        ]) +
+        searchBar(
+          D.certificationId
+            ? `${D.keywords
+                .slice(0, 3)
+                .map((k) => k.answer)
+                .join(", ")}…`
+            : "ARP, 미러링, 역방향 조회…",
+          ["전체", ...new Set(D.keywords.map((k) => k.category))],
+        ) +
         `<div class="toolbar"><button type="button" class="filter ${onlyUnlearned ? "active" : ""}" id="unlearned-toggle" aria-pressed="${onlyUnlearned}">미암기만 보기</button><span class="quiz-status" id="mastery-count">암기 완료 ${state.mastered.length} / ${D.keywords.length}</span></div><div id="keyword-results"></div>`;
       keywordResults();
     }
@@ -62,7 +67,7 @@
                 )
                 .join(
                   "",
-                )}</div>${keywordExample(k)}<div class="flash-actions"><span class="card-index">${String(Number(k.id.slice(1)) + 1).padStart(2, "0")}</span><button class="master-button" data-master="${k.id}" aria-pressed="${state.mastered.includes(k.id)}">${state.mastered.includes(k.id) ? "✓ 암기 완료" : "암기 체크"}</button></div></article>`,
+                )}</div>${keywordExample(k)}<div class="flash-actions"><span class="card-index">${String(D.keywords.findIndex((item) => item.id === k.id) + 1).padStart(2, "0")}</span><button class="master-button" data-master="${k.id}" aria-pressed="${state.mastered.includes(k.id)}">${state.mastered.includes(k.id) ? "✓ 암기 완료" : "암기 체크"}</button></div></article>`,
           )
           .join("")}</div>` +
         (matches.length ? "" : empty("해당하는 카드가 없어요.", "검색어나 필터를 바꿔 보세요."));
@@ -85,12 +90,12 @@
           "조회인지 변경인지, Windows인지 Linux인지 먼저 확인해요.",
         ) +
         `<p class="inline-note">변경·삭제 명령은 실습 환경에서 사용하세요.</p>` +
-        searchBar("DNS 캐시, netstat, 부팅 자동 시작…", [
-          "전체",
-          "Windows",
-          "Linux",
-          "systemctl·vi·설정 파일",
-        ]) +
+        searchBar(
+          "명령어나 용어 검색…",
+          D.certificationId
+            ? ["전체", ...new Set(D.commands.map((c) => c.category))]
+            : ["전체", "Windows", "Linux", "systemctl·vi·설정 파일"],
+        ) +
         `<div id="command-results"></div>`;
       commandResults();
     }
@@ -100,11 +105,13 @@
       let matches = D.commands.filter(
         (c) =>
           (filter === "전체" ||
-            (filter === "Windows"
-              ? c.category.startsWith("Windows")
-              : filter === "Linux"
-                ? c.category.startsWith("Linux")
-                : c.category === "systemctl·vi·설정 파일")) &&
+            (D.certificationId
+              ? c.category === filter
+              : filter === "Windows"
+                ? c.category.startsWith("Windows")
+                : filter === "Linux"
+                  ? c.category.startsWith("Linux")
+                  : c.category === "systemctl·vi·설정 파일")) &&
           [c.purpose, c.command, c.hint].some((t) => t.toLowerCase().includes(query.toLowerCase())),
       );
       $("#command-results").innerHTML =
@@ -125,7 +132,7 @@
           "외울 것과 이해할 것을 나눠요.",
           "기출·해설 모음을 정리한 가이드. 틀리기 쉬운 설명은 바로잡았어요.",
         ) +
-        `<div class="reader-layout"><details class="reader-menu" ${compactMenu ? "" : "open"}><summary>목차 · ${esc(section.title)}</summary><nav class="reader-nav" aria-label="이론 목차">${D.sections.map((s) => `<a href="#theory/${s.id}" class="${s.id === section.id ? "active" : ""}" ${s.id === section.id ? 'aria-current="page"' : ""}>${state.read.includes(s.id) ? "✓ " : ""}${esc(s.title)}</a>`).join("")}</nav></details><article class="reader"><div class="reader-section-count">STUDY GUIDE · ${Number(section.id) + 1} / ${D.sections.length}</div>${window.TheoryVisuals?.render(section.id) || ""}<div id="theory-text">${section.html}</div>${section.title.startsWith("4.") ? calculator() : ""}<div class="read-complete"><button class="button ${state.read.includes(section.id) ? "secondary" : "primary"}" type="button" data-read="${section.id}">${state.read.includes(section.id) ? "✓ 읽기 완료 · 해제" : "이 단원 읽기 완료"}</button>${Number(section.id) < D.sections.length - 1 ? `<a class="text-button" href="#theory/${Number(section.id) + 1}">다음 단원 →</a>` : '<a class="text-button" href="#quiz">문제로 확인하기 →</a>'}</div></article></div>`;
+        `<div class="reader-layout"><details class="reader-menu" ${compactMenu ? "" : "open"}><summary>목차 · ${esc(section.title)}</summary><nav class="reader-nav" aria-label="이론 목차">${D.sections.map((s) => `<a href="#theory/${s.id}" class="${s.id === section.id ? "active" : ""}" ${s.id === section.id ? 'aria-current="page"' : ""}>${state.read.includes(s.id) ? "✓ " : ""}${esc(s.title)}</a>`).join("")}</nav></details><article class="reader"><div class="reader-section-count">STUDY GUIDE · ${Number(section.id) + 1} / ${D.sections.length}</div>${(!D.certificationId && window.TheoryVisuals?.render(section.id)) || ""}<div id="theory-text">${section.html}</div>${!D.certificationId && section.title.startsWith("4.") ? calculator() : ""}<div class="read-complete"><button class="button ${state.read.includes(section.id) ? "secondary" : "primary"}" type="button" data-read="${section.id}">${state.read.includes(section.id) ? "✓ 읽기 완료 · 해제" : "이 단원 읽기 완료"}</button>${Number(section.id) < D.sections.length - 1 ? `<a class="text-button" href="#theory/${Number(section.id) + 1}">다음 단원 →</a>` : '<a class="text-button" href="#quiz">문제로 확인하기 →</a>'}</div></article></div>`;
     }
     function calculator() {
       return `<section class="calculator"><div class="eyebrow">TRY IT YOURSELF</div><h3>서브넷 계산 연습장</h3><p class="muted">먼저 직접 풀고, 계산 결과와 비교해 보세요.</p><form id="subnet-form"><div class="calc-fields"><label for="ip-input">IPv4 주소<input id="ip-input" name="ip" type="text" value="192.168.10.77" inputmode="decimal" required></label><label for="prefix-input">프리픽스<select id="prefix-input" name="prefix">${Array.from({ length: 33 }, (_, i) => `<option value="${i}" ${i === 27 ? "selected" : ""}>/${i}</option>`).join("")}</select></label><button type="submit" class="button primary">결과 비교하기</button></div></form><div id="subnet-result" aria-live="polite"></div></section>`;

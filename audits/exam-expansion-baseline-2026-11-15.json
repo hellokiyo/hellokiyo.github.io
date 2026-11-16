@@ -1,0 +1,13 @@
+{
+  "date": "2026-11-15",
+  "purpose": "Read-only baseline for future certification expansion; no migration performed",
+  "keywords": 54,
+  "commands": 87,
+  "theory": 12,
+  "ownQuestions": 72,
+  "papers": 17,
+  "pastQuestions": 850,
+  "totalQuestions": 922,
+  "uniqueQuestionIds": 922,
+  "idAnswerSha256": "320e1379ad5f802d6ae97af1c766c73d3278ccffb9f40cbad6f05d9204fce7e4"
+}

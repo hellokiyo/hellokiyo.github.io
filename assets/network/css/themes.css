@@ -127,7 +127,7 @@ html:is([data-theme="warm"], [data-theme="sage"])
   border-color: var(--line);
 }
 html:is([data-theme="warm"], [data-theme="sage"])
-  :is(input, select, textarea, .answer, .button.secondary, .map-button, .search-input) {
+  :is(input, select, textarea, .answer:not(.selected):not(.correct):not(.incorrect), .button.secondary, .map-button, .search-input) {
   background: var(--paper);
   color: var(--ink);
   border-color: var(--line);
@@ -225,7 +225,7 @@ html[data-theme="dark"]
   border-color: var(--line);
 }
 html[data-theme="dark"]
-  :is(input, select, textarea, .answer, .button.secondary, .map-button, .search-input) {
+  :is(input, select, textarea, .answer:not(.selected):not(.correct):not(.incorrect), .button.secondary, .map-button, .search-input) {
   background: #292d30;
   color: var(--ink);
   border-color: #50585b;

@@ -1,14 +1,21 @@
 /* 앱 조립부: 상태·저장·내비게이션·페이지 간 이벤트를 연결합니다. 모듈 책임표는 docs/architecture.md 참고. */
 (() => {
   "use strict";
-  const D = window.STUDY_DATA,
-    B = window.STUDY_QUESTIONS,
-    P = window.LATEST_PAPER,
-    A = window.PaperArchive.create(P, window.PAST_PAPERS),
+  const examWorkspace = window.ExamWorkspace;
+  if (!location.hash) history.replaceState(history.state, "", location.search + "#exams");
+  const selectedExam = examWorkspace.resolve(location.search);
+  const practicePack = window.ExamPractice.get(selectedExam);
+  const gameStorageKey = practicePack
+    ? `cert-game:${selectedExam.id}:v1`
+    : "network-keyword-rain:v1";
+  const D = practicePack?.data || window.STUDY_DATA,
+    B = practicePack?.questions || window.STUDY_QUESTIONS,
+    P = practicePack ? null : window.LATEST_PAPER,
+    A = window.PaperArchive.create(P, practicePack ? [] : window.PAST_PAPERS),
     Q = [...B, ...A.papers.flatMap((p) => p.questions)],
     C = window.StudyCore;
   const W = window.WrongNotebook;
-  const KEY = "network-notes:v1",
+  const KEY = practicePack ? `cert-study:${selectedExam.id}:v1` : "network-notes:v1",
     R = window.ReviewCore,
     items = R.catalog(D, Q);
   try {
@@ -17,7 +24,10 @@
       localStorage.setItem(KEY + ":before-adaptive", old);
   } catch {}
   const $ = (selector, root = document) => root.querySelector(selector);
-  const { escapeHTML: esc, heading, empty } = window.PageUI;
+  const { escapeHTML: esc, empty } = window.PageUI;
+  const heading = (kicker, title, description, extra) =>
+    window.PageUI.heading(kicker, title, description, extra, Boolean(practicePack));
+  const materialsStore = window.StudyMaterialsStore.forExam(selectedExam.id);
   let storageOK = true,
     state;
   try {
@@ -26,7 +36,7 @@
     state = C.cleanState({}, D, Q);
     storageOK = false;
   }
-  if (!state.examDate) state.examDate = R.DEFAULT_EXAM;
+  if (!practicePack && !state.examDate) state.examDate = R.DEFAULT_EXAM;
   let filter = "전체",
     query = "",
     onlyUnlearned = false,
@@ -70,6 +80,7 @@
     window.DailyStudy?.unmount();
     window.KeywordGame?.unmount();
     window.StudyMaterialsPage?.unmount();
+    window.PaperSourcesPage.unmount();
     const [view = "dashboard", id] = location.hash.slice(1).split("/");
     currentView = [
       "dashboard",
@@ -83,11 +94,14 @@
       "game",
       "daily",
       "help",
+      "exams",
+      "sources",
     ].includes(view)
       ? view
       : "dashboard";
     filter = "전체";
     query = "";
+    examWorkspace.shell(examWorkspace.resolve(location.search), currentView === "exams");
     if (currentView === "quiz" && id === "current") {
       quizPage.filterCurrent();
     }
@@ -97,8 +111,13 @@
       else a.removeAttribute("aria-current");
     });
     ({
+      sources: () =>
+        window.PaperSourcesPage.mount({ main, exam: examWorkspace.resolve(location.search) }),
+      exams: () => {
+        main.innerHTML = examWorkspace.selection();
+      },
       help: () => {
-        main.innerHTML = window.UserGuidePage.render();
+        main.innerHTML = window.UserGuidePage.render(Boolean(practicePack));
       },
       dashboard,
       keywords,
@@ -111,6 +130,7 @@
           save: persist,
           toast,
           presetMinutes: id === "5" ? 5 : null,
+          planOptions: practicePack ? { practiceMinutes: B.length, basicOnly: true } : undefined,
           onReview: (id, correct) => {
             W.update(state, "daily", id, correct);
             persist();
@@ -118,6 +138,8 @@
         }),
       game: () =>
         window.KeywordGame.mount({
+          keywords: D.keywords,
+          storageKey: gameStorageKey,
           root: main,
           onFinish: () => {
             coach.refresh();
@@ -136,13 +158,22 @@
       quiz: renderQuiz,
       wrong: wrongView,
       plan: renderPlan,
-      materials: () => window.StudyMaterialsPage.mount({ root: main, toast, confirmAction }),
+      materials: () =>
+        window.StudyMaterialsPage.mount({
+          root: main,
+          toast,
+          confirmAction,
+          store: materialsStore,
+          publicMaterials: practicePack ? [] : window.PUBLIC_MATERIALS,
+        }),
     })[currentView]();
     updateBadges();
     updateStorage();
     window.scrollTo({ top: 0, behavior: "instant" });
     document.title =
       {
+        exams: "시험 선택",
+        sources: "기출 자료",
         help: "사용법",
         dashboard: "학습 현황",
         keywords: "키워드 암기",
@@ -336,6 +367,8 @@
   };
   setInterval(() => quizPage.tick(), 1000);
   const coach = window.StudyCoach.mount({
+    basicOnly: Boolean(practicePack),
+    storageKey: practicePack ? `cert-coach:${selectedExam.id}:v1` : "network-study-coach:v1",
     root: main,
     getView: () => currentView,
     getMode: () =>
@@ -366,8 +399,10 @@
     if (view === "keywords") keywordResults();
     else commandResults();
   });
-  const helper = window.FeatureHelper.mount();
+  const helper = window.FeatureHelper.mount(D);
   const settings = window.SettingsController.create({
+    certificationId: selectedExam.id,
+    gameStorageKey,
     C,
     D,
     Q,
@@ -389,6 +424,7 @@
   });
   const { openSettings, confirmAction } = settings;
   const quizPage = window.QuizPage.create({
+    practiceOnly: Boolean(practicePack),
     B,
     P,
     A,

@@ -232,7 +232,7 @@
       today: state.days[today] || 0,
     };
   }
-  function plan(examDate, today = dateKey()) {
+  function plan(examDate, today = dateKey(), { practiceMinutes = 50, basicOnly = false } = {}) {
     const left = valid(examDate) ? days(today, examDate) : null;
     return left === null
       ? {
@@ -247,17 +247,21 @@
         : left === 0
           ? {
               title: "시험 당일 · 익숙한 내용 확인",
-              goal: "남은 오답과 포트·명령어만 짧게 확인하세요.",
+              goal: basicOnly
+                ? "남은 오답과 핵심 용어를 짧게 확인하세요."
+                : "남은 오답과 포트·명령어만 짧게 확인하세요.",
             }
           : left <= 2
             ? {
                 title: "최종 복습",
-                goal: "오답·핵심 키워드·서브넷·명령어를 확인하세요.",
+                goal: basicOnly
+                  ? "오답·핵심 키워드·헷갈린 개념을 확인하세요."
+                  : "오답·핵심 키워드·서브넷·명령어를 확인하세요.",
               }
             : left <= 4
               ? {
                   title: "실전 적응",
-                  goal: "50분 실전 풀이 후 취약한 단원을 복습하세요.",
+                  goal: `${practiceMinutes}분 ${basicOnly ? "기초 연습" : "실전 풀이"} 후 취약한 단원을 복습하세요.`,
                 }
               : left <= 7
                 ? {
@@ -265,7 +269,7 @@
                     goal: "복습 기한이 지난 문제와 혼합 문제를 풀어보세요.",
                   }
                 : {
-                    title: "전체 범위 학습",
+                    title: basicOnly ? "기초 개념 학습" : "전체 범위 학습",
                     goal: "핵심 개념을 익히고 첫 인출 연습으로 취약 개념을 찾으세요.",
                   };
   }

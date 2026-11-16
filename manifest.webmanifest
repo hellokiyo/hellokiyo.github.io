@@ -1,9 +1,9 @@
 {
  "id":"./",
- "name":"합격루틴 · 네트워크관리사 2급",
+ "name":"합격루틴 · 자격시험 공부방",
  "short_name":"합격루틴",
  "lang":"ko",
- "start_url":"./#dashboard",
+ "start_url":"./#exams",
  "scope":"./",
  "display":"standalone",
  "background_color":"#ffffff",

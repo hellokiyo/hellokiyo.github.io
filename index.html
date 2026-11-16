@@ -31,6 +31,9 @@
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="apple-touch-icon" href="assets/network/icons/icon-192.png" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    <script defer src="assets/network/data/exam-catalog.js"></script>
+    <script defer src="assets/network/data/exam-practice.js"></script>
+    <script defer src="assets/network/data/exam-paper-sources.js"></script>
     <script defer src="assets/network/data/study-data.js"></script>
     <script defer src="assets/network/data/questions.js"></script>
     <script defer src="assets/network/data/latest-paper.js"></script>
@@ -58,6 +61,10 @@
     <script defer src="assets/network/ui/page-ui.js"></script>
     <script defer src="assets/network/ui/theory-visuals.js"></script>
     <script defer src="assets/network/pages/user-guide-page.js"></script>
+    <script defer src="assets/network/pages/exam-workspace.js"></script>
+    <script defer src="assets/network/pages/paper-sources-page.js"></script>
+    <link rel="stylesheet" href="assets/network/css/exam-workspace.css" />
+    <link rel="stylesheet" href="assets/network/css/paper-sources.css" />
     <script defer src="assets/network/app.js"></script>
     <script defer src="assets/network/platform/pwa.js"></script>
   </head>
@@ -85,6 +92,7 @@
           <span class="nav-count" id="wrong-count">0</span></a
         >
         <a href="#materials" data-view="materials"><span aria-hidden="true">▥</span> 시험 자료</a>
+        <a href="#sources" data-view="sources"><span aria-hidden="true">↗</span> 기출 자료</a>
         <a href="#plan" data-view="plan"><span aria-hidden="true">☑</span> 14일 학습 계획</a>
       </nav>
       <div class="sidebar-bottom">
@@ -97,6 +105,7 @@
       <header class="topbar">
         <div class="breadcrumb"><strong>네트워크관리사 2급</strong> · 필기</div>
         <div class="topbar-right">
+          <a class="text-button exam-switch" id="exam-switch" href="#exams">시험 변경</a>
           <span class="saved-dot" aria-hidden="true"></span><span id="save-status">자동 저장</span
           ><button
             class="icon-button"
@@ -146,7 +155,7 @@
         >
       </nav>
       <footer class="footer">
-        개인 학습용 · 자체 연습과 회차별 기출을 구분해 제공합니다. <span>합격루틴 v23</span>
+        개인 학습용 · 자체 연습과 회차별 기출을 구분해 제공합니다. <span>합격루틴 v29</span>
       </footer>
     </div>
     <dialog id="settings-dialog" aria-labelledby="settings-title">

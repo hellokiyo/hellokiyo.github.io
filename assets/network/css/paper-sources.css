@@ -1,0 +1,59 @@
+/* 외부 회차 출처: 테마 공통 panel을 사용하며 작은 화면에서 링크를 아래로 배치합니다. */
+.source-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 20px 0;
+}
+.source-filters label {
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  flex: 1 1 180px;
+}
+.source-filters select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 9px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+}
+.source-round {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.source-round h2 {
+  margin: 10px 0;
+  font-size: 18px;
+}
+.source-round p {
+  margin: 6px 0;
+}
+.source-round .button {
+  flex-shrink: 0;
+}
+.source-intro details {
+  margin-top: 18px;
+  line-height: 1.8;
+}
+.source-extras {
+  padding-left: 20px;
+}
+.source-extras li {
+  margin: 16px 0;
+}
+.source-extras a {
+  color: var(--green);
+  overflow-wrap: anywhere;
+}
+@media (max-width: 640px) {
+  .source-round {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}

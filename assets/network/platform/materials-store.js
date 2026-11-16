@@ -3,11 +3,12 @@
 (function (root, factory) {
   "use strict";
   const api = factory();
+  api.forExam = (id) => (id === "network" ? api : factory(`cert-materials:${id}:v1`));
   if (typeof module === "object" && module.exports) module.exports = api;
   if (root) root.StudyMaterialsStore = api;
-})(typeof window !== "undefined" ? window : globalThis, function () {
+})(typeof window !== "undefined" ? window : globalThis, function (databaseName) {
   "use strict";
-  const DB_NAME = "network-notes-materials:v1",
+  const DB_NAME = databaseName || "network-notes-materials:v1",
     STORE = "materials",
     MAX_FILE_BYTES = 30 * 1024 * 1024;
   const MIME = {

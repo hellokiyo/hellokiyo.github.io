@@ -1,0 +1,85 @@
+/* 시험 선택과 공통 공부방의 준비 상태. 기존 테마와 페이지 컨테이너를 사용합니다. */
+.exam-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin: 20px 0;
+}
+.exam-grid .panel {
+  margin: 0;
+  min-width: 0;
+}
+.exam-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+.exam-card .button {
+  margin-top: auto;
+}
+.exam-grid p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+.exam-switch {
+  white-space: nowrap;
+  font-size: 12px;
+}
+.exam-tools {
+  display: grid;
+  gap: 12px;
+  margin: 20px 0;
+}
+.exam-tools input {
+  width: 100%;
+  max-width: 460px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+}
+.exam-tools label {
+  font-size: 13px;
+  font-weight: 700;
+}
+.exam-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.exam-card h2 {
+  overflow-wrap: anywhere;
+}
+body.exam-selecting .sidebar,
+body.exam-selecting .mobile-nav,
+body.exam-selecting #settings-button,
+body.exam-selecting .topbar-right,
+body.exam-selecting .feature-helper,
+body.exam-selecting .helper-launch,
+body.exam-pending #settings-button,
+body.exam-pending .sidebar-bottom {
+  display: none;
+}
+body.exam-selecting .workspace {
+  margin-left: 0;
+}
+body.exam-selecting #main {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+@media (max-width: 640px) {
+  .exam-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .exam-switch {
+    font-size: 11px;
+  }
+  body.exam-pending #save-status,
+  body.exam-pending .saved-dot {
+    display: none;
+  }
+}

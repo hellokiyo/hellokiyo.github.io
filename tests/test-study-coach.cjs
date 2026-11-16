@@ -112,3 +112,19 @@ test("짧은 게임·일시정지·비활성·라우트 이동의 활성 시간�
   interval();
   assert.equal(read().theory, 30);
 });
+
+test("확장 시험 추천은 실제 이용 시간만 쓰고 네트워크 점수 근거를 섞지 않는다", () => {
+  for (const values of [{}, { game: 600 }, { practice: 650, theory: 350 }]) {
+    const recommendation = C.choose(data(values), 0, true);
+    assert.doesNotMatch(JSON.stringify(recommendation), /44개|22%|평균 88|2026년|최신 기출/);
+    assert.notEqual(recommendation.href, "#quiz/current");
+  }
+  assert.equal(C.choose(data({ game: 600 }), 0, true).id, "game-balance");
+  assert.equal(C.choose(data({ practice: 650, theory: 350 }), 0, true).href, "#theory");
+});
+
+test("확장 시험의 추천 화면에는 네트워크 전용 점수표나 다운로드가 없다", () => {
+  const html = C.markup(C.choose(data({}), 0, true), true);
+  assert.doesNotMatch(html, /coach-evidence|2026년|88점|study-plan-7-days/);
+  assert.match(html, /실제 기출과 시험 전 범위/);
+});

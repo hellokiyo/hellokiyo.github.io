@@ -173,3 +173,9 @@ test("읽기 쉬운 파일 크기", () => {
   assert.equal(S.formatBytes(1024), "1.0 KB");
   assert.equal(S.formatBytes(30 * 1024 * 1024), "30.0 MB");
 });
+
+test("시험별 자료 DB는 네트워크 DB를 유지하고 서로 다른 이름을 사용한다", () => {
+  assert.equal(S.forExam("network"), S);
+  assert.equal(S.forExam("pc").DB_NAME, "cert-materials:pc:v1");
+  assert.notEqual(S.forExam("pc").DB_NAME, S.forExam("ccna").DB_NAME);
+});

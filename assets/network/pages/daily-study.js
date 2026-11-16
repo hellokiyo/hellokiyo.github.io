@@ -14,7 +14,16 @@
           "'": "&#39;",
         })[c],
     );
-  function mount({ root, state, items, save, toast, presetMinutes = null, onReview = null }) {
+  function mount({
+    root,
+    state,
+    items,
+    save,
+    toast,
+    presetMinutes = null,
+    onReview = null,
+    planOptions,
+  }) {
     dispose();
     const R = window.ReviewCore,
       abort = new AbortController();
@@ -33,7 +42,7 @@
     }
     function setup() {
       const stats = R.summary(A(), items),
-        plan = R.plan(state.examDate);
+        plan = R.plan(state.examDate, undefined, planOptions);
       root.innerHTML = `<div class="page-heading"><div><h1>오늘의 학습</h1><p>떠올리기 → 이유 확인 → 다음 복습 예약</p></div></div><section class="panel daily-setup"><span class="label-tag">${esc(plan.title)}</span><h2>오늘도 조금씩, 기억을 단단하게.</h2><p>${esc(plan.goal)}</p><p>복습 ${stats.due}개 · 취약 ${stats.weak}개 · 최근 정답률 ${stats.recent === null ? "—" : stats.recent + "%"}</p><label for="daily-minutes">학습 시간</label><select id="daily-minutes"><option value="5">5분 · 빠른 복습 (5문항)</option><option value="12" selected>12분 · 기본 학습 (12문항)</option><option value="25">25분 · 집중 학습 (20문항)</option><option value="0">자유 학습 (20문항)</option></select><label for="daily-category">학습 범위</label><select id="daily-category"><option>전체</option>${[...new Set(items.map((i) => i.category))].map((c) => `<option>${esc(c)}</option>`).join("")}</select><p class="fine-print">기한이 지난 복습 → 취약·오답 → 미학습 순서입니다. 혼합 학습은 단원을 번갈아 출제합니다. 시간은 권장 시간이며, 지나도 문제를 중단하지 않습니다.</p><button class="button primary full" id="daily-start">오늘의 학습 시작 →</button></section>`;
     }
     function start() {

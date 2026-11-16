@@ -2,6 +2,7 @@
 (() => {
   "use strict";
   function create({
+    practiceOnly = false,
     B,
     P,
     A,
@@ -23,6 +24,8 @@
     onResult,
     onWrongChange,
   }) {
+    const practiceCount = practiceOnly ? B.length : 50;
+    const practiceMinutes = practiceOnly ? B.length : 50;
     let paperYear = String(A.years[0]),
       currentPapersOnly = false;
     function latestPaperCard() {
@@ -31,12 +34,14 @@
         : "";
     }
     function paperLibrary() {
+      if (practiceOnly)
+        return `<p class="inline-note">현재 ${B.length}개의 자체 제작 기초 연습문제입니다. 실제 기출·시험 전 범위·합격 예상 점수가 아닙니다. 채점과 해설, 오답 복습을 이용하세요.</p>`;
       return `<section class="panel paper-library" aria-labelledby="paper-library-title"><div class="paper-library-heading"><div><h2 id="paper-library-title">연도별 기출문제</h2><p>최근 5년 · ${A.papers.length}회차 · ${A.papers.reduce((n, p) => n + p.questions.length, 0)}문항</p></div><label class="paper-year-label" for="paper-year">연도<select id="paper-year" aria-label="기출 연도 선택"><option value="all" ${paperYear === "all" ? "selected" : ""}>전체 연도</option>${A.years.map((y) => `<option value="${y}" ${paperYear === String(y) ? "selected" : ""}>${y}년</option>`).join("")}</select></label></div><label class="paper-current-filter"><input type="checkbox" id="paper-current-only" ${currentPapersOnly ? "checked" : ""}>2025.08 개정 이후만 보기</label><div id="paper-rounds">${paperRounds()}</div>${(window.PENDING_PAPERS || []).length ? `<details class="paper-pending"><summary>원본 확보 대기 ${(window.PENDING_PAPERS || []).length}회차</summary><p>다운로드 응답을 확인하지 못한 회차는 채점 문제에 포함하지 않았습니다.</p>${window.PENDING_PAPERS.map((p) => `<a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title.replace("네트워크관리사 2급 필기 기출문제 및 CBT ", ""))} · 원문 자료실 ↗</a>`).join("")}</details>` : ""}<p class="paper-source-note">2025.08.01부터 Windows Server 2022 기준으로 변경되었습니다. 이전 회차의 운영체제 문제는 당시 기준입니다. <a href="https://exam.icqa.or.kr/cn/board/notice/463" target="_blank" rel="noopener">출제기준 안내 ↗</a></p></section>`;
     }
     function paperRounds() {
       const papers = A.filter(paperYear, currentPapersOnly);
       return papers.length
-        ? `<div class="paper-round-grid">${papers.map((p) => `<article class="paper-round"><div class="paper-round-top"><span>${esc(p.date)}</span><span class="paper-standard ${p.previousStandard ? "previous" : ""}">${p.previousStandard ? "이전 출제기준" : "개정 이후"}</span></div><h3>${p.year}년 ${p.round}회${p.id === P.id ? " · 최신" : ""}</h3><p>${p.questions.length}문항 · 원문·보기 순서 고정</p><button class="button ${p.id === P.id ? "primary" : "secondary"} full" data-start="paper" data-paper="${esc(p.id)}" aria-label="${p.year}년 ${p.round}회 풀기">풀어보기 →</button><div class="paper-links"><a href="${esc(p.original)}" download>원본 ${p.id === P.id ? "HWP" : "PDF"} ↓</a><a href="${esc(p.source)}" target="_blank" rel="noopener">${esc(p.sourceName)} 출처 ↗</a></div></article>`).join("")}</div>`
+        ? `<div class="paper-round-grid">${papers.map((p) => `<article class="paper-round"><div class="paper-round-top"><span>${esc(p.date)}</span><span class="paper-standard ${p.previousStandard ? "previous" : ""}">${p.previousStandard ? "이전 출제기준" : "개정 이후"}</span></div><h3>${p.year}년 ${p.round}회${p.id === P?.id ? " · 최신" : ""}</h3><p>${p.questions.length}문항 · 원문·보기 순서 고정</p><button class="button ${p.id === P?.id ? "primary" : "secondary"} full" data-start="paper" data-paper="${esc(p.id)}" aria-label="${p.year}년 ${p.round}회 풀기">풀어보기 →</button><div class="paper-links"><a href="${esc(p.original)}" download>원본 ${p.id === P?.id ? "HWP" : "PDF"} ↓</a><a href="${esc(p.source)}" target="_blank" rel="noopener">${esc(p.sourceName)} 출처 ↗</a></div></article>`).join("")}</div>`
         : empty("해당 회차가 없어요.", "다른 연도를 선택하거나 개정 이후 필터를 해제하세요.");
     }
     function paperOf(value) {
@@ -66,10 +71,13 @@
           "아는 것을, 맞히는 힘으로.",
           "학습 가이드 기반 자체 제작 문제입니다. 공식 기출이 아니에요.",
         ) +
-        `<div class="paper-discovery"><div><strong>2022~2026년 기출이 준비돼 있어요</strong><p>아래에서 연도를 선택하고 원하는 회차를 풀어보세요.</p></div><button class="button secondary" id="find-past-papers">연도별 기출 찾기 ↓</button></div>` +
+        '<p class="inline-note">외부 원문이나 개정 전후 출처를 찾나요? <a class="text-button" href="#sources">기출 자료 모아보기 ↗</a></p>' +
+        (practiceOnly
+          ? ""
+          : `<div class="paper-discovery"><div><strong>2022~2026년 기출이 준비돼 있어요</strong><p>아래에서 연도를 선택하고 원하는 회차를 풀어보세요.</p></div><button class="button secondary" id="find-past-papers">연도별 기출 찾기 ↓</button></div>`) +
         latestPaperCard() +
         paperLibrary() +
-        `<div class="quiz-modes"><article class="mode-card"><span class="label-tag">10 QUESTIONS</span><h3>10문제 연습</h3><p>시간 제한 없음 · 문제별 해설</p><button class="button primary" data-start="quick">빠른 연습 시작 →</button></article><article class="mode-card"><span class="label-tag">50 MINUTES</span><h3>50문제 실전</h3><p>50분 제한 · 제출 후 일괄 채점</p><button class="button primary" data-start="exam">실전 연습 시작 →</button></article><article class="mode-card"><span class="label-tag">REVIEW</span><h3>오답 다시 풀기</h3><p>${state.wrong.length}문제 · 맞히면 오답에서 제외</p><button class="button secondary" data-start="wrong" ${state.wrong.length ? "" : "disabled"}>오답 다시 풀기 ↺</button></article></div><section class="panel"><div class="section-heading"><h2>나의 최근 연습</h2><span class="quiz-status">자체 연습 ${B.length}문항 · 기출 회차 별도</span></div>${
+        `<div class="quiz-modes"><article class="mode-card"><span class="label-tag">10 QUESTIONS</span><h3>10문제 연습</h3><p>시간 제한 없음 · 문제별 해설</p><button class="button primary" data-start="quick">빠른 연습 시작 →</button></article><article class="mode-card"><span class="label-tag">${practiceMinutes} MINUTES</span><h3>${practiceCount}문제 ${practiceOnly ? "기초 연습" : "실전"}</h3><p>${practiceMinutes}분 제한 · 제출 후 일괄 채점</p><button class="button primary" data-start="exam">${practiceOnly ? "시간 제한 연습" : "실전 연습"} 시작 →</button></article><article class="mode-card"><span class="label-tag">REVIEW</span><h3>오답 다시 풀기</h3><p>${state.wrong.length}문제 · 맞히면 오답에서 제외</p><button class="button secondary" data-start="wrong" ${state.wrong.length ? "" : "disabled"}>오답 다시 풀기 ↺</button></article></div><section class="panel"><div class="section-heading"><h2>나의 최근 연습</h2><span class="quiz-status">자체 연습 ${B.length}문항 · 기출 회차 별도</span></div>${
           state.records.length
             ? `<div class="table-wrap"><table><thead><tr><th>날짜</th><th>연습 방식</th><th>정답</th><th>점수</th></tr></thead><tbody>${state.records
                 .slice(-8)
@@ -85,9 +93,13 @@
     function modeName(mode, value = getState().session) {
       return mode === "paper"
         ? `${paperOf(value).title.replace(" 네트워크관리사 2급 필기", "")} 반복 풀이`
-        : { exam: "실전 연습", quick: "빠른 연습", wrong: "오답노트" }[mode] || "연습";
+        : {
+            exam: practiceOnly ? "시간 제한 기초 연습" : "실전 연습",
+            quick: "빠른 연습",
+            wrong: "오답노트",
+          }[mode] || "연습";
     }
-    function startQuiz(mode, paperId = P.id) {
+    function startQuiz(mode, paperId = P?.id) {
       const state = getState();
 
       const paper = A.get(paperId);
@@ -99,7 +111,7 @@
         mode === "paper"
           ? paper.questions.map((q) => q.id)
           : C.shuffle(mode === "wrong" ? Q.filter((q) => state.wrong.includes(q.id)) : B)
-              .slice(0, mode === "exam" ? 50 : mode === "quick" ? 10 : Q.length)
+              .slice(0, mode === "exam" ? practiceCount : mode === "quick" ? 10 : Q.length)
               .map((q) => q.id);
       if (!ids.length) {
         toast("아직 오답이 없어요. 먼저 문제를 풀어 보세요.");
@@ -113,7 +125,7 @@
         answers: {},
         checked: [],
         startedAt: Date.now(),
-        endsAt: mode === "exam" ? Date.now() + 50 * 60 * 1000 : null,
+        endsAt: mode === "exam" ? Date.now() + practiceMinutes * 60 * 1000 : null,
       };
       state.lastResult = null;
       persist();
@@ -189,7 +201,7 @@
       state.records = state.records.slice(-30);
       state.session = null;
       persist();
-      if (auto) toast("50분이 지나 답안을 자동 제출했어요.");
+      if (auto) toast(`${practiceMinutes}분이 지나 답안을 자동 제출했어요.`);
       if (getView() === "quiz") renderResult();
     }
     function renderResult() {
@@ -210,12 +222,12 @@
           "오늘의 연습을 마쳤어요.",
           "맞힌 문제보다, 다음에 맞힐 문제를 하나 더 기억해요.",
         ) +
-        `<section class="score-card"><span class="pill">${modeName(r.mode, r)} · ${r.ids.length}문항</span><div class="big-score">${score}<small style="font-size:20px">점</small></div><h2>${score >= 80 ? "잘 쌓이고 있어요. 이 감각을 이어가세요." : "오답의 이유를 알면 다음 점수가 달라져요."}</h2><p>${correct}문제 정답 · ${r.ids.length - correct}문제 오답/미응답<br>${r.mode === "paper" ? `${r.ids.length}문항 기준 · ${esc(paperOf(r).answerStatus)}` : "자체 연습 점수이며 실제 합격을 보장하지 않습니다."}</p><div class="score-actions">${r.mode === "paper" ? `<button class="button primary" data-start="paper" data-paper="${esc(paperOf(r).id)}">같은 회차 다시 풀기 ↺</button>` : ""}<button class="button secondary" id="new-quiz">다른 문제로 연습 →</button><a class="button secondary" href="#wrong">오답장 보기 ↗</a></div></section><div class="section-heading"><h2>문항별 해설</h2><span class="quiz-status">틀린 문제는 오답장에 저장됐어요.</span></div>${r.ids
+        `<section class="score-card"><span class="pill">${modeName(r.mode, r)} · ${r.ids.length}문항</span><div class="big-score">${score}<small style="font-size:20px">점</small></div><h2>${score >= 80 ? "잘 쌓이고 있어요. 이 감각을 이어가세요." : "오답의 이유를 알면 다음 점수가 달라져요."}</h2><p>${correct}문제 정답 · ${r.ids.length - correct}문제 오답/미응답<br>${r.mode === "paper" ? `${r.ids.length}문항 기준 · ${esc(paperOf(r).answerStatus)}` : "자체 연습 점수이며 실제 합격을 보장하지 않습니다."}</p><div class="score-actions">${r.mode === "paper" ? `<button class="button primary" data-start="paper" data-paper="${esc(paperOf(r).id)}">같은 회차 다시 풀기 ↺</button>` : ""}<button class="button secondary" id="new-quiz">다른 문제로 연습 →</button><a class="button secondary" href="#wrong">오답노트 보기 ↗</a></div></section><div class="section-heading"><h2>문항별 해설</h2><span class="quiz-status">틀린 문제는 오답노트에 저장됐어요.</span></div>${r.ids
           .map((id, i) => {
             const q = Q.find((q) => q.id === id),
               a = r.answers[id],
               right = a === q.answer;
-            return `<details class="review-item"><summary>${right ? "✓" : "○"} ${i + 1}. ${esc(q.question)}</summary><div class="review-detail">${paperNote(q)}${questionFigures(q)}내 답: ${a === undefined ? "미응답" : `${a + 1}번 · ${esc(q.options[a])}`}<br><strong>정답: ${q.answer + 1}번 · ${esc(q.options[q.answer])}</strong><p>${esc(q.explanation)}</p><button class="text-button" data-wrong-toggle="${id}">${state.wrong.includes(id) ? "✓ 오답장에 저장됨 · 제외하기" : "복습을 위해 오답장에 추가"}</button></div></details>`;
+            return `<details class="review-item"><summary>${right ? "정답" : a === undefined ? "미응답" : "오답"} · ${i + 1}. ${esc(q.question)}</summary><div class="review-detail">${paperNote(q)}${questionFigures(q)}내 답: ${a === undefined ? "미응답" : `${a + 1}번 · ${esc(q.options[a])}`}<br><strong>정답: ${q.answer + 1}번 · ${esc(q.options[q.answer])}</strong><p>${esc(q.explanation)}</p><button class="text-button" data-wrong-toggle="${id}">${state.wrong.includes(id) ? "✓ 오답노트에 저장됨 · 제외하기" : "복습을 위해 오답노트에 추가"}</button></div></details>`;
           })
           .join("")}`;
       onResult();
@@ -259,7 +271,7 @@
       }
       if (target.dataset.start) {
         const mode = target.dataset.start,
-          paperId = target.dataset.paper || P.id;
+          paperId = target.dataset.paper || P?.id;
         if (state.session)
           confirmAction(
             "진행 중인 연습이 있어요.",
@@ -338,8 +350,8 @@
           );
         persist();
         target.textContent = state.wrong.includes(target.dataset.wrongToggle)
-          ? "✓ 오답장에 저장됨 · 제외하기"
-          : "복습을 위해 오답장에 추가";
+          ? "✓ 오답노트에 저장됨 · 제외하기"
+          : "복습을 위해 오답노트에 추가";
       }
     }
     function tick() {

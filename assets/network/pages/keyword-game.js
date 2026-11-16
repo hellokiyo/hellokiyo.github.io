@@ -28,17 +28,17 @@
     }
     return result;
   }
-  function exportProgress() {
+  function exportProgress(storageKey = KEY) {
     try {
-      return cleanProgress(JSON.parse(localStorage.getItem(KEY) || "{}"));
+      return cleanProgress(JSON.parse(localStorage.getItem(storageKey) || "{}"));
     } catch {
       return {};
     }
   }
-  function importProgress(raw) {
+  function importProgress(raw, storageKey = KEY) {
     if (raw === undefined) return true; // 구버전 학습 백업에는 게임 필드가 없습니다.
     try {
-      localStorage.setItem(KEY, JSON.stringify(cleanProgress(raw)));
+      localStorage.setItem(storageKey, JSON.stringify(cleanProgress(raw)));
       return true;
     } catch {
       return false;
@@ -46,11 +46,18 @@
   }
   let dispose = () => {},
     active = false;
-  function mount({ root, onFinish = () => {}, onActivity = () => {}, onReview = () => {} }) {
+  function mount({
+    root,
+    keywords = window.STUDY_DATA.keywords,
+    storageKey = KEY,
+    onFinish = () => {},
+    onActivity = () => {},
+    onReview = () => {},
+  }) {
     dispose();
     const controller = new AbortController(),
       opts = { signal: controller.signal },
-      data = window.STUDY_DATA.keywords;
+      data = keywords;
     let timer = null,
       playing = false,
       paused = false,
@@ -72,7 +79,7 @@
       mode = "choice",
       best = {};
     try {
-      const stored = JSON.parse(localStorage.getItem(KEY) || "{}");
+      const stored = JSON.parse(localStorage.getItem(storageKey) || "{}");
       if (stored && typeof stored === "object" && !Array.isArray(stored)) best = stored;
     } catch {}
     const badges = [
@@ -160,7 +167,7 @@
       const unlocked = eligible ? badges.filter(([n]) => previous < n && record(mode) >= n) : [];
       let saved = true;
       try {
-        localStorage.setItem(KEY, JSON.stringify(best));
+        localStorage.setItem(storageKey, JSON.stringify(best));
       } catch {
         saved = false;
       }

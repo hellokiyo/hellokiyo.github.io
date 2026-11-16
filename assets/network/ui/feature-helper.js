@@ -85,7 +85,7 @@
   function search(query, data = {}) {
     const q = norm(query).slice(0, 160);
     if (!q) return [];
-    if (q.includes("산성비") && /만|점수|비중|효과/.test(q))
+    if (!data.certificationId && q.includes("산성비") && /만|점수|비중|효과/.test(q))
       return [
         {
           title: "산성비만으로 준비해도 될까요?",
@@ -135,9 +135,17 @@
     return matches
       .sort((a, b) => b.score - a.score)
       .slice(0, 4)
-      .map((x) => x.item);
+      .map((x) =>
+        data.certificationId && x.item.href === "#quiz"
+          ? {
+              ...x.item,
+              title: "문제풀이 · 자체 기초 연습",
+              text: "답을 고르고 해설을 읽어 보세요. 현재는 자체 기초 연습이며 실제 기출은 별도 준비 중입니다.",
+            }
+          : x.item,
+      );
   }
-  function mount() {
+  function mount(data = window.STUDY_DATA) {
     const holder = document.createElement("div");
     holder.innerHTML = `<button class="helper-launch" type="button" aria-haspopup="dialog" aria-controls="feature-helper" aria-expanded="false"><span aria-hidden="true">⌕</span> 공부 도우미</button><dialog id="feature-helper" class="feature-helper" aria-labelledby="helper-title"><div class="helper-heading"><div><h2 id="helper-title">어떤 기능을 찾으세요?</h2><p>사이트 안에서 찾는 공부 도우미</p></div><button type="button" data-helper-close aria-label="공부 도우미 닫기">×</button></div><div class="helper-shortcuts">${["기출 어디 있어?", "산성비만 해도 돼?", "테마 바꾸기"].map((t) => `<button type="button" data-helper-prompt="${t}">${t}</button>`).join("")}</div><form class="helper-form"><label class="sr-only" for="helper-input">찾는 기능이나 학습 용어</label><input id="helper-input" maxlength="160" placeholder="기출, 오답, ipconfig…" autocomplete="off"><button class="button primary" type="submit">찾기</button></form><p class="helper-notice">AI 채팅이 아닌 기능·용어 검색이에요. 입력은 저장하거나 외부로 전송하지 않아요.</p><div class="helper-results" aria-live="polite" aria-atomic="true"></div></dialog>`;
     document.body.append(holder);
@@ -146,7 +154,7 @@
       input = holder.querySelector("input"),
       results = holder.querySelector(".helper-results");
     function render(query) {
-      const found = search(query, window.STUDY_DATA);
+      const found = search(query, data);
       results.innerHTML = query ? `<p class="helper-query">“${esc(query)}” 검색 결과</p>` : "";
       results.innerHTML += found.length
         ? found

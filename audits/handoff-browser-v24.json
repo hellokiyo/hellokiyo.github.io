@@ -1,0 +1,134 @@
+[
+  {
+    "overflow": false,
+    "route": "#dashboard",
+    "title": "오늘의 시험 공부",
+    "width": 1366
+  },
+  {
+    "overflow": false,
+    "route": "#daily",
+    "title": "기억 꺼내기",
+    "width": 1366
+  },
+  {
+    "overflow": false,
+    "route": "#keywords",
+    "title": "키워드 암기",
+    "width": 1366
+  },
+  {
+    "overflow": false,
+    "route": "#commands",
+    "title": "명령어 노트",
+    "width": 1366
+  },
+  {
+    "overflow": false,
+    "route": "#theory/2",
+    "title": "핵심정리",
+    "width": 1366
+  },
+  {
+    "overflow": false,
+    "route": "#quiz",
+    "title": "채점 결과",
+    "width": 1366
+  },
+  {
+    "overflow": false,
+    "route": "#wrong",
+    "title": "오답노트",
+    "width": 1366
+  },
+  {
+    "overflow": false,
+    "route": "#plan",
+    "title": "14일 학습 계획",
+    "width": 1366
+  },
+  {
+    "overflow": false,
+    "route": "#materials",
+    "title": "시험 자료",
+    "width": 1366
+  },
+  {
+    "overflow": false,
+    "route": "#game",
+    "title": "키워드 산성비",
+    "width": 1366
+  },
+  {
+    "overflow": false,
+    "route": "#help",
+    "title": "처음이라면? 1분 사용법",
+    "width": 1366
+  },
+  {
+    "overflow": false,
+    "route": "#dashboard",
+    "title": "오늘의 시험 공부",
+    "width": 390
+  },
+  {
+    "overflow": false,
+    "route": "#daily",
+    "title": "기억 꺼내기",
+    "width": 390
+  },
+  {
+    "overflow": false,
+    "route": "#keywords",
+    "title": "키워드 암기",
+    "width": 390
+  },
+  {
+    "overflow": false,
+    "route": "#commands",
+    "title": "명령어 노트",
+    "width": 390
+  },
+  {
+    "overflow": false,
+    "route": "#theory/2",
+    "title": "핵심정리",
+    "width": 390
+  },
+  {
+    "overflow": false,
+    "route": "#quiz",
+    "title": "채점 결과",
+    "width": 390
+  },
+  {
+    "overflow": false,
+    "route": "#wrong",
+    "title": "오답노트",
+    "width": 390
+  },
+  {
+    "overflow": false,
+    "route": "#plan",
+    "title": "14일 학습 계획",
+    "width": 390
+  },
+  {
+    "overflow": false,
+    "route": "#materials",
+    "title": "시험 자료",
+    "width": 390
+  },
+  {
+    "overflow": false,
+    "route": "#game",
+    "title": "키워드 산성비",
+    "width": 390
+  },
+  {
+    "overflow": false,
+    "route": "#help",
+    "title": "처음이라면? 1분 사용법",
+    "width": 390
+  }
+]

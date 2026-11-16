@@ -1,3 +1,5 @@
+/* 키워드 카드의 펼침 높이에 맞춰 grid 행을 배치합니다. 학습 상태는 소유하지 않습니다.
+   ResizeObserver는 mount 시 교체하고 페이지 이탈 시 app.js가 unmount로 해제합니다. */
 (function (root) {
   "use strict";
   let observer = null;

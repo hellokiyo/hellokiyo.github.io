@@ -2,7 +2,7 @@ const test = require("node:test"),
   assert = require("node:assert/strict"),
   fs = require("node:fs"),
   vm = require("node:vm");
-function setup() {
+function setup(certificationId = "network") {
   const nodes = {},
     node = (s) =>
       (nodes[s] ??= {
@@ -34,6 +34,7 @@ function setup() {
     window,
   });
   const api = window.SettingsController.create({
+    certificationId,
     C: { cleanState: (raw) => ({ examDate: raw.examDate, adaptive: {} }) },
     D: {},
     Q: [],
@@ -97,4 +98,26 @@ test("잘못된 앱 백업은 가져오기 확인조차 열지 않고 기존 기
   assert.equal(g.state.examDate, "2026-11-14");
   assert.equal(g.node("#confirm-ok").onclick, undefined);
   assert.equal(g.saves, 0);
+});
+
+test("다른 시험 백업과 식별자 없는 구버전은 확장 시험에 덮어쓰지 않는다", async () => {
+  for (const certificationId of [undefined, "linux-master-2"]) {
+    const g = setup("pc");
+    await g
+      .node("#import-progress")
+      .listeners.change({
+        target: {
+          files: [
+            {
+              size: 100,
+              text: async () =>
+                JSON.stringify({ app: "network-notes", version: 1, certificationId }),
+            },
+          ],
+          value: "x",
+        },
+      });
+    assert.equal(g.node("#confirm-ok").onclick, undefined);
+    assert.equal(g.saves, 0);
+  }
 });

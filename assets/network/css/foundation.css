@@ -1,3 +1,7 @@
+/* hidden 속성의 의미를 레이아웃 display 규칙보다 우선합니다. */
+[hidden] {
+  display: none !important;
+}
 :root {
   --bg: #f7f8f4;
   --paper: #fff;

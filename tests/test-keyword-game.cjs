@@ -2,7 +2,7 @@ const test = require("node:test"),
   assert = require("node:assert/strict"),
   vm = require("node:vm"),
   fs = require("node:fs");
-function setup(initial = {}, onReview = () => {}) {
+function setup(initial = {}, onReview = () => {}, storageKey) {
   let now = 0,
     interval,
     clears = 0;
@@ -49,7 +49,7 @@ function setup(initial = {}, onReview = () => {}) {
     },
   };
   vm.runInNewContext(fs.readFileSync("assets/network/pages/keyword-game.js", "utf8"), context);
-  context.window.KeywordGame.mount({ root, onReview });
+  context.window.KeywordGame.mount({ root, onReview, storageKey });
   return {
     node,
     storage,
@@ -229,4 +229,22 @@ test("백업은 최고점과 누적값을 왕복하고 구버전 복원은 기�
   assert.deepEqual(JSON.parse(g.storage[key]), { type: 3000 });
   api.importProgress(backup);
   assert.deepEqual(JSON.parse(g.storage[key]), backup);
+});
+
+test("시험별 게임 저장과 내보내기가 기존 네트워크 기록을 덮어쓰지 않는다", () => {
+  const key = "cert-game:pc:v1";
+  const g = setup(
+    { "network-keyword-rain:v1": JSON.stringify({ choice: 900, totalGP: 900 }) },
+    () => {},
+    key,
+  );
+  g.click("rain-start");
+  g.click("", { rainAnswer: "0" });
+  g.click("rain-end");
+  assert.equal(JSON.parse(g.storage["network-keyword-rain:v1"]).totalGP, 900);
+  assert.equal(JSON.parse(g.storage[key]).totalGP, 100);
+  assert.equal(g.context.window.KeywordGame.exportProgress(key).totalGP, 100);
+  g.context.window.KeywordGame.importProgress({ choice: 1200, totalGP: 1300 }, key);
+  assert.equal(JSON.parse(g.storage[key]).choice, 1200);
+  assert.equal(g.context.window.KeywordGame.exportProgress().choice, 900);
 });
