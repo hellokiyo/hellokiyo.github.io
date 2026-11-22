@@ -282,3 +282,60 @@
   grid-column: auto;
 }
 
+/* 구분 선택은 콘텐츠보다 먼저 보이게 하며, 메뉴도 같은 구분을 따릅니다. */
+.study-stage-switch {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 14px 28px;
+  border-bottom: 1px solid var(--line);
+}
+.study-stage-switch[hidden],
+#navigation a[hidden] {
+  display: none !important;
+}
+.study-stage-switch > span {
+  color: var(--muted);
+  font-size: 12px;
+  margin-right: 8px;
+}
+.study-stage-switch button {
+  padding: 10px 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+  font-weight: 700;
+}
+.study-stage-switch button small {
+  font-weight: 400;
+  margin-left: 8px;
+}
+.study-stage-switch button[aria-pressed="true"] {
+  background: var(--green);
+  color: var(--paper);
+  border-color: var(--green);
+}
+.stage-practical .mobile-nav {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+@media (max-width: 600px) {
+  .study-stage-switch {
+    padding: 12px 16px;
+    gap: 8px;
+  }
+  .study-stage-switch > span {
+    width: 100%;
+  }
+  .study-stage-switch button {
+    flex: 1;
+    padding: 10px 6px;
+  }
+  .study-stage-switch button small {
+    display: block;
+    font-size: 11px;
+    margin: 4px 0 0;
+  }
+}

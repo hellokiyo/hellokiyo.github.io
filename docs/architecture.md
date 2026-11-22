@@ -184,3 +184,7 @@ LabWindows(ui/lab-windows.js)는 창 단계와 draft/pending/applied를 소유�
 ## v36 실험실 검사 스냅샷
 
 PracticalLab.inspect가 조건 판정과 detail/target을 반환하고 페이지가 이를 이스케이프해 표시한다. 검사 결과는 검사 당시 값이며 장비 변경 후 resultsStale로 구별한다. 콘솔 조회/실패는 상태 전후 비교로 구분한다. 홈은 네트워크 실기에서만 필기 도구를 details로 묶어 다른 시험의 흐름을 보존한다.
+
+## v37 학습 단계 분리
+
+platform/study-stage.js의 StudyStage는 네트워크 전용 필기/실기 선택, 경로 분류, 메뉴/브레드크럼/모바일 내비게이션 동기화를 담당한다. 별도 선택 키만 사용하며 학습 상태에 손대지 않는다. app은 라우팅 전에 sync하고 HomePages에 getStage를 주입한다. 직접 링크는 화면 의미를 우선하며 홈은 마지막 선택을 유지한다. StudyCoach의 getView는 실기에서는 practical을 반환해 필기 추천이 실기 홈에 삽입되지 않는다.

@@ -76,6 +76,7 @@
     <script defer src="assets/network/ui/lab-windows.js"></script>
     <script defer src="assets/network/pages/practical-lab-page.js"></script>
     <script defer src="assets/network/pages/practical-page.js"></script>
+    <script defer src="assets/network/platform/study-stage.js"></script>
     <script defer src="assets/network/app.js"></script>
     <script defer src="assets/network/platform/pwa.js"></script>
   </head>
@@ -91,6 +92,9 @@
         <a href="#dashboard" data-view="dashboard"><span aria-hidden="true">◫</span> 학습 현황</a>
         <a href="#practical" data-view="practical" data-network-practical hidden
           ><span>⌨</span> 실기 준비</a
+        >
+        <a href="#lab" data-view="lab" data-network-practical hidden
+          ><span aria-hidden="true">⌨</span> 실습 실험실</a
         >
         <a href="#daily" data-view="daily"><span aria-hidden="true">▷</span> 오늘의 학습</a>
         <a href="#keywords" data-view="keywords"
@@ -131,6 +135,21 @@
           </button>
         </div>
       </header>
+      <div
+        id="study-stage-switch"
+        class="study-stage-switch"
+        role="group"
+        aria-label="필기 실기 학습 전환"
+        hidden
+      >
+        <span>학습 구분</span>
+        <button type="button" data-study-stage="written" aria-pressed="false">
+          필기 <small>기출·오답·암기</small>
+        </button>
+        <button type="button" data-study-stage="practical" aria-pressed="false">
+          실기 <small>설정·명령·케이블</small>
+        </button>
+      </div>
       <div id="pwa-banner" hidden role="status"></div>
       <main id="main" tabindex="-1"></main>
       <nav class="mobile-nav" aria-label="빠른 학습">
@@ -169,7 +188,7 @@
         >
       </nav>
       <footer class="footer">
-        개인 학습용 · 자체 연습과 회차별 기출을 구분해 제공합니다. <span>합격루틴 v36</span>
+        개인 학습용 · 자체 연습과 회차별 기출을 구분해 제공합니다. <span>합격루틴 v37.1</span>
       </footer>
     </div>
     <dialog id="settings-dialog" aria-labelledby="settings-title">
@@ -239,7 +258,7 @@
           <legend>학습 기록 관리</legend>
           <button type="button" class="button secondary" data-screen-lock>화면 다시 잠그기</button>
           <p class="fine-print">
-            한국 시간의 오늘 날짜 6자리로 열어요. 통과 표시는 오늘·이 탭에서만 기억해요. 간단한 화면
+            입장 코드로 열어요. 통과 표시는 오늘·이 탭에서만 기억해요. 간단한 화면
             가림막이며 공개 파일의 접근 제어는 아닙니다.
           </p>
           <p class="fine-print">

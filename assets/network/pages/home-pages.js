@@ -1,7 +1,21 @@
 /* 홈·계획 화면: 공통 학습 상태는 getState로 읽고 저장은 앱 이벤트가 담당합니다. */
 (() => {
   "use strict";
-  function create({ D, P, A, R, C, W, items, main, getState, heading, esc, modeName }) {
+  function create({
+    D,
+    P,
+    A,
+    R,
+    C,
+    W,
+    items,
+    main,
+    getState,
+    heading,
+    esc,
+    modeName,
+    getStage = () => "written",
+  }) {
     function practicalHero() {
       const value = window.PracticalStudy.clean(getState().practicalStudy);
       const days = C.daysUntil(value.examDate);
@@ -64,7 +78,12 @@
         plan = D.plan[todayPlan()],
         practiceOnly = !P,
         latest = P ? A.get(P.id) : null,
-        practicalReady = !D.certificationId && Boolean(window.PracticalStudy);
+        practicalReady =
+          !D.certificationId && Boolean(window.PracticalStudy) && getStage() === "practical";
+      if (practicalReady) {
+        main.innerHTML = `<div class="page-heading"><div><h1>네트워크관리사 2급 실기</h1><p>설정·명령 입력·케이블 작업 연습</p></div></div>${practicalHero()}<p class="inline-note">실기는 직접 조작하는 연습입니다. 객관식 기출·오답·암기는 상단의 <strong>필기</strong>로 전환하세요. 실험실 결과는 필기 성적이나 오답노트에 섞이지 않습니다.</p>`;
+        return;
+      }
       main.innerHTML = `<div class="home-greeting"><div><span class="home-eyebrow">${practicalReady ? "네트워크관리사 2급 실기" : esc(D.examName || "네트워크관리사 2급 필기")}</span><h1>오늘의 시험 공부</h1><p>${practicalReady ? "따라하기 · 실기 로드맵 · 직접 연습" : `${practiceOnly ? "기초 연습" : "기출 풀이"} · 오답 복습 · 핵심정리`}</p></div>${practicalReady ? `<a class="home-dday" href="#practical"><span>실기까지</span><strong>D−${Math.max(0, C.daysUntil(window.PracticalStudy.clean(getState().practicalStudy).examDate))}</strong></a>` : `<button class="home-dday" data-settings aria-label="시험일 설정 · ${dday()}"><span>시험까지</span><strong>${dday()}</strong></button>`}</div>
  <p class="guide-entry">처음 왔나요? <a href="#help">1분 사용법부터 보기 →</a></p>
  ${practicalReady ? practicalHero() : ` <section class="home-hero" aria-labelledby="hero-title"><div class="home-hero-copy"><span class="hero-chip">${latest ? `${latest.year}년 ${esc(latest.label || `${latest.round}회`)} · 최신 기출 ${P.questions.length}문항` : `자체 기초 연습 ${D.keywords.length}문항`}</span><h2 id="hero-title">${practiceOnly ? "문제를 풀고," : "기출을 풀고,"}<br>틀린 이유를 확인해요.</h2><p>문제를 풀면 오답노트에 자동으로 모여요.<br>헷갈린 개념은 핵심정리에서 확인하세요.</p><div class="hero-actions"><a class="button primary" href="${practiceOnly ? "#quiz" : "#quiz/current"}">${practiceOnly ? "기초 문제 풀기" : "최신 기출 풀기"} →</a><a class="button secondary" href="${resume ? "#daily" : "#daily/5"}">${resume ? "오늘의 학습 이어서" : "5분 복습"}</a></div></div></section>`}

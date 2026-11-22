@@ -55,6 +55,14 @@
     currentView = "dashboard";
   const main = $("#main");
   let navigation;
+  const studyStage = window.StudyStage.create({
+    document,
+    storage: {
+      getItem: (key) => localStorage.getItem(key),
+      setItem: (key, value) => localStorage.setItem(key, value),
+    },
+    enabled: selectedExam.id === "network",
+  });
   function persist() {
     try {
       localStorage.setItem(KEY, JSON.stringify(state));
@@ -115,6 +123,7 @@
     filter = "전체";
     query = "";
     examWorkspace.shell(examWorkspace.resolve(location.search), currentView === "exams");
+    studyStage.sync(currentView);
     if (currentView === "quiz" && id === "current") {
       quizPage.filterCurrent();
     }
@@ -182,8 +191,7 @@
           publicMaterials: practicePack ? [] : window.PUBLIC_MATERIALS,
         }),
     })[currentView]();
-    if (["practical", "lab"].includes(currentView) && selectedExam.id === "network")
-      document.querySelector(".breadcrumb").lastChild.textContent = " · 실기 준비";
+
     updateBadges();
     updateStorage();
     window.scrollTo({ top: 0, behavior: "instant" });
@@ -263,6 +271,13 @@
       event.preventDefault();
       if (target.hasAttribute("data-guide-link")) $("#settings-dialog").close();
       navigation.go(target.getAttribute("href"));
+      return;
+    }
+    if (target.dataset.studyStage) {
+      if (studyStage.select(target.dataset.studyStage)) {
+        if (location.hash === "#dashboard") route();
+        else navigation.go("#dashboard");
+      }
       return;
     }
     if (target.dataset.filter !== undefined) {
@@ -403,7 +418,7 @@
     basicOnly: Boolean(practicePack),
     storageKey: practicePack ? `cert-coach:${selectedExam.id}:v1` : "network-study-coach:v1",
     root: main,
-    getView: () => currentView,
+    getView: () => (studyStage.get() === "practical" ? "practical" : currentView),
     getMode: () =>
       currentView === "game"
         ? window.KeywordGame.isPlaying()
@@ -501,6 +516,7 @@
     heading,
     esc,
     modeName,
+    getStage: studyStage.get,
   });
   // 가져오기·초기화 후에도 페이지는 getState로 최신 상태를 읽습니다.
   const { keywords, keywordResults, commands, commandResults, theory } =

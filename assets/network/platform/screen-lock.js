@@ -52,7 +52,7 @@
     document.querySelectorAll("dialog[open]").forEach((dialog) => dialog.close());
     const section = document.createElement("section");
     section.id = "screen-lock";
-    section.innerHTML = `<form class="screen-lock-card" id="screen-lock-form"><span class="label-tag">합격루틴 · 화면 잠금</span><h1>입장 코드를 입력해 주세요</h1><p>한국 시간의 오늘 날짜를 숫자 6자리(YYMMDD)로 입력해요.</p><label for="screen-lock-code">입장 코드</label><input id="screen-lock-code" name="entry-code" type="password" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="off" required aria-describedby="screen-lock-feedback"><p id="screen-lock-feedback" role="status" aria-live="polite"></p><button type="submit" class="button primary full">공부 화면 열기 →</button><small>간단한 화면 가림막입니다. 공개 파일의 접근을 막는 보안 기능은 아니에요.</small></form>`;
+    section.innerHTML = `<form class="screen-lock-card" id="screen-lock-form"><span class="label-tag">합격루틴 · 화면 잠금</span><h1>입장 코드를 입력해 주세요</h1><label for="screen-lock-code">입장 코드</label><input id="screen-lock-code" name="entry-code" type="password" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="off" required aria-describedby="screen-lock-feedback"><p id="screen-lock-feedback" role="status" aria-live="polite"></p><button type="submit" class="button primary full">공부 화면 열기 →</button><small>간단한 화면 가림막입니다. 공개 파일의 접근을 막는 보안 기능은 아니에요.</small></form>`;
     document.body.appendChild(section);
     const input = section.querySelector("input");
     section.querySelector("form").addEventListener("submit", (event) => {

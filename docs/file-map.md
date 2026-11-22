@@ -156,3 +156,8 @@
 - `assets/network/ui/lab-windows.js`: 속성창 단계와 적용/취소 상태.
 - `assets/network/css/lab-windows.css`: Windows 모형과 드래그 대상 표현.
 - `tests/test-lab-fidelity.cjs`: CLI 오류·저장 확인·케이블 드래그·Windows 취소/적용 회귀.
+
+### v37 추가 파일
+
+- assets/network/platform/study-stage.js: 필기/실기 선택·경로 분류·메뉴 동기화.
+- tests/test-study-stage.cjs: 단계 추론·홈 유지·저장 실패·시험 격리.
