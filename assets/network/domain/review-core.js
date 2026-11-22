@@ -273,7 +273,21 @@
                     goal: "핵심 개념을 익히고 첫 인출 연습으로 취약 개념을 찾으세요.",
                   };
   }
+  // 복수 정답은 배포된 문항 데이터만 신뢰합니다. 사용자 백업에서 정답을 받지 않습니다.
+  function isCorrect(question, answer) {
+    return (
+      Number.isInteger(answer) &&
+      answer >= 0 &&
+      answer < question.options.length &&
+      (question.acceptedAnswers || [question.answer]).includes(answer)
+    );
+  }
+  function answerNumbers(question) {
+    return (question.acceptedAnswers || [question.answer]).map((answer) => answer + 1).join("·");
+  }
   const api = {
+    isCorrect,
+    answerNumbers,
     DEFAULT_EXAM,
     dateKey,
     plus,

@@ -1,0 +1,34 @@
+{
+  "date": "2026-11-23",
+  "version": "v33",
+  "checks": {
+    "staticAssets": 60,
+    "automatedTests": 120,
+    "desktop": {
+      "quizNextQuestionTop": 90,
+      "focus": "question-box",
+      "wrongSequential": "correct retained current; next and number jump observed"
+    },
+    "mobile": {
+      "viewport": [
+        412,
+        915
+      ],
+      "documentWidth": 397,
+      "questionTop": 89.67,
+      "focus": "question-box notebook-question"
+    },
+    "screenLock": [
+      "wrong code rejected",
+      "correct code opens screen",
+      "settings relock closes dialog",
+      "locked reload retains lock",
+      "unlocked same-tab reload retains pass"
+    ],
+    "limits": [
+      "static screen cover only; public files remain accessible",
+      "no physical devices/public deployment/file URL/offline lock testing",
+      "review queue is in-memory; a reload returns to remaining wrong list"
+    ]
+  }
+}

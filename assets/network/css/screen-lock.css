@@ -1,0 +1,51 @@
+/* 화면 잠금의 표시만 담당합니다. 실제 파일 접근 권한을 바꾸지 않습니다. */
+html[data-screen-locked] body > :not(#screen-lock) {
+  display: none !important;
+}
+html[data-screen-locked] {
+  overflow: hidden;
+}
+#screen-lock {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: max(20px, env(safe-area-inset-top)) 20px max(20px, env(safe-area-inset-bottom));
+  background: var(--paper);
+  color: var(--ink);
+  overflow-y: auto;
+}
+.screen-lock-card {
+  width: min(100%, 400px);
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--paper);
+}
+.screen-lock-card h1 {
+  font-size: clamp(20px, 5vw, 26px);
+  margin: 18px 0 10px;
+}
+.screen-lock-card p,
+.screen-lock-card small {
+  color: var(--muted);
+  line-height: 1.7;
+}
+.screen-lock-card label,
+.screen-lock-card small {
+  display: block;
+  margin-top: 20px;
+}
+.screen-lock-card input {
+  width: 100%;
+  padding: 14px;
+  margin-top: 8px;
+  font-size: 24px;
+  letter-spacing: 8px;
+  text-align: center;
+}
+#screen-lock-feedback {
+  min-height: 24px;
+  font-size: 13px;
+}

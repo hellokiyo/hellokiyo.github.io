@@ -1,0 +1,259 @@
+{
+  "date": "2026-11-16",
+  "checks": [
+    {
+      "examId": "network",
+      "width": 1366,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "pc",
+      "width": 1366,
+      "bookmarkPreview": "1문제 중 1문제를 풉니다.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "linux-master-2",
+      "width": 1366,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "information-processing-engineer",
+      "width": 1366,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "geospatial-convergence-industrial",
+      "width": 1366,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "information-equipment-craftsman",
+      "width": 1366,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "information-security-engineer",
+      "width": 1366,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "digital-forensics-2",
+      "width": 1366,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "information-security-industrial",
+      "width": 1366,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "network-manager-1",
+      "width": 1366,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "internet-security-2",
+      "width": 1366,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "computer-systems-engineer",
+      "width": 1366,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "information-processing-industrial",
+      "width": 1366,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "geospatial-convergence-craftsman",
+      "width": 1366,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "surveying-geospatial-engineer",
+      "width": 1366,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "pc-master-kie",
+      "width": 1366,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "ccna",
+      "width": 1366,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "network",
+      "width": 390,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "pc",
+      "width": 390,
+      "bookmarkPreview": "1문제 중 1문제를 풉니다.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "linux-master-2",
+      "width": 390,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "information-processing-engineer",
+      "width": 390,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "geospatial-convergence-industrial",
+      "width": 390,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "information-equipment-craftsman",
+      "width": 390,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "information-security-engineer",
+      "width": 390,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "digital-forensics-2",
+      "width": 390,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "information-security-industrial",
+      "width": 390,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "network-manager-1",
+      "width": 390,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "internet-security-2",
+      "width": 390,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "computer-systems-engineer",
+      "width": 390,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "information-processing-industrial",
+      "width": 390,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "geospatial-convergence-craftsman",
+      "width": 390,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "surveying-geospatial-engineer",
+      "width": 390,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "pc-master-kie",
+      "width": 390,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    },
+    {
+      "examId": "ccna",
+      "width": 390,
+      "bookmarkPreview": "조건에 맞는 문제가 없어요. 범위를 넓히거나 먼저 별표로 문제를 저장해 주세요.",
+      "emptyDisabled": true,
+      "overflow": false
+    }
+  ],
+  "pcFlow": {
+    "bookmarkSurvivesReload": true,
+    "bookmarkedPool": 1,
+    "gradedScore": 100,
+    "repeatSameQuestion": true,
+    "repeatClearsAnswers": true,
+    "repeatKindSurvivesReload": true,
+    "setupRetainsSession": true,
+    "resumeReturnsQuizRoute": true
+  },
+  "networkPool": {
+    "past": 850,
+    "own": 72
+  },
+  "authenticationAdded": false,
+  "limits": "Viewport developer checks; no physical-device, public deployment, bulk copyrighted question import, or UI backup export/import test. Backup round-trip covered by unit tests."
+}

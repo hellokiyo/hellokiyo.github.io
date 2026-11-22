@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-23",
+  "version": "v34.2",
+  "testCount": 126,
+  "staticAssets": 65,
+  "examDate": "2026-12-19",
+  "dateOrigin": "user supplied",
+  "guidedExamples": 8,
+  "labConditions": 6,
+  "browserChecks": [
+    "Windows invalid IP rejected and valid apply scored1/6",
+    "router IP/no shutdown/route/show/save scored5/6",
+    "two cable connectors configured and scored6/6",
+    "IPv4 walkthrough completion survived reload as1/8",
+    "home D26/practical links/sidebar verified after update",
+    "no browser errors observed"
+  ],
+  "mobile": {
+    "viewport": [
+      412,
+      915
+    ],
+    "documentWidth": 397
+  },
+  "limits": [
+    "not a real VM or official emulator",
+    "only IPv4 and partial CLI and T568B demo supported",
+    "lab device state resets on browser reload",
+    "no physical-device or real ICQA execution validation"
+  ]
+}

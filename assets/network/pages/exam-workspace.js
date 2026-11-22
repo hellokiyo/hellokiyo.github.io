@@ -30,7 +30,7 @@
   }
   function selection() {
     selectedCategory = "전체";
-    return `<div class="page-heading"><div><h1>어떤 시험을 공부할까요?</h1><p>시험을 선택하면 문제풀이·오늘의 학습·산성비·오답노트를 이용할 수 있어요.</p></div></div><div class="exam-tools"><label for="exam-search">시험 이름 검색</label><input type="search" id="exam-search" placeholder="리눅스, 정보보안, CCNA…" maxlength="100" autocomplete="off"><div class="exam-categories" role="group" aria-label="시험 분야">${["전체", ...categories].map((category) => `<button type="button" class="filter ${category === "전체" ? "active" : ""}" data-exam-category="${category}" aria-pressed="${category === "전체"}">${category}</button>`).join("")}</div></div><p id="exam-results-count" class="fine-print" role="status">${exams.length}개 시험 · 학습 가능 ${exams.length}개 · 실제 기출 수록 1개</p><div class="exam-grid" id="exam-results">${cards(exams)}</div><p class="inline-note">기존 네트워크관리사 기록은 그대로 유지돼요. 시험마다 학습과 게임 기록이 따로 저장돼요. 다른 시험은 자체 기초 연습부터 제공하며 실제 기출과 구분합니다.</p>`;
+    return `<div class="page-heading"><div><h1>어떤 시험을 공부할까요?</h1><p>시험을 선택하면 문제풀이·오늘의 학습·산성비·오답노트를 이용할 수 있어요.</p></div></div><div class="exam-tools"><label for="exam-search">시험 이름 검색</label><input type="search" id="exam-search" placeholder="리눅스, 정보보안, CCNA…" maxlength="100" autocomplete="off"><div class="exam-categories" role="group" aria-label="시험 분야">${["전체", ...categories].map((category) => `<button type="button" class="filter ${category === "전체" ? "active" : ""}" data-exam-category="${category}" aria-pressed="${category === "전체"}">${category}</button>`).join("")}</div></div><p id="exam-results-count" class="fine-print" role="status">${exams.length}개 시험 · 학습 가능 ${exams.length}개 · 실제 기출 수록 ${exams.filter((exam) => exam.ready).length}개</p><div class="exam-grid" id="exam-results">${cards(exams)}</div><p class="inline-note">기존 네트워크관리사 기록은 그대로 유지돼요. 시험마다 학습과 게임 기록이 따로 저장돼요. 다른 시험은 자체 기초 연습부터 제공하며 실제 기출과 구분합니다.</p>`;
   }
   function refreshSelection() {
     const input = document.querySelector("#exam-search");
@@ -62,6 +62,9 @@
   }
   function shell(exam, choosing = false) {
     document.body.classList.toggle("exam-selecting", choosing);
+    document.querySelectorAll("[data-network-practical]").forEach((link) => {
+      link.hidden = choosing || exam.id !== "network";
+    });
     document.body.classList.toggle(
       "exam-pending",
       !exam.ready && !root.ExamPractice?.profiles[exam.id] && !choosing,
@@ -72,7 +75,8 @@
       ? ""
       : ` · ${exam.stage}`;
     document.querySelector("#exam-switch").hidden = choosing;
-    document.querySelector('a[href="docs/study/exam-guide.md"]').hidden = !exam.ready || choosing;
+    document.querySelector('a[href="docs/study/exam-guide.md"]').hidden =
+      exam.id !== "network" || choosing;
     // 계획 이름은 제공되는 공통 14일 연습 화면과 일치시킵니다.
     document.querySelectorAll('[data-view="plan"]').forEach((link) => {
       const label = Array.from(link.childNodes).find(

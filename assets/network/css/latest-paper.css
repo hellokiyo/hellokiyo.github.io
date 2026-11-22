@@ -13,3 +13,12 @@
   justify-content: flex-start;
   flex-wrap: wrap;
 }
+
+/* 원본 코드·다중 행 보기·제공 해설의 줄바꿈을 보존합니다. */
+.answer,
+.explanation p,
+.review-detail > p,
+.daily-question h2 {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}

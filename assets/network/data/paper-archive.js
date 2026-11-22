@@ -8,10 +8,10 @@
             {
               ...latest,
               year: Number(latest.date.slice(0, 4)),
-              round: Number(latest.title.match(/(\d+)회/)?.[1]),
-              previousStandard: latest.date < REVISION,
-              original: "materials/files/network-2026-04-a.hwp",
-              sourceName: "ICQA 제공 시험지",
+              round: latest.round ?? Number(latest.title.match(/(\d+)회/)?.[1]),
+              previousStandard: latest.examId ? latest.previousStandard : latest.date < REVISION,
+              original: latest.original || "materials/files/network-2026-04-a.hwp",
+              sourceName: latest.sourceName || "ICQA 제공 시험지",
             },
           ]
         : []),

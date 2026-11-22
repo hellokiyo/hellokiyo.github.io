@@ -1,0 +1,523 @@
+{
+  "date": "2026-11-16",
+  "localOnly": true,
+  "rows": [
+    {
+      "id": "network",
+      "name": "네트워크관리사 2급",
+      "own": 72,
+      "past": 850,
+      "papers": 17,
+      "total": 922,
+      "keywords": 54,
+      "sections": 12,
+      "notes": 87,
+      "termNotes": 0,
+      "topics": [
+        "1. 목표와 우선순위",
+        "2. 키워드로 빠르게 고르는 유형",
+        "3. 반드시 외울 숫자와 대응표",
+        "4. 계산과 해석이 필요한 유형",
+        "5. 필수 명령어",
+        "6. 이해해야 풀리는 이론",
+        "7. 원자료에서 바로잡을 내용",
+        "8. 14일 학습 계획",
+        "9. 시험장 풀이 전략",
+        "10. 전날 최종 체크",
+        "부록. 실기 준비",
+        "출처와 정리 원칙"
+      ],
+      "sourceRoundLinks": 20,
+      "questionImages": 150,
+      "researchedRoundRows": 20,
+      "rawPaperFiles": 17
+    },
+    {
+      "id": "pc",
+      "name": "PC정비사 2급",
+      "own": 20,
+      "past": 0,
+      "papers": 0,
+      "total": 20,
+      "keywords": 20,
+      "sections": 2,
+      "notes": 11,
+      "termNotes": 0,
+      "topics": [
+        "1. PC 기초",
+        "2. 운영체제"
+      ],
+      "sourceRoundLinks": 20,
+      "questionImages": 0,
+      "researchedRoundRows": 20,
+      "rawPaperFiles": 0
+    },
+    {
+      "id": "linux-master-2",
+      "name": "리눅스마스터 2급",
+      "own": 20,
+      "past": 0,
+      "papers": 0,
+      "total": 20,
+      "keywords": 20,
+      "sections": 2,
+      "notes": 11,
+      "termNotes": 0,
+      "topics": [
+        "1. 운영체제",
+        "2. TCP/IP"
+      ],
+      "sourceRoundLinks": 7,
+      "questionImages": 0,
+      "researchedRoundRows": 17,
+      "rawPaperFiles": 0
+    },
+    {
+      "id": "information-processing-engineer",
+      "name": "정보처리기사",
+      "own": 20,
+      "past": 0,
+      "papers": 0,
+      "total": 20,
+      "keywords": 20,
+      "sections": 2,
+      "notes": 6,
+      "termNotes": 0,
+      "topics": [
+        "1. 프로그래밍",
+        "2. 데이터베이스"
+      ],
+      "sourceRoundLinks": 2,
+      "questionImages": 0,
+      "researchedRoundRows": 14,
+      "rawPaperFiles": 0
+    },
+    {
+      "id": "geospatial-convergence-industrial",
+      "name": "공간정보융합산업기사",
+      "own": 30,
+      "past": 0,
+      "papers": 0,
+      "total": 30,
+      "keywords": 30,
+      "sections": 3,
+      "notes": 5,
+      "termNotes": 0,
+      "topics": [
+        "1. 공간정보",
+        "2. 좌표·측량",
+        "3. 데이터베이스"
+      ],
+      "sourceRoundLinks": 0,
+      "questionImages": 0,
+      "researchedRoundRows": 0,
+      "rawPaperFiles": 0
+    },
+    {
+      "id": "information-equipment-craftsman",
+      "name": "정보기기운용기능사",
+      "own": 20,
+      "past": 0,
+      "papers": 0,
+      "total": 20,
+      "keywords": 20,
+      "sections": 2,
+      "notes": 4,
+      "termNotes": 0,
+      "topics": [
+        "1. TCP/IP",
+        "2. 스위칭·라우팅"
+      ],
+      "sourceRoundLinks": 0,
+      "questionImages": 0,
+      "researchedRoundRows": 20,
+      "rawPaperFiles": 0
+    },
+    {
+      "id": "information-security-engineer",
+      "name": "정보보안기사",
+      "own": 20,
+      "past": 0,
+      "papers": 0,
+      "total": 20,
+      "keywords": 20,
+      "sections": 2,
+      "notes": 2,
+      "termNotes": 0,
+      "topics": [
+        "1. 정보보호",
+        "2. TCP/IP"
+      ],
+      "sourceRoundLinks": 3,
+      "questionImages": 0,
+      "researchedRoundRows": 9,
+      "rawPaperFiles": 0
+    },
+    {
+      "id": "digital-forensics-2",
+      "name": "디지털포렌식전문가 2급",
+      "own": 20,
+      "past": 0,
+      "papers": 0,
+      "total": 20,
+      "keywords": 20,
+      "sections": 2,
+      "notes": 9,
+      "termNotes": 0,
+      "topics": [
+        "1. 디지털 증거",
+        "2. 운영체제"
+      ],
+      "sourceRoundLinks": 0,
+      "questionImages": 0,
+      "researchedRoundRows": 0,
+      "rawPaperFiles": 0
+    },
+    {
+      "id": "information-security-industrial",
+      "name": "정보보안산업기사",
+      "own": 20,
+      "past": 0,
+      "papers": 0,
+      "total": 20,
+      "keywords": 20,
+      "sections": 2,
+      "notes": 9,
+      "termNotes": 0,
+      "topics": [
+        "1. 정보보호",
+        "2. 운영체제"
+      ],
+      "sourceRoundLinks": 0,
+      "questionImages": 0,
+      "researchedRoundRows": 0,
+      "rawPaperFiles": 0
+    },
+    {
+      "id": "network-manager-1",
+      "name": "네트워크관리사 1급",
+      "own": 30,
+      "past": 0,
+      "papers": 0,
+      "total": 30,
+      "keywords": 30,
+      "sections": 3,
+      "notes": 4,
+      "termNotes": 0,
+      "topics": [
+        "1. TCP/IP",
+        "2. 스위칭·라우팅",
+        "3. 정보보호"
+      ],
+      "sourceRoundLinks": 10,
+      "questionImages": 0,
+      "researchedRoundRows": 10,
+      "rawPaperFiles": 0
+    },
+    {
+      "id": "internet-security-2",
+      "name": "인터넷보안전문가 2급",
+      "own": 20,
+      "past": 0,
+      "papers": 0,
+      "total": 20,
+      "keywords": 20,
+      "sections": 2,
+      "notes": 2,
+      "termNotes": 0,
+      "topics": [
+        "1. 정보보호",
+        "2. TCP/IP"
+      ],
+      "sourceRoundLinks": 10,
+      "questionImages": 0,
+      "researchedRoundRows": 10,
+      "rawPaperFiles": 0
+    },
+    {
+      "id": "computer-systems-engineer",
+      "name": "컴퓨터시스템기사",
+      "own": 20,
+      "past": 0,
+      "papers": 0,
+      "total": 20,
+      "keywords": 20,
+      "sections": 2,
+      "notes": 9,
+      "termNotes": 0,
+      "topics": [
+        "1. 컴퓨터 구조",
+        "2. 운영체제"
+      ],
+      "sourceRoundLinks": 1,
+      "questionImages": 0,
+      "researchedRoundRows": 15,
+      "rawPaperFiles": 0
+    },
+    {
+      "id": "information-processing-industrial",
+      "name": "정보처리산업기사",
+      "own": 20,
+      "past": 0,
+      "papers": 0,
+      "total": 20,
+      "keywords": 20,
+      "sections": 2,
+      "notes": 6,
+      "termNotes": 0,
+      "topics": [
+        "1. 프로그래밍",
+        "2. 데이터베이스"
+      ],
+      "sourceRoundLinks": 0,
+      "questionImages": 0,
+      "researchedRoundRows": 14,
+      "rawPaperFiles": 0
+    },
+    {
+      "id": "geospatial-convergence-craftsman",
+      "name": "공간정보융합기능사",
+      "own": 20,
+      "past": 0,
+      "papers": 0,
+      "total": 20,
+      "keywords": 20,
+      "sections": 2,
+      "notes": 6,
+      "termNotes": 6,
+      "topics": [
+        "1. 공간정보",
+        "2. 좌표·측량"
+      ],
+      "sourceRoundLinks": 0,
+      "questionImages": 0,
+      "researchedRoundRows": 0,
+      "rawPaperFiles": 0
+    },
+    {
+      "id": "surveying-geospatial-engineer",
+      "name": "측량및지형공간정보기사",
+      "own": 20,
+      "past": 0,
+      "papers": 0,
+      "total": 20,
+      "keywords": 20,
+      "sections": 2,
+      "notes": 6,
+      "termNotes": 6,
+      "topics": [
+        "1. 좌표·측량",
+        "2. 공간정보"
+      ],
+      "sourceRoundLinks": 1,
+      "questionImages": 0,
+      "researchedRoundRows": 1,
+      "rawPaperFiles": 0
+    },
+    {
+      "id": "pc-master-kie",
+      "name": "PC Master(정비사)",
+      "own": 20,
+      "past": 0,
+      "papers": 0,
+      "total": 20,
+      "keywords": 20,
+      "sections": 2,
+      "notes": 11,
+      "termNotes": 0,
+      "topics": [
+        "1. PC 기초",
+        "2. 운영체제"
+      ],
+      "sourceRoundLinks": 0,
+      "questionImages": 0,
+      "researchedRoundRows": 0,
+      "rawPaperFiles": 0
+    },
+    {
+      "id": "ccna",
+      "name": "CCNA",
+      "own": 20,
+      "past": 0,
+      "papers": 0,
+      "total": 20,
+      "keywords": 20,
+      "sections": 2,
+      "notes": 4,
+      "termNotes": 0,
+      "topics": [
+        "1. TCP/IP",
+        "2. 스위칭·라우팅"
+      ],
+      "sourceRoundLinks": 0,
+      "questionImages": 0,
+      "researchedRoundRows": 0,
+      "rawPaperFiles": 0
+    }
+  ],
+  "expandedIdCount": 340,
+  "expandedUniqueContent": 110,
+  "metadataOriginal": 74,
+  "metadataUserBoards": 117,
+  "rawFiles": [
+    "network-20220522-student.pdf",
+    "network-20220821-teacher.pdf",
+    "network-20221106-student.pdf",
+    "network-20230226-student.pdf",
+    "network-20230521-student.pdf",
+    "network-20231105-student.pdf",
+    "network-20240225-student.pdf",
+    "network-20240519-teacher.pdf",
+    "network-20241103-student.pdf",
+    "network-20250223-teacher.pdf",
+    "network-20250525-teacher.pdf",
+    "network-20250824-teacher.pdf",
+    "network-20251102-teacher.pdf",
+    "network-20260201-teacher.pdf",
+    "network-20260517-teacher.pdf",
+    "network-20260802-teacher.pdf"
+  ],
+  "materialsFiles": [
+    "network-2026-04-a.hwp"
+  ],
+  "networkPaperDates": [
+    {
+      "id": "nw2-2026-04-a",
+      "date": "2026-11-01",
+      "questions": 50,
+      "answerStatus": "학습용 풀이 · 공식 정답표 미확인"
+    },
+    {
+      "id": "nw2-2026-03",
+      "date": "2026-08-02",
+      "questions": 50,
+      "answerStatus": "COMCBT 정답표 기준 · 상세 해설 별도"
+    },
+    {
+      "id": "nw2-2026-02",
+      "date": "2026-05-17",
+      "questions": 50,
+      "answerStatus": "COMCBT 정답표 기준 · 상세 해설 별도"
+    },
+    {
+      "id": "nw2-2026-01",
+      "date": "2026-02-01",
+      "questions": 50,
+      "answerStatus": "COMCBT 정답표 기준 · 상세 해설 별도"
+    },
+    {
+      "id": "nw2-2025-04",
+      "date": "2025-11-02",
+      "questions": 50,
+      "answerStatus": "COMCBT 정답표 기준 · 상세 해설 별도"
+    },
+    {
+      "id": "nw2-2025-03",
+      "date": "2025-08-24",
+      "questions": 50,
+      "answerStatus": "COMCBT 정답표 기준 · 상세 해설 별도"
+    },
+    {
+      "id": "nw2-2025-02",
+      "date": "2025-05-25",
+      "questions": 50,
+      "answerStatus": "COMCBT 정답표 기준 · 상세 해설 별도"
+    },
+    {
+      "id": "nw2-2025-01",
+      "date": "2025-02-23",
+      "questions": 50,
+      "answerStatus": "COMCBT 정답표 기준 · 상세 해설 별도"
+    },
+    {
+      "id": "nw2-2024-04",
+      "date": "2024-11-03",
+      "questions": 50,
+      "answerStatus": "COMCBT 정답표 기준 · 상세 해설 별도"
+    },
+    {
+      "id": "nw2-2024-02",
+      "date": "2024-05-19",
+      "questions": 50,
+      "answerStatus": "COMCBT 정답표 기준 · 상세 해설 별도"
+    },
+    {
+      "id": "nw2-2024-01",
+      "date": "2024-02-25",
+      "questions": 50,
+      "answerStatus": "COMCBT 정답표 기준 · 상세 해설 별도"
+    },
+    {
+      "id": "nw2-2023-04",
+      "date": "2023-11-05",
+      "questions": 50,
+      "answerStatus": "COMCBT 정답표 기준 · 상세 해설 별도"
+    },
+    {
+      "id": "nw2-2023-02",
+      "date": "2023-05-21",
+      "questions": 50,
+      "answerStatus": "COMCBT 정답표 기준 · 상세 해설 별도"
+    },
+    {
+      "id": "nw2-2023-01",
+      "date": "2023-02-26",
+      "questions": 50,
+      "answerStatus": "COMCBT 정답표 기준 · 상세 해설 별도"
+    },
+    {
+      "id": "nw2-2022-04",
+      "date": "2022-11-06",
+      "questions": 50,
+      "answerStatus": "COMCBT 정답표 기준 · 상세 해설 별도"
+    },
+    {
+      "id": "nw2-2022-03",
+      "date": "2022-08-21",
+      "questions": 50,
+      "answerStatus": "COMCBT 정답표 기준 · 상세 해설 별도"
+    },
+    {
+      "id": "nw2-2022-02",
+      "date": "2022-05-22",
+      "questions": 50,
+      "answerStatus": "COMCBT 정답표 기준 · 상세 해설 별도"
+    }
+  ],
+  "catalogRows": 19,
+  "identicalContentPairs": [
+    [
+      "PC정비사 2급",
+      "PC Master(정비사)",
+      20
+    ],
+    [
+      "정보처리기사",
+      "정보처리산업기사",
+      20
+    ],
+    [
+      "정보기기운용기능사",
+      "CCNA",
+      20
+    ],
+    [
+      "정보보안기사",
+      "인터넷보안전문가 2급",
+      20
+    ],
+    [
+      "공간정보융합기능사",
+      "측량및지형공간정보기사",
+      20
+    ]
+  ],
+  "networkSourceOnlyExplanations": 800,
+  "uniqueResearchedRoundRows": 150,
+  "researchDefinition": "Union by selected exam ID and exam date; includes unverified listing and reconstruction-pending rows, not downloaded or playable papers.",
+  "networkPendingRounds": [
+    "2024년 3회",
+    "2023년 3회",
+    "2022년 1회"
+  ]
+}

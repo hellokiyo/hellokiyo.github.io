@@ -5,14 +5,19 @@
   if (!location.hash) history.replaceState(history.state, "", location.search + "#exams");
   const selectedExam = examWorkspace.resolve(location.search);
   const practicePack = window.ExamPractice.get(selectedExam);
+  const importedPapers = window.ExamPapers.get(selectedExam.id);
   const gameStorageKey = practicePack
     ? `cert-game:${selectedExam.id}:v1`
     : "network-keyword-rain:v1";
   const D = practicePack?.data || window.STUDY_DATA,
     B = practicePack?.questions || window.STUDY_QUESTIONS,
-    P = practicePack ? null : window.LATEST_PAPER,
-    A = window.PaperArchive.create(P, practicePack ? [] : window.PAST_PAPERS),
-    Q = [...B, ...A.papers.flatMap((p) => p.questions)],
+    P = practicePack ? importedPapers[0] || null : window.LATEST_PAPER,
+    A = window.PaperArchive.create(P, practicePack ? importedPapers.slice(1) : window.PAST_PAPERS),
+    Q = [
+      ...B,
+      ...A.papers.flatMap((p) => p.questions),
+      ...window.LicensedPractice.get(selectedExam.id),
+    ],
     C = window.StudyCore;
   const W = window.WrongNotebook;
   const KEY = practicePack ? `cert-study:${selectedExam.id}:v1` : "network-notes:v1",
@@ -26,7 +31,13 @@
   const $ = (selector, root = document) => root.querySelector(selector);
   const { escapeHTML: esc, empty } = window.PageUI;
   const heading = (kicker, title, description, extra) =>
-    window.PageUI.heading(kicker, title, description, extra, Boolean(practicePack));
+    window.PageUI.heading(
+      kicker,
+      title,
+      description,
+      extra,
+      Boolean(practicePack) && (kicker !== "PRACTICE MAKES PROGRESS" || !P),
+    );
   const materialsStore = window.StudyMaterialsStore.forExam(selectedExam.id);
   let storageOK = true,
     state;
@@ -96,6 +107,8 @@
       "help",
       "exams",
       "sources",
+      "practical",
+      "lab",
     ].includes(view)
       ? view
       : "dashboard";
@@ -111,13 +124,15 @@
       else a.removeAttribute("aria-current");
     });
     ({
+      lab: () => practicalLabPage.render(),
+      practical: () => practicalPage.render(),
       sources: () =>
         window.PaperSourcesPage.mount({ main, exam: examWorkspace.resolve(location.search) }),
       exams: () => {
         main.innerHTML = examWorkspace.selection();
       },
       help: () => {
-        main.innerHTML = window.UserGuidePage.render(Boolean(practicePack));
+        main.innerHTML = window.UserGuidePage.render(Boolean(practicePack), Boolean(P));
       },
       dashboard,
       keywords,
@@ -155,7 +170,7 @@
           },
         }),
       theory: () => theory(id),
-      quiz: renderQuiz,
+      quiz: () => (id === "setup" ? quizLanding() : renderQuiz()),
       wrong: wrongView,
       plan: renderPlan,
       materials: () =>
@@ -167,11 +182,15 @@
           publicMaterials: practicePack ? [] : window.PUBLIC_MATERIALS,
         }),
     })[currentView]();
+    if (["practical", "lab"].includes(currentView) && selectedExam.id === "network")
+      document.querySelector(".breadcrumb").lastChild.textContent = " · 실기 준비";
     updateBadges();
     updateStorage();
     window.scrollTo({ top: 0, behavior: "instant" });
     document.title =
       {
+        lab: "가상 실기 실험실",
+        practical: "실기 준비",
         exams: "시험 선택",
         sources: "기출 자료",
         help: "사용법",
@@ -260,6 +279,8 @@
       target.setAttribute("aria-pressed", String(onlyUnlearned));
       keywordResults();
     }
+    if (currentView === "lab" && practicalLabPage.handleClick(target)) return;
+    if (currentView === "practical" && practicalPage.handleClick(target)) return;
     if (notebookPage.handle(target)) return;
     quizPage.handleClick(target);
     settings.handleClick(target);
@@ -321,13 +342,25 @@
     }
   });
   document.addEventListener("input", (event) => {
+    quizPage.handleInput(event);
     if (event.target.id === "search") {
       query = event.target.value;
       currentView === "keywords" ? keywordResults() : commandResults();
     }
   });
-  document.addEventListener("change", (event) => quizPage.handleChange(event));
+  document.addEventListener("change", (event) => {
+    if (currentView === "lab" && practicalLabPage.handleChange(event)) return;
+    quizPage.handleChange(event);
+  });
+  for (const type of ["dragstart", "dragover", "dragleave", "drop", "dragend"]) {
+    document.addEventListener(type, (event) => {
+      if (currentView === "lab") practicalLabPage.handleDrag(event);
+    });
+  }
   document.addEventListener("submit", (event) => {
+    if (currentView === "lab" && practicalLabPage.handleSubmit(event)) return;
+    if (currentView === "practical" && practicalPage.handleSubmit(event)) return;
+    if (quizPage.handleSubmit(event)) return;
     settings.handleSubmit(event);
     if (event.target.id === "subnet-form") {
       event.preventDefault();
@@ -494,6 +527,21 @@
     esc,
     persist,
     toast,
+  });
+  const practicalPage = window.PracticalPage.create({
+    data: window.PracticalStudy,
+    main,
+    getState: () => state,
+    persist,
+    esc,
+    C,
+    enabled: selectedExam.id === "network",
+  });
+  const practicalLabPage = window.PracticalLabPage.create({
+    main,
+    engine: window.PracticalLab,
+    esc,
+    enabled: selectedExam.id === "network",
   });
   const wrongView = () => notebookPage.render();
   updateBadges();

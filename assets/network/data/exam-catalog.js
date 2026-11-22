@@ -88,14 +88,20 @@
       category,
       sourceUrl,
       aliases,
-      stage,
-      ready: id === "network", // 실제 회차 기출이 수록된 시험
+      stage: id === "network" ? "필기·실기" : stage,
+      ready: ["network", "pc", "linux-master-2", "information-processing-engineer"].includes(id), // 실제 회차 기출이 수록된 시험
       learningReady: true,
-      status: id === "network" ? "기출 학습 가능" : "기초 연습 가능",
+      status: ["network", "pc", "linux-master-2", "information-processing-engineer"].includes(id)
+        ? "기출 학습 가능"
+        : "기초 연습 가능",
       description:
         id === "network"
           ? "기출 17회차 · 오늘의 학습 · 키워드 복습"
-          : "자체 기초 연습 · 해설·오답·키워드·산성비 (실제 기출 별도 준비)",
+          : {
+              pc: "기출 14회차 · 700문항 · 기초 복습",
+              "linux-master-2": "기출 9회차 · 720문항 · 기초 복습",
+              "information-processing-engineer": "기출 7회차 · 700문항 · 기초 복습",
+            }[id] || "자체 기초 연습 · 해설·오답·키워드·산성비 (실제 기출 별도 준비)",
     }),
   );
   const normalize = (value) => String(value).toLowerCase().replace(/\s+/g, "");

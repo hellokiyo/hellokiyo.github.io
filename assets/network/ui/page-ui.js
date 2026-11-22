@@ -29,7 +29,7 @@
       "COMMAND REFERENCE": "목적 · 명령어 · 옵션을 함께 확인하세요.",
       "CORE CONCEPTS": "시험에 필요한 개념과 계산을 정리했습니다.",
       "14-DAY STUDY PLAN": "하루 한 주제씩 완료 체크하세요.",
-      "PRACTICE MAKES PROGRESS": "최근 5년 기출 · 회차별 반복 풀이와 오답 복습",
+      "PRACTICE MAKES PROGRESS": "수록된 기출 · 회차별 반복 풀이와 오답 복습",
       "REVIEW YOUR MISTAKES": "다시 맞힌 문제는 오답노트에서 제외됩니다.",
       "SESSION COMPLETE": "틀린 문제와 미응답은 오답노트에 저장됩니다.",
     };
@@ -38,7 +38,15 @@
   function empty(title, description, action = "") {
     return `<div class="empty-state"><h2>${title}</h2><p>${description}</p>${action}</div>`;
   }
-  const api = { escapeHTML, heading, empty };
+  // 재렌더링으로 누른 버튼이 사라져도 번호판이 아닌 새 문제를 읽기 시작합니다.
+  function focusQuestion(container) {
+    const question = container.querySelector(".question-box, .daily-question");
+    if (!question) return;
+    question.setAttribute("tabindex", "-1");
+    question.focus({ preventScroll: true });
+    question.scrollIntoView({ block: "start", behavior: "instant" });
+  }
+  const api = { escapeHTML, heading, empty, focusQuestion };
   root.PageUI = api;
   if (typeof module !== "undefined") module.exports = api;
 })(typeof window !== "undefined" ? window : globalThis);

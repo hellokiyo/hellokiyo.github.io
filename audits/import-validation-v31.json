@@ -1,0 +1,24 @@
+{
+  "version": "v31",
+  "questions": 2120,
+  "papers": 30,
+  "images": 589,
+  "providedExplanations": 840,
+  "networkQuestions": 922,
+  "networkIdAnswerSha256": "320e1379ad5f802d6ae97af1c766c73d3278ccffb9f40cbad6f05d9204fce7e4",
+  "browser": {
+    "origin": "http://127.0.0.1:4205",
+    "pc": "latest start, wrong grading, bookmark, reload, past wrong-note checked",
+    "linux": "2021 year, 80-question session, question41 accepted option3, two green correct options, question5 image loaded",
+    "informationProcessing": "100th question survives reload, 2020 year, question44 five images loaded and four picture options mapped",
+    "viewports": [
+      "1366x900 desktop",
+      "412x915 Linux mobile; no horizontal overflow"
+    ],
+    "limits": [
+      "file protocol browser action blocked by URL policy; no workaround attempted",
+      "physical devices and all-paper visual comparison not performed",
+      "PWA update applied; airplane-mode full-cache replay not performed"
+    ]
+  }
+}

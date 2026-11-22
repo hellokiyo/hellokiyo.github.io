@@ -1,0 +1,221 @@
+/* Windows 속성 창을 닮은 학습 모형. 실제 OS 화면 캡처나 시스템 대화상자가 아닙니다. */
+.win-workspace,
+.win-dialog {
+  font-family: "Segoe UI", "Malgun Gothic", sans-serif;
+  font-size: 13px;
+  color: var(--ink);
+  background: var(--paper);
+}
+.win-workspace {
+  min-height: 330px;
+  border: 1px solid var(--line);
+  padding: 16px;
+}
+.win-explorer-bar {
+  padding: 10px;
+  border: 1px solid var(--line);
+  font-size: 12px;
+  margin-bottom: 18px;
+}
+.win-adapter-tile {
+  display: flex;
+  gap: 14px;
+  padding: 16px;
+  text-align: left;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+  margin: 16px 0;
+}
+.win-adapter-tile small {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+.win-network-icon {
+  font-size: 36px;
+  color: #2675bd;
+}
+.win-dialog {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  border: 1px solid #888;
+  border-radius: 3px;
+  box-shadow: 0 8px 24px #0002;
+}
+.win-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--line);
+  padding-left: 12px;
+  font-size: 13px;
+}
+.win-title button {
+  background: transparent;
+  color: var(--ink);
+  border: 0;
+  padding: 10px 16px;
+  font-size: 20px;
+  cursor: pointer;
+}
+.win-title button:hover {
+  background: #c42b1c;
+  color: white;
+}
+.win-tabs {
+  border-bottom: 1px solid var(--line);
+  padding: 12px 12px 0;
+}
+.win-tabs span {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-bottom: none;
+}
+.win-dialog-body {
+  padding: 18px;
+  line-height: 1.7;
+}
+.win-dialog-body > p {
+  margin: 8px 0 14px;
+}
+.win-device {
+  border: 1px solid var(--line);
+  padding: 10px;
+}
+.win-components {
+  border: 1px solid #888;
+  margin: 8px 0 12px;
+  padding: 3px;
+}
+.win-components button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 8px;
+  border: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-size: 12px;
+  cursor: pointer;
+}
+.win-components button.is-selected {
+  color: white;
+  background: #0067c0;
+}
+.win-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 12px;
+}
+.win-actions button {
+  min-width: 76px;
+  padding: 8px 14px;
+  border: 1px solid #888;
+  border-radius: 2px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 13px;
+  cursor: pointer;
+}
+.win-actions button:focus-visible {
+  outline: 2px solid #0067c0;
+  outline-offset: 2px;
+}
+.win-radio {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0;
+  font-size: 12px;
+}
+.win-radio input {
+  width: auto;
+  margin: 0;
+  accent-color: #0067c0;
+}
+.win-address-fields {
+  min-width: 0;
+  padding: 0 0 8px 22px;
+  margin: 0;
+  border: 0;
+}
+.win-address-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 176px;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0;
+  font-size: 12px;
+}
+.win-address {
+  display: grid;
+  grid-template-columns: 1fr 5px 1fr 5px 1fr 5px 1fr;
+  border: 1px solid #888;
+  background: var(--paper);
+  align-items: center;
+}
+.win-address input {
+  box-sizing: border-box;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  border: 0;
+  border-radius: 0;
+  text-align: center;
+  padding: 5px 0;
+  margin: 0;
+  font-size: 16px;
+  background: transparent;
+  color: var(--ink);
+}
+.win-address input:disabled {
+  color: var(--muted);
+  opacity: 0.6;
+}
+.win-address-fields:disabled {
+  opacity: 0.6;
+}
+#win-error {
+  color: #b3261e;
+  font-size: 12px;
+}
+.lab-connectors .is-drop-target {
+  outline: 3px solid var(--green);
+  outline-offset: 2px;
+  background: var(--paper);
+}
+.lab-palette [draggable="true"],
+.lab-connectors [draggable="true"] {
+  cursor: grab;
+}
+.lab-palette [draggable="true"]:active,
+.lab-connectors [draggable="true"]:active {
+  cursor: grabbing;
+}
+@media (max-width: 560px) {
+  .win-dialog-body {
+    padding: 12px;
+  }
+  .win-address-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+  .win-address {
+    width: 100%;
+    max-width: 200px;
+  }
+  .win-address-fields {
+    padding-left: 12px;
+  }
+  .win-title {
+    font-size: 12px;
+  }
+}

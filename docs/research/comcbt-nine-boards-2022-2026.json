@@ -1,0 +1,491 @@
+{
+  "checkedAt": "2026-11-16",
+  "yearWindow": {
+    "from": 2022,
+    "to": 2026
+  },
+  "scope": "Board metadata and attachment availability only. No question text or explanation copied; no new quiz questions added.",
+  "newQuestionsAdded": 0,
+  "boards": [
+    {
+      "code": "je",
+      "name": "PC정비사 2급",
+      "latestListedExamDate": "2026-08-02",
+      "rowsInWindow": 19,
+      "url": "https://www.comcbt.com/xe/je"
+    },
+    {
+      "code": "r2",
+      "name": "리눅스마스터 2급 2차",
+      "latestListedExamDate": "2023-12-09",
+      "rowsInWindow": 7,
+      "url": "https://www.comcbt.com/xe/r2"
+    },
+    {
+      "code": "iz",
+      "name": "정보처리기사",
+      "latestListedExamDate": "2022-04-24",
+      "rowsInWindow": 2,
+      "url": "https://www.comcbt.com/xe/iz"
+    },
+    {
+      "code": "j2",
+      "name": "정보기기운용기능사",
+      "latestListedExamDate": "2011-10-09",
+      "rowsInWindow": 0,
+      "url": "https://www.comcbt.com/xe/j2"
+    },
+    {
+      "code": "i2",
+      "name": "인터넷보안전문가 2급",
+      "latestListedExamDate": "2026-04-19",
+      "rowsInWindow": 9,
+      "url": "https://www.comcbt.com/xe/i2"
+    },
+    {
+      "code": "ccw",
+      "name": "정보보안기사",
+      "latestListedExamDate": "2023-03-11",
+      "rowsInWindow": 3,
+      "url": "https://www.comcbt.com/xe/ccw"
+    },
+    {
+      "code": "ji",
+      "name": "컴퓨터시스템기사(A형) · 구 전자계산기조직응용기사",
+      "latestListedExamDate": "2022-03-05",
+      "rowsInWindow": 1,
+      "url": "https://www.comcbt.com/xe/ji"
+    },
+    {
+      "code": "kx",
+      "name": "컴퓨터시스템기사(B형) · 구 전자계산기기사",
+      "latestListedExamDate": "2021-09-12",
+      "rowsInWindow": 0,
+      "url": "https://www.comcbt.com/xe/kx"
+    },
+    {
+      "code": "j3",
+      "name": "정보처리산업기사",
+      "latestListedExamDate": "2020-08-22",
+      "rowsInWindow": 0,
+      "url": "https://www.comcbt.com/xe/j3"
+    }
+  ],
+  "records": [
+    {
+      "board": "je",
+      "examDate": "2026-08-02",
+      "round": "3",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/je/10176772",
+      "detailVerified": true
+    },
+    {
+      "board": "je",
+      "examDate": "2026-05-17",
+      "round": "2",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/je/10061802",
+      "detailVerified": true
+    },
+    {
+      "board": "je",
+      "examDate": "2026-02-01",
+      "round": "1",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/je/9818700",
+      "detailVerified": true
+    },
+    {
+      "board": "je",
+      "examDate": "2025-11-02",
+      "round": "4",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/je/9628511",
+      "detailVerified": true
+    },
+    {
+      "board": "je",
+      "examDate": "2025-08-24",
+      "round": "3",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/je/9371020",
+      "detailVerified": true
+    },
+    {
+      "board": "je",
+      "examDate": "2025-05-25",
+      "round": "2",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/je/8556226",
+      "detailVerified": true
+    },
+    {
+      "board": "je",
+      "examDate": "2025-02-23",
+      "round": "1",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/je/8472159",
+      "detailVerified": true
+    },
+    {
+      "board": "je",
+      "examDate": "2024-11-03",
+      "round": "4",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/je/8472143",
+      "detailVerified": true
+    },
+    {
+      "board": "je",
+      "examDate": "2024-08-25",
+      "round": "3",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/je/8133859",
+      "detailVerified": true
+    },
+    {
+      "board": "je",
+      "examDate": "2024-05-19",
+      "round": "2",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/je/8133839",
+      "detailVerified": true
+    },
+    {
+      "board": "r2",
+      "examDate": "2023-12-09",
+      "round": "4",
+      "explanationInTitle": true,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/r2/7097908",
+      "detailVerified": true
+    },
+    {
+      "board": "r2",
+      "examDate": "2023-09-09",
+      "round": "3",
+      "explanationInTitle": true,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/r2/7038221",
+      "detailVerified": true
+    },
+    {
+      "board": "r2",
+      "examDate": "2023-06-10",
+      "round": "2",
+      "explanationInTitle": true,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/r2/7109385",
+      "detailVerified": true
+    },
+    {
+      "board": "r2",
+      "examDate": "2023-03-11",
+      "round": "1",
+      "explanationInTitle": true,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/r2/6676341",
+      "detailVerified": true
+    },
+    {
+      "board": "r2",
+      "examDate": "2022-09-03",
+      "round": "3",
+      "explanationInTitle": true,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/r2/6122068",
+      "detailVerified": true
+    },
+    {
+      "board": "iz",
+      "examDate": "2022-04-24",
+      "round": "2",
+      "explanationInTitle": true,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/iz/5851061",
+      "detailVerified": true
+    },
+    {
+      "board": "iz",
+      "examDate": "2022-03-05",
+      "round": "1",
+      "explanationInTitle": true,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/iz/5691901",
+      "detailVerified": true
+    },
+    {
+      "board": "i2",
+      "examDate": "2026-04-19",
+      "round": "1",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/i2/9993758",
+      "detailVerified": true
+    },
+    {
+      "board": "i2",
+      "examDate": "2025-10-26",
+      "round": "2",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/i2/9629094",
+      "detailVerified": true
+    },
+    {
+      "board": "i2",
+      "examDate": "2025-04-20",
+      "round": "1",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/i2/8471832",
+      "detailVerified": true
+    },
+    {
+      "board": "i2",
+      "examDate": "2024-10-27",
+      "round": "2",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/i2/8471814",
+      "detailVerified": true
+    },
+    {
+      "board": "i2",
+      "examDate": "2024-04-21",
+      "round": "1",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/i2",
+      "detailVerified": false,
+      "urlFromPriorInventory": true
+    },
+    {
+      "board": "i2",
+      "examDate": "2023-10-29",
+      "round": "2",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/i2",
+      "detailVerified": false,
+      "urlFromPriorInventory": true
+    },
+    {
+      "board": "ccw",
+      "examDate": "2023-03-11",
+      "round": "21",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/ccw/9718307",
+      "detailVerified": true
+    },
+    {
+      "board": "ccw",
+      "examDate": "2022-06-25",
+      "round": "20",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/ccw/6699229",
+      "detailVerified": true
+    },
+    {
+      "board": "ccw",
+      "examDate": "2022-03-13",
+      "round": "19",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/ccw/6689620",
+      "detailVerified": true
+    },
+    {
+      "board": "ji",
+      "examDate": "2022-03-05",
+      "round": "1",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/ji/5770376",
+      "detailVerified": true
+    },
+    {
+      "board": "je",
+      "examDate": "2024-02-25",
+      "round": "1",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/je/7748085",
+      "detailVerified": true
+    },
+    {
+      "board": "je",
+      "examDate": "2023-11-05",
+      "round": "4",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/je/7068151",
+      "detailVerified": true
+    },
+    {
+      "board": "je",
+      "examDate": "2023-08-20",
+      "round": "3",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/je/6966822",
+      "detailVerified": true
+    },
+    {
+      "board": "je",
+      "examDate": "2023-05-21",
+      "round": "2",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/je/6893063",
+      "detailVerified": true
+    },
+    {
+      "board": "je",
+      "examDate": "2023-02-26",
+      "round": "1",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/je/6650757",
+      "detailVerified": true
+    },
+    {
+      "board": "je",
+      "examDate": "2022-11-06",
+      "round": "4",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/je",
+      "detailVerified": false,
+      "urlFromPriorInventory": true
+    },
+    {
+      "board": "je",
+      "examDate": "2022-08-21",
+      "round": "3",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/je",
+      "detailVerified": false,
+      "urlFromPriorInventory": true
+    },
+    {
+      "board": "je",
+      "examDate": "2022-05-22",
+      "round": "2",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/je",
+      "detailVerified": false,
+      "urlFromPriorInventory": true
+    },
+    {
+      "board": "je",
+      "examDate": "2022-02-27",
+      "round": "1",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/je/5684286",
+      "detailVerified": true
+    },
+    {
+      "board": "r2",
+      "examDate": "2022-06-11",
+      "round": "2",
+      "explanationInTitle": true,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/r2/5944921",
+      "detailVerified": true
+    },
+    {
+      "board": "r2",
+      "examDate": "2022-03-12",
+      "round": "1",
+      "explanationInTitle": false,
+      "reconstructionPending": true,
+      "attachmentIcon": false,
+      "postUrl": "https://www.comcbt.com/xe/r2/5944905",
+      "detailVerified": true
+    },
+    {
+      "board": "i2",
+      "examDate": "2023-04-09",
+      "round": "1",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/i2/6699213",
+      "detailVerified": true
+    },
+    {
+      "board": "i2",
+      "examDate": "2022-10-30",
+      "round": "2",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/i2/6215216",
+      "detailVerified": true
+    },
+    {
+      "board": "i2",
+      "examDate": "2022-04-10",
+      "round": "1",
+      "explanationInTitle": false,
+      "reconstructionPending": false,
+      "attachmentIcon": true,
+      "postUrl": "https://www.comcbt.com/xe/i2/5779429",
+      "detailVerified": true
+    }
+  ]
+}

@@ -153,3 +153,34 @@ work/          일회 작업과 중간 결과 (런타임 의존 금지)
 ### v29 시험별 화면 비교 수정
 
 홈·사용법을 공통 렌더러로 통합해 시험일 설정/이어가기/복습 현황/오늘 목표를 제공한다. 확장 시험의 학습 추천은 시험별 활성 시간만 사용하고 네트워크 점수 근거를 표시하지 않는다. 추천 기록은 `cert-coach:{id}:v1`이며 학습 JSON 백업 대상이 아니다. [비교·검증 결과](exam-parity-2026-11-16.md)를 참고한다.
+
+
+## v30 맞춤 연습과 로그인 금지 원칙
+
+문제풀이에서 단원/검색/출처/미학습/오답/북마크/문제 수를 고르고 동일 문제를 다시 풀 수 있다. `core.js`는 선택 규칙과 북마크/연습 종류의 가져오기 정제를, `quiz-page.js`는 입력/시작/반복/표시를 담당한다. 북마크는 시험별 학습 JSON에 포함된다. 로그인·회원가입·계정·인증 서버 및 학습 기록 외부 업로드는 사용자 명시 재지시 전까지 추가하지 않는다. [사용법·구조·범위](custom-practice.md) 참고.
+
+## v31 실제 기출 레지스트리
+
+ExamPractice는 자체 기초 자료를 계속 소유하고 ExamPapers는 사용자 제공 실제 기출만 소유한다. app은 선택 시험의 두 묶음을 합쳐 공통 QuizPage/ReviewCore/WrongNotebook에 전달한다. 실제 기출 존재와 자체 자료 존재를 구분하여 홈·회차 목록을 결정한다. PaperArchive는 제공 원본 경로/날짜 레이블을 유지하며 네트워크 개정 기준을 다른 시험에 적용하지 않는다. 복수 정답 판정은 ReviewCore.isCorrect/answerNumbers를 문제풀이·오늘의 학습·오답에서 공통 사용한다. 상세 추출/한계는 [수록 문서](imported-papers.md).
+
+## v32 공개 라이선스 보충 자료
+
+LicensedPractice는 원문/저자/라이선스/변경 이력과 번역 문항만 소유하며 상태를 소유하지 않는다. app은 기존 B(자체 빠른 연습), A(실제 기출)에 손대지 않고 Q에 보충 문항을 더한다. StudyCore.selectPractice의 licensed 조건으로 필터하고 QuizPage의 공개 연습 버튼은 기존 quick/custom 세션을 이용한다. 가짜 시험 날짜·회차·기출 범위는 생성하지 않는다. 오답의 feature는 기존practice를 사용하며 별도공개오답feature는 추가하지 않았다. [원문과 한계](licensed-practice.md).
+
+## v33 오답 복습과 정적 화면 잠금
+
+WrongNotebookPage는 UI복습목록과인덱스를소유하고 WrongNotebook은기능별저장완료를소유한다. 정답으로목록이줄어도현재복습화면은유지한다. PageUI.focusQuestion이 QuizPage/오답의재렌더후포커스와스크롤을복구한다. ScreenLock은head에서가림상태를정하고DOMContentLoaded에화면을추가한다. 탭통과표시는sessionStorage에만있으며학습저장과분리한다. 이구조는정적파일의접근권한을소유하지않는다. 서버인증으로확장하려면새운영설계와명시요청이필요하다.
+
+## v34 실기 책임 경계
+
+PracticalStudy는 자체예제/출처/로드맵·완료정제, PracticalPage는 따라하기/날짜설정, PracticalLab은OS실행없는순수장비상태전이/검사, PracticalLabPage는가상장비메모리/UI를소유한다. app은라우트와이벤트만연결하며 core.cleanState는네트워크시험에서만 practicalStudy를백업에보존한다. 장비상태를공식점수/오답/산성비와섞지않는다.
+
+ScreenLock은고정해시방식을제거하고한국현재날짜를계산한다. v2통과표시에는당일코드만두고자정타이머/탭복귀시만료한다. 서버인증이아니며 기기시계에의존한다. [현행 설정](settings.md).
+
+## v35 Windows 모형과 입력 경계
+
+LabWindows(ui/lab-windows.js)는 창 단계와 draft/pending/applied를 소유하고 적용 콜백으로 장비에 전달한다. 페이지는 조립과 이벤트 전달을 담당한다. PracticalLab은 DOM 없는 모드 문법 해석과 불변 상태 전이, placeWire의 색/출처/핀 검증을 담당한다. app의 드래그 위임은 현재 lab 화면에만 전달하며 외부 파일이나 서버에 전송하지 않는다. 실제 OS/전체 IOS는 구현하지 않았다.
+
+## v36 실험실 검사 스냅샷
+
+PracticalLab.inspect가 조건 판정과 detail/target을 반환하고 페이지가 이를 이스케이프해 표시한다. 검사 결과는 검사 당시 값이며 장비 변경 후 resultsStale로 구별한다. 콘솔 조회/실패는 상태 전후 비교로 구분한다. 홈은 네트워크 실기에서만 필기 도구를 details로 묶어 다른 시험의 흐름을 보존한다.

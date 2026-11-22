@@ -1,0 +1,432 @@
+/* 실기 로드맵과 학습용 설정창. 공통 테마와 question-box/버튼을 재사용합니다. */
+.practical-intro p,
+.practical-step > p,
+.practical-check p {
+  line-height: 1.85;
+}
+.practical-roadmap,
+.practical-tasks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.practical-phase {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 20px;
+}
+.practical-phase.is-current {
+  border-color: var(--green);
+  box-shadow: inset 4px 0 var(--green);
+}
+.practical-phase small {
+  color: var(--muted);
+}
+.practical-phase h3 {
+  margin: 10px 0;
+}
+.practical-phase p,
+.practical-tasks p {
+  color: var(--muted);
+  line-height: 1.8;
+}
+.practical-phase .text-button {
+  display: block;
+  text-align: left;
+  white-space: normal;
+}
+.practical-tasks > .panel {
+  margin: 0;
+}
+.practical-tasks h3 {
+  margin: 16px 0 10px;
+}
+.practical-date {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: end;
+  margin: 20px 0;
+}
+.practical-date label,
+#practical-command-form label {
+  display: grid;
+  gap: 8px;
+  font-size: 13px;
+}
+.practical-date input {
+  padding: 10px;
+  font-size: 16px;
+  max-width: 100%;
+}
+.practical-step h2 {
+  margin: 20px 0;
+}
+.practical-terminal {
+  margin: 22px 0;
+  padding: 18px;
+  border-radius: 12px;
+  background: var(--ink);
+  color: var(--paper);
+}
+.practical-terminal > div {
+  font-size: 12px;
+  opacity: 0.7;
+  margin-bottom: 12px;
+}
+.practical-terminal pre {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 14px;
+  line-height: 1.8;
+}
+#practical-command-form input,
+.practical-window input {
+  width: 100%;
+  max-width: 100%;
+  padding: 13px;
+  font-size: 16px;
+  margin: 10px 0 14px;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.practical-window {
+  margin: 22px 0;
+  padding: 20px;
+  border: 2px solid var(--line);
+  border-radius: 10px;
+  background: var(--paper);
+}
+.practical-window-title {
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+  font-weight: 700;
+}
+.practical-window label {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(130px, 1fr);
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+}
+.practical-feedback {
+  min-height: 24px;
+  margin: 16px 0;
+  color: var(--green);
+  line-height: 1.7;
+}
+.practical-check {
+  margin: 20px 0;
+  padding: 16px;
+  border-left: 3px solid var(--green);
+  background: var(--paper);
+}
+.practical-step .quiz-controls {
+  flex-wrap: wrap;
+}
+.practical-step > div:last-child {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.practical-cable {
+  margin: 22px 0;
+  padding: 14px 0;
+}
+.practical-cable figcaption {
+  font-size: 12px;
+  margin-bottom: 12px;
+  line-height: 1.7;
+}
+.practical-pins {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 4px;
+}
+.practical-pins > div {
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+  padding: 8px 0;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+.practical-pins i {
+  display: block;
+  width: 12px;
+  height: 55px;
+  border: 1px solid #888;
+}
+.practical-pins small {
+  font-size: 10px;
+}
+@media (max-width: 700px) {
+  .practical-roadmap,
+  .practical-tasks {
+    grid-template-columns: 1fr;
+  }
+  .practical-window {
+    padding: 14px;
+  }
+  .practical-window label {
+    display: block;
+    margin-top: 14px;
+  }
+}
+
+/* 실험실은 실제 장비가 아닌, 같은 상태를 여러 창에서 조작하는 학습 화면입니다. */
+.lab-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 18px;
+  align-items: start;
+}
+.lab-desktop {
+  padding: 0;
+  overflow: hidden;
+}
+.lab-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 16px;
+  border-bottom: 1px solid var(--line);
+}
+.lab-apps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px;
+  border-bottom: 1px solid var(--line);
+}
+.lab-apps button {
+  flex: 1;
+  min-width: 100px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 13px;
+}
+.lab-apps button.active {
+  border-color: var(--green);
+  color: var(--green);
+  font-weight: 700;
+}
+.lab-surface {
+  padding: 20px;
+}
+.lab-window-title {
+  font-size: 13px;
+  line-height: 1.8;
+  font-weight: 700;
+}
+.lab-console {
+  min-height: 220px;
+  max-height: 350px;
+  overflow-y: auto;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 16px;
+  border-radius: 10px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font:
+    13px/1.85 Consolas,
+    monospace;
+}
+.lab-command {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+}
+.lab-command input {
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  font-size: 16px;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.lab-command label {
+  font:
+    12px Consolas,
+    monospace;
+  overflow-wrap: anywhere;
+  max-width: 100px;
+}
+.lab-mission details {
+  font-size: 13px;
+  line-height: 1.85;
+  margin: 16px 0;
+}
+.lab-mission h2 {
+  font-size: 20px;
+  margin: 14px 0;
+}
+.lab-results {
+  margin: 16px 0;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.lab-results p {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+.lab-pass {
+  color: var(--green);
+}
+.lab-miss {
+  color: var(--muted);
+}
+.lab-palette {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin: 18px 0;
+}
+.lab-palette button,
+.lab-connectors button {
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 8px;
+  padding: 10px 3px;
+  cursor: pointer;
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+}
+.lab-palette .is-selected {
+  border: 2px solid var(--green);
+  font-weight: 700;
+}
+.lab-connectors span {
+  font-size: 11px;
+}
+.lab-palette i,
+.lab-connectors i {
+  display: block;
+  width: 14px;
+  height: 36px;
+  border: 1px solid #888;
+}
+.lab-color-0 {
+  background: linear-gradient(90deg, #fff 50%, #ee8a24 50%);
+}
+.lab-color-1 {
+  background: #ee8a24;
+}
+.lab-color-2 {
+  background: linear-gradient(90deg, #fff 50%, #76a94d 50%);
+}
+.lab-color-3 {
+  background: #478ad1;
+}
+.lab-color-4 {
+  background: linear-gradient(90deg, #fff 50%, #478ad1 50%);
+}
+.lab-color-5 {
+  background: #76a94d;
+}
+.lab-color-6 {
+  background: linear-gradient(90deg, #fff 50%, #966c4b 50%);
+}
+.lab-color-7 {
+  background: #966c4b;
+}
+#lab-status {
+  min-height: 24px;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--green);
+}
+@media (max-width: 1000px) {
+  .lab-shell {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 500px) {
+  .lab-surface {
+    padding: 14px;
+  }
+  .lab-command {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .lab-command label {
+    grid-column: 1 / -1;
+  }
+  .lab-apps button {
+    min-width: 80px;
+    font-size: 12px;
+  }
+}
+
+/* 결과는 장식보다 재확인 행동을 앞에 둡니다. 움직임 최소화 설정을 존중합니다. */
+.lab-device-status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  padding: 10px 0;
+  font-size: 12px;
+  border-bottom: 1px solid var(--line);
+}
+.lab-result-row {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  animation: lab-result-in 160ms ease-out;
+}
+.lab-result-row p {
+  margin: 6px 0;
+  padding: 0;
+  border: 0;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+.lab-result-row .text-button {
+  font-size: 12px;
+}
+.lab-stale {
+  border-left: 3px solid var(--green);
+  padding-left: 10px !important;
+  color: var(--ink);
+}
+.home-written-review {
+  margin-top: 24px;
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+}
+.home-written-review > summary {
+  cursor: pointer;
+  font-weight: 700;
+  padding: 12px 0;
+}
+.home-written-review > summary small {
+  display: inline-block;
+  font-weight: 400;
+  color: var(--muted);
+  margin-left: 12px;
+}
+@keyframes lab-result-in {
+  from {
+    opacity: 0.6;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lab-result-row {
+    animation: none;
+  }
+}

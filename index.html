@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#254f3d" />
     <meta
       name="description"
-      content="네트워크관리사 2급 시험 전 2주. 키워드 암기, 핵심 이론, 명령어, 문제 풀이와 오답 복습을 한곳에서 준비하세요."
+      content="네트워크관리사 2급 실기 따라하기와 로드맵, 필기 기출 반복 풀이와 오답 복습을 한곳에서 준비하세요."
     />
     <title>합격루틴 · 네트워크관리사 2급</title>
     <link rel="icon" href="assets/network/icons/favicon.svg" type="image/svg+xml" />
@@ -28,9 +28,14 @@
     <link rel="stylesheet" href="assets/network/css/themes.css" />
     <link rel="stylesheet" href="assets/network/css/study-coach.css" />
     <script src="assets/network/platform/themes.js"></script>
+    <link rel="stylesheet" href="assets/network/css/screen-lock.css" />
+    <link rel="stylesheet" href="assets/network/css/practical.css" />
+    <link rel="stylesheet" href="assets/network/css/lab-windows.css" />
+    <script src="assets/network/platform/screen-lock.js"></script>
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="apple-touch-icon" href="assets/network/icons/icon-192.png" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    <script defer src="assets/network/data/practical-study.js"></script>
     <script defer src="assets/network/data/exam-catalog.js"></script>
     <script defer src="assets/network/data/exam-practice.js"></script>
     <script defer src="assets/network/data/exam-paper-sources.js"></script>
@@ -38,10 +43,13 @@
     <script defer src="assets/network/data/questions.js"></script>
     <script defer src="assets/network/data/latest-paper.js"></script>
     <script defer src="assets/network/data/past-papers.js"></script>
+    <script defer src="assets/network/data/licensed-practice.js"></script>
+    <script defer src="assets/network/data/exam-papers.js"></script>
     <script defer src="assets/network/data/paper-archive.js"></script>
     <script defer src="assets/network/domain/review-core.js"></script>
     <script defer src="assets/network/pages/daily-study.js"></script>
     <script defer src="assets/network/domain/wrong-notebook.js"></script>
+    <script defer src="assets/network/domain/practical-lab.js"></script>
     <script defer src="assets/network/domain/core.js"></script>
     <script defer src="assets/network/platform/materials-store.js"></script>
     <script defer src="assets/network/data/public-materials.js"></script>
@@ -65,6 +73,9 @@
     <script defer src="assets/network/pages/paper-sources-page.js"></script>
     <link rel="stylesheet" href="assets/network/css/exam-workspace.css" />
     <link rel="stylesheet" href="assets/network/css/paper-sources.css" />
+    <script defer src="assets/network/ui/lab-windows.js"></script>
+    <script defer src="assets/network/pages/practical-lab-page.js"></script>
+    <script defer src="assets/network/pages/practical-page.js"></script>
     <script defer src="assets/network/app.js"></script>
     <script defer src="assets/network/platform/pwa.js"></script>
   </head>
@@ -78,6 +89,9 @@
 
       <nav id="navigation" aria-label="주요 메뉴">
         <a href="#dashboard" data-view="dashboard"><span aria-hidden="true">◫</span> 학습 현황</a>
+        <a href="#practical" data-view="practical" data-network-practical hidden
+          ><span>⌨</span> 실기 준비</a
+        >
         <a href="#daily" data-view="daily"><span aria-hidden="true">▷</span> 오늘의 학습</a>
         <a href="#keywords" data-view="keywords"
           ><span aria-hidden="true">◇</span> 키워드 암기
@@ -155,7 +169,7 @@
         >
       </nav>
       <footer class="footer">
-        개인 학습용 · 자체 연습과 회차별 기출을 구분해 제공합니다. <span>합격루틴 v29</span>
+        개인 학습용 · 자체 연습과 회차별 기출을 구분해 제공합니다. <span>합격루틴 v36</span>
       </footer>
     </div>
     <dialog id="settings-dialog" aria-labelledby="settings-title">
@@ -223,9 +237,14 @@
         </fieldset>
         <fieldset class="settings-group">
           <legend>학습 기록 관리</legend>
+          <button type="button" class="button secondary" data-screen-lock>화면 다시 잠그기</button>
+          <p class="fine-print">
+            한국 시간의 오늘 날짜 6자리로 열어요. 통과 표시는 오늘·이 탭에서만 기억해요. 간단한 화면
+            가림막이며 공개 파일의 접근 제어는 아닙니다.
+          </p>
           <p class="fine-print">
             기록은 현재 브라우저에만 저장되며 다른 기기와 동기화되지 않아요. JSON에는 학습·게임
-            기록이 포함됩니다. 개인 자료 파일과 테마는 별도입니다.
+            기록과 문제 북마크가 포함됩니다. 개인 자료 파일과 테마는 별도입니다.
           </p>
           <div class="data-actions">
             <button type="button" id="export-progress" class="button secondary">

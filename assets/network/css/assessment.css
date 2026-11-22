@@ -37,6 +37,7 @@
   gap: 20px;
 }
 .question-box {
+  scroll-margin-top: 90px;
   background: #fff;
   border: 1px solid var(--line);
   border-radius: 14px;
@@ -220,4 +221,88 @@
 }
 .review-item code {
   font-size: 12px;
+}
+
+/* 맞춤 시작과 북마크: 기존 테마 변수로 표시하고 좁은 화면에서는 세로로 배치합니다. */
+.custom-practice-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.custom-practice-grid label {
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+  color: var(--ink);
+  font-size: 13px;
+}
+.custom-practice-grid :is(input, select) {
+  width: 100%;
+  min-width: 0;
+  padding: 11px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--ink);
+}
+.custom-practice-search {
+  grid-column: span 2;
+}
+.custom-practice-shuffle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0;
+}
+.question-tools {
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px 0;
+}
+.question-bookmark {
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 12px;
+}
+.question-bookmark[aria-pressed="true"] {
+  background: var(--green-light);
+  border-color: var(--green);
+}
+@media (max-width: 600px) {
+  .custom-practice-grid {
+    grid-template-columns: 1fr;
+  }
+  .custom-practice-search {
+    grid-column: auto;
+  }
+  .custom-practice .section-heading {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+
+/* 오답 번호 이동은 접힌 입력 하나로 제공해 큰 번호판으로 화면을 이동시키지 않습니다. */
+.notebook-question h2 {
+  white-space: pre-wrap;
+}
+.notebook-jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: end;
+  margin: 20px 0;
+}
+.notebook-jump label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.notebook-jump input {
+  width: 100px;
+  padding: 10px;
+  font-size: 16px;
 }

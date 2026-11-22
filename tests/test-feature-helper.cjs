@@ -26,3 +26,8 @@ test("사이트 원천 용어·명령어로 해당 검색 화면을 연결한다
   assert.equal(search("알수없는외계문자", d).length, 0);
   assert.equal(search("", d).length, 0);
 });
+
+test("북마크나 맞춤 연습을 찾으면 문제 선택 화면으로 연결한다", () => {
+  assert.equal(search("북마크만 풀고 싶어")[0].href, "#quiz/setup");
+  assert.equal(search("맞춤 단원 골라")[0].href, "#quiz/setup");
+});

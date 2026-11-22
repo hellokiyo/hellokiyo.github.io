@@ -66,5 +66,5 @@ test("시험 ID는 중복 없이 왕복하고 검색은 분야와 별칭을 함�
   );
   assert.equal(catalog.filter("리눅스", "공간정보").length, 0);
   assert.equal(catalog.filter("없는시험").length, 0);
-  assert.equal(catalog.exams.filter((exam) => exam.ready).length, 1);
+  assert.equal(catalog.exams.filter((exam) => exam.ready).length, 4);
 });

@@ -124,3 +124,35 @@
 ## 2026-11-16 시험별 학습 업데이트
 
 17개 시험에서 공통 학습 화면을 사용합니다. 네트워크관리사 2급은 기존 기출을 유지하고, 다른 16개는 자체 제작 기초 연습 20~30문항·해설·오늘의 학습·키워드 예시·산성비·기능별 오답·핵심정리·14일 계획을 제공합니다. 실제 기출/전 범위/공식 검수 완료를 뜻하지 않습니다. 상세 경계와 추가 방법은 [시험별 학습 설계](exam-learning.md)를 참고하세요.
+
+
+## v30 맞춤 연습과 로그인 금지 원칙
+
+문제풀이에서 단원/검색/출처/미학습/오답/북마크/문제 수를 고르고 동일 문제를 다시 풀 수 있다. `core.js`는 선택 규칙과 북마크/연습 종류의 가져오기 정제를, `quiz-page.js`는 입력/시작/반복/표시를 담당한다. 북마크는 시험별 학습 JSON에 포함된다. 로그인·회원가입·계정·인증 서버 및 학습 기록 외부 업로드는 사용자 명시 재지시 전까지 추가하지 않는다. [사용법·구조·범위](custom-practice.md) 참고.
+
+## 사용자 제공 HWP 수록
+
+- `scripts/hwp_reader.py`: CFB/HWP5 읽기 전용 파서.
+- `scripts/build-user-papers.py`: 교사용/학생용 대조·생성.
+- `assets/network/data/exam-papers.js`: 시험별 날짜순 기출 레지스트리.
+- `assets/network/papers/imported/`: 원본 비트맵.
+- `docs/test/`: 사용자가 제공한 원본.
+- `tests/test-imported-papers.cjs`: 문항 무결성·저장 격리·복수 정답 회귀.
+
+- `assets/network/data/licensed-practice.js`: CC BY4.0 교재 번역·수정 보충문항의 원본/허가 정보와 시험별 ID.
+- `tests/test-licensed-practice.cjs`: 공개/자체/기출 필터와 조립·채점·저장 격리 회귀.
+
+- `platform/screen-lock.js`, `css/screen-lock.css`: 로컬탭화면가림막·6자리코드비교. 서버인증아님.
+- `tests/test-screen-lock.cjs`, `tests/test-notebook-navigation.cjs`: 코드비교경계·오답출처/번호/포커스회귀.
+
+- `data/practical-study.js`: 8실기예제·4기간로드맵·출처·완료정제.
+- `domain/practical-lab.js`: 가상라우터 상태전이·저장/재시작·6조건검사.
+- `pages/practical-page.js`, `pages/practical-lab-page.js`: 따라하기와가상실험실.
+- `css/practical.css`: 실기화면반응형스타일.
+- `tests/test-practical-lab.cjs`: 입력·저장·재시작·진행·백업·시험격리 회귀.
+
+### v35 추가 파일
+
+- `assets/network/ui/lab-windows.js`: 속성창 단계와 적용/취소 상태.
+- `assets/network/css/lab-windows.css`: Windows 모형과 드래그 대상 표현.
+- `tests/test-lab-fidelity.cjs`: CLI 오류·저장 확인·케이블 드래그·Windows 취소/적용 회귀.

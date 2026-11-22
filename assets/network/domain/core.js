@@ -66,6 +66,35 @@
         86400000,
     );
   }
+  // 맞춤 연습의 필터는 화면과 분리합니다. 채점한 이력은 ReviewCore의 실제 기록만 사용합니다.
+  function selectPractice(questions, state, options = {}) {
+    const query = String(options.query || "")
+      .trim()
+      .toLowerCase()
+      .slice(0, 160);
+    const bookmarks = new Set(state.bookmarks || []);
+    const wrong = new Set(state.wrong || []);
+    const seenIds = new Set();
+    const pool = questions.filter((q) => {
+      if (seenIds.has(q.id)) return false;
+      seenIds.add(q.id);
+      const past = Boolean(q.paperId) || q.id.startsWith("nw2-");
+      return (
+        (!options.category || options.category === "all" || q.category === options.category) &&
+        (options.source !== "own" || (!past && q.sourceKind !== "licensed-adaptation")) &&
+        (options.source !== "licensed" || q.sourceKind === "licensed-adaptation") &&
+        (options.source !== "past" || past) &&
+        (options.status !== "bookmarked" || bookmarks.has(q.id)) &&
+        (options.status !== "wrong" || wrong.has(q.id)) &&
+        (options.status !== "unseen" || !(state.adaptive?.entries?.[q.id]?.studyCount > 0)) &&
+        (!query || [q.question, ...q.options].some((text) => text.toLowerCase().includes(query)))
+      );
+    });
+    const requested = Number(options.count);
+    const count = [5, 10, 20, 50].includes(requested) ? requested : 10;
+    const ordered = options.shuffle === false ? pool : shuffle(pool);
+    return { available: pool.length, ids: ordered.slice(0, count).map((q) => q.id) };
+  }
   function cleanState(source, data, questions) {
     if (!source || typeof source !== "object" || Array.isArray(source))
       throw new Error("학습 기록 형식이 올바르지 않습니다.");
@@ -73,8 +102,10 @@
       Array.isArray(input) ? [...new Set(input.filter((id) => ids.includes(id)))] : [];
     const safePaper = (id) =>
       typeof id === "string" &&
-      /^nw2-\d{4}-\d{2}(?:-a)?$/.test(id) &&
-      questions.some((q) => q.id.startsWith(id + "-"))
+      questions.some(
+        (q) =>
+          q.paperId === id || (/^nw2-\d{4}-\d{2}(?:-a)?$/.test(id) && q.id.startsWith(id + "-")),
+      )
         ? id
         : null;
     const qids = questions.map((q) => q.id),
@@ -84,6 +115,7 @@
       version: 1,
       examDate: validDate(source.examDate) ? source.examDate : "",
       mastered: allowed(source.mastered, kids),
+      bookmarks: allowed(source.bookmarks, qids),
       read: allowed(source.read, rids),
       plans: allowed(
         source.plans,
@@ -95,6 +127,12 @@
       session: null,
       lastResult: null,
     };
+    if (!data.certificationId) {
+      const practical =
+        root.PracticalStudy ||
+        (typeof require === "function" ? require("../data/practical-study.js") : null);
+      if (practical) result.practicalStudy = practical.clean(source.practicalStudy);
+    }
     const W =
       root.WrongNotebook || (typeof require === "function" ? require("./wrong-notebook.js") : null);
     if (W) {
@@ -130,6 +168,9 @@
           at: r.at,
           mode: ["exam", "quick", "wrong", "paper"].includes(r.mode) ? r.mode : "quick",
           ...(safePaper(r.paperId) ? { paperId: r.paperId } : {}),
+          ...(["custom", "repeat"].includes(r.practiceKind) && r.mode === "quick"
+            ? { practiceKind: r.practiceKind }
+            : {}),
         }));
     const cleanSession = (s) => {
       if (
@@ -160,6 +201,9 @@
         mode: s.mode,
         ...(s.mode === "paper" && safePaper(s.paperId) ? { paperId: s.paperId } : {}),
         ids,
+        ...(s.mode === "quick" && ["custom", "repeat"].includes(s.practiceKind)
+          ? { practiceKind: s.practiceKind }
+          : {}),
         answers,
         checked,
         index: Number.isInteger(s.index) ? Math.max(0, Math.min(s.index, ids.length - 1)) : 0,
@@ -181,7 +225,7 @@
     if (R) result.adaptive = R.clean(source.adaptive, R.catalog(data, questions));
     return result;
   }
-  const api = { subnet, shuffle, localDate, validDate, daysUntil, cleanState };
+  const api = { subnet, shuffle, localDate, validDate, daysUntil, selectPractice, cleanState };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   root.StudyCore = api;
 })(typeof window !== "undefined" ? window : globalThis);
