@@ -322,6 +322,69 @@
       ],
     },
   ];
+  // 따라하기의 설명/예상 출력 원본. 자유 콘솔의 실제 상태와 혼동하지 않게 예시로 표시합니다.
+  const routerLesson = [
+    {
+      why: "처음의 >는 조회 위주로 시작하는 위치입니다. enable로 관리자 명령을 쓸 수 있는 # 위치로 이동합니다. 아직 IP를 바꾸는 단계는 아닙니다.",
+      after: "Router#",
+      notice: "출력이 없어도 >가 #로 바뀌면 이 단계는 성공입니다.",
+      term: "프롬프트 = 입력칸 앞에 보이는 현재 위치 표시. Router> 자체는 입력하지 않습니다.",
+    },
+    {
+      why: "#에서는 관리 명령을 쓰고, (config)#에서는 설정을 바꿉니다. configure terminal은 ‘지금부터 설정을 편집하겠다’는 뜻입니다.",
+      after: "Enter configuration commands, one per line. End with CNTL/Z.\nRouter(config)#",
+      notice: "(config)가 붙었는지 봅니다. 관리자 모드와 설정 모드는 다릅니다.",
+      term: "terminal = 지금 사용 중인 명령창. conf t는 같은 명령의 축약입니다.",
+    },
+    {
+      why: "라우터에는 여러 연결 구멍이 있습니다. IP를 넣기 전에 어느 구멍을 바꿀지 고릅니다. 이 예제에서는 FastEthernet0/0을 선택합니다.",
+      after: "Router(config-if)#",
+      notice:
+        "(config-if)는 특정 포트의 설정 안에 들어왔다는 표시입니다. 다른 포트를 고르면 같은 IP를 써도 과제와 달라집니다.",
+      term: "포트(interface) = 케이블을 연결하는 네트워크 연결 지점. 여기서 0/0은 대상 번호입니다.",
+    },
+    {
+      why: "이 포트의 주소를 192.168.10.1로 정합니다. 뒤의 마스크 255.255.255.0은 어느 범위까지 같은 네트워크로 볼지 정합니다. /24와 같은 마스크입니다.",
+      after: "Router(config-if)#",
+      notice:
+        "정상 입력 시 별도 성공 문구가 없을 수 있습니다. 같은 프롬프트로 돌아오면 뒤의 show 조회 단계에서 실제 값을 확인합니다.",
+      term: "입력 순서: ip address → IP 주소 → 서브넷 마스크. 주소와 마스크 사이에 공백을 넣습니다.",
+    },
+    {
+      why: "IP를 넣는 것과 포트를 켜는 것은 별개입니다. shutdown은 관리자가 사용을 막은 상태이고, no shutdown은 그 차단을 푸는 명령입니다.",
+      after: "Router(config-if)#",
+      notice:
+        "관리 차단을 풀어도 케이블이나 상대 장비 상태 때문에 실제 링크가 down일 수 있습니다. 무조건 up/up이 되는 명령은 아닙니다.",
+      term: "no = 해당 설정을 해제한다는 뜻. no shutdown은 ‘종료하지 않음’, 즉 관리상 활성화입니다.",
+    },
+    {
+      why: "설정 편집을 마치고 조회·저장을 하기 편한 관리자 위치로 돌아옵니다. end는 설정 모드에서 한 번에 #로 나옵니다.",
+      after: "Router#",
+      notice: "(config-if)가 사라졌는지 봅니다. end는 저장 명령이 아닙니다.",
+      term: "exit는 보통 한 단계 위로, end는 설정 모드에서 관리자 모드로 바로 이동합니다.",
+    },
+    {
+      why: "내가 친 명령을 기억하는 것보다 장비에 들어간 값을 확인하는 것이 중요합니다. show ip interface brief는 포트별 IP와 상태를 짧게 보여줍니다.",
+      after:
+        "FastEthernet0/0  192.168.10.1  enabled (물리 링크 미구현)\nFastEthernet0/1  unassigned  administratively down\nRouter#",
+      notice:
+        "이 표는 사이트 실험실의 예시입니다. 실제 IOS 표에서는 대상 포트의 IP-Address와 Status/Protocol을 확인합니다. administratively down은 관리상 꺼짐, unassigned는 주소 미설정입니다.",
+      term: "show = 조회, brief = 요약. 조회는 설정을 바꾸지 않습니다.",
+    },
+    {
+      why: "running-config는 현재 적용 중인 설정, startup-config는 다시 시작할 때 불러올 설정입니다. 현재 내용을 저장본으로 복사해야 저장이 끝납니다.",
+      after:
+        "Destination filename [startup-config]?\n[Enter를 누르면]\nBuilding configuration...\n[OK]\nRouter#",
+      notice:
+        "실제 콘솔에서는 파일명 질문에 Enter를 누른 뒤 완료 출력을 확인하세요. 여기서는 명령 입력만 확인하며 저장 동작 연습은 실험실에서 합니다.",
+      term: "copy 원본 목적지 순서입니다. end로 나왔다고 저장된 것은 아닙니다.",
+    },
+  ];
+  tasks
+    .find((task) => task.id === "router-ip")
+    .steps.forEach((current, index) => {
+      Object.assign(current, routerLesson[index]);
+    });
   const roadmap = [
     {
       from: "2026-11-23",

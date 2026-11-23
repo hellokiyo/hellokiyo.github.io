@@ -339,3 +339,9 @@
     margin: 4px 0 0;
   }
 }
+
+.study-stage-switch button:not(:disabled):is(:hover, :focus-visible) {
+  background: var(--green);
+  color: var(--paper);
+  border-color: var(--green);
+}

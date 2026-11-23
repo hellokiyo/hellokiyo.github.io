@@ -356,16 +356,19 @@ main {
   background: var(--green);
   color: #fff;
 }
-.primary:hover {
-  background: #183d2d;
+.primary:not(:disabled):is(:hover, :focus-visible) {
+  background: var(--green);
+  color: var(--paper);
 }
 .secondary {
   background: #fff;
   border-color: var(--line);
   color: #5b6e57;
 }
-.secondary:hover {
-  background: #f1f4e9;
+.button.secondary:not(:disabled):is(:hover, :focus-visible) {
+  background: var(--green);
+  border-color: var(--green);
+  color: var(--paper);
 }
 .text-button {
   border: 0;
@@ -374,8 +377,10 @@ main {
   color: #738368;
   padding: 5px 0;
 }
-.text-button:hover {
+.text-button:not(:disabled):is(:hover, :focus-visible) {
+  color: var(--green);
   text-decoration: underline;
+  text-underline-offset: 4px;
 }
 .hero-actions {
   display: flex;
