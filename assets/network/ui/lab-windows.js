@@ -54,7 +54,7 @@
           )
           .join(
             "",
-          )}</div><div class="win-actions"><button type="button" data-win-action="ipv4">속성(R)...</button></div><p class="fine-print">이번 모형은 TCP/IPv4 속성만 편집합니다. 나머지 구성 요소의 설정은 재현하지 않습니다.</p></div><footer class="win-actions"><button type="button" data-win-action="commit-close">확인</button><button type="button" data-win-action="cancel">취소</button><button type="button" data-win-action="apply">적용(A)</button></footer></section>`;
+          )}</div><div class="win-actions"><button type="button" data-win-action="ipv4" ${selected !== "ipv4" ? "disabled" : ""}>속성(R)...</button></div><p class="fine-print">이번 모형은 TCP/IPv4 속성만 편집합니다. 나머지 구성 요소의 설정은 재현하지 않습니다.</p></div><footer class="win-actions"><button type="button" data-win-action="commit-close">확인</button><button type="button" data-win-action="cancel">취소</button><button type="button" data-win-action="apply">적용(A)</button></footer></section>`;
       return `<section class="win-dialog" aria-label="IPv4 속성">${title("인터넷 프로토콜 버전 4(TCP/IPv4) 속성", "cancel-ipv4")}<div class="win-tabs"><span class="is-active">일반</span></div><form id="lab-windows-form" novalidate><div class="win-dialog-body"><p>IP 주소를 자동으로 할당받거나 네트워크 관리자에게 받은 주소를 직접 입력할 수 있습니다.</p><label class="win-radio"><input type="radio" name="win-ip-mode" value="auto" ${draft.ipMode === "auto" ? "checked" : ""}>자동으로 IP 주소 받기(O)</label><label class="win-radio"><input id="win-ip-manual" type="radio" name="win-ip-mode" value="manual" ${draft.ipMode === "manual" ? "checked" : ""}>다음 IP 주소 사용(S)</label><fieldset class="win-address-fields" ${draft.ipMode === "auto" ? "disabled" : ""}>${fields
         .slice(0, 3)
         .map(([id, label]) => addressField(id, label))
@@ -115,15 +115,15 @@
       const value = read(main);
       const valid =
         (value.ipMode === "auto" ||
-          (engine.validIp(value.ip) &&
-            engine.validMask(value.mask) &&
+          (!engine.addressIssue(value.ip, value.mask) &&
             (!value.gateway || engine.validIp(value.gateway)))) &&
         (value.dnsMode === "auto" || !value.dns || engine.validIp(value.dns));
       if (!valid) {
         main.querySelector("#win-error").textContent =
-          "IP 주소 또는 서브넷 마스크가 올바르지 않습니다. 각 옥텟(0~255)과 마스크를 확인하세요.";
+          "IP·마스크·게이트웨이·DNS를 확인하세요. 이 모형은 /1~30의 일반 호스트 주소만 다룹니다. 네트워크/브로드캐스트 주소는 IP로 쓸 수 없습니다.";
         return "error";
       }
+      // Windows는 다른 서브넷의 게이트웨이에 경고를 줄 수 있지만 무조건 적용을 금지하지 않습니다.
       pending = value;
       draft = { ...value };
       stage = "adapter";

@@ -36,6 +36,7 @@
     <link rel="apple-touch-icon" href="assets/network/icons/icon-192.png" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <script defer src="assets/network/data/practical-study.js"></script>
+    <script defer src="assets/network/data/practical-notes.js"></script>
     <script defer src="assets/network/data/exam-catalog.js"></script>
     <script defer src="assets/network/data/exam-practice.js"></script>
     <script defer src="assets/network/data/exam-paper-sources.js"></script>
@@ -76,6 +77,7 @@
     <script defer src="assets/network/ui/lab-windows.js"></script>
     <script defer src="assets/network/pages/practical-lab-page.js"></script>
     <script defer src="assets/network/pages/practical-page.js"></script>
+    <script defer src="assets/network/pages/practical-notes-page.js"></script>
     <script defer src="assets/network/platform/study-stage.js"></script>
     <script defer src="assets/network/app.js"></script>
     <script defer src="assets/network/platform/pwa.js"></script>
@@ -112,6 +114,9 @@
         <a href="#materials" data-view="materials"><span aria-hidden="true">▥</span> 시험 자료</a>
         <a href="#sources" data-view="sources"><span aria-hidden="true">↗</span> 기출 자료</a>
         <a href="#plan" data-view="plan"><span aria-hidden="true">☑</span> 14일 학습 계획</a>
+        <a href="#practicalnotes" data-view="practicalnotes" data-network-practical hidden
+          ><span aria-hidden="true">▤</span> 실기 풀이 사전</a
+        >
       </nav>
       <div class="sidebar-bottom">
         <a href="docs/study/exam-guide.md" download="network-exam-guide.md"
@@ -188,7 +193,7 @@
         >
       </nav>
       <footer class="footer">
-        개인 학습용 · 자체 연습과 회차별 기출을 구분해 제공합니다. <span>합격루틴 v38.1</span>
+        개인 학습용 · 자체 연습과 회차별 기출을 구분해 제공합니다. <span>합격루틴 v40.1</span>
       </footer>
     </div>
     <dialog id="settings-dialog" aria-labelledby="settings-title">
@@ -258,8 +263,8 @@
           <legend>학습 기록 관리</legend>
           <button type="button" class="button secondary" data-screen-lock>화면 다시 잠그기</button>
           <p class="fine-print">
-            입장 코드로 열어요. 통과 표시는 오늘·이 탭에서만 기억해요. 간단한 화면
-            가림막이며 공개 파일의 접근 제어는 아닙니다.
+            입장 코드로 열어요. 통과 표시는 오늘·이 탭에서만 기억해요. 간단한 화면 가림막이며 공개
+            파일의 접근 제어는 아닙니다.
           </p>
           <p class="fine-print">
             기록은 현재 브라우저에만 저장되며 다른 기기와 동기화되지 않아요. JSON에는 학습·게임

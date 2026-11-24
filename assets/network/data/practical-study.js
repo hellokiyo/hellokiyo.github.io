@@ -84,7 +84,7 @@
           {
             prompt: "Router(config)#",
             command: "interface FastEthernet0/0",
-            aliases: ["int fa0/0", "interface fa0/0"],
+            aliases: ["int fa0/0", "int f0/0", "interface fa0/0"],
           },
         ),
         step(
@@ -107,13 +107,21 @@
           "내가 넣은 값 확인",
           "show ip interface brief로 주소와 상태를 확인합니다. 이 사이트는 실제 장비 결과를 생성하지 않아요.",
           "선택한 포트의 IP를 확인한다. up/down의 이유를 실제 에뮬레이터에서 살펴본다.",
-          { prompt: "Router#", command: "show ip interface brief", aliases: ["sh ip int brief"] },
+          {
+            prompt: "Router#",
+            command: "show ip interface brief",
+            aliases: ["sh ip int brief", "sh ip int br"],
+          },
         ),
         step(
           "저장까지 마무리",
           "copy running-config startup-config로 현재 설정을 저장합니다. 실제 시험 도구의 저장 지시가 우선입니다.",
           "저장 확인 질문/완료 메시지를 실제 프로그램에서 확인했다.",
-          { prompt: "Router#", command: "copy running-config startup-config" },
+          {
+            prompt: "Router#",
+            command: "copy running-config startup-config",
+            aliases: ["copy run start"],
+          },
         ),
       ],
     },
@@ -286,7 +294,11 @@
           "저장 확인",
           "현재 설정을 저장하고 시험 프로그램의 제출/저장 안내까지 확인합니다.",
           "저장 확인을 누락하지 않았다.",
-          { prompt: "Router#", command: "copy running-config startup-config" },
+          {
+            prompt: "Router#",
+            command: "copy running-config startup-config",
+            aliases: ["copy run start"],
+          },
         ),
       ],
     },
@@ -300,7 +312,7 @@
       steps: [
         step(
           "제작 조건부터 읽기",
-          "시험에서 지시한 케이블 규격과 양 끝 결선 조건을 먼저 확인합니다. 여기서는 T568B 양끝의 직결 예제로 색 순서를 설명합니다.",
+          "시험에서 지시한 케이블 규격과 양 끝 결선 조건을 먼저 확인합니다. 여기서는 T568B 양끝의 직결 예제로 색 순서를 설명합니다. 지문이 Straight=T568B로 지정하면 양끝 B-B를 따릅니다. 일반적인 직결 A-A도 가능하다는 지식으로 지문 조건을 바꾸지 않습니다. 1Gbps 결선은 8가닥 모두 정확히 맞춥니다.",
           "어떤 문제든 무조건 같은 케이블을 만들겠다고 외우지 않았다.",
         ),
         step(
@@ -322,6 +334,86 @@
       ],
     },
   ];
+  tasks.push({
+    id: "short-answer",
+    title: "단답 · 서브넷과 Linux 명령",
+    kind: "answers",
+    minutes: 15,
+    source: "exam",
+    goal: "자체 기초 과제 · 답을 직접 쓰고 이유 확인하기. 공식 기출이 아닙니다.",
+    steps: [
+      step(
+        "네트워크 주소",
+        "호스트 192.168.10.70/26이 속한 네트워크 주소를 쓰세요.",
+        "블록 크기64로 0·64·128·192에서 시작합니다. 70이 들어가는 구간의 시작을 찾으세요.",
+        {
+          fields: [{ label: "네트워크 주소", value: "192.168.10.64" }],
+          why: "/26의 마스크는 255.255.255.192입니다. 주소70이 들어가는64~127구간을 찾습니다.",
+        },
+      ),
+      step(
+        "브로드캐스트 주소",
+        "같은 192.168.10.70/26 네트워크의 브로드캐스트 주소를 쓰세요.",
+        "64~127구간의 마지막 주소입니다. 일반 호스트에 할당하지 않습니다.",
+        { fields: [{ label: "브로드캐스트 주소", value: "192.168.10.127" }] },
+      ),
+      step(
+        "일반 호스트 수",
+        "같은 /26 네트워크에서 네트워크·브로드캐스트 주소를 뺀 일반 호스트 수를 숫자로 쓰세요.",
+        "전체64개에서 두 주소를 빼세요. /31 P2P 같은 예외와 구별합니다.",
+        { fields: [{ label: "사용 가능한 일반 호스트 수", value: "62" }] },
+      ),
+      step(
+        "현재 위치 조회",
+        "Linux에서 현재 작업 디렉터리의 경로를 출력하는 명령을 쓰세요. 옵션은 필요 없습니다.",
+        "print working directory의 약자입니다. 셸 실행은 하지 않습니다.",
+        { fields: [{ label: "조회 명령", value: "pwd" }] },
+      ),
+      step(
+        "파일 권한 지정",
+        "report.txt를 소유자 읽기/쓰기, 그룹 읽기, 기타 권한 없음으로 바꾸는 명령을 숫자 모드로 쓰세요.",
+        "읽기4·쓰기2·실행1입니다. 소유자/그룹/기타 순서로 더하세요.",
+        { fields: [{ label: "권한 변경 명령", value: "chmod 640 report.txt" }] },
+      ),
+    ],
+  });
+  // NOS는 실제 MMC를 실행하지 않고 요구 조건을 올바른 칸으로 옮기는 연습입니다.
+  const nosChecks = {
+    dns: [
+      { label: "영역 이름", value: "lab.example", ignoreCase: true },
+      { label: "호스트 이름", value: "www", ignoreCase: true },
+      { label: "레코드 종류", value: "A", ignoreCase: true },
+      { label: "연결할 IPv4 주소", value: "192.168.10.20" },
+    ],
+    dhcp: [
+      { label: "범위 시작 주소", value: "192.168.10.100" },
+      { label: "범위 끝 주소", value: "192.168.10.150" },
+      { label: "서브넷 마스크", value: "255.255.255.0" },
+      { label: "라우터 옵션", value: "192.168.10.1" },
+      { label: "DNS 옵션", value: "192.168.10.2" },
+    ],
+    iis: [
+      { label: "사이트 이름", value: "LabWeb", ignoreCase: true },
+      { label: "프로토콜", value: "http", ignoreCase: true },
+      { label: "포트", value: "80" },
+      { label: "호스트 이름", value: "www.lab.example", ignoreCase: true },
+    ],
+  };
+  for (const [id, fields] of Object.entries(nosChecks)) {
+    const task = tasks.find((item) => item.id === id);
+    task.steps[task.steps.length - 1].fields = fields;
+    task.steps[task.steps.length - 1].action +=
+      " 아래 칸에 이 예제의 요구 조건을 직접 입력하세요. 실제 Windows 서비스 생성·검증은 아닙니다.";
+  }
+  function fieldMatches(value, field) {
+    const normalize = (text) =>
+      field.ignoreCase
+        ? String(text).trim().replace(/\s+/g, " ").toLowerCase()
+        : String(text).trim().replace(/\s+/g, " ");
+    return [field.value, ...(field.aliases || [])].some(
+      (expected) => normalize(value) === normalize(expected),
+    );
+  }
   // 따라하기의 설명/예상 출력 원본. 자유 콘솔의 실제 상태와 혼동하지 않게 예시로 표시합니다.
   const routerLesson = [
     {
@@ -404,7 +496,7 @@
       from: "2026-12-07",
       to: "2026-12-13",
       title: "3주 · 섞어서 반복",
-      taskIds: ["router-route", "cable"],
+      taskIds: ["router-route", "cable", "short-answer"],
       goal: "라우터·Windows·케이블을 섞고, 단답·서브넷도 짧게 복습.",
     },
     {
@@ -415,6 +507,21 @@
       goal: "공식 도구의 과제를 시간 재고 수행. 마지막에는 저장·제출·못한 작업만 재확인.",
     },
   ];
+  function roadmapFor(date) {
+    const valid =
+      typeof date === "string" &&
+      /^\d{4}-\d{2}-\d{2}$/.test(date) &&
+      !Number.isNaN(Date.parse(date)) &&
+      new Date(date).toISOString().slice(0, 10) === date;
+    const deadline = new Date((valid ? date : examDate) + "T00:00:00Z");
+    const shifted = (days) =>
+      new Date(deadline.getTime() + days * 86400000).toISOString().slice(0, 10);
+    return roadmap.map((phase, index) => ({
+      ...phase,
+      from: shifted([-26, -19, -12, -5][index]),
+      to: shifted([-20, -13, -6, -1][index]),
+    }));
+  }
   function clean(raw = {}) {
     raw = raw && typeof raw === "object" && !Array.isArray(raw) ? raw : {};
     const allowed = new Set(tasks.map((task) => task.id));
@@ -438,7 +545,16 @@
       .filter(Boolean)
       .some((command) => normalize(value) === normalize(command));
   }
-  const api = { examDate, sources, tasks, roadmap, clean, commandMatches };
+  const api = {
+    examDate,
+    sources,
+    tasks,
+    roadmap,
+    roadmapFor,
+    clean,
+    commandMatches,
+    fieldMatches,
+  };
   root.PracticalStudy = api;
   if (typeof module !== "undefined" && module.exports) module.exports = api;
 })(typeof window !== "undefined" ? window : globalThis);

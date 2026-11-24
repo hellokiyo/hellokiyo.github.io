@@ -15,7 +15,7 @@
     "sources",
   ]);
   function classify(view) {
-    return ["practical", "lab"].includes(view)
+    return ["practical", "lab", "practicalnotes"].includes(view)
       ? "practical"
       : writtenViews.has(view)
         ? "written"
@@ -52,13 +52,13 @@
         link.hidden =
           view === "exams" ||
           (practical
-            ? !["dashboard", "practical", "lab"].includes(link.dataset.view)
-            : ["practical", "lab"].includes(link.dataset.view));
+            ? !["dashboard", "practical", "lab", "practicalnotes"].includes(link.dataset.view)
+            : ["practical", "lab", "practicalnotes"].includes(link.dataset.view));
       });
       const guide = document.querySelector(".sidebar-bottom a");
       if (guide) guide.hidden = practical || view === "exams";
       mobile.innerHTML = practical
-        ? '<a href="#dashboard" data-view="dashboard"><span class="mobile-tab-icon" aria-hidden="true">⌂</span><span>실기 홈</span></a><a href="#practical" data-view="practical"><span class="mobile-tab-icon" aria-hidden="true">☷</span><span>따라하기·계획</span></a><a href="#lab" data-view="lab"><span class="mobile-tab-icon" aria-hidden="true">⌨</span><span>실습 실험실</span></a>'
+        ? '<a href="#dashboard" data-view="dashboard"><span class="mobile-tab-icon" aria-hidden="true">⌂</span><span>실기 홈</span></a><a href="#practical" data-view="practical"><span class="mobile-tab-icon" aria-hidden="true">☷</span><span>따라하기·계획</span></a><a href="#lab" data-view="lab"><span class="mobile-tab-icon" aria-hidden="true">⌨</span><span>실습 실험실</span></a><a href="#practicalnotes" data-view="practicalnotes"><span class="mobile-tab-icon" aria-hidden="true">▤</span><span>풀이 사전</span></a>'
         : writtenMobile;
       if (visible)
         document.querySelector(".breadcrumb").lastChild.textContent = practical

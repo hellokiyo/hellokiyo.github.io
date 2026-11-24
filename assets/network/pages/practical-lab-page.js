@@ -8,6 +8,7 @@
       cables = { a: Array(8).fill(""), b: Array(8).fill("") };
     let tab = "windows",
       end = "a",
+      cableKind = "straight",
       selectedColor = engine.colors[0],
       history = [],
       results = null,
@@ -28,12 +29,11 @@
       return windowsUI.render();
     }
     function routerPanel() {
-      const saved =
-        router.startup && JSON.stringify(router.startup) === JSON.stringify(router.running);
+      const saved = engine.sameConfig(router.startup, router.running);
       return `<div class="lab-device-status"><span>모드</span><strong>${esc(engine.prompt(router))}</strong><span class="${saved ? "lab-pass" : "lab-miss"}">${router.pending ? "저장 확인 대기" : saved ? "현재 구성 저장됨" : "현재 구성 미저장"}</span></div><div class="lab-window-title">Router Emulator를 본뜬 학습 콘솔 · 부분 명령 지원</div><pre id="lab-console" class="lab-console" aria-live="polite">${esc(history.join("\n") || "가상 라우터 준비 완료. ? 로 지원 명령을 확인하세요.")}</pre><form id="lab-router-form" class="lab-command"><label for="lab-command">${esc(engine.prompt(router))}</label><input id="lab-command" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="180" placeholder="명령 입력 후 Enter"><button type="submit" class="button primary">실행</button></form><p class="fine-print">이 콘솔은 JS 상태만 바꿉니다. ping·장비 연결·실제 링크·파일 명령은 실행하지 않습니다. copy 명령 뒤에는 저장 파일 확인에 Enter를 누르세요. reload는 가상 재시작입니다. 오타/미완성 명령은 IOS 형태 오류로 표시합니다.</p>`;
     }
     function cablePanel() {
-      return `<div class="lab-window-title">가상 케이블 작업대 · T568B 직결 예제</div><p>색을 핀으로 드래그하세요. 꽂힌 선끼리는 드래그해서 위치를 바꿀 수 있어요. 휴대폰에서는 색 선택 → 핀 터치도 가능합니다. 금속 접점이 보이고 걸쇠는 뒤, 케이블은 아래일 때 왼쪽이1번입니다.</p><div class="filter-group">${["a", "b"].map((side) => `<button type="button" class="filter ${end === side ? "active" : ""}" data-lab-end="${side}">커넥터 ${side.toUpperCase()}</button>`).join("")}</div><div class="lab-palette">${engine.colors.map((color, i) => `<button type="button" class="${selectedColor === color ? "is-selected" : ""}" data-lab-color="${i}" draggable="true" title="핀으로 드래그하거나 선택하세요" aria-pressed="${selectedColor === color}"><i class="lab-color-${i}" aria-hidden="true"></i>${esc(color)}</button>`).join("")}</div><div class="practical-pins lab-connectors">${cables[end].map((color, i) => `<button type="button" data-lab-pin="${i}" draggable="${Boolean(color)}" aria-label="${end.toUpperCase()} ${i + 1}번 핀 ${color || "빈칸"}"><b>${i + 1}</b><i class="lab-color-${engine.colors.indexOf(color)}" aria-hidden="true"></i><span>${esc(color || "선택")}</span></button>`).join("")}</div><p>A: ${esc(cables.a.map((color) => color || "＿").join(" · "))}</p><p>B: ${esc(cables.b.map((color) => color || "＿").join(" · "))}</p><p class="fine-print">색 배치 확인 모형입니다. 압착·접촉 불량·길이·통신 품질은 실물로 확인해야 합니다.</p>`;
+      return `<div class="lab-window-title">가상 케이블 작업대 · ${cableKind === "straight" ? "직결" : "교차"} 예제</div><p>색을 핀으로 드래그하세요. 꽂힌 선끼리는 드래그해서 위치를 바꿀 수 있어요. 휴대폰에서는 색 선택 → 핀 터치도 가능합니다. 금속 접점이 보이고 걸쇠는 뒤, 케이블은 아래일 때 왼쪽이1번입니다.</p><div class="filter-group" aria-label="케이블 과제 선택"><button type="button" class="filter ${cableKind === "straight" ? "active" : ""}" data-lab-cable-kind="straight" aria-pressed="${cableKind === "straight"}">직결</button><button type="button" class="filter ${cableKind === "cross" ? "active" : ""}" data-lab-cable-kind="cross" aria-pressed="${cableKind === "cross"}">교차</button></div><p class="fine-print">직결은 같은 표준끼리, 교차는 A/B 표준을 양쪽에 씁니다. Auto MDI-X 장비의 자동 보정과 별개로 과제의 결선 지시를 따르세요.</p><details><summary>표준 색 순서 확인</summary><p>T568A: ${engine.colorsA.join(" · ")}</p><p>T568B: ${engine.colors.join(" · ")}</p></details><div class="filter-group">${["a", "b"].map((side) => `<button type="button" class="filter ${end === side ? "active" : ""}" data-lab-end="${side}">커넥터 ${side.toUpperCase()}</button>`).join("")}</div><div class="lab-palette">${engine.colors.map((color, i) => `<button type="button" class="${selectedColor === color ? "is-selected" : ""}" data-lab-color="${i}" draggable="true" title="핀으로 드래그하거나 선택하세요" aria-pressed="${selectedColor === color}"><i class="lab-color-${i}" aria-hidden="true"></i>${esc(color)}</button>`).join("")}</div><div class="practical-pins lab-connectors">${cables[end].map((color, i) => `<button type="button" data-lab-pin="${i}" draggable="${Boolean(color)}" aria-label="${end.toUpperCase()} ${i + 1}번 핀 ${color || "빈칸"}"><b>${i + 1}</b><i class="lab-color-${engine.colors.indexOf(color)}" aria-hidden="true"></i><span>${esc(color || "선택")}</span></button>`).join("")}</div><p>A: ${esc(cables.a.map((color) => color || "＿").join(" · "))}</p><p>B: ${esc(cables.b.map((color) => color || "＿").join(" · "))}</p><p class="fine-print">색 배치 확인 모형입니다. 압착·접촉 불량·길이·통신 품질은 실물로 확인해야 합니다.</p>`;
     }
     function render() {
       if (!enabled) {
@@ -52,7 +52,7 @@
         )
         .join(
           "",
-        )}</nav><div class="lab-surface">${tab === "windows" ? windowsPanel() : tab === "router" ? routerPanel() : cablePanel()}<p id="lab-status" role="status">${esc(message)}</p></div></section><aside class="panel lab-mission"><span class="label-tag">자체 예제 · 공식 점수 아님</span><h2>오늘의 실습 과제</h2><details open><summary>설정할 값 보기</summary><p>Windows: IP .10 / 마스크 255.255.255.0 / 게이트웨이 .1 / DNS .2<br>모두 192.168.10.x 대역입니다.</p><p>라우터: FastEthernet0/0에 192.168.10.1/24, 포트 켜기. 목적지192.168.20.0/24의 다음 홉192.168.10.2. 확인 후 가상 startup에 저장.</p><p>케이블: A·B 모두 T568B 순서. 실물 연습은 별도로 합니다.</p></details><button type="button" id="lab-test" class="button primary full">실습 테스트 →</button><div class="lab-results" role="status">${results ? `${resultsStale ? '<p class="lab-stale">설정이 변경됐습니다. 다시 테스트하세요. 아래는 이전 결과입니다.</p>' : ""}<h3>${results.filter((result) => result.ok).length} / ${results.length} 조건 확인</h3>${results.map((result) => `<article class="lab-result-row ${result.ok ? "lab-pass" : "lab-miss"}"><strong>${result.ok ? "✓" : "○"} ${esc(result.label)}</strong><p>${esc(result.detail)}</p>${!result.ok ? `<button type="button" class="text-button" data-lab-tab="${result.target}">해당 설정으로 이동 →</button>` : ""}</article>`).join("")}` : "설정을 바꾼 뒤 테스트 버튼을 눌러 확인하세요."}</div><p class="fine-print">검사는 지정한 예제 값과 가상 저장 여부만 봅니다. 실제 장비 통신·공식 채점·합격 점수를 의미하지 않습니다.</p></aside></div>`;
+        )}</nav><div class="lab-surface">${tab === "windows" ? windowsPanel() : tab === "router" ? routerPanel() : cablePanel()}<p id="lab-status" role="status">${esc(message)}</p></div></section><aside class="panel lab-mission"><span class="label-tag">자체 예제 · 공식 점수 아님</span><h2>오늘의 실습 과제</h2><details open><summary>설정할 값 보기</summary><p>Windows: IP .10 / 마스크 255.255.255.0 / 게이트웨이 .1 / DNS .2<br>모두 192.168.10.x 대역입니다.</p><p>라우터: FastEthernet0/0에 192.168.10.1/24, 포트 켜기. 목적지192.168.20.0/24의 다음 홉192.168.10.2. 확인 후 가상 startup에 저장.</p><p>케이블: ${cableKind === "straight" ? "직결 · 양끝 같은 표준" : "교차 · 양끝 A/B 표준"}. 실물 연습은 별도로 합니다.</p></details><button type="button" id="lab-test" class="button primary full">실습 테스트 →</button><div class="lab-results" role="status">${results ? `${resultsStale ? '<p class="lab-stale">설정이 변경됐습니다. 다시 테스트하세요. 아래는 이전 결과입니다.</p>' : ""}<h3>${results.filter((result) => result.ok).length} / ${results.length} 조건 확인</h3>${results.map((result) => `<article class="lab-result-row ${result.ok ? "lab-pass" : "lab-miss"}"><strong>${result.ok ? "✓" : "○"} ${esc(result.label)}</strong><p>${esc(result.detail)}</p>${!result.ok ? `<button type="button" class="text-button" data-lab-tab="${result.target}">해당 설정으로 이동 →</button>` : ""}</article>`).join("")}` : "설정을 바꾼 뒤 테스트 버튼을 눌러 확인하세요."}</div><p class="fine-print">검사는 지정한 예제 값과 가상 저장 여부만 봅니다. 실제 장비 통신·공식 채점·합격 점수를 의미하지 않습니다.</p></aside></div>`;
     }
     function handleClick(target) {
       if (!enabled) return false;
@@ -63,6 +63,12 @@
       if (target.dataset.labTab && ["windows", "router", "cable"].includes(target.dataset.labTab)) {
         tab = target.dataset.labTab;
         message = "";
+        render();
+        return true;
+      }
+      if (["straight", "cross"].includes(target.dataset.labCableKind)) {
+        cableKind = target.dataset.labCableKind;
+        resultsStale = Boolean(results);
         render();
         return true;
       }
@@ -90,13 +96,16 @@
         return true;
       }
       if (target.id === "lab-test") {
-        results = engine.inspect(router, windows, cables);
+        results = engine.inspect(router, windows, cables, cableKind);
         resultsStale = false;
         render();
         return true;
       }
       if (target.id === "lab-reset") {
         router = engine.initial();
+        end = "a";
+        cableKind = "straight";
+        selectedColor = engine.colors[0];
         windows = {};
         windowsUI.reset();
         cables = { a: Array(8).fill(""), b: Array(8).fill("") };

@@ -1,0 +1,151 @@
+{
+  "epoch": 8,
+  "basis": "2026-09-13 공개 복원 18문항 요구 대조. 공식 성적 아님. 가채점 관행 가중치(6.5/5.5), 부분점수 없음. 정답을 본 뒤의 비블라인드 정보 대조.",
+  "score": 77.0,
+  "items": [
+    {
+      "number": 1,
+      "topic": "결선 제작",
+      "weight": 6.5,
+      "solved": false,
+      "evidence": null,
+      "decision": "전체 요구 근거 부족 또는 실물 수행 미검증"
+    },
+    {
+      "number": 2,
+      "topic": "주소 계산과 IPv4 적용",
+      "weight": 5.5,
+      "solved": true,
+      "evidence": "docs/study/exam-guide.md",
+      "decision": "현재 내부 설명에서 필요한 답을 유도할 수 있음"
+    },
+    {
+      "number": 3,
+      "topic": "웹 서비스 조건",
+      "weight": 5.5,
+      "solved": true,
+      "evidence": "assets/network/data/practical-notes.js",
+      "decision": "WEB의 생성·바인딩·연결시간·단일 기본 문서·익명 인증 조건을 순서대로 대조했다."
+    },
+    {
+      "number": 4,
+      "topic": "DHCP 범위·제외·임대",
+      "weight": 5.5,
+      "solved": true,
+      "evidence": "assets/network/data/practical-notes.js",
+      "decision": "범위 이름·설명·25비트 마스크·제외 범위·임대 일수·라우터 옵션을 지문에서 각 설정 위치로 옮기는 풀이를 대조했다."
+    },
+    {
+      "number": 5,
+      "topic": "보안 정책",
+      "weight": 5.5,
+      "solved": true,
+      "evidence": "assets/network/data/practical-notes.js",
+      "decision": "메시지 제목/내용·암호 최소/최대일수·복잡성·실패 횟수와 잠금 분 단위를 각 정책에 대입해 해석했다."
+    },
+    {
+      "number": 6,
+      "topic": "DNS SOA",
+      "weight": 5.5,
+      "solved": true,
+      "evidence": "assets/network/data/practical-notes.js",
+      "decision": "DNS 영역/파일·주서버·책임자·SOA 숫자 순서·초 단위 변환·레코드 TTL 구별을 내부 설명으로 해석했다."
+    },
+    {
+      "number": 7,
+      "topic": "FTP 고급 설정",
+      "weight": 5.5,
+      "solved": true,
+      "evidence": "assets/network/data/practical-notes.js",
+      "decision": "FTP 비표준 제어 포트·디렉터리 표시·allowReadUploads·외부 IP의 서로 다른 위치를 설명 근거로 대조했다."
+    },
+    {
+      "number": 8,
+      "topic": "서비스 식별",
+      "weight": 5.5,
+      "solved": true,
+      "evidence": "assets/network/data/practical-notes.js",
+      "decision": "알림 서비스의 세션0/WNS 단서를 공식 설명과 비교하고 WINS 오기를 경고했으며 시작 유형과 상태를 별도로 해석했다."
+    },
+    {
+      "number": 9,
+      "topic": "사용자·세션",
+      "weight": 5.5,
+      "solved": true,
+      "evidence": "assets/network/data/practical-notes.js",
+      "decision": "사용자/그룹 이름·설명·전체 이름·암호 변경 금지·소속 그룹과 연결 끊김/유휴 세션을 구별해 대조했다."
+    },
+    {
+      "number": 10,
+      "topic": "연결 표 판독",
+      "weight": 5.5,
+      "solved": true,
+      "evidence": "docs/study/exam-guide.md",
+      "decision": "현재 내부 설명에서 필요한 답을 유도할 수 있음"
+    },
+    {
+      "number": 11,
+      "topic": "ICMP 빈칸",
+      "weight": 5.5,
+      "solved": true,
+      "evidence": "docs/study/exam-guide.md",
+      "decision": "현재 내부 설명에서 필요한 답을 유도할 수 있음"
+    },
+    {
+      "number": 12,
+      "topic": "DNS 출력 판독",
+      "weight": 5.5,
+      "solved": true,
+      "evidence": "assets/network/data/practical-notes.js",
+      "decision": "dig 출력 표식·마스크 역산 후보 계산·IPv6 각 보기 판별 근거를 내부 원본에 보완하고 복원 요구와 수동 대조했다."
+    },
+    {
+      "number": 13,
+      "topic": "마스크 역산",
+      "weight": 5.5,
+      "solved": true,
+      "evidence": "assets/network/data/practical-notes.js",
+      "decision": "dig 출력 표식·마스크 역산 후보 계산·IPv6 각 보기 판별 근거를 내부 원본에 보완하고 복원 요구와 수동 대조했다."
+    },
+    {
+      "number": 14,
+      "topic": "IPv6 복수선택",
+      "weight": 5.5,
+      "solved": true,
+      "evidence": "assets/network/data/practical-notes.js",
+      "decision": "dig 출력 표식·마스크 역산 후보 계산·IPv6 각 보기 판별 근거를 내부 원본에 보완하고 복원 요구와 수동 대조했다."
+    },
+    {
+      "number": 15,
+      "topic": "표준 포트",
+      "weight": 5.5,
+      "solved": true,
+      "evidence": "docs/study/exam-guide.md",
+      "decision": "현재 내부 설명에서 필요한 답을 유도할 수 있음"
+    },
+    {
+      "number": 16,
+      "topic": "라우터 사용자 조회",
+      "weight": 5.5,
+      "solved": false,
+      "evidence": null,
+      "decision": "전체 요구 근거 부족 또는 실물 수행 미검증"
+    },
+    {
+      "number": 17,
+      "topic": "직렬 포트 복수 주소",
+      "weight": 5.5,
+      "solved": false,
+      "evidence": null,
+      "decision": "전체 요구 근거 부족 또는 실물 수행 미검증"
+    },
+    {
+      "number": 18,
+      "topic": "VTY 로그인",
+      "weight": 5.5,
+      "solved": false,
+      "evidence": null,
+      "decision": "전체 요구 근거 부족 또는 실물 수행 미검증"
+    }
+  ]
+}

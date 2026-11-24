@@ -1,0 +1,13 @@
+✔ round02 Ethernet 주소·브로드캐스트·겹침·지원 한계 (2.5255ms)
+✔ round03 경로의 순서 대신 의미로 저장 비교·정확한 경로 삭제 (5.5901ms)
+✔ round04 Windows는 주소 형식과 일반 호스트를 검사하고 취소 후 기존 값을 유지한다 (2.0358ms)
+✔ round05 따라하기 재입력 오답은 이전 통과를 취소한다 (2.9491ms)
+✔ round06 직결 A-A/B-B와 교차 A-B/B-A를 구별한다 (0.1534ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 73.2346

@@ -188,3 +188,6 @@ PracticalLab.inspect가 조건 판정과 detail/target을 반환하고 페이지
 ## v37 학습 단계 분리
 
 platform/study-stage.js의 StudyStage는 네트워크 전용 필기/실기 선택, 경로 분류, 메뉴/브레드크럼/모바일 내비게이션 동기화를 담당한다. 별도 선택 키만 사용하며 학습 상태에 손대지 않는다. app은 라우팅 전에 sync하고 HomePages에 getStage를 주입한다. 직접 링크는 화면 의미를 우선하며 홈은 마지막 선택을 유지한다. StudyCoach의 getView는 실기에서는 practical을 반환해 필기 추천이 실기 홈에 삽입되지 않는다.
+
+## v40 실기 설명 책임
+`data/practical-notes.js`는 자체 설명·공식 출처 원본, `pages/practical-notes-page.js`는 읽기 전용 렌더링을 맡는다. `domain/practical-lab.js`는 Serial 보조 IP와 VTY 상태/저장 비교를 맡는다. 실제 장비 연결·인증 기능은 없다.

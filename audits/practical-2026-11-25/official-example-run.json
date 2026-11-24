@@ -1,0 +1,20 @@
+{
+  "type": "Observed official example application, not actual exam sitting",
+  "visibleHeading": "2026년 예제 제sample회 네트워크관리사 2급 실기",
+  "visibleQuestionButtons": 15,
+  "navigation": "User opened; automated controls ineffective at higher Windows integrity; no input bypass attempted",
+  "items": [
+    {
+      "number": 1,
+      "topic": "Switch-to-endpoint gigabit cable",
+      "requiredStandard": "Straight with T568B per displayed instructions",
+      "internalEvidence": "assets/network/data/practical-study.js cable guide and virtual cable workbench",
+      "internalInformationSufficient": true,
+      "physicalTaskPerformed": false,
+      "officialGrade": null,
+      "decision": "B-B and all eight conductors; actual crimp quality unverified. No points awarded."
+    }
+  ],
+  "totalActualScore": null,
+  "next": "User requested to close cable panel and open item2"
+}

@@ -161,3 +161,7 @@
 
 - assets/network/platform/study-stage.js: 필기/실기 선택·경로 분류·메뉴 동기화.
 - tests/test-study-stage.cjs: 단계 추론·홈 유지·저장 실패·시험 격리.
+
+- `assets/network/data/practical-notes.js`: 실기 자체 풀이13개와 출처.
+- `assets/network/pages/practical-notes-page.js`: 실기 풀이 사전 화면.
+- `scripts/record-practical-epoch.py`: 수동 정보 판정 합계 기록, 시험 자동 채점 아님.

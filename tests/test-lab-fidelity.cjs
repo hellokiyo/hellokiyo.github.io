@@ -169,7 +169,7 @@ test("실습 진단은 실제 값·저장 대기·잘못된 핀과 복귀 대상
   const report = E.inspect(state, { ip: "192.168.10.99" }, wires);
   assert.match(report[0].detail, /192.168.10.99/);
   assert.equal(report[0].target, "windows");
-  assert.match(report[5].detail, /B 4번/);
+  assert.match(report[5].detail, /B:.*주/);
   assert.equal(report[5].target, "cable");
   state = E.run(state, "en").state;
   state = E.run(state, "copy run start").state;

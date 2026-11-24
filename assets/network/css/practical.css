@@ -505,3 +505,25 @@
   color: var(--green);
   box-shadow: inset 0 0 0 1px var(--green);
 }
+
+.practical-note ol {
+  padding-left: 24px;
+}
+.practical-note li {
+  line-height: 1.9;
+  margin: 16px 0;
+  overflow-wrap: anywhere;
+}
+.practical-note details {
+  margin-top: 24px;
+}
+.practical-note-link h2 {
+  font-size: 17px;
+}
+.practical-note-link span {
+  color: var(--green);
+  font-size: 13px;
+}
+.practical-note-link:is(:hover, :focus-visible) {
+  border-color: var(--green);
+}

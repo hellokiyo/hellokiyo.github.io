@@ -7,6 +7,7 @@
     interfaces: {
       "FastEthernet0/0": { ip: "", mask: "", enabled: false },
       "FastEthernet0/1": { ip: "", mask: "", enabled: false },
+      "Serial2/0": { ip: "", mask: "", enabled: false },
     },
     routes: [],
   });
@@ -27,6 +28,26 @@
       .join("");
     return /^1*0*$/.test(bits);
   }
+  function ipNumber(value) {
+    return value.split(".").reduce((number, part) => number * 256 + Number(part), 0) >>> 0;
+  }
+  function subnetInfo(ip, mask) {
+    if (!validIp(ip) || !validMask(mask)) return null;
+    const address = ipNumber(ip),
+      bits = ipNumber(mask),
+      network = (address & bits) >>> 0;
+    const broadcast = (network | ~bits) >>> 0;
+    return { address, network, broadcast, prefix: bits.toString(2).replace(/0/g, "").length };
+  }
+  // 이 모형은 일반 Ethernet 호스트(/1~30)를 연습합니다. /31 P2P·/32는 별도 범위입니다.
+  function addressIssue(ip, mask) {
+    const subnet = subnetInfo(ip, mask);
+    if (!subnet) return "format";
+    if (subnet.prefix < 1 || subnet.prefix > 30) return "unsupported-prefix";
+    const first = Number(ip.split(".")[0]);
+    if (first === 0 || first === 127 || first >= 224) return "scope";
+    return subnet.address === subnet.network || subnet.address === subnet.broadcast ? "host" : null;
+  }
   function prompt(state) {
     if (state.pending) return "[startup-config]";
     return (
@@ -35,9 +56,13 @@
         ? ">"
         : state.mode === "config"
           ? "(config)#"
-          : state.mode === "interface"
-            ? "(config-if)#"
-            : "#")
+          : state.mode === "dhcp"
+            ? "(dhcp-config)#"
+            : state.mode === "line"
+              ? "(config-line)#"
+              : state.mode === "interface"
+                ? "(config-if)#"
+                : "#")
     );
   }
   function grammar(mode) {
@@ -52,6 +77,7 @@
       return [
         ...exec,
         ["configure", "terminal"],
+        ["show", "users"],
         ["show", "running-config"],
         ["show", "startup-config"],
         ["copy", "running-config", "startup-config"],
@@ -61,14 +87,28 @@
     if (mode === "config")
       return [
         ["interface", "<interface>"],
+        ["line", "vty", "<start>", "<end>"],
         ["hostname", "<name>"],
+        ["ip", "dhcp", "pool", "<name>"],
+        ["no", "ip", "dhcp", "pool", "<name>"],
         ["ip", "route", "<network>", "<mask>", "<next-hop>"],
         ["no", "ip", "route", "<network>", "<mask>", "<next-hop>"],
         ["end"],
         ["exit"],
       ];
+    if (mode === "line")
+      return [["password", "<value>"], ["login"], ["no", "login"], ["end"], ["exit"]];
+    if (mode === "dhcp")
+      return [
+        ["network", "<network>", "<mask>"],
+        ["default-router", "<address>"],
+        ["dns-server", "<address>"],
+        ["end"],
+        ["exit"],
+      ];
     return [
       ["ip", "address", "<address>", "<mask>"],
+      ["ip", "address", "<address>", "<mask>", "secondary"],
       ["no", "ip", "address"],
       ["shutdown"],
       ["no", "shutdown"],
@@ -146,12 +186,12 @@
     if (!raw) return done();
     if (raw.endsWith("?") || raw.toLowerCase() === "help")
       return done(commandHelp(raw.toLowerCase() === "help" ? "?" : raw, state.mode));
-    if (/^(ping|traceroute|router|access-list|line|vlan|crypto|debug)(\s|$)/i.test(raw))
+    if (/^(ping|traceroute|router|access-list|vlan|crypto|debug)(\s|$)/i.test(raw))
       return done(
         "[시뮬레이터 미구현] 이 명령의 장비 동작은 재현하지 않습니다. 실제 IOS의 오답이라는 뜻은 아닙니다.",
         "unsupported",
       );
-    if (/^do\s/i.test(raw) && ["config", "interface"].includes(state.mode)) {
+    if (/^do\s/i.test(raw) && ["config", "interface", "line", "dhcp"].includes(state.mode)) {
       const result = run({ ...state, mode: "privileged" }, raw.slice(3));
       result.state.mode = state.mode;
       result.state.selected = state.selected;
@@ -181,6 +221,8 @@
     if (lower === "end") {
       state.mode = "privileged";
       state.selected = null;
+      state.selectedLine = null;
+      state.selectedPool = null;
       return done();
     }
     if (lower === "disable") {
@@ -188,9 +230,14 @@
       return done();
     }
     if (lower === "exit") {
-      state.mode =
-        state.mode === "interface" ? "config" : state.mode === "config" ? "privileged" : "user";
+      state.mode = ["interface", "line", "dhcp"].includes(state.mode)
+        ? "config"
+        : state.mode === "config"
+          ? "privileged"
+          : "user";
       state.selected = null;
+      state.selectedLine = null;
+      state.selectedPool = null;
       return done();
     }
     if (lower === "reload") {
@@ -212,13 +259,29 @@
       Object.entries(value.interfaces)
         .map(
           ([name, value]) =>
-            `interface ${name}\n ${value.description ? `description ${value.description}\n ` : ""}${value.ip ? `ip address ${value.ip} ${value.mask}` : "no ip address"}\n ${value.enabled ? "no shutdown" : "shutdown"}`,
+            `interface ${name}\n ${value.description ? `description ${value.description}\n ` : ""}${value.ip ? `ip address ${value.ip} ${value.mask}` : "no ip address"}\n ${value.enabled ? "no shutdown" : "shutdown"}${(value.secondary || []).map((item) => `\n ip address ${item.ip} ${item.mask} secondary`).join("")}`,
         )
         .join("\n") +
       "\n" +
       value.routes
         .map((route) => `ip route ${route.network} ${route.mask} ${route.nextHop}`)
-        .join("\n");
+        .join("\n") +
+      Object.entries(value.lines || {})
+        .map(
+          ([range, line]) =>
+            `\nline vty ${range}\n${line.password ? " password [학습 입력값 숨김]" : " no password"}\n ${line.login ? "login" : "no login"}`,
+        )
+        .join("") +
+      Object.entries(value.dhcpPools || {})
+        .map(
+          ([name, pool]) =>
+            `\nip dhcp pool ${name}${pool.network ? `\n network ${pool.network} ${pool.mask}` : ""}${pool.router ? `\n default-router ${pool.router}` : ""}${pool.dns ? `\n dns-server ${pool.dns}` : ""}`,
+        )
+        .join("");
+    if (lower === "show users")
+      return done(
+        "Line       User       Host(s)       Idle       Location\n* 0 con 0             idle          00:00:00\n[학습 모형: 현재 콘솔만 표시하며 실제 원격 접속은 없습니다.]",
+      );
     if (lower === "show running-config") return done(configText(state.running));
     if (lower === "show startup-config")
       return done(state.startup ? configText(state.startup) : "startup-config is not present");
@@ -243,12 +306,70 @@
               .join("\n")
           : "등록된 정적 경로가 없습니다. 실제 도달 가능성/라우팅 프로토콜은 시뮬레이션하지 않습니다.",
       );
+    // DHCP는 설정 상태만 보관합니다. 주소를 임대하거나 실제 패킷을 보내지 않습니다.
+    const poolCommand = command.match(/^(no )?ip dhcp pool (\S+)$/i);
+    if (poolCommand) {
+      const name = poolCommand[2];
+      state.running.dhcpPools ||= {};
+      if (poolCommand[1]) {
+        delete state.running.dhcpPools[name];
+      } else {
+        state.running.dhcpPools[name] ||= { network: "", mask: "", router: "", dns: "" };
+        state.selectedPool = name;
+        state.mode = "dhcp";
+      }
+      return done();
+    }
+    if (state.mode === "dhcp" && state.selectedPool) {
+      const pool = state.running.dhcpPools[state.selectedPool];
+      const networkCommand = command.match(/^network (\S+) (\S+)$/i);
+      if (networkCommand) {
+        const subnet = subnetInfo(networkCommand[1], networkCommand[2]);
+        if (!subnet || subnet.address !== subnet.network)
+          return done("% Inconsistent network address and mask.", "invalid-value");
+        if (subnet.prefix < 1 || subnet.prefix > 30)
+          return done("[시뮬레이터 범위] DHCP 예제는 /1~30만 다룹니다.", "unsupported");
+        pool.network = networkCommand[1];
+        pool.mask = networkCommand[2];
+        return done();
+      }
+      const option = command.match(/^(default-router|dns-server) (\S+)$/i);
+      if (option) {
+        if (!validIp(option[2])) return done("% Invalid IPv4 address.", "invalid-value");
+        pool[option[1].toLowerCase() === "default-router" ? "router" : "dns"] = option[2];
+        return done();
+      }
+    }
+    const line = command.match(/^line vty (\d+) (\d+)$/i);
+    if (line) {
+      const first = Number(line[1]),
+        last = Number(line[2]);
+      if (first > last || first < 0 || last > 15)
+        return done("% Invalid VTY range.", "invalid-value");
+      state.running.lines ||= {};
+      state.selectedLine = `${first} ${last}`;
+      state.running.lines[state.selectedLine] ||= { password: "", login: false };
+      state.mode = "line";
+      return done();
+    }
+    if (state.mode === "line" && state.selectedLine) {
+      const value = state.running.lines[state.selectedLine];
+      if (lower.startsWith("password ")) {
+        value.password = command.slice(9);
+        return done();
+      }
+      if (["login", "no login"].includes(lower)) {
+        value.login = lower === "login";
+        return done();
+      }
+    }
     const int = command.match(/^interface (.+)$/i);
     if (int) {
       const name = int[1].match(/^(?:fastethernet|fa|f)(0\/[01])$/i);
-      if (!name)
+      const serial = /^(?:serial|s)2\/0$/i.test(int[1]);
+      if (!name && !serial)
         return done("% Invalid interface type and number for this model.", "invalid-value");
-      state.selected = "FastEthernet" + name[1];
+      state.selected = serial ? "Serial2/0" : "FastEthernet" + name[1];
       state.mode = "interface";
       return done();
     }
@@ -268,7 +389,7 @@
       if ((number(route[2]) & number(route[3])) >>> 0 !== number(route[2]))
         return done("% Inconsistent address and mask.", "invalid-value");
       state.running.routes = state.running.routes.filter(
-        (item) => item.network !== route[2] || item.mask !== route[3],
+        (item) => item.network !== route[2] || item.mask !== route[3] || item.nextHop !== route[4],
       );
       if (!route[1])
         state.running.routes.push({ network: route[2], mask: route[3], nextHop: route[4] });
@@ -276,17 +397,45 @@
     }
     if (state.mode === "interface" && state.selected) {
       const value = state.running.interfaces[state.selected],
-        address = command.match(/^ip address (\S+) (\S+)$/i);
+        address = command.match(/^ip address (\S+) (\S+)( secondary)?$/i);
       if (address) {
-        if (!validIp(address[1]) || !validMask(address[2]))
-          return done("% Bad mask or invalid IPv4 address.", "invalid-value");
-        value.ip = address[1];
-        value.mask = address[2];
+        const issue = addressIssue(address[1], address[2]);
+        if (issue === "unsupported-prefix")
+          return done(
+            "[시뮬레이터 범위] 이 Ethernet 예제는 /1~30만 다룹니다. /31 P2P·/32의 유효성을 오답으로 판정하지 않습니다.",
+            "unsupported",
+          );
+        if (issue) return done("% Bad mask or invalid host IPv4 address.", "invalid-value");
+        const next = subnetInfo(address[1], address[2]);
+        const overlap = Object.entries(state.running.interfaces).some(([name, configured]) => {
+          if (name === state.selected || !configured.ip) return false;
+          return [
+            { ip: configured.ip, mask: configured.mask },
+            ...(configured.secondary || []),
+          ].some((item) => {
+            const existing = subnetInfo(item.ip, item.mask);
+            return (
+              existing && next.network <= existing.broadcast && existing.network <= next.broadcast
+            );
+          });
+        });
+        if (overlap) return done("% Address overlaps with another interface.", "invalid-value");
+        if (address[3]) {
+          if (!value.ip) return done("% Configure a primary address first.", "invalid-value");
+          if (value.ip === address[1])
+            return done("% Address is already primary.", "invalid-value");
+          value.secondary = (value.secondary || []).filter((item) => item.ip !== address[1]);
+          value.secondary.push({ ip: address[1], mask: address[2] });
+        } else {
+          value.ip = address[1];
+          value.mask = address[2];
+        }
         return done();
       }
       if (lower === "no ip address") {
         value.ip = "";
         value.mask = "";
+        delete value.secondary;
         return done();
       }
       if (["no shutdown", "shutdown"].includes(lower)) {
@@ -304,8 +453,49 @@
     }
     return done("[시뮬레이터 미구현] 실제 IOS와 구별해 주세요.", "unsupported");
   }
+  function sameConfig(left, right) {
+    if (!left || !right) return false;
+    const canonical = (value) =>
+      JSON.stringify({
+        hostname: value.hostname,
+        interfaces: Object.entries(value.interfaces)
+          .sort(([a], [b]) => a.localeCompare(b))
+          .map(([name, port]) => [
+            name,
+            port.ip,
+            port.mask,
+            Boolean(port.enabled),
+            port.description || "",
+            (port.secondary || []).map((item) => item.ip + " " + item.mask).sort(),
+          ]),
+        lines: Object.entries(value.lines || {})
+          .sort(([a], [b]) => a.localeCompare(b))
+          .map(([range, line]) => [range, line.password, line.login]),
+        dhcpPools: Object.entries(value.dhcpPools || {})
+          .sort(([a], [b]) => a.localeCompare(b))
+          .map(([name, pool]) => [name, pool.network, pool.mask, pool.router, pool.dns]),
+        routes: value.routes
+          .map((route) => [route.network, route.mask, route.nextHop].join(" "))
+          .sort(),
+      });
+    return canonical(left) === canonical(right);
+  }
   const colors = ["흰주", "주", "흰초", "파", "흰파", "초", "흰갈", "갈"];
-  function inspect(router, windows, cables) {
+  const colorsA = ["흰초", "초", "흰주", "파", "흰파", "주", "흰갈", "갈"];
+  function cableCheck(cables, kind = "straight") {
+    const same = (values, expected) => expected.every((color, index) => values?.[index] === color);
+    if (kind === "cross")
+      return (
+        (same(cables.a, colorsA) && same(cables.b, colors)) ||
+        (same(cables.a, colors) && same(cables.b, colorsA))
+      );
+    if (kind !== "straight") return false;
+    return (
+      (same(cables.a, colors) && same(cables.b, colors)) ||
+      (same(cables.a, colorsA) && same(cables.b, colorsA))
+    );
+  }
+  function inspect(router, windows, cables, cableKind = "straight") {
     const int = router.running.interfaces["FastEthernet0/0"];
     const observed = [
       `적용 IP ${windows.ip || "미설정"} / 마스크 ${windows.mask || "미설정"} / 게이트웨이 ${windows.gateway || "미설정"} / DNS ${windows.dns || "미설정"} · 자동 할당 여부와 부모 창 적용을 확인하세요.`,
@@ -356,20 +546,29 @@
       },
       {
         label: "라우터: 현재 구성을 startup-config에 저장",
-        ok:
-          Boolean(router.startup) &&
-          JSON.stringify(router.startup) === JSON.stringify(router.running),
+        ok: sameConfig(router.startup, router.running),
       },
       {
-        label: "케이블: A·B 양 끝을 모두 T568B 순서로 배치",
-        ok: ["a", "b"].every((end) =>
-          colors.every((color, index) => cables[end]?.[index] === color),
-        ),
+        label:
+          cableKind === "cross"
+            ? "케이블: 양 끝을 T568A/T568B로 교차 배치"
+            : "케이블: 양 끝을 같은 표준으로 직결 배치",
+        ok: cableCheck(cables, cableKind),
       },
     ].map((result, index) => ({
       ...result,
       target: index === 0 ? "windows" : index === 5 ? "cable" : "router",
-      detail: result.ok ? "예제 조건과 일치합니다." : observed[index],
+      detail: result.ok
+        ? "예제 조건과 일치합니다."
+        : index === 5
+          ? (cableKind === "cross"
+              ? "교차는 한쪽 T568A, 반대쪽 T568B입니다. "
+              : "직결은 양쪽 모두 T568A 또는 모두 T568B입니다. ") +
+            "A: " +
+            (cables.a || []).map((color) => color || "빈칸").join(" · ") +
+            " / B: " +
+            (cables.b || []).map((color) => color || "빈칸").join(" · ")
+          : observed[index],
     }));
   }
   function placeWire(source, payload, targetEnd, targetPin) {
@@ -406,8 +605,13 @@
     prompt,
     validIp,
     validMask,
+    subnetInfo,
+    addressIssue,
+    sameConfig,
     inspect,
     colors,
+    colorsA,
+    cableCheck,
     placeWire,
     parseCommand,
   };

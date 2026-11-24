@@ -1,0 +1,32 @@
+{
+  "source": "https://www.icqa.or.kr/cn/board/dataroom/20?sca=네트워크관리사",
+  "file": "icqaExampleSetup64.msi",
+  "bytes": 15337472,
+  "sha256": "F2D6BD10158D343D29AD3A99CB10DF815A5D8D047B1AFA7F6DAC61572B8354F9",
+  "signature": "NotSigned (PowerShell Authenticode)",
+  "download": "Official public page and download endpoint, normal cookie/referrer session; saved to OS TEMP only",
+  "authorization": "User explicitly allowed installation and execution in this turn",
+  "installer": "Started official installer UI. Log reports VSDFXAvailable condition false; .NET Framework 3.5 prerequisite absent.",
+  "automation": "sky.get_window for returned icqaExample window rejected: product policy blocks this app: msiexec.exe",
+  "actionAfterBlock": "No alternate installation or UI automation attempted; manual installation requested",
+  "examApplicationStarted": false,
+  "actualExamScore": null,
+  "followupReadOnlyCheck": {
+    "net35InstalledRegistry": false,
+    "matchingUninstallRegistrationFound": false,
+    "manualCompletionReplyReceived": false,
+    "consecutiveBlockedGoalTurns": 3,
+    "scope": "Registry observation only; absence does not prove every portable executable is absent.",
+    "goalDisposition": "blocked: manual installation required after installer UI automation policy rejection; no completion claimed"
+  },
+  "postInstall": {
+    "userReply": "설치완료",
+    "installedExecutableObserved": true,
+    "net35InstallRegistry": 1,
+    "officialStartScreenObserved": true,
+    "visibleVersion": "2.0,20251203",
+    "uiObservation": "Window higher Windows integrity than Computer Use helper; accessibility limited to window; exam selector click did not visibly change state",
+    "userTask": "Open network level2 example task with temporary name; no actual credential required by observed example screen",
+    "actualExamScore": null
+  }
+}

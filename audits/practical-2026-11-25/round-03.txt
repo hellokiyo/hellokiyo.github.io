@@ -1,0 +1,10 @@
+✔ round02 Ethernet 주소·브로드캐스트·겹침·지원 한계 (2.272ms)
+✔ round03 경로의 순서 대신 의미로 저장 비교·정확한 경로 삭제 (6.0658ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 67.1744

@@ -116,6 +116,7 @@
       "exams",
       "sources",
       "practical",
+      "practicalnotes",
       "lab",
     ].includes(view)
       ? view
@@ -135,6 +136,7 @@
     ({
       lab: () => practicalLabPage.render(),
       practical: () => practicalPage.render(),
+      practicalnotes: () => practicalNotesPage.render(id),
       sources: () =>
         window.PaperSourcesPage.mount({ main, exam: examWorkspace.resolve(location.search) }),
       exams: () => {
@@ -199,6 +201,7 @@
       {
         lab: "가상 실기 실험실",
         practical: "실기 준비",
+        practicalnotes: "실기 풀이 사전",
         exams: "시험 선택",
         sources: "기출 자료",
         help: "사용법",
@@ -562,5 +565,10 @@
   const wrongView = () => notebookPage.render();
   updateBadges();
   updateStorage();
+  const practicalNotesPage = window.PracticalNotesPage.create({
+    main,
+    esc,
+    enabled: selectedExam.id === "network",
+  });
   navigation.init();
 })();
